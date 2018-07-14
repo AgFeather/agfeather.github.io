@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="machine learning," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Sklearn简介Sklearn是机器学习领域最知名的python模块之一，广泛的应用到各种机器学习项目中。如果英语足够好的话，可以查看Skearn官网，那里有你想知道的一切。http://scikit-learn.org/stable/Sklearn包含了多种机器学习方式：  Classification分类 Regression回归 Clustering非监督聚类 Dimensionality">
+<meta name="keywords" content="machine learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sklearn学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/04/16/sklearn学习笔记/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="Sklearn简介Sklearn是机器学习领域最知名的python模块之一，广泛的应用到各种机器学习项目中。如果英语足够好的话，可以查看Skearn官网，那里有你想知道的一切。http://scikit-learn.org/stable/Sklearn包含了多种机器学习方式：  Classification分类 Regression回归 Clustering非监督聚类 Dimensionality">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-14T01:54:35.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sklearn学习笔记">
+<meta name="twitter:description" content="Sklearn简介Sklearn是机器学习领域最知名的python模块之一，广泛的应用到各种机器学习项目中。如果英语足够好的话，可以查看Skearn官网，那里有你想知道的一切。http://scikit-learn.org/stable/Sklearn包含了多种机器学习方式：  Classification分类 Regression回归 Clustering非监督聚类 Dimensionality">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/16/sklearn学习笔记/"/>
+
+
+
+
+
+  <title>sklearn学习笔记 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/sklearn学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sklearn学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T00:00:00+09:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Sklearn简介"><a href="#Sklearn简介" class="headerlink" title="Sklearn简介"></a>Sklearn简介</h2><p>Sklearn是机器学习领域最知名的python模块之一，广泛的应用到各种机器学习项目中。如果英语足够好的话，可以查看Skearn官网，那里有你想知道的一切。<br><a href="http://scikit-learn.org/stable/" target="_blank" rel="noopener">http://scikit-learn.org/stable/</a><br>Sklearn包含了多种机器学习方式：</p>
+<ul>
+<li>Classification分类</li>
+<li>Regression回归</li>
+<li>Clustering非监督聚类</li>
+<li>Dimensionality reduction数据降维</li>
+<li>Preprocessing数据预处理</li>
+</ul>
+<h2 id="Sklearn安装"><a href="#Sklearn安装" class="headerlink" title="Sklearn安装"></a>Sklearn安装</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>Linux可以直接使用pip进行安装，方便快捷。需要说明的是，sklearn需要Numpy和Scipy模块的支持。也就是说，在安装sklearn前，需要确定电脑已经安装了依赖模块。</p>
+<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>windows安装建议通过Anaconda来安装所有科学计算需要的模块，方便快捷。</p>
+<h2 id="Sklearn模型选择"><a href="#Sklearn模型选择" class="headerlink" title="Sklearn模型选择"></a>Sklearn模型选择</h2><p>在官网上，有一个机器学习模型选择流程图，在进行机器学习模型选择时可以用作参考：<br><a href="http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html</a></p>
+<h2 id="Sklearn初探"><a href="#Sklearn初探" class="headerlink" title="Sklearn初探"></a>Sklearn初探</h2><p>Sklearn把所有及其模型的使用模式整合在了一起，所有模型的调用方式都是一样的。也就是说，学会了一种机器学习模型的使用方法，也就掌握了所有模型的使用方式。</p>
+<h3 id="K近邻方法"><a href="#K近邻方法" class="headerlink" title="K近邻方法"></a>K近邻方法</h3><p>让我们使用Sklearn自带的数据集，使用k近邻算法，探索Sklearn模块的使用模式：</p>
+<ol>
+<li><p>首先导入包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from sklearn import datasets</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.neighbors import KNeighborsClassifier</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>载入数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iris = datasets.load_iris()</span><br><span class="line">iris_X = iris.data</span><br><span class="line">iris_y = iris.target</span><br><span class="line"></span><br><span class="line">print(iris_X[:3,:])</span><br><span class="line">print(iris_y[:3])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>训练数据集测试数据集分离并训练K近邻模型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(iris_X, iris_y, test_size=0.3)</span><br><span class="line"></span><br><span class="line">kNN = KNeighborsClassifier()</span><br><span class="line">kNN.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>预测和评分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prediction = kNN.predict(X_test)</span><br><span class="line">score = kNN.score(X_test, y_test)#分类准确率</span><br><span class="line">probability = kNN.predict_proba(X_test)</span><br><span class="line">neighborpoint=knn.kneighbors(iris_x_test[-1],5,False)</span><br><span class="line">#计算与最后一个测试样本距离在最近的5个点，返回的是这些样本的序号组成的数组</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="模型常用属性和功能"><a href="#模型常用属性和功能" class="headerlink" title="模型常用属性和功能"></a>模型常用属性和功能</h2><h3 id="训练和预测"><a href="#训练和预测" class="headerlink" title="训练和预测"></a>训练和预测</h3><p>如上文代码所示：</p>
+<ul>
+<li>model.fit(x_train, y_labels)可以对模型进行训练</li>
+<li>model.predict(x_test)使用训练好的模型进行预测</li>
+<li>每个模型在训练和预测时，都有非常多的参数可以调整，对于新手来说，可以直接使用默认参数。当熟练掌握模型后，可以通过对参数的调整来优化模型。</li>
+</ul>
+<h3 id="模型参数"><a href="#模型参数" class="headerlink" title="模型参数"></a>模型参数</h3><p>Sklearn对每个模型都提供方法，用以取出模型的具体参数信息：</p>
+<ul>
+<li>model.coef_, model.intercept_就属于model的属性。例如对线性回归来说，这两个参数分别代表模型的斜率和截距。</li>
+<li>model.get_params()函数可以返回在模型定义时，定义的参数。</li>
+</ul>
+<h3 id="预测评分"><a href="#预测评分" class="headerlink" title="预测评分"></a>预测评分</h3><ul>
+<li>model.score(x_test, y_test)可以输出模型对测试集合的预测评分。</li>
+</ul>
+<p>以上就是最常见的模型使用方法：1.创建模型 2.训练模型 3.预测/测试模型</p>
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>Sklearn提供便捷强大的数据预处理模块，方便工程师对数据进行快速处理</p>
+<h4 id="数据标准化"><a href="#数据标准化" class="headerlink" title="数据标准化"></a>数据标准化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from sklearn import preprocessing</span><br><span class="line">data = preprocessing.scale(data)</span><br></pre></td></tr></table></figure>
+<h2 id="常用机器学习模型"><a href="#常用机器学习模型" class="headerlink" title="常用机器学习模型"></a>常用机器学习模型</h2><h3 id="k近邻"><a href="#k近邻" class="headerlink" title="k近邻"></a>k近邻</h3><p>sklearn.neighbors封装了所有与k近邻相关的算法模型，包括非监督kNN，分类kNN，回归kNN，以及kNN等几个实现算法等</p>
+<h4 id="常用参数："><a href="#常用参数：" class="headerlink" title="常用参数："></a>常用参数：</h4><ul>
+<li>n_neighbors：kNN中的k值</li>
+<li>radius：限定半径最近邻中的半径</li>
+<li>algorithm：实现算法，提供’ball_tree’, ‘kd_tree’, ‘auto’, ‘brute’</li>
+<li>metric：距离度量方法，提供’euclidean’, ‘manhattan’, ‘chebyshev’, ‘minkowski’等，一般使用默认欧式距离<h4 id="非监督k近邻"><a href="#非监督k近邻" class="headerlink" title="非监督k近邻"></a>非监督k近邻</h4>‘from sklearn.neighbors import NearestNeighbors’</li>
+</ul>
+<h4 id="分类kNN"><a href="#分类kNN" class="headerlink" title="分类kNN"></a>分类kNN</h4><p>‘from sklearn.neighbors import KNeighborsClassifier’</p>
+<h4 id="回归kNN"><a href="#回归kNN" class="headerlink" title="回归kNN"></a>回归kNN</h4><p>‘from sklearn.neighbors import KNeighborsRegressor’</p>
+<h4 id="实现算法"><a href="#实现算法" class="headerlink" title="实现算法"></a>实现算法</h4><p>‘from sklearn.neighbors import KDTree’<br>‘from sklearn.neighbors import BallTree’</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/12/Python装饰器/" rel="next" title="python装饰器">
+                <i class="fa fa-chevron-left"></i> python装饰器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/18/Hadoop入门/" rel="prev" title="Hadoop入门">
+                Hadoop入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sklearn简介"><span class="nav-number">1.</span> <span class="nav-text">Sklearn简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sklearn安装"><span class="nav-number">2.</span> <span class="nav-text">Sklearn安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">2.1.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows"><span class="nav-number">2.2.</span> <span class="nav-text">windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sklearn模型选择"><span class="nav-number">3.</span> <span class="nav-text">Sklearn模型选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sklearn初探"><span class="nav-number">4.</span> <span class="nav-text">Sklearn初探</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#K近邻方法"><span class="nav-number">4.1.</span> <span class="nav-text">K近邻方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型常用属性和功能"><span class="nav-number">5.</span> <span class="nav-text">模型常用属性和功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#训练和预测"><span class="nav-number">5.1.</span> <span class="nav-text">训练和预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型参数"><span class="nav-number">5.2.</span> <span class="nav-text">模型参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测评分"><span class="nav-number">5.3.</span> <span class="nav-text">预测评分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据预处理"><span class="nav-number">6.</span> <span class="nav-text">数据预处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据标准化"><span class="nav-number">6.0.1.</span> <span class="nav-text">数据标准化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用机器学习模型"><span class="nav-number">7.</span> <span class="nav-text">常用机器学习模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#k近邻"><span class="nav-number">7.1.</span> <span class="nav-text">k近邻</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用参数："><span class="nav-number">7.1.1.</span> <span class="nav-text">常用参数：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非监督k近邻"><span class="nav-number">7.1.2.</span> <span class="nav-text">非监督k近邻</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分类kNN"><span class="nav-number">7.1.3.</span> <span class="nav-text">分类kNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回归kNN"><span class="nav-number">7.1.4.</span> <span class="nav-text">回归kNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现算法"><span class="nav-number">7.1.5.</span> <span class="nav-text">实现算法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SICP,PL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概述为什么需要复合数据？与我们需要复合过程一样的原因一样：同样是为了提升我们在设计程序时所位于的概念层次，提高设计的模块性，增强语言的表达能力。正如定义过程的能力使我们有可能在更高的概念层次上处理计算工作一样，复合数据的能力，也将使我们得以在比语言提供的基本数据对象更高的概念层次上，处理与数据有关的各种问题。 复合数据提高模块性如果我们可以直接在将有理数本身当作对象的方式下操作他们，那么也就可能把">
+<meta name="keywords" content="SICP,PL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SICP第二章:构造数据抽象">
+<meta property="og:url" content="http://yoursite.com/2018/04/27/SICP第二章笔记/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="概述为什么需要复合数据？与我们需要复合过程一样的原因一样：同样是为了提升我们在设计程序时所位于的概念层次，提高设计的模块性，增强语言的表达能力。正如定义过程的能力使我们有可能在更高的概念层次上处理计算工作一样，复合数据的能力，也将使我们得以在比语言提供的基本数据对象更高的概念层次上，处理与数据有关的各种问题。 复合数据提高模块性如果我们可以直接在将有理数本身当作对象的方式下操作他们，那么也就可能把">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-14T02:02:51.914Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SICP第二章:构造数据抽象">
+<meta name="twitter:description" content="概述为什么需要复合数据？与我们需要复合过程一样的原因一样：同样是为了提升我们在设计程序时所位于的概念层次，提高设计的模块性，增强语言的表达能力。正如定义过程的能力使我们有可能在更高的概念层次上处理计算工作一样，复合数据的能力，也将使我们得以在比语言提供的基本数据对象更高的概念层次上，处理与数据有关的各种问题。 复合数据提高模块性如果我们可以直接在将有理数本身当作对象的方式下操作他们，那么也就可能把">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/27/SICP第二章笔记/"/>
+
+
+
+
+
+  <title>SICP第二章:构造数据抽象 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/SICP第二章笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SICP第二章:构造数据抽象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T00:00:00+09:00">
+                2018-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="为什么需要复合数据？"><a href="#为什么需要复合数据？" class="headerlink" title="为什么需要复合数据？"></a>为什么需要复合数据？</h3><p>与我们需要复合过程一样的原因一样：同样是为了提升我们在设计程序时所位于的概念层次，提高设计的模块性，增强语言的表达能力。正如定义过程的能力使我们有可能在更高的概念层次上处理计算工作一样，复合数据的能力，也将使我们得以在比语言提供的基本数据对象更高的概念层次上，处理与数据有关的各种问题。</p>
+<h3 id="复合数据提高模块性"><a href="#复合数据提高模块性" class="headerlink" title="复合数据提高模块性"></a>复合数据提高模块性</h3><p>如果我们可以直接在将有理数本身当作对象的方式下操作他们，那么也就可能把处理有理数的那些程序部分，与有理数如何表示的细节隔离开。也就是说：将程序中处理数据对象的表示部分，和处理数据对象的使用的部分相互隔离。数据抽象技术能使程序更容易设计，维护和修改。</p>
+<h2 id="2-1-数据抽象索引"><a href="#2-1-数据抽象索引" class="headerlink" title="2.1 数据抽象索引"></a>2.1 数据抽象索引</h2><ul>
+<li><p>数据抽象使一种方法学，它使我们能将一个 <strong>复合数据对象的使用</strong>，与该数据对象怎样由 <strong>更基本的数据对象构造</strong> 起来的细节隔离开。（对于过程抽象，我们可以理解为：构造一个抽象，它将这一过程的 <strong>使用方式</strong>，和该过程究竟如何通过 <strong>更基本的过程实现的具体细节</strong> 相互分离）  </p>
+</li>
+<li><p>数据抽象的基本思想，就是设法构造出一些使用复合数据对象的程序。我们的程序使用数据的方式应该是这样的：除了完成当前工作所必要的东西之外，它们不对所有数据作任何假设，与此同时，一种‘具体’数据表示的定义，也应该与程序中使用数据的方式无关。这两个部分之间的界面是一组过程，称为 <strong>选择函数和构造函数</strong></p>
+</li>
+</ul>
+<h3 id="2-1-1-实例：有理数的运算"><a href="#2-1-1-实例：有理数的运算" class="headerlink" title="2.1.1 实例：有理数的运算"></a>2.1.1 实例：有理数的运算</h3><p>假定我们要作有理数的算术，包括加减乘除等<br>假定已经有了一种从分子和分母构造有理数的方法，并进一步假定如果有了一个有理数，我们有一种方法取得他的分子和分母。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(make-rat &lt;n&gt; &lt;d&gt;) 返回一个有理数， 分子是n，分母是d</span><br><span class="line">(numer &lt;x&gt;) 返回分子</span><br><span class="line">(denom &lt;x&gt;) 返回分母</span><br></pre></td></tr></table></figure></p>
+<p>目前，我们并不考虑上面的三个过程的具体实现，我们仅根据他们的功能，完成有理数的加减乘除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(define (add-rat x y)</span><br><span class="line">  (make-rat (+ (* (numer x) (denom y))</span><br><span class="line">               (* (numer y) (denom x)))</span><br><span class="line">            (* (denom x) (denom y))))</span><br><span class="line"></span><br><span class="line">(define (sub-rat x y)</span><br><span class="line">  (make-rat (- (* (numer x) (denom y))</span><br><span class="line">               (* (numer y) (denom x)))</span><br><span class="line">            (* (denom x) (denom y))))</span><br><span class="line"></span><br><span class="line">(define (mul-rat x y)</span><br><span class="line">  (make-rat (* (numer x) (numer y))</span><br><span class="line">            (* (denom x) (denom y))))</span><br><span class="line"></span><br><span class="line">(define (div-rat x y)</span><br><span class="line">  (make-rat (* (numer x) (denom y))</span><br><span class="line">            (* (numer y) (denom x))))</span><br><span class="line"></span><br><span class="line">(define (equal-rat? x y)</span><br><span class="line">  (let ((a (* (numer x) (denom y)))</span><br><span class="line">        (b (* (numer y) (denom x))))</span><br><span class="line">    (if (eqv? a b)</span><br><span class="line">        #t</span><br><span class="line">        #f)))</span><br></pre></td></tr></table></figure></p>
+<p>这样，我们有了定义在三个构造过程基础之上的各种运算。而这些基础还没有定义。我们可以使用序对cons进行构造：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(define (make-rat n d) (cons n d))</span><br><span class="line">(define (numer x) (car x))</span><br><span class="line">(define (denom x) (cdr x))</span><br><span class="line">(define (print-rat x))</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-1-2-抽象屏障"><a href="#2-1-2-抽象屏障" class="headerlink" title="2.1.2 抽象屏障"></a>2.1.2 抽象屏障</h3><ul>
+<li>一般而言，数据抽象的基本思想就是为每一类数据对象标示出一组 <strong>基本操作</strong>，使得对这类数据对象的所有操作都可以基于他们表述，而且在操作这些数据对象时也只能使用他们。</li>
+<li>对于数据，可以有多个抽象层次，也就是多个抽象屏障，如有理数的定义：<blockquote>
+<p>使用有理数的程序将仅仅通过有理数包提供的“API”（add-rat, sub-rat, mul-rat, div-rat..)去完成有理数操作；而这些过程转而又是完全基于构造函数和选择函数make-rat, numer, denom实现的。而这些函数又是基于序对实现的，只要序对可以通过cons,car和cdr操作。，有关序对如何实现的细节与有理数包的其余部分都完全没有关系。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-1-3-数据意味着什么"><a href="#2-1-3-数据意味着什么" class="headerlink" title="2.1.3 数据意味着什么"></a>2.1.3 数据意味着什么</h3><ul>
+<li>可以考虑 <strong>序对</strong> ，我们从来没有说过序对是什么，只是说所有的语言为序对的操作提供了三个过程cons，car，cdr。有关这三个操作，我们需要知道的全部东西就是，三个过程的功能。</li>
+<li><p>进一步思考，我们能发现一个令人吃惊的事实：我们完全可以不用任何数据结构，只使用过程就可以实现序对：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(define (cons x y)</span><br><span class="line">  (define (dispatch m)</span><br><span class="line">    (cond ((= m 0) x)</span><br><span class="line">          ((= m 1) y)</span><br><span class="line">          (else (error &quot;argument no 0 or 1&quot; m))))</span><br><span class="line">  dispatch)</span><br><span class="line">(define (car z) (z 0))</span><br><span class="line">(define (cdr z) (z 1))</span><br><span class="line"></span><br><span class="line">(car (cons 0 1)) -&gt; 0</span><br><span class="line">(cdr (cons 0 1)) -&gt; 1</span><br><span class="line"></span><br><span class="line">; cons过程会返回一个过程，而过程car，cdr会使用cons返回的过程并传入；参数，而在cons返回的过程中针对传入的参数进行操作。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以看出，cons返回一个过程，而对这三个方法的定义，完全满足了序对的定义。从这个例子可以看出，我们无法把这一实现和“真正的”数据结构区分开。</p>
+</li>
+<li><strong>数据的过程性表示</strong> 将在我们的程序设计中扮演一种核心角色。有关的程序设计风格通常称为 <strong>消息传递</strong></li>
+</ul>
+<h2 id="2-2-层次性数据和闭包性质"><a href="#2-2-层次性数据和闭包性质" class="headerlink" title="2.2 层次性数据和闭包性质"></a>2.2 层次性数据和闭包性质</h2><ul>
+<li>序对为我们提供了一种用于构造复合数据的基本“粘合剂”。我们可以建立元素本身也是序对的序对，这就是表结构得以作为一种表示工具的根本基础。我们将这种能力成为cons的闭包性质。</li>
+<li>一般的说，某种组合数据对象的操作满足闭包性质，那就是说，通过它组合起来的数据对象得到的结果本身还可以通过同样的操作再进行组合。</li>
+</ul>
+<h3 id="2-2-1-序列的表示"><a href="#2-2-1-序列的表示" class="headerlink" title="2.2.1 序列的表示"></a>2.2.1 序列的表示</h3><ul>
+<li><p>可以使用cons构造序列，同时Scheme提供过程list用以快速构造序列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(list &lt;a1&gt; &lt;a2&gt; ..) = (cons (a1 (cons a2 (cons ..))))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用map过程，对一个list的所有元素进行操作映射。</p>
+</li>
+</ul>
+<h3 id="2-2-2-层次性结构"><a href="#2-2-2-层次性结构" class="headerlink" title="2.2.2 层次性结构"></a>2.2.2 层次性结构</h3><p>使用list和cons可以构建复合形式的数据，我们可以将它看作树结构，进行递归访问。</p>
+<h3 id="2-2-3-序列作为一种约定的界面"><a href="#2-2-3-序列作为一种约定的界面" class="headerlink" title="2.2.3 序列作为一种约定的界面"></a>2.2.3 序列作为一种约定的界面</h3><p>对于一个复杂的过程，我们可以将其拆分成一个信号流系统，将这个复杂的过程分割成不同的子过程，并且各个子过程之间用信号表示流动。<br>例：给定一个树，计算值为奇数的叶子的平方和。最原始的思想解题过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(define (sum-odd-squares tree)</span><br><span class="line">  (cond ((null? tree) 0)</span><br><span class="line">        ((not (pair? tree))</span><br><span class="line">         (if (odd? tree)</span><br><span class="line">             (square tree)</span><br><span class="line">             0))</span><br><span class="line">        (else (+ (sum-odd-squares (car tree))</span><br><span class="line">                 (sum-odd-squares (cdr tree))))))</span><br></pre></td></tr></table></figure></p>
+<p>我们可以将上面这个复杂的过程归纳为信号流结构：</p>
+<ol>
+<li>枚举出一棵树的每个树叶</li>
+<li>过滤它们，选出其中的奇数树叶</li>
+<li>对选出的每一个数求平方</li>
+<li>用+累加起来得到结果，从0开始</li>
+</ol>
+<p>但在上面的原始过程中，我们并没有体现出信号流结构。我们需要重新组织这些程序，使之能够清晰的反应上面信号流的结构，其中最关键的一点就是将注意力集中在处理过程中从一个步骤流向下一个步骤的“信号”。   </p>
+<ul>
+<li><p>枚举一棵树的所有树叶：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(define (enumerate-tree tree)</span><br><span class="line">  (cond ((null? tree) nil)</span><br><span class="line">        ((not (pair? tree)) (list tree))</span><br><span class="line">        (else (append (enumerate-tree (car tree))</span><br><span class="line">                      (enumerate-tree (cdr tree))))))</span><br><span class="line"></span><br><span class="line">(enumerate-tree (list 1 (list 2 (list 3 4)) 5))</span><br><span class="line">(1 2 3 4 5)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按照给定谓词过滤元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(define (filter predicate sequence)</span><br><span class="line">  (cond ((null? sequence) nil)</span><br><span class="line">        ((predicate (car sequence))</span><br><span class="line">         (cons (car sequence)</span><br><span class="line">               (filter predicate (cdr sequence))))</span><br><span class="line">        (else (filter predicate (cdr sequence)))))</span><br><span class="line"></span><br><span class="line">(filter odd? (list 1 2 3 4 5))</span><br><span class="line">(1 3 5)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现信号流图中的映射步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(map square (list 1 2 3 4 5))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现流图中的累加过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(define (accumulate op initial sequence)</span><br><span class="line">  (if (null? sequence)</span><br><span class="line">      initial</span><br><span class="line">      (op (car sequence)</span><br><span class="line">          (accumulate op initial (cdr sequence)))))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后，将整个流程整合起来形成一个过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(define (sum-odd-squares tree)</span><br><span class="line">  (accumulate +</span><br><span class="line">              0</span><br><span class="line">              (map square</span><br><span class="line">                   (filter odd?</span><br><span class="line">                           (enumerate-tree tree)))))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将程序表示为一些针对序列的操作，这样做的价值就在于能帮助我们得到模块化的程序设计，也就是说，得到由一些比较独立的片段的组合构成的设计。在工业设计中，模块化结构是控制复杂性的一种威力强大的策略。</p>
+<h3 id="2-2-4-实例分析：一个图形语言"><a href="#2-2-4-实例分析：一个图形语言" class="headerlink" title="2.2.4 实例分析：一个图形语言"></a>2.2.4 实例分析：一个图形语言</h3><p>在描述一种语言时，应该将注意力集中到语言的基本原语，它的组合手段以及它的抽象手段。详细内容见书P86.</p>
+<h2 id="2-3-符号数据"><a href="#2-3-符号数据" class="headerlink" title="2.3 符号数据"></a>2.3 符号数据</h2><p>到目前为止，我们已经使用过的所有复合数据都是从数值出发构造起来的，在这一节，我们要扩充所用语言的表述能力，引进将任意符号作为数据的功能。</p>
+<h3 id="2-3-1-使用引号表示字符"><a href="#2-3-1-使用引号表示字符" class="headerlink" title="2.3.1 使用引号表示字符"></a>2.3.1 使用引号表示字符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(define a 1)</span><br><span class="line">(define b 2)</span><br><span class="line">(list a b)</span><br><span class="line">&gt;&gt;(1 2)</span><br><span class="line">(list &apos;a &apos;b)</span><br><span class="line">&gt;&gt;(a b)</span><br><span class="line">(list &apos;a b)</span><br><span class="line">&gt;&gt;(a 2)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SICP/" rel="tag"># SICP</a>
+          
+            <a href="/tags/PL/" rel="tag"># PL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/18/Hadoop入门/" rel="next" title="Hadoop入门">
+                <i class="fa fa-chevron-left"></i> Hadoop入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/21/Scheme语言基本语法/" rel="prev" title="Scheme基本语法">
+                Scheme基本语法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要复合数据？"><span class="nav-number">1.1.</span> <span class="nav-text">为什么需要复合数据？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合数据提高模块性"><span class="nav-number">1.2.</span> <span class="nav-text">复合数据提高模块性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-数据抽象索引"><span class="nav-number">2.</span> <span class="nav-text">2.1 数据抽象索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-实例：有理数的运算"><span class="nav-number">2.1.</span> <span class="nav-text">2.1.1 实例：有理数的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-抽象屏障"><span class="nav-number">2.2.</span> <span class="nav-text">2.1.2 抽象屏障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-数据意味着什么"><span class="nav-number">2.3.</span> <span class="nav-text">2.1.3 数据意味着什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-层次性数据和闭包性质"><span class="nav-number">3.</span> <span class="nav-text">2.2 层次性数据和闭包性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-序列的表示"><span class="nav-number">3.1.</span> <span class="nav-text">2.2.1 序列的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-层次性结构"><span class="nav-number">3.2.</span> <span class="nav-text">2.2.2 层次性结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-序列作为一种约定的界面"><span class="nav-number">3.3.</span> <span class="nav-text">2.2.3 序列作为一种约定的界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-实例分析：一个图形语言"><span class="nav-number">3.4.</span> <span class="nav-text">2.2.4 实例分析：一个图形语言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-符号数据"><span class="nav-number">4.</span> <span class="nav-text">2.3 符号数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-使用引号表示字符"><span class="nav-number">4.1.</span> <span class="nav-text">2.3.1 使用引号表示字符</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
