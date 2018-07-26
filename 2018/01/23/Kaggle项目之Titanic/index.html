@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Kaggle, machine learning," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Titanic是Taggle上的一篇教程性质的项目，具体内容为根据给定的乘客信息，分析乘客能否获救。">
+<meta name="keywords" content="Kaggle, machine learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kaggle之Titanic">
+<meta property="og:url" content="http://yoursite.com/2018/01/23/Kaggle项目之Titanic/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="Titanic是Taggle上的一篇教程性质的项目，具体内容为根据给定的乘客信息，分析乘客能否获救。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_12_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_15_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_18_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_21_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_24_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_31_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_34_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_37_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_39_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_41_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_42_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_44_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_46_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_48_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_59_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_63_1.png">
+<meta property="og:image" content="http://yoursite.com/img/titanic/output_90_0.png">
+<meta property="og:updated_time" content="2018-07-26T04:00:50.180Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kaggle之Titanic">
+<meta name="twitter:description" content="Titanic是Taggle上的一篇教程性质的项目，具体内容为根据给定的乘客信息，分析乘客能否获救。">
+<meta name="twitter:image" content="http://yoursite.com/img/titanic/output_12_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/23/Kaggle项目之Titanic/"/>
+
+
+
+
+
+  <title>Kaggle之Titanic | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+<a href="https://github.com/YHfeather"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/23/Kaggle项目之Titanic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kaggle之Titanic</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-23T00:00:00+09:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Titanic是Taggle上的一篇教程性质的项目，具体内容为根据给定的乘客信息，分析乘客能否获救。</p>
+<a id="more"></a>
+<ul>
+<li>通过该项目，对数据处理，特征工程，以及机器学习应用等方面产生一个较为清晰的认识。  </li>
+<li>同时，由于是教学性质的文章，我会对一些代码写尽可能详细的注释，便于理解和学习。</li>
+</ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li>数据分析</li>
+<li>特征工程</li>
+<li>baseline</li>
+</ol>
+<h2 id="1-数据分析"><a href="#1-数据分析" class="headerlink" title="1. 数据分析"></a>1. 数据分析</h2><p>首先，将给定数据导入到程序中，然后对给定的每个特征，进行简要的分析和可视化，从而探索出数据，特征之间的关系，为之后的特征工程做准备。</p>
+<h3 id="1-1-包导入"><a href="#1-1-包导入" class="headerlink" title="1.1 包导入"></a>1.1 包导入</h3><p>我们会使用总共三大类的python lib，1.数据处理； 2.可视化； 3.机器学习</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数据处理</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> sklearn.preprocessing <span class="keyword">as</span> preprocessing</span><br><span class="line"></span><br><span class="line"><span class="comment">#可视化</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="comment">#ML</span></span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> (GradientBoostingClassifier, GradientBoostingRegressor,</span><br><span class="line">                              RandomForestClassifier, RandomForestRegressor)</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> learning_curve</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC, LinearSVC</span><br><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> GaussianNB</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> Perceptron</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> SGDClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"><span class="keyword">from</span> xgboost <span class="keyword">import</span> XGBClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_score</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV, cross_val_score, StratifiedKFold, learning_curve</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-数据探索"><a href="#1-2-数据探索" class="headerlink" title="1.2 数据探索"></a>1.2 数据探索</h3><p>首先看一下数据的大概状况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">train = pd.read_csv(<span class="string">'train.csv'</span>)</span><br><span class="line">test = pd.read_csv(<span class="string">'test.csv'</span>)</span><br><span class="line">train.head(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>PassengerId</th><br>      <th>Survived</th><br>      <th>Pclass</th><br>      <th>Name</th><br>      <th>Sex</th><br>      <th>Age</th><br>      <th>SibSp</th><br>      <th>Parch</th><br>      <th>Ticket</th><br>      <th>Fare</th><br>      <th>Cabin</th><br>      <th>Embarked</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>0</th><br>      <td>1</td><br>      <td>0</td><br>      <td>3</td><br>      <td>Braund, Mr. Owen Harris</td><br>      <td>male</td><br>      <td>22.0</td><br>      <td>1</td><br>      <td>0</td><br>      <td>A/5 21171</td><br>      <td>7.2500</td><br>      <td>NaN</td><br>      <td>S</td><br>    </tr><br>    <tr><br>      <th>1</th><br>      <td>2</td><br>      <td>1</td><br>      <td>1</td><br>      <td>Cumings, Mrs. John Bradley (Florence Briggs Th…</td><br>      <td>female</td><br>      <td>38.0</td><br>      <td>1</td><br>      <td>0</td><br>      <td>PC 17599</td><br>      <td>71.2833</td><br>      <td>C85</td><br>      <td>C</td><br>    </tr><br>    <tr><br>      <th>2</th><br>      <td>3</td><br>      <td>1</td><br>      <td>3</td><br>      <td>Heikkinen, Miss. Laina</td><br>      <td>female</td><br>      <td>26.0</td><br>      <td>0</td><br>      <td>0</td><br>      <td>STON/O2. 3101282</td><br>      <td>7.9250</td><br>      <td>NaN</td><br>      <td>S</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+<p>对于每个乘客，共有11个特征，以及对应的每个乘客是否获救的label.<br>乘客信息如下</p>
+<ul>
+<li>PassengerId = 乘客ID</li>
+<li>Pclass = 乘客等级（1/2/3等仓）</li>
+<li>Name,Sex, Age</li>
+<li>SibSp = 兄弟姐妹个数</li>
+<li>Parch = 父母和小孩个数</li>
+<li>Ticket = 船票信息</li>
+<li>Fare = 船票价格</li>
+<li>Cabin = 客仓</li>
+<li>Embarked = 登船港口  </li>
+</ul>
+<p>接下来，对每个特征看一下类型信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.info()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class &apos;pandas.core.frame.DataFrame&apos;&gt;
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 12 columns):
+PassengerId    891 non-null int64
+Survived       891 non-null int64
+Pclass         891 non-null int64
+Name           891 non-null object
+Sex            891 non-null object
+Age            714 non-null float64
+SibSp          891 non-null int64
+Parch          891 non-null int64
+Ticket         891 non-null object
+Fare           891 non-null float64
+Cabin          204 non-null object
+Embarked       889 non-null object
+dtypes: float64(2), int64(5), object(5)
+memory usage: 83.6+ KB
+</code></pre><p>通过以上信息，我们发现在给定数据中，Age，Cabin， Embarked存在<strong>数据缺失</strong>，尤其Cabin缺失很严重<br>我们继续对所有的数值数据进行探索：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.describe()</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>PassengerId</th><br>      <th>Survived</th><br>      <th>Pclass</th><br>      <th>Age</th><br>      <th>SibSp</th><br>      <th>Parch</th><br>      <th>Fare</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>count</th><br>      <td>891.000000</td><br>      <td>891.000000</td><br>      <td>891.000000</td><br>      <td>714.000000</td><br>      <td>891.000000</td><br>      <td>891.000000</td><br>      <td>891.000000</td><br>    </tr><br>    <tr><br>      <th>mean</th><br>      <td>446.000000</td><br>      <td>0.383838</td><br>      <td>2.308642</td><br>      <td>29.699118</td><br>      <td>0.523008</td><br>      <td>0.381594</td><br>      <td>32.204208</td><br>    </tr><br>    <tr><br>      <th>std</th><br>      <td>257.353842</td><br>      <td>0.486592</td><br>      <td>0.836071</td><br>      <td>14.526497</td><br>      <td>1.102743</td><br>      <td>0.806057</td><br>      <td>49.693429</td><br>    </tr><br>    <tr><br>      <th>min</th><br>      <td>1.000000</td><br>      <td>0.000000</td><br>      <td>1.000000</td><br>      <td>0.420000</td><br>      <td>0.000000</td><br>      <td>0.000000</td><br>      <td>0.000000</td><br>    </tr><br>    <tr><br>      <th>25%</th><br>      <td>223.500000</td><br>      <td>0.000000</td><br>      <td>2.000000</td><br>      <td>20.125000</td><br>      <td>0.000000</td><br>      <td>0.000000</td><br>      <td>7.910400</td><br>    </tr><br>    <tr><br>      <th>50%</th><br>      <td>446.000000</td><br>      <td>0.000000</td><br>      <td>3.000000</td><br>      <td>28.000000</td><br>      <td>0.000000</td><br>      <td>0.000000</td><br>      <td>14.454200</td><br>    </tr><br>    <tr><br>      <th>75%</th><br>      <td>668.500000</td><br>      <td>1.000000</td><br>      <td>3.000000</td><br>      <td>38.000000</td><br>      <td>1.000000</td><br>      <td>0.000000</td><br>      <td>31.000000</td><br>    </tr><br>    <tr><br>      <th>max</th><br>      <td>891.000000</td><br>      <td>1.000000</td><br>      <td>3.000000</td><br>      <td>80.000000</td><br>      <td>8.000000</td><br>      <td>6.000000</td><br>      <td>512.329200</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+<p>观察下各个特征之间的协方差</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sns.set(context=<span class="string">"paper"</span>, font=<span class="string">"monospace"</span>)</span><br><span class="line">sns.set(style=<span class="string">"white"</span>)</span><br><span class="line">f, ax = plt.subplots(figsize=(<span class="number">10</span>,<span class="number">6</span>))</span><br><span class="line">train_corr = train.drop(<span class="string">'PassengerId'</span>,axis=<span class="number">1</span>).corr()</span><br><span class="line">sns.heatmap(train_corr, ax=ax, vmax=<span class="number">.9</span>, square=<span class="keyword">True</span>)</span><br><span class="line"><span class="comment"># ax.set_xticklabels(train_corr.index, size=15)</span></span><br><span class="line"><span class="comment"># ax.set_yticklabels(train_corr.columns[::-1], size=15)</span></span><br><span class="line">ax.set_title(<span class="string">'train feature corr'</span>, fontsize=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,1,&apos;train feature corr&apos;)
+</code></pre><p><img src="/img/titanic/output_12_1.png" alt="png"></p>
+<p>通过协方差，我们可以得出以下结论：</p>
+<ul>
+<li>Pclass乘客等级和获救<strong>负相关</strong></li>
+<li>Fare价格和获救<strong>正相关</strong>，给的钱多的优先</li>
+<li>Pclass和Fare负相关，正常，一等仓最贵</li>
+</ul>
+<h4 id="1-2-1-年龄特征分析："><a href="#1-2-1-年龄特征分析：" class="headerlink" title="1.2.1 年龄特征分析："></a>1.2.1 年龄特征分析：</h4><p>对乘客的年龄特征进行分析，首先画出年龄分布曲线，对于缺失值，使用age=-20进行填补</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> stats</span><br><span class="line">fig, axes = plt.subplots(<span class="number">2</span>,<span class="number">1</span>,figsize=(<span class="number">8</span>,<span class="number">6</span>))</span><br><span class="line">sns.distplot(train.Age.fillna(<span class="number">-20</span>), rug=<span class="keyword">True</span>, color=<span class="string">'b'</span>, ax=axes[<span class="number">0</span>])</span><br><span class="line">ax0 = axes[<span class="number">0</span>]</span><br><span class="line">ax0.set_title(<span class="string">'age distribution'</span>)</span><br><span class="line">ax0.set_xlabel(<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line">ax1 = axes[<span class="number">1</span>]</span><br><span class="line">ax1.set_title(<span class="string">'age survived distribution'</span>)</span><br><span class="line">k1 = sns.distplot(train[train.Survived==<span class="number">0</span>].Age.fillna(<span class="number">-20</span>), hist=<span class="keyword">False</span>, color=<span class="string">'r'</span>, ax=ax1, label=<span class="string">'dead'</span>)</span><br><span class="line">k2 = sns.distplot(train[train.Survived==<span class="number">1</span>].Age.fillna(<span class="number">-20</span>), hist=<span class="keyword">False</span>, color=<span class="string">'g'</span>, ax=ax1, label=<span class="string">'alive'</span>)</span><br><span class="line">ax1.set_xlabel(<span class="string">''</span>)</span><br><span class="line">ax1.legend(fontsize=<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f282bf1c0f0&gt;
+</code></pre><p><img src="/img/titanic/output_15_1.png" alt="png"></p>
+<p>通过对年龄分布进行分析，可以得到以下信息：</p>
+<ol>
+<li>可以看出，小孩和20多岁的青年以及中年获救可能性较大</li>
+<li>获救情况和年龄<strong>不成现线性关系，所以如果使用线性模型需要对年龄进行离散处理，作为类型变量带入模型</strong></li>
+<li>获救的人中，年龄缺少的人比例要小于有年龄信息的人（获救之后对乘客信息重新登记导致？）</li>
+</ol>
+<h5 id="1-2-1-年龄和性别分布"><a href="#1-2-1-年龄和性别分布" class="headerlink" title="1.2.1 年龄和性别分布"></a>1.2.1 年龄和性别分布</h5><p>对年龄和性别两个特征进行探索</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">3</span>))</span><br><span class="line">ax.set_title(<span class="string">'Sex-Age_distribution'</span>)</span><br><span class="line">sns.distplot(train[train[<span class="string">'Sex'</span>] == <span class="string">'female'</span>].dropna().Age, hist=<span class="keyword">False</span>, color=<span class="string">'pink'</span>, label=<span class="string">'female'</span>)</span><br><span class="line">sns.distplot(train[train[<span class="string">'Sex'</span>] == <span class="string">'male'</span>].dropna().Age, hist=<span class="keyword">False</span>, color=<span class="string">'blue'</span>, label=<span class="string">'male'</span>)</span><br><span class="line">ax.legend(fontsize=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f282bf1c198&gt;
+</code></pre><p><img src="/img/titanic/output_18_1.png" alt="png"></p>
+<ul>
+<li>男性年龄普遍集中在40岁左右，女性年龄普遍集中在21，22岁左右。</li>
+<li>老年人中，男性比例较多，年轻人中，女性比例较多。</li>
+</ul>
+<h5 id="1-2-1-年龄和仓位分布"><a href="#1-2-1-年龄和仓位分布" class="headerlink" title="1.2.1 年龄和仓位分布"></a>1.2.1 年龄和仓位分布</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f, ax = plt.subplots(figsize=(<span class="number">8</span>,<span class="number">3</span>))</span><br><span class="line">ax.set_title(<span class="string">'Pclass Age dist'</span>, size=<span class="number">20</span>)</span><br><span class="line">sns.distplot(train[train.Pclass==<span class="number">1</span>].dropna().Age, hist=<span class="keyword">False</span>, color=<span class="string">'pink'</span>, label=<span class="string">'P1'</span>)</span><br><span class="line">sns.distplot(train[train.Pclass==<span class="number">2</span>].dropna().Age, hist=<span class="keyword">False</span>, color=<span class="string">'blue'</span>, label=<span class="string">'p2'</span>)</span><br><span class="line">sns.distplot(train[train.Pclass==<span class="number">3</span>].dropna().Age, hist=<span class="keyword">False</span>, color=<span class="string">'g'</span>, label=<span class="string">'p3'</span>)</span><br><span class="line">ax.legend(fontsize=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f282b78c278&gt;
+</code></pre><p><img src="/img/titanic/output_21_1.png" alt="png"></p>
+<ul>
+<li>越老，仓位越好（好像是废话）</li>
+</ul>
+<h4 id="1-2-1-Pclass-仓位分析"><a href="#1-2-1-Pclass-仓位分析" class="headerlink" title="1.2.1 Pclass 仓位分析"></a>1.2.1 Pclass 仓位分析</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">y_dead = train[train.Survived==<span class="number">0</span>].groupby(<span class="string">'Pclass'</span>)[<span class="string">'Survived'</span>].count()</span><br><span class="line">y_alive = train[train.Survived==<span class="number">1</span>].groupby(<span class="string">'Pclass'</span>)[<span class="string">'Survived'</span>].count()</span><br><span class="line">pos = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">ax = plt.figure(figsize=(<span class="number">8</span>,<span class="number">4</span>)).add_subplot(<span class="number">111</span>)</span><br><span class="line">ax.bar(pos, y_dead, color=<span class="string">'r'</span>, alpha=<span class="number">0.6</span>, label=<span class="string">'dead'</span>)</span><br><span class="line">ax.bar(pos, y_alive, color=<span class="string">'g'</span>, bottom=y_dead, alpha=<span class="number">0.6</span>, label=<span class="string">'alive'</span>)</span><br><span class="line">ax.legend(fontsize=<span class="number">16</span>, loc=<span class="string">'best'</span>)</span><br><span class="line">ax.set_xticks(pos)</span><br><span class="line">ax.set_xticklabels([<span class="string">'Pclass%d'</span>%(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">4</span>)], size=<span class="number">15</span>)</span><br><span class="line">ax.set_title(<span class="string">'Pclass Surveved count'</span>, size=<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,1,&apos;Pclass Surveved count&apos;)
+</code></pre><p><img src="/img/titanic/output_24_1.png" alt="png"></p>
+<ul>
+<li>头等舱（Pclass=1），商务舱（Pclass=2），经济舱（Pclass=3）</li>
+<li>经济舱人数遥遥领先</li>
+<li>比较来说，头等舱获救比例最大，经济舱死亡概率最大</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pos = range(0,6)</span></span><br><span class="line"><span class="comment"># age_list = []</span></span><br><span class="line"><span class="comment"># for Pclass_ in range(1,4):</span></span><br><span class="line"><span class="comment">#     for Survived_ in range(0,2):</span></span><br><span class="line"><span class="comment">#         age_list.append(train[(train.Pclass == Pclass_)&amp;(train.Survived == Survived_)].Age.values)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># fig, axes = plt.subplots(3,1,figsize=(10,6))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># i_Pclass = 1</span></span><br><span class="line"><span class="comment"># for ax in axes:</span></span><br><span class="line"><span class="comment">#     sns.distplot(age_list[i_Pclass*2-2], hist=False, ax=ax, label='Pclass:%d ,survived:0'%(i_Pclass), color='r')</span></span><br><span class="line"><span class="comment">#     sns.distplot(age_list[i_Pclass*2-1], hist=False, ax=ax, label='Pclass:%d ,survived:1'%(i_Pclass), color='g')</span></span><br><span class="line"><span class="comment">#     i_Pclass += 1</span></span><br><span class="line"><span class="comment">#     ax.set_xlabel('age', size=15)</span></span><br><span class="line"><span class="comment">#     ax.legend(fontsize=15)</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-2-3-性别特征"><a href="#1-2-3-性别特征" class="headerlink" title="1.2.3 性别特征"></a>1.2.3 性别特征</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(train.Sex.value_counts())</span><br><span class="line">print(<span class="string">'==================================='</span>)</span><br><span class="line">print(train.groupby(<span class="string">'Sex'</span>)[<span class="string">'Survived'</span>].mean())</span><br></pre></td></tr></table></figure>
+<pre><code>male      577
+female    314
+Name: Sex, dtype: int64
+===================================
+Sex
+female    0.742038
+male      0.188908
+Name: Survived, dtype: float64
+</code></pre><p>可以看出：</p>
+<ul>
+<li>全部乘客中，男性人数大于女性，接近1.5倍</li>
+<li>获救乘客中，大部分为女性，是男性的4倍，女性生存率远大于男性</li>
+</ul>
+<h5 id="性别和年龄和生存情况"><a href="#性别和年龄和生存情况" class="headerlink" title="性别和年龄和生存情况"></a>性别和年龄和生存情况</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ax = plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>)).add_subplot(<span class="number">111</span>)</span><br><span class="line">sns.violinplot(x=<span class="string">'Sex'</span>, y=<span class="string">'Age'</span>, hue=<span class="string">'Survived'</span>, data=train.dropna(),split=<span class="keyword">True</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">'Sex'</span>, size=<span class="number">20</span>)</span><br><span class="line">ax.set_xticklabels([<span class="string">'Female'</span>, <span class="string">'male'</span>], size=<span class="number">18</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'Age'</span>, size=<span class="number">20</span>)</span><br><span class="line">ax.legend(fontsize=<span class="number">25</span>, loc=<span class="string">'best'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f282b7242b0&gt;
+</code></pre><p><img src="/img/titanic/output_31_1.png" alt="png"></p>
+<p>从分布可以看出：</p>
+<ul>
+<li>女性获救年龄主要分布在20岁左右的青年</li>
+<li>青年男性获救概率要大于中年男性，年轻人和小孩更容易获救</li>
+</ul>
+<h5 id="性别仓位和获救情况分布"><a href="#性别仓位和获救情况分布" class="headerlink" title="性别仓位和获救情况分布"></a>性别仓位和获救情况分布</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">label = []</span><br><span class="line"><span class="keyword">for</span> sex_i <span class="keyword">in</span> [<span class="string">'female'</span>,<span class="string">'male'</span>]:</span><br><span class="line">    <span class="keyword">for</span> pclass_i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">4</span>):</span><br><span class="line">        label.append(<span class="string">'sex:%s,Pclass:%d'</span>%(sex_i, pclass_i))</span><br><span class="line"></span><br><span class="line">pos = range(<span class="number">6</span>)</span><br><span class="line">fig = plt.figure(figsize=(<span class="number">14</span>,<span class="number">4</span>))</span><br><span class="line">ax = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">ax.bar(pos,</span><br><span class="line">        train[train[<span class="string">'Survived'</span>]==<span class="number">0</span>].groupby([<span class="string">'Sex'</span>,<span class="string">'Pclass'</span>])[<span class="string">'Survived'</span>].count().values,</span><br><span class="line">        color=<span class="string">'r'</span>,</span><br><span class="line">        alpha=<span class="number">0.5</span>,</span><br><span class="line">        align=<span class="string">'center'</span>,</span><br><span class="line">        tick_label=label,</span><br><span class="line">        label=<span class="string">'dead'</span>)</span><br><span class="line">ax.bar(pos,</span><br><span class="line">        train[train[<span class="string">'Survived'</span>]==<span class="number">1</span>].groupby([<span class="string">'Sex'</span>,<span class="string">'Pclass'</span>])[<span class="string">'Survived'</span>].count().values,</span><br><span class="line">        bottom=train[train[<span class="string">'Survived'</span>]==<span class="number">0</span>].groupby([<span class="string">'Sex'</span>,<span class="string">'Pclass'</span>])[<span class="string">'Survived'</span>].count().values,</span><br><span class="line">        color=<span class="string">'g'</span>,</span><br><span class="line">        alpha=<span class="number">0.5</span>,</span><br><span class="line">        align=<span class="string">'center'</span>,</span><br><span class="line">        tick_label=label,</span><br><span class="line">        label=<span class="string">'alive'</span>)</span><br><span class="line">ax.tick_params(labelsize=<span class="number">15</span>)</span><br><span class="line">ax.set_title(<span class="string">'sex_pclass_survived'</span>, size=<span class="number">20</span>)</span><br><span class="line">ax.legend(fontsize=<span class="number">10</span>,loc=<span class="string">'best'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f282b6ebf60&gt;
+</code></pre><p><img src="/img/titanic/output_34_1.png" alt="png"></p>
+<p>可以发现，头等舱的女性几乎都获救了</p>
+<h4 id="1-2-4-票价-Fare"><a href="#1-2-4-票价-Fare" class="headerlink" title="1.2.4 票价(Fare)"></a>1.2.4 票价(Fare)</h4><p>分别看一下票价的分布以及票价随仓位的分布</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">ax = plt.subplot2grid((<span class="number">2</span>,<span class="number">2</span>), (<span class="number">0</span>,<span class="number">0</span>), colspan=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">ax.tick_params(labelsize=<span class="number">15</span>)</span><br><span class="line">ax.set_title(<span class="string">'Fare dist'</span>, size=<span class="number">20</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'dist'</span>, size=<span class="number">20</span>)</span><br><span class="line">sns.kdeplot(train.Fare, ax=ax)</span><br><span class="line">sns.distplot(train.Fare, ax=ax)</span><br><span class="line">ax.legend(fontsize=<span class="number">15</span>)</span><br><span class="line">pos = range(<span class="number">0</span>,<span class="number">400</span>,<span class="number">50</span>)</span><br><span class="line">ax.set_xticks(pos)</span><br><span class="line">ax.set_xlim([<span class="number">0</span>, <span class="number">200</span>])</span><br><span class="line">ax.set_xlabel(<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line">ax1 = plt.subplot2grid((<span class="number">2</span>,<span class="number">2</span>), (<span class="number">1</span>,<span class="number">0</span>), colspan=<span class="number">2</span>)</span><br><span class="line">ax.set_title(<span class="string">'Fare Pclass dist'</span>, size=<span class="number">20</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">4</span>):</span><br><span class="line">    sns.kdeplot(train[train.Pclass==i].Fare, ax=ax1, label=<span class="string">'Pclass %d'</span>%(i))</span><br><span class="line">ax1.set_xlim([<span class="number">0</span>,<span class="number">200</span>])</span><br><span class="line">ax1.legend(fontsize=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f282b632f60&gt;
+</code></pre><p><img src="/img/titanic/output_37_1.png" alt="png"></p>
+<h5 id="票价和获救情况的关系"><a href="#票价和获救情况的关系" class="headerlink" title="票价和获救情况的关系"></a>票价和获救情况的关系</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">8</span>,<span class="number">3</span>))</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">sns.kdeplot(train[train.Survived==<span class="number">0</span>].Fare, ax=ax1, label=<span class="string">'dead'</span>, color=<span class="string">'r'</span>)</span><br><span class="line">sns.kdeplot(train[train.Survived==<span class="number">1</span>].Fare, ax=ax1, label=<span class="string">'alive'</span>, color=<span class="string">'g'</span>)</span><br><span class="line"><span class="comment">#sns.distplot(train[train.Survived==0].Fare, ax=ax1, color='r')</span></span><br><span class="line"><span class="comment">#sns.distplot(train[train.Survived==1].Fare, ax=ax1, color='g')</span></span><br><span class="line">ax1.set_xlim([<span class="number">0</span>,<span class="number">300</span>])</span><br><span class="line">ax1.legend(fontsize=<span class="number">15</span>)</span><br><span class="line">ax1.set_title(<span class="string">'Fare survived'</span>, size=<span class="number">20</span>)</span><br><span class="line">ax1.set_xlabel(<span class="string">'Fare'</span>, size=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,0,&apos;Fare&apos;)
+</code></pre><p><img src="/img/titanic/output_39_1.png" alt="png"></p>
+<h4 id="1-2-5-sibsp-amp-parch-表亲和直亲"><a href="#1-2-5-sibsp-amp-parch-表亲和直亲" class="headerlink" title="1.2.5 sibsp&amp;parch 表亲和直亲"></a>1.2.5 sibsp&amp;parch 表亲和直亲</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">8</span>,<span class="number">4</span>))</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line">sns.countplot(train.SibSp)</span><br><span class="line">ax1.set_title(<span class="string">'SibSp'</span>, size=<span class="number">20</span>)</span><br><span class="line">ax2 = fig.add_subplot(<span class="number">212</span>, sharex=ax1)</span><br><span class="line">sns.countplot(train.Parch)</span><br><span class="line">ax2.set_title(<span class="string">'Parch'</span>, size=<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,1,&apos;Parch&apos;)
+</code></pre><p><img src="/img/titanic/output_41_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">10</span>,<span class="number">6</span>))</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">311</span>)</span><br><span class="line">train.groupby(<span class="string">'SibSp'</span>)[<span class="string">'Survived'</span>].mean().plot(kind=<span class="string">'bar'</span>, ax=ax1)</span><br><span class="line">ax1.set_title(<span class="string">'Sibsp Survived Rate'</span>, size=<span class="number">16</span>)</span><br><span class="line">ax1.set_xlabel(<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line">ax2 = fig.add_subplot(<span class="number">312</span>)</span><br><span class="line">train.groupby(<span class="string">'Parch'</span>)[<span class="string">'Survived'</span>].mean().plot(kind=<span class="string">'bar'</span>, ax=ax2)</span><br><span class="line">ax2.set_title(<span class="string">'Parch Survived Rate'</span>, size=<span class="number">16</span>)</span><br><span class="line">ax2.set_xlabel(<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line">ax3 = fig.add_subplot(<span class="number">313</span>)</span><br><span class="line">train.groupby(train.SibSp+train.Parch)[<span class="string">'Survived'</span>].mean().plot(kind=<span class="string">'bar'</span>, ax=ax3)</span><br><span class="line">ax3.set_title(<span class="string">'Parch+Sibsp Survived Rate'</span>, size=<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,1,&apos;Parch+Sibsp Survived Rate&apos;)
+</code></pre><p><img src="/img/titanic/output_42_1.png" alt="png"></p>
+<p>分组统计不同人数亲戚的获救率来看，都近似呈现先高后低, 亲人数目多少和是否获救不是简单的线性关系</p>
+<h4 id="1-2-6-Embarked-上船地点"><a href="#1-2-6-Embarked-上船地点" class="headerlink" title="1.2.6 Embarked 上船地点"></a>1.2.6 Embarked 上船地点</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">plt.style.use(<span class="string">'ggplot'</span>)</span><br><span class="line">ax = plt.figure(figsize=(<span class="number">8</span>,<span class="number">3</span>)).add_subplot(<span class="number">111</span>)</span><br><span class="line">pos = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">y1 = train[train.Survived==<span class="number">0</span>].groupby(<span class="string">'Embarked'</span>)[<span class="string">'Survived'</span>].count().sort_index().values</span><br><span class="line">y2 = train[train.Survived==<span class="number">1</span>].groupby(<span class="string">'Embarked'</span>)[<span class="string">'Survived'</span>].count().sort_index().values</span><br><span class="line">ax.bar(pos, y1, color=<span class="string">'r'</span>, alpha=<span class="number">0.4</span>, align=<span class="string">'center'</span>, label=<span class="string">'dead'</span>)</span><br><span class="line">ax.bar(pos, y2, color=<span class="string">'g'</span>, alpha=<span class="number">0.4</span>, align=<span class="string">'center'</span>, label=<span class="string">'alive'</span>, bottom=y1)</span><br><span class="line">ax.set_xticks(pos)</span><br><span class="line">ax.set_xticklabels([<span class="string">'C'</span>,<span class="string">'Q'</span>,<span class="string">'S'</span>])</span><br><span class="line">ax.legend(fontsize=<span class="number">15</span>, loc=<span class="string">'best'</span>)</span><br><span class="line">ax.set_title(<span class="string">'Embarked survived count'</span>, size=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,1,&apos;Embarked survived count&apos;)
+</code></pre><p><img src="/img/titanic/output_44_1.png" alt="png"></p>
+<p>可以看出，从c港上船的乘客更容易获救</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ax = plt.figure(figsize=(<span class="number">8</span>,<span class="number">3</span>)).add_subplot(<span class="number">111</span>)</span><br><span class="line">ax.set_xlim([<span class="number">-20</span>, <span class="number">80</span>])</span><br><span class="line">sns.kdeplot(train[train.Embarked==<span class="string">'C'</span>].Age.fillna(<span class="number">-10</span>), ax=ax, label=<span class="string">'C'</span>)</span><br><span class="line">sns.kdeplot(train[train.Embarked==<span class="string">'Q'</span>].Age.fillna(<span class="number">-10</span>), ax=ax, label=<span class="string">'Q'</span>)</span><br><span class="line">sns.kdeplot(train[train.Embarked==<span class="string">'S'</span>].Age.fillna(<span class="number">-10</span>), ax=ax, label=<span class="string">'S'</span>)</span><br><span class="line">ax.legend(fontsize=<span class="number">18</span>)</span><br><span class="line">ax.set_title(<span class="string">'Embarked Age Dist '</span>, size=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,1,&apos;Embarked Age Dist &apos;)
+</code></pre><p><img src="/img/titanic/output_46_1.png" alt="png"></p>
+<ul>
+<li>Q上岸的很多没有年龄</li>
+<li>C上岸和S上岸的年龄分布较为相似，区别在于C上岸的年龄分布更加扁平，小孩和老人比例更高</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">y1 = train[train.Survived==<span class="number">0</span>].groupby([<span class="string">'Embarked'</span>,<span class="string">'Pclass'</span>])[<span class="string">'Survived'</span>].count().reset_index()[<span class="string">'Survived'</span>].values</span><br><span class="line">y2 = train[train.Survived==<span class="number">1</span>].groupby([<span class="string">'Embarked'</span>,<span class="string">'Pclass'</span>])[<span class="string">'Survived'</span>].count().reset_index()[<span class="string">'Survived'</span>].values</span><br><span class="line"></span><br><span class="line">ax = plt.figure(figsize=(<span class="number">8</span>,<span class="number">3</span>)).add_subplot(<span class="number">111</span>)</span><br><span class="line">pos = range(<span class="number">9</span>)</span><br><span class="line">ax.bar(pos, y1, align=<span class="string">'center'</span>, alpha=<span class="number">0.5</span>, color=<span class="string">'r'</span>, label=<span class="string">'dead'</span>)</span><br><span class="line">ax.bar(pos, y2, align=<span class="string">'center'</span>, bottom=y1, alpha=<span class="number">0.5</span>, color=<span class="string">'g'</span>, label=<span class="string">'alive'</span>)</span><br><span class="line"></span><br><span class="line">ax.set_xticks(pos)</span><br><span class="line">xticklabels = []</span><br><span class="line"><span class="keyword">for</span> embarked_val <span class="keyword">in</span> [<span class="string">'C'</span>,<span class="string">'Q'</span>,<span class="string">'S'</span>]:</span><br><span class="line">    <span class="keyword">for</span> pclass_val <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">4</span>):</span><br><span class="line">        xticklabels.append(<span class="string">'%s/%d'</span>%(embarked_val,pclass_val))</span><br><span class="line"></span><br><span class="line">ax.set_xticklabels(xticklabels,size=<span class="number">15</span>)</span><br><span class="line">ax.legend(fontsize=<span class="number">15</span>, loc=<span class="string">'best'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f282b3e07b8&gt;
+</code></pre><p><img src="/img/titanic/output_48_1.png" alt="png"></p>
+<p>从不同仓位的比例来看，似乎C上岸更容易获救是因为头等舱的人较多？</p>
+<p>但进一步对比C/S 发现，同样的仓位，C获救概率依然更高</p>
+<p>脑洞下：</p>
+<p>C地的人更加抱团，互帮互助- -<br>人数上来看S地的人更多，不同等级分布也更合常理，而C地的人头等舱很多，商务舱几乎没有，屌丝仓的也不少；</p>
+<p>猜想：C地的人更多是权贵，S地的人来自商贸发达的商人？，所有C地的人地位更高- -</p>
+<h4 id="1-2-7-Cabin-船舱号"><a href="#1-2-7-Cabin-船舱号" class="headerlink" title="1.2.7 Cabin 船舱号"></a>1.2.7 Cabin 船舱号</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.Cabin.isnull().value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>True     687
+False    204
+Name: Cabin, dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.groupby(by=train.Cabin.isnull())[<span class="string">'Survived'</span>].mean()</span><br></pre></td></tr></table></figure>
+<pre><code>Cabin
+False    0.666667
+True     0.299854
+Name: Survived, dtype: float64
+</code></pre><ul>
+<li>Cabin大部分为空</li>
+<li>为空的获救概率较低，不为空的获救概率较高。<strong>说明该数据可以作为特征</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[train.Cabin.apply(<span class="keyword">lambda</span> x:len(x) <span class="keyword">if</span>(x <span class="keyword">is</span> <span class="keyword">not</span> np.nan) <span class="keyword">else</span> <span class="number">0</span>)&gt;<span class="number">4</span>].head()</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>PassengerId</th><br>      <th>Survived</th><br>      <th>Pclass</th><br>      <th>Name</th><br>      <th>Sex</th><br>      <th>Age</th><br>      <th>SibSp</th><br>      <th>Parch</th><br>      <th>Ticket</th><br>      <th>Fare</th><br>      <th>Cabin</th><br>      <th>Embarked</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>27</th><br>      <td>28</td><br>      <td>0</td><br>      <td>1</td><br>      <td>Fortune, Mr. Charles Alexander</td><br>      <td>male</td><br>      <td>19.0</td><br>      <td>3</td><br>      <td>2</td><br>      <td>19950</td><br>      <td>263.0000</td><br>      <td>C23 C25 C27</td><br>      <td>S</td><br>    </tr><br>    <tr><br>      <th>75</th><br>      <td>76</td><br>      <td>0</td><br>      <td>3</td><br>      <td>Moen, Mr. Sigurd Hansen</td><br>      <td>male</td><br>      <td>25.0</td><br>      <td>0</td><br>      <td>0</td><br>      <td>348123</td><br>      <td>7.6500</td><br>      <td>F G73</td><br>      <td>S</td><br>    </tr><br>    <tr><br>      <th>88</th><br>      <td>89</td><br>      <td>1</td><br>      <td>1</td><br>      <td>Fortune, Miss. Mabel Helen</td><br>      <td>female</td><br>      <td>23.0</td><br>      <td>3</td><br>      <td>2</td><br>      <td>19950</td><br>      <td>263.0000</td><br>      <td>C23 C25 C27</td><br>      <td>S</td><br>    </tr><br>    <tr><br>      <th>97</th><br>      <td>98</td><br>      <td>1</td><br>      <td>1</td><br>      <td>Greenfield, Mr. William Bertram</td><br>      <td>male</td><br>      <td>23.0</td><br>      <td>0</td><br>      <td>1</td><br>      <td>PC 17759</td><br>      <td>63.3583</td><br>      <td>D10 D12</td><br>      <td>C</td><br>    </tr><br>    <tr><br>      <th>118</th><br>      <td>119</td><br>      <td>0</td><br>      <td>1</td><br>      <td>Baxter, Mr. Quigg Edmond</td><br>      <td>male</td><br>      <td>24.0</td><br>      <td>0</td><br>      <td>1</td><br>      <td>PC 17558</td><br>      <td>247.5208</td><br>      <td>B58 B60</td><br>      <td>C</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+<p>不少船舱编号有多个，其个数基本上和直系亲属个数保持一致，说明也许可以通过寻找亲属信息来填充cabin的一部分信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">'Cabin_Zone'</span>] = train.Cabin.fillna(<span class="string">'0'</span>).str.split(<span class="string">' '</span>).apply(<span class="keyword">lambda</span> x: x[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">train.groupby(by=<span class="string">'Cabin_Zone'</span>)[<span class="string">'Survived'</span>].agg([<span class="string">'mean'</span>, <span class="string">'count'</span>])</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>mean</th><br>      <th>count</th><br>    </tr><br>    <tr><br>      <th>Cabin_Zone</th><br>      <th></th><br>      <th></th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>0</th><br>      <td>0.299854</td><br>      <td>687</td><br>    </tr><br>    <tr><br>      <th>A</th><br>      <td>0.466667</td><br>      <td>15</td><br>    </tr><br>    <tr><br>      <th>B</th><br>      <td>0.744681</td><br>      <td>47</td><br>    </tr><br>    <tr><br>      <th>C</th><br>      <td>0.593220</td><br>      <td>59</td><br>    </tr><br>    <tr><br>      <th>D</th><br>      <td>0.757576</td><br>      <td>33</td><br>    </tr><br>    <tr><br>      <th>E</th><br>      <td>0.750000</td><br>      <td>32</td><br>    </tr><br>    <tr><br>      <th>F</th><br>      <td>0.615385</td><br>      <td>13</td><br>    </tr><br>    <tr><br>      <th>G</th><br>      <td>0.500000</td><br>      <td>4</td><br>    </tr><br>    <tr><br>      <th>T</th><br>      <td>0.000000</td><br>      <td>1</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+<p>把每个Cabin中的区域提取出来之后，统计发现不同区域获救概率差别很大，<strong>或许可以作为一个特征</strong></p>
+<h4 id="1-2-8-姓名特征"><a href="#1-2-8-姓名特征" class="headerlink" title="1.2.8 姓名特征"></a>1.2.8 姓名特征</h4><p>最开始认为Name这个特征没有任何意义，但我们发现，所给数据中的姓名信息不仅仅是姓名，而且包括称谓，甚至包括性别，地位，财富，婚姻状况等都可能包含在姓名中。所以，对于Name不能直接将其当作垃圾特征处理。<br>首先，对姓名的长度和获救状况进行探索：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.groupby(train.Name.apply(<span class="keyword">lambda</span> x:len(x)))[<span class="string">'Survived'</span>].mean().plot()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f282b56a198&gt;
+</code></pre><p><img src="/img/titanic/output_59_1.png" alt="png"></p>
+<ul>
+<li>可以发现，似乎名字越长，获救可能性越高，所以我们把名字的长度加入特征：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">'Name_Len'</span>] = train[<span class="string">'Name'</span>].apply(<span class="keyword">lambda</span> x:len(x))</span><br><span class="line">test[<span class="string">'Name_Len'</span>] = test[<span class="string">'Name'</span>].apply(<span class="keyword">lambda</span> x:len(x))</span><br><span class="line">train.head(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>PassengerId</th><br>      <th>Survived</th><br>      <th>Pclass</th><br>      <th>Name</th><br>      <th>Sex</th><br>      <th>Age</th><br>      <th>SibSp</th><br>      <th>Parch</th><br>      <th>Ticket</th><br>      <th>Fare</th><br>      <th>Cabin</th><br>      <th>Embarked</th><br>      <th>Cabin_Zone</th><br>      <th>Name_Len</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>0</th><br>      <td>1</td><br>      <td>0</td><br>      <td>3</td><br>      <td>Braund, Mr. Owen Harris</td><br>      <td>male</td><br>      <td>22.0</td><br>      <td>1</td><br>      <td>0</td><br>      <td>A/5 21171</td><br>      <td>7.2500</td><br>      <td>NaN</td><br>      <td>S</td><br>      <td>0</td><br>      <td>23</td><br>    </tr><br>    <tr><br>      <th>1</th><br>      <td>2</td><br>      <td>1</td><br>      <td>1</td><br>      <td>Cumings, Mrs. John Bradley (Florence Briggs Th…</td><br>      <td>female</td><br>      <td>38.0</td><br>      <td>1</td><br>      <td>0</td><br>      <td>PC 17599</td><br>      <td>71.2833</td><br>      <td>C85</td><br>      <td>C</td><br>      <td>C</td><br>      <td>51</td><br>    </tr><br>    <tr><br>      <th>2</th><br>      <td>3</td><br>      <td>1</td><br>      <td>3</td><br>      <td>Heikkinen, Miss. Laina</td><br>      <td>female</td><br>      <td>26.0</td><br>      <td>0</td><br>      <td>0</td><br>      <td>STON/O2. 3101282</td><br>      <td>7.9250</td><br>      <td>NaN</td><br>      <td>S</td><br>      <td>0</td><br>      <td>22</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+<p>同时我们猜测，不同的称谓应该也和获救情况有关联：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.groupby(train[<span class="string">'Name'</span>].apply(<span class="keyword">lambda</span> x: x.split(<span class="string">', '</span>)[<span class="number">1</span>]).apply(<span class="keyword">lambda</span> x: x.split(<span class="string">'.'</span>)[<span class="number">0</span>]))[<span class="string">'Survived'</span>].mean().plot()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f282b32f6d8&gt;
+</code></pre><p><img src="/img/titanic/output_63_1.png" alt="png"></p>
+<p>于是我们把称谓信息提取出来，由于有些称谓的人数量过少，我们还需要做一个映射:</p>
+<p>Mme：称呼非英语民族的”上层社会”已婚妇女,及有职业的妇女，相当于Mrs</p>
+<p>Jonkheer:乡绅</p>
+<p>Capt：船长</p>
+<p>Lady：贵族夫人的称呼</p>
+<p>Don唐：是西班牙语中贵族和有地位者的尊称</p>
+<p>sir：先生</p>
+<p>the Countess：女伯爵</p>
+<p>Ms：Ms.或Mz 美国近来用来称呼婚姻状态不明的妇女</p>
+<p>Col：中校:Lieutenant Colonel(Lt. Col.)上校:Colonel(Col.)</p>
+<p>Major：少校</p>
+<p>Mlle:小姐</p>
+<p>Rev：牧师</p>
+<p>测试集合中特殊的Dona：女士尊称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">'Title'</span>] = train[<span class="string">'Name'</span>].apply(<span class="keyword">lambda</span> x: x.split(<span class="string">', '</span>)[<span class="number">1</span>]).apply(<span class="keyword">lambda</span> x: x.split(<span class="string">'.'</span>)[<span class="number">0</span>])</span><br><span class="line">train[<span class="string">'Title'</span>] = train[<span class="string">'Title'</span>].replace([<span class="string">'Don'</span>,<span class="string">'Dona'</span>, <span class="string">'Major'</span>, <span class="string">'Capt'</span>, <span class="string">'Jonkheer'</span>, <span class="string">'Rev'</span>, <span class="string">'Col'</span>,<span class="string">'Sir'</span>,<span class="string">'Dr'</span>],<span class="string">'Mr'</span>)</span><br><span class="line">train[<span class="string">'Title'</span>] = train[<span class="string">'Title'</span>].replace([<span class="string">'Mlle'</span>,<span class="string">'Ms'</span>], <span class="string">'Miss'</span>)</span><br><span class="line">train[<span class="string">'Title'</span>] = train[<span class="string">'Title'</span>].replace([<span class="string">'the Countess'</span>,<span class="string">'Mme'</span>,<span class="string">'Lady'</span>,<span class="string">'Dr'</span>], <span class="string">'Mrs'</span>)</span><br><span class="line"></span><br><span class="line">test[<span class="string">'Title'</span>] = test[<span class="string">'Name'</span>].apply(<span class="keyword">lambda</span> x: x.split(<span class="string">', '</span>)[<span class="number">1</span>]).apply(<span class="keyword">lambda</span> x: x.split(<span class="string">'.'</span>)[<span class="number">0</span>])</span><br><span class="line">test[<span class="string">'Title'</span>] = test[<span class="string">'Title'</span>].replace([<span class="string">'Don'</span>,<span class="string">'Dona'</span>, <span class="string">'Major'</span>, <span class="string">'Capt'</span>, <span class="string">'Jonkheer'</span>, <span class="string">'Rev'</span>, <span class="string">'Col'</span>,<span class="string">'Sir'</span>,<span class="string">'Dr'</span>],<span class="string">'Mr'</span>)</span><br><span class="line">test[<span class="string">'Title'</span>] = test[<span class="string">'Title'</span>].replace([<span class="string">'Mlle'</span>,<span class="string">'Ms'</span>], <span class="string">'Miss'</span>)</span><br><span class="line">test[<span class="string">'Title'</span>] = test[<span class="string">'Title'</span>].replace([<span class="string">'the Countess'</span>,<span class="string">'Mme'</span>,<span class="string">'Lady'</span>,<span class="string">'Dr'</span>], <span class="string">'Mrs'</span>)</span><br><span class="line"></span><br><span class="line">train.head(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>PassengerId</th><br>      <th>Survived</th><br>      <th>Pclass</th><br>      <th>Name</th><br>      <th>Sex</th><br>      <th>Age</th><br>      <th>SibSp</th><br>      <th>Parch</th><br>      <th>Ticket</th><br>      <th>Fare</th><br>      <th>Cabin</th><br>      <th>Embarked</th><br>      <th>Cabin_Zone</th><br>      <th>Name_Len</th><br>      <th>Title</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>0</th><br>      <td>1</td><br>      <td>0</td><br>      <td>3</td><br>      <td>Braund, Mr. Owen Harris</td><br>      <td>male</td><br>      <td>22.0</td><br>      <td>1</td><br>      <td>0</td><br>      <td>A/5 21171</td><br>      <td>7.2500</td><br>      <td>NaN</td><br>      <td>S</td><br>      <td>0</td><br>      <td>23</td><br>      <td>Mr</td><br>    </tr><br>    <tr><br>      <th>1</th><br>      <td>2</td><br>      <td>1</td><br>      <td>1</td><br>      <td>Cumings, Mrs. John Bradley (Florence Briggs Th…</td><br>      <td>female</td><br>      <td>38.0</td><br>      <td>1</td><br>      <td>0</td><br>      <td>PC 17599</td><br>      <td>71.2833</td><br>      <td>C85</td><br>      <td>C</td><br>      <td>C</td><br>      <td>51</td><br>      <td>Mrs</td><br>    </tr><br>    <tr><br>      <th>2</th><br>      <td>3</td><br>      <td>1</td><br>      <td>3</td><br>      <td>Heikkinen, Miss. Laina</td><br>      <td>female</td><br>      <td>26.0</td><br>      <td>0</td><br>      <td>0</td><br>      <td>STON/O2. 3101282</td><br>      <td>7.9250</td><br>      <td>NaN</td><br>      <td>S</td><br>      <td>0</td><br>      <td>22</td><br>      <td>Miss</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+<h1 id="2-特征工程"><a href="#2-特征工程" class="headerlink" title="2. 特征工程"></a>2. 特征工程</h1><p>首先查看所有数据中为null的数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'============train==========='</span>)</span><br><span class="line">print(train.isnull().sum())</span><br><span class="line">print(<span class="string">'============test============'</span>)</span><br><span class="line">print(test.isnull().sum())</span><br></pre></td></tr></table></figure>
+<pre><code>============train===========
+PassengerId      0
+Survived         0
+Pclass           0
+Name             0
+Sex              0
+Age            177
+SibSp            0
+Parch            0
+Ticket           0
+Fare             0
+Cabin          687
+Embarked         2
+Cabin_Zone       0
+Name_Len         0
+Title            0
+dtype: int64
+============test============
+PassengerId      0
+Pclass           0
+Name             0
+Sex              0
+Age             86
+SibSp            0
+Parch            0
+Ticket           0
+Fare             1
+Cabin          327
+Embarked         0
+Name_Len         0
+Title            0
+dtype: int64
+</code></pre><ol>
+<li>age 和 cabin在训练集和测试集都有缺失，cabin缺失数量巨大</li>
+<li>embarked 在训练集存在2个缺失</li>
+<li>fare在测试集有一个缺失</li>
+</ol>
+<h3 id="2-1-embarked-处理"><a href="#2-1-embarked-处理" class="headerlink" title="2.1 embarked 处理"></a>2.1 embarked 处理</h3><p>首先，对embarked进行处理，查看embarked的缺失情况。<br>因为只有2个数据存在缺失，所以不适合将“缺失”重新定义一个分类，我们想办法对其进行填补：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[train.Embarked.isnull()]</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>PassengerId</th><br>      <th>Survived</th><br>      <th>Pclass</th><br>      <th>Name</th><br>      <th>Sex</th><br>      <th>Age</th><br>      <th>SibSp</th><br>      <th>Parch</th><br>      <th>Ticket</th><br>      <th>Fare</th><br>      <th>Cabin</th><br>      <th>Embarked</th><br>      <th>Cabin_Zone</th><br>      <th>Name_Len</th><br>      <th>Title</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>61</th><br>      <td>62</td><br>      <td>1</td><br>      <td>1</td><br>      <td>Icard, Miss. Amelie</td><br>      <td>female</td><br>      <td>38.0</td><br>      <td>0</td><br>      <td>0</td><br>      <td>113572</td><br>      <td>80.0</td><br>      <td>B28</td><br>      <td>NaN</td><br>      <td>B</td><br>      <td>19</td><br>      <td>Miss</td><br>    </tr><br>    <tr><br>      <th>829</th><br>      <td>830</td><br>      <td>1</td><br>      <td>1</td><br>      <td>Stone, Mrs. George Nelson (Martha Evelyn)</td><br>      <td>female</td><br>      <td>62.0</td><br>      <td>0</td><br>      <td>0</td><br>      <td>113572</td><br>      <td>80.0</td><br>      <td>B28</td><br>      <td>NaN</td><br>      <td>B</td><br>      <td>41</td><br>      <td>Mrs</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(train.Embarked.value_counts())</span><br><span class="line">print(<span class="string">'========================='</span>)</span><br><span class="line">print(train[train.Pclass==<span class="number">1</span>].Embarked.value_counts())</span><br></pre></td></tr></table></figure>
+<pre><code>S    644
+C    168
+Q     77
+Name: Embarked, dtype: int64
+=========================
+S    127
+C     85
+Q      2
+Name: Embarked, dtype: int64
+</code></pre><ul>
+<li>不分Pclass仓位来看的话，S embarked人数远大于C，Q</li>
+<li>而且两个缺失的数据Pclass都为1，而Pclass==1的乘客中，S embarked的人数也是最多。  </li>
+</ul>
+<p><strong>所以，因为缺失数据很少，可以考虑随最大可能数据填补缺失值，因此设定缺失值为S</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.Embarked.fillna(<span class="string">'S'</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-cabin处理"><a href="#2-2-cabin处理" class="headerlink" title="2.2 cabin处理"></a>2.2 cabin处理</h3><p>在之前的数据探索环节，我们知道cabin为空的获救概率较低，不为空的获救概率较高。说明该数据可以作为特征。所以我们对cabin作填充处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#若为NaN,则用字符串‘Null’填充，否则用'Not Null'填充</span></span><br><span class="line">train[<span class="string">'Cabin'</span>] = train[<span class="string">'Cabin'</span>].isnull().apply(<span class="keyword">lambda</span> x: <span class="string">'Null'</span> <span class="keyword">if</span> x <span class="keyword">is</span> <span class="keyword">True</span> <span class="keyword">else</span> <span class="string">'Not Null'</span>)</span><br><span class="line">test[<span class="string">'Cabin'</span>] = test[<span class="string">'Cabin'</span>].isnull().apply(<span class="keyword">lambda</span> x: <span class="string">'Null'</span> <span class="keyword">if</span> x <span class="keyword">is</span> <span class="keyword">True</span> <span class="keyword">else</span> <span class="string">'Not Null'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-Name和Ticket处理"><a href="#2-3-Name和Ticket处理" class="headerlink" title="2.3 Name和Ticket处理"></a>2.3 Name和Ticket处理</h3><p>已经从Name属性中提取了有价值的特征，所以删除原Name和Ticket属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> train[<span class="string">'Name'</span>], test[<span class="string">'Name'</span>]</span><br><span class="line"><span class="keyword">del</span> train[<span class="string">'Ticket'</span>], test[<span class="string">'Ticket'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-年龄离散化处理"><a href="#2-4-年龄离散化处理" class="headerlink" title="2.4 年龄离散化处理"></a>2.4 年龄离散化处理</h3><p>在我们对数据进行观察时，发现获救情况和年龄不是存在简单的线性关系，所以需要对年龄进行离散化处理<br>同时，对于缺失值，需要进行填补。考虑到年龄缺失的数量较多，所以将缺失设为一类<br>年龄以5岁为一个周期进行离散，同时10岁以下，60岁以上分别归为一类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">group = train.groupby([<span class="string">'Title'</span>, <span class="string">'Pclass'</span>])[<span class="string">'Age'</span>]</span><br><span class="line">train[<span class="string">'Age'</span>] = group.transform(<span class="keyword">lambda</span> x: x.fillna(x.median()))</span><br><span class="line">train = train.drop(<span class="string">'Title'</span>,axis=<span class="number">1</span>)</span><br><span class="line">train[<span class="string">'IsChild'</span>] = np.where(train[<span class="string">'Age'</span>]&lt;=<span class="number">12</span>,<span class="number">1</span>,<span class="number">0</span>)</span><br><span class="line">train[<span class="string">'Age'</span>] = pd.cut(train[<span class="string">'Age'</span>],<span class="number">5</span>)</span><br><span class="line"><span class="comment">#train = train.drop('Age',axis=1)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">group = test.groupby([<span class="string">'Title'</span>, <span class="string">'Pclass'</span>])[<span class="string">'Age'</span>]</span><br><span class="line">test[<span class="string">'Age'</span>] = group.transform(<span class="keyword">lambda</span> x: x.fillna(x.median()))</span><br><span class="line">test = test.drop(<span class="string">'Title'</span>,axis=<span class="number">1</span>)</span><br><span class="line">test[<span class="string">'IsChild'</span>] = np.where(test[<span class="string">'Age'</span>]&lt;=<span class="number">12</span>,<span class="number">1</span>,<span class="number">0</span>)</span><br><span class="line">test[<span class="string">'Age'</span>] = pd.cut(test[<span class="string">'Age'</span>],<span class="number">5</span>)</span><br><span class="line"><span class="comment">#test = test.drop('Age',axis=1)</span></span><br><span class="line"></span><br><span class="line">train.head(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>PassengerId</th><br>      <th>Survived</th><br>      <th>Pclass</th><br>      <th>Sex</th><br>      <th>Age</th><br>      <th>SibSp</th><br>      <th>Parch</th><br>      <th>Fare</th><br>      <th>Cabin</th><br>      <th>Embarked</th><br>      <th>Cabin_Zone</th><br>      <th>Name_Len</th><br>      <th>IsChild</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>0</th><br>      <td>1</td><br>      <td>0</td><br>      <td>3</td><br>      <td>male</td><br>      <td>(16.336, 32.252]</td><br>      <td>1</td><br>      <td>0</td><br>      <td>7.2500</td><br>      <td>Null</td><br>      <td>S</td><br>      <td>0</td><br>      <td>23</td><br>      <td>0</td><br>    </tr><br>    <tr><br>      <th>1</th><br>      <td>2</td><br>      <td>1</td><br>      <td>1</td><br>      <td>female</td><br>      <td>(32.252, 48.168]</td><br>      <td>1</td><br>      <td>0</td><br>      <td>71.2833</td><br>      <td>Not Null</td><br>      <td>C</td><br>      <td>C</td><br>      <td>51</td><br>      <td>0</td><br>    </tr><br>    <tr><br>      <th>2</th><br>      <td>3</td><br>      <td>1</td><br>      <td>3</td><br>      <td>female</td><br>      <td>(16.336, 32.252]</td><br>      <td>0</td><br>      <td>0</td><br>      <td>7.9250</td><br>      <td>Null</td><br>      <td>S</td><br>      <td>0</td><br>      <td>22</td><br>      <td>0</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+<h3 id="2-5-fare属性"><a href="#2-5-fare属性" class="headerlink" title="2.5 fare属性"></a>2.5 fare属性</h3><p>在test集中存在一个数据的fare为缺失值，对于这个变量，可以用平均值进行填补</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test[test.Fare.isnull()]</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>PassengerId</th><br>      <th>Pclass</th><br>      <th>Sex</th><br>      <th>Age</th><br>      <th>SibSp</th><br>      <th>Parch</th><br>      <th>Fare</th><br>      <th>Cabin</th><br>      <th>Embarked</th><br>      <th>Name_Len</th><br>      <th>IsChild</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>152</th><br>      <td>1044</td><br>      <td>3</td><br>      <td>male</td><br>      <td>(45.668, 60.834]</td><br>      <td>0</td><br>      <td>0</td><br>      <td>NaN</td><br>      <td>Null</td><br>      <td>S</td><br>      <td>18</td><br>      <td>0</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test.loc[test.Fare.isnull(), <span class="string">'Fare'</span>] = \</span><br><span class="line">test[(test.Pclass==<span class="number">1</span>) &amp; (test.Embarked==<span class="string">'S'</span>) &amp; (test.Sex==<span class="string">'male'</span>)].dropna().Fare.mean()</span><br></pre></td></tr></table></figure>
+<h3 id="2-6-归一化处理"><a href="#2-6-归一化处理" class="headerlink" title="2.6 归一化处理"></a>2.6 归一化处理</h3><p>数据中fare分布波动较大，对其进行归一化处理，加速模型收敛</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scaler = preprocessing.StandardScaler()</span><br><span class="line">fare_scale_param = scaler.fit(train[<span class="string">'Fare'</span>].values.reshape(<span class="number">-1</span>, <span class="number">1</span>))</span><br><span class="line">train.Fare = fare_scale_param.transform(train[<span class="string">'Fare'</span>].values.reshape(<span class="number">-1</span>, <span class="number">1</span>))</span><br><span class="line">test.Fare = fare_scale_param.transform(test[<span class="string">'Fare'</span>].values.reshape(<span class="number">-1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="2-7-所有特征转化成数值型编码"><a href="#2-7-所有特征转化成数值型编码" class="headerlink" title="2.7 所有特征转化成数值型编码"></a>2.7 所有特征转化成数值型编码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">features = train.drop([<span class="string">"PassengerId"</span>,<span class="string">"Survived"</span>], axis=<span class="number">1</span>).columns</span><br><span class="line">le = LabelEncoder()</span><br><span class="line"><span class="keyword">for</span> feature <span class="keyword">in</span> features:</span><br><span class="line">    le = le.fit(train[feature])</span><br><span class="line">    train[feature] = le.transform(train[feature])</span><br><span class="line"></span><br><span class="line">train.head(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>PassengerId</th><br>      <th>Survived</th><br>      <th>Pclass</th><br>      <th>Sex</th><br>      <th>Age</th><br>      <th>SibSp</th><br>      <th>Parch</th><br>      <th>Fare</th><br>      <th>Cabin</th><br>      <th>Embarked</th><br>      <th>Cabin_Zone</th><br>      <th>Name_Len</th><br>      <th>IsChild</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>0</th><br>      <td>1</td><br>      <td>0</td><br>      <td>2</td><br>      <td>1</td><br>      <td>1</td><br>      <td>1</td><br>      <td>0</td><br>      <td>18</td><br>      <td>1</td><br>      <td>2</td><br>      <td>0</td><br>      <td>11</td><br>      <td>0</td><br>    </tr><br>    <tr><br>      <th>1</th><br>      <td>2</td><br>      <td>1</td><br>      <td>0</td><br>      <td>0</td><br>      <td>2</td><br>      <td>1</td><br>      <td>0</td><br>      <td>207</td><br>      <td>0</td><br>      <td>0</td><br>      <td>3</td><br>      <td>39</td><br>      <td>0</td><br>    </tr><br>    <tr><br>      <th>2</th><br>      <td>3</td><br>      <td>1</td><br>      <td>2</td><br>      <td>0</td><br>      <td>1</td><br>      <td>0</td><br>      <td>0</td><br>      <td>41</td><br>      <td>1</td><br>      <td>2</td><br>      <td>0</td><br>      <td>10</td><br>      <td>0</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+<h3 id="2-8-得到训练-测试数据集"><a href="#2-8-得到训练-测试数据集" class="headerlink" title="2.8 得到训练/测试数据集"></a>2.8 得到训练/测试数据集</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X_all = train.iloc[:<span class="number">891</span>,:].drop([<span class="string">'PassengerId'</span>, <span class="string">'Survived'</span>], axis=<span class="number">1</span>)</span><br><span class="line">Y_all = train.iloc[:<span class="number">891</span>,:][<span class="string">'Survived'</span>]</span><br><span class="line">X_test = train.iloc[<span class="number">891</span>:,:].drop([<span class="string">'PassengerId'</span>, <span class="string">'Survived'</span>], axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="3-模型训练和调优"><a href="#3-模型训练和调优" class="headerlink" title="3 模型训练和调优"></a>3 模型训练和调优</h1><p>分别考察逻辑回归、支持向量机、最近邻、决策树、随机森林、gbdt、xgbGBDT几类算法的性能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">lr = LogisticRegression()</span><br><span class="line">svc = SVC()</span><br><span class="line">knn = KNeighborsClassifier(n_neighbors = <span class="number">3</span>)</span><br><span class="line">decision_tree = DecisionTreeClassifier()</span><br><span class="line">random_forest = RandomForestClassifier(n_estimators=<span class="number">300</span>,min_samples_leaf=<span class="number">4</span>,class_weight=&#123;<span class="number">0</span>:<span class="number">0.745</span>,<span class="number">1</span>:<span class="number">0.255</span>&#125;)</span><br><span class="line">gbdt = GradientBoostingClassifier(n_estimators=<span class="number">500</span>,learning_rate=<span class="number">0.03</span>,max_depth=<span class="number">3</span>)</span><br><span class="line">xgbGBDT = XGBClassifier(max_depth=<span class="number">3</span>, n_estimators=<span class="number">300</span>, learning_rate=<span class="number">0.05</span>)</span><br><span class="line">clfs = [lr, svc, knn, decision_tree, random_forest, gbdt, xgbGBDT]</span><br><span class="line"></span><br><span class="line">kfold = <span class="number">10</span></span><br><span class="line">cv_results = []</span><br><span class="line"><span class="keyword">for</span> classifier <span class="keyword">in</span> clfs :</span><br><span class="line">    cv_results.append(cross_val_score(classifier, X_all, y = Y_all, scoring = <span class="string">"accuracy"</span>, cv = kfold, n_jobs=<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">cv_means = []</span><br><span class="line">cv_std = []</span><br><span class="line"><span class="keyword">for</span> cv_result <span class="keyword">in</span> cv_results:</span><br><span class="line">    cv_means.append(cv_result.mean())</span><br><span class="line">    cv_std.append(cv_result.std())</span><br><span class="line"></span><br><span class="line">cv_res = pd.DataFrame(&#123;<span class="string">"CrossValMeans"</span>:cv_means,<span class="string">"CrossValerrors"</span>: cv_std,</span><br><span class="line">                       <span class="string">"Algorithm"</span>:[<span class="string">"LR"</span>,<span class="string">"SVC"</span>,<span class="string">'KNN'</span>,<span class="string">'decision_tree'</span>,<span class="string">"random_forest"</span>,<span class="string">"GBDT"</span>,<span class="string">"xgbGBDT"</span>]&#125;)</span><br><span class="line"></span><br><span class="line">g = sns.barplot(<span class="string">"CrossValMeans"</span>,<span class="string">"Algorithm"</span>,data = cv_res, palette=<span class="string">"Set3"</span>,orient = <span class="string">"h"</span>,**&#123;<span class="string">'xerr'</span>:cv_std&#125;)</span><br><span class="line">g.set_xlabel(<span class="string">"Mean Accuracy"</span>)</span><br><span class="line">g = g.set_title(<span class="string">"Cross validation scores"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/img/titanic/output_90_0.png" alt="png"></p>
+<p>通过观察，发现不同的模型的feature importance有比较大的差别，所以考虑到把他们组合在一起可能有更好的效果<br>首先定义集成框架：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ensemble</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,estimators)</span>:</span></span><br><span class="line">        self.estimator_names = []</span><br><span class="line">        self.estimators = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> estimators:</span><br><span class="line">            self.estimator_names.append(i[<span class="number">0</span>])</span><br><span class="line">            self.estimators.append(i[<span class="number">1</span>])</span><br><span class="line">        self.clf = LogisticRegression()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, train_x, train_y)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.estimators:</span><br><span class="line">            i.fit(train_x,train_y)</span><br><span class="line">        x = np.array([i.predict(train_x) <span class="keyword">for</span> i <span class="keyword">in</span> self.estimators]).T</span><br><span class="line">        y = train_y</span><br><span class="line">        self.clf.fit(x, y)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self,x)</span>:</span></span><br><span class="line">        x = np.array([i.predict(x) <span class="keyword">for</span> i <span class="keyword">in</span> self.estimators]).T</span><br><span class="line">        <span class="comment">#print(x)</span></span><br><span class="line">        <span class="keyword">return</span> self.clf.predict(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self,x,y)</span>:</span></span><br><span class="line">        s = precision_score(y,self.predict(x))</span><br><span class="line">        <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
+<p>将基分类器放入集成框架中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">bag = Ensemble(</span><br><span class="line">    [(<span class="string">'xgb'</span>,xgbGBDT),(<span class="string">'lr'</span>,lr),(<span class="string">'rf'</span>,random_forest),(<span class="string">'svc'</span>,svc),(<span class="string">'gbdt'</span>,gbdt),(<span class="string">'dt'</span>,decision_tree),(<span class="string">'knn'</span>,knn)])</span><br><span class="line">score = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">    num_test = <span class="number">0.20</span></span><br><span class="line">    X_train, X_cv, Y_train, Y_cv = train_test_split(X_all, Y_all, test_size=num_test)</span><br><span class="line">    bag.fit(X_train, Y_train)</span><br><span class="line">    <span class="comment">#Y_test = bag.predict(X_test)</span></span><br><span class="line">    acc_xgb = round(bag.score(X_cv, Y_cv) * <span class="number">100</span>, <span class="number">2</span>)</span><br><span class="line">    score+=acc_xgb</span><br><span class="line">print(score/<span class="number">10</span>)  <span class="comment">#0.8786</span></span><br></pre></td></tr></table></figure>
+<pre><code>68.73299999999999
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># def plot_learning_curve(clf, title, X, y, ylim=None, cv=None, n_jobs=3, train_sizes=np.linspace(.05, 1., 5)):</span></span><br><span class="line"><span class="comment">#     train_sizes, train_scores, test_scores = learning_curve(</span></span><br><span class="line"><span class="comment">#         clf, x, y, train_sizes=train_sizes)</span></span><br><span class="line"><span class="comment">#     train_scores_mean = np.mean(train_scores, axis=1)</span></span><br><span class="line"><span class="comment">#     train_scores_std = np.std(train_scores, axis=1)</span></span><br><span class="line"><span class="comment">#     test_scores_mean = np.mean(test_scores, axis=1)</span></span><br><span class="line"><span class="comment">#     test_scores_std = np.std(test_scores, axis=1)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     ax = plt.figure().add_subplot(111)</span></span><br><span class="line"><span class="comment">#     ax.set_title(title)</span></span><br><span class="line"><span class="comment">#     if ylim is not None:</span></span><br><span class="line"><span class="comment">#         ax.ylim(*ylim)</span></span><br><span class="line"><span class="comment">#     ax.set_xlabel(u"train_num_of_samples")</span></span><br><span class="line"><span class="comment">#     ax.set_ylabel(u"score")</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     ax.fill_between(train_sizes, train_scores_mean - train_scores_std, train_scores_mean + train_scores_std,</span></span><br><span class="line"><span class="comment">#                      alpha=0.1, color="b")</span></span><br><span class="line"><span class="comment">#     ax.fill_between(train_sizes, test_scores_mean - test_scores_std, test_scores_mean + test_scores_std,</span></span><br><span class="line"><span class="comment">#                      alpha=0.1, color="r")</span></span><br><span class="line"><span class="comment">#     ax.plot(train_sizes, train_scores_mean, 'o-', color="b", label=u"train score")</span></span><br><span class="line"><span class="comment">#     ax.plot(train_sizes, test_scores_mean, 'o-', color="r", label=u"testCV score")</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     ax.legend(loc="best")</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     midpoint = ((train_scores_mean[-1] + train_scores_std[-1]) + (test_scores_mean[-1] - test_scores_std[-1])) / 2</span></span><br><span class="line"><span class="comment">#     diff = (train_scores_mean[-1] + train_scores_std[-1]) - (test_scores_mean[-1] - test_scores_std[-1])</span></span><br><span class="line"><span class="comment">#     return midpoint, diff</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plot_learning_curve(grd, u"learning_rate", train_x, train_y)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gender_submission = pd.DataFrame(&#123;'PassengerId':test.iloc[:,0],'Survived':grd.predict(test_x)&#125;)</span></span><br><span class="line"><span class="comment"># gender_submission.to_csv('C:/Users/evilpsycho/Desktop/gender_submission.csv', index=None)</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kaggle-machine-learning/" rel="tag"># Kaggle, machine learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/2018-4-3-Kaggle解题步骤/" rel="next" title="Kaggle解题步骤">
+                <i class="fa fa-chevron-left"></i> Kaggle解题步骤
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/11/atom运行python并修改为python3/" rel="prev" title="atom运行python3">
+                atom运行python3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数据分析"><span class="nav-number">2.</span> <span class="nav-text">1. 数据分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-包导入"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 包导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-数据探索"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 数据探索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-年龄特征分析："><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1 年龄特征分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-1-年龄和性别分布"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">1.2.1 年龄和性别分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-1-年龄和仓位分布"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">1.2.1 年龄和仓位分布</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-Pclass-仓位分析"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.1 Pclass 仓位分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-性别特征"><span class="nav-number">2.2.3.</span> <span class="nav-text">1.2.3 性别特征</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#性别和年龄和生存情况"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">性别和年龄和生存情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#性别仓位和获救情况分布"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">性别仓位和获救情况分布</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-4-票价-Fare"><span class="nav-number">2.2.4.</span> <span class="nav-text">1.2.4 票价(Fare)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#票价和获救情况的关系"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">票价和获救情况的关系</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-5-sibsp-amp-parch-表亲和直亲"><span class="nav-number">2.2.5.</span> <span class="nav-text">1.2.5 sibsp&amp;parch 表亲和直亲</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-6-Embarked-上船地点"><span class="nav-number">2.2.6.</span> <span class="nav-text">1.2.6 Embarked 上船地点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-7-Cabin-船舱号"><span class="nav-number">2.2.7.</span> <span class="nav-text">1.2.7 Cabin 船舱号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-8-姓名特征"><span class="nav-number">2.2.8.</span> <span class="nav-text">1.2.8 姓名特征</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-特征工程"><span class="nav-number"></span> <span class="nav-text">2. 特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-embarked-处理"><span class="nav-number">0.1.</span> <span class="nav-text">2.1 embarked 处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-cabin处理"><span class="nav-number">0.2.</span> <span class="nav-text">2.2 cabin处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Name和Ticket处理"><span class="nav-number">0.3.</span> <span class="nav-text">2.3 Name和Ticket处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-年龄离散化处理"><span class="nav-number">0.4.</span> <span class="nav-text">2.4 年龄离散化处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-fare属性"><span class="nav-number">0.5.</span> <span class="nav-text">2.5 fare属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-归一化处理"><span class="nav-number">0.6.</span> <span class="nav-text">2.6 归一化处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-所有特征转化成数值型编码"><span class="nav-number">0.7.</span> <span class="nav-text">2.7 所有特征转化成数值型编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-得到训练-测试数据集"><span class="nav-number">0.8.</span> <span class="nav-text">2.8 得到训练/测试数据集</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-模型训练和调优"><span class="nav-number"></span> <span class="nav-text">3 模型训练和调优</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

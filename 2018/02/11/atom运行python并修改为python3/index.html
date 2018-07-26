@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="介绍atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3 下载script插件点击左上角“Atom” -&amp;gt; “preference”">
+<meta name="description" content="atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3">
 <meta name="keywords" content="skills">
 <meta property="og:type" content="article">
 <meta property="og:title" content="atom运行python3">
 <meta property="og:url" content="http://yoursite.com/2018/02/11/atom运行python并修改为python3/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="介绍atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3 下载script插件点击左上角“Atom” -&amp;gt; “preference”">
+<meta property="og:description" content="atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-14T01:55:47.937Z">
+<meta property="og:updated_time" content="2018-07-26T03:57:59.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="atom运行python3">
-<meta name="twitter:description" content="介绍atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3 下载script插件点击左上角“Atom” -&amp;gt; “preference”">
+<meta name="twitter:description" content="atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3">
 
 
 
@@ -343,7 +343,8 @@
       
 
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3</p>
+        <p>atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3</p>
+<a id="more"></a>
 <h2 id="下载script插件"><a href="#下载script插件" class="headerlink" title="下载script插件"></a>下载script插件</h2><p>点击左上角“Atom” -&gt; “preference” -&gt; “install”，在搜索框输入“script”下载安装script运行插件。下载完成后，我们可以新建一个py文件进行测试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">print(sys.version)</span><br></pre></td></tr></table></figure></p>
 <p>运行快捷键：Mac：”command + i”，我们可以看到，控制台输出的python版本为2.7，如果python2.7刚好满足你的日常编程需要，到此atom运行python就搞定了。</p>
 <h2 id="修改python3"><a href="#修改python3" class="headerlink" title="修改python3"></a>修改python3</h2><p>如果你使用的是python3，那么需要修改一下atom的默认python运行版本。点击左上角atom：<br>preference –&gt; Open Config Folder –&gt; packages –&gt; lib –&gt; grammars –&gt; python.coffee<br>可以看到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">exports.Python =</span><br><span class="line">  &apos;Selection Based&apos;:</span><br><span class="line">    command: &apos;python3&apos;</span><br><span class="line">    args: (context) -&gt; [&apos;-u&apos;, &apos;-c&apos;, context.getCode()]</span><br><span class="line"></span><br><span class="line">  &apos;File Based&apos;:</span><br><span class="line">    command: &apos;python3&apos;</span><br><span class="line">    args: (&#123;filepath&#125;) -&gt; [&apos;-u&apos;, filepath]</span><br></pre></td></tr></table></figure></p>
@@ -385,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/04/2018-4-3-Kaggle解题步骤/" rel="next" title="Kaggle解题步骤">
-                <i class="fa fa-chevron-left"></i> Kaggle解题步骤
+              <a href="/2018/01/23/Kaggle项目之Titanic/" rel="next" title="Kaggle之Titanic">
+                <i class="fa fa-chevron-left"></i> Kaggle之Titanic
               </a>
             
           </div>
@@ -487,7 +488,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -520,7 +521,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载script插件"><span class="nav-number">2.</span> <span class="nav-text">下载script插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改python3"><span class="nav-number">3.</span> <span class="nav-text">修改python3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python2和python3并存"><span class="nav-number">4.</span> <span class="nav-text">python2和python3并存</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载script插件"><span class="nav-number">1.</span> <span class="nav-text">下载script插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改python3"><span class="nav-number">2.</span> <span class="nav-text">修改python3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python2和python3并存"><span class="nav-number">3.</span> <span class="nav-text">python2和python3并存</span></a></li></ol></div>
             
 
           </div>
