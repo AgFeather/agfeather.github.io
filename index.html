@@ -346,7 +346,7 @@
 
       
         
-          <p>本篇介绍对Scheme函数式编程语言的基础语法学习，因为研究室要进行EOPL（《Essentials of Programming Languages》）的轮讲，而这本书是用Scheme作为教学语言，以至于不得不学习一下Scheme的基本语法。同时作为一种教学性质的函数式编程语言，Scheme语法简单，非常通俗易懂，可以帮助程序员理解函数式编程思想，还是值得一学的。而且著名的编程神书SICP（《Structure and Interpretation of Computer Programs》）也是用Scheme作为教学语言（EOPL的作者是SICP的联合作者之一，都是Scheme的拥簇）。所以为了方便理解这两本书，对Scheme的基本语法有一个简单的了解还是有必要的。</p>
+          <p>因为研究室要进行EOPL（《Essentials of Programming Languages》）的轮讲，而这本书是用Scheme作为教学语言，以至于不得不学习一下Scheme的基本语法。作为一种教学性质的函数式编程语言，Scheme语法简单，非常通俗易懂，可以帮助程序员理解函数式编程思想，还是值得一学的。而且著名的编程神书SICP（《Structure and Interpretation of Computer Programs》）也是用Scheme作为教学语言。所以为了方便更好的理解这两本书，对Scheme的基本语法有一个简单的了解还是有必要的。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/21/Scheme语言基本语法/#more" rel="contents">
@@ -470,79 +470,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="为什么需要复合数据？"><a href="#为什么需要复合数据？" class="headerlink" title="为什么需要复合数据？"></a>为什么需要复合数据？</h3><p>与我们需要复合过程一样的原因一样：同样是为了提升我们在设计程序时所位于的概念层次，提高设计的模块性，增强语言的表达能力。正如定义过程的能力使我们有可能在更高的概念层次上处理计算工作一样，复合数据的能力，也将使我们得以在比语言提供的基本数据对象更高的概念层次上，处理与数据有关的各种问题。</p>
-<h3 id="复合数据提高模块性"><a href="#复合数据提高模块性" class="headerlink" title="复合数据提高模块性"></a>复合数据提高模块性</h3><p>如果我们可以直接在将有理数本身当作对象的方式下操作他们，那么也就可能把处理有理数的那些程序部分，与有理数如何表示的细节隔离开。也就是说：将程序中处理数据对象的表示部分，和处理数据对象的使用的部分相互隔离。数据抽象技术能使程序更容易设计，维护和修改。</p>
-<h2 id="2-1-数据抽象索引"><a href="#2-1-数据抽象索引" class="headerlink" title="2.1 数据抽象索引"></a>2.1 数据抽象索引</h2><ul>
-<li><p>数据抽象使一种方法学，它使我们能将一个 <strong>复合数据对象的使用</strong>，与该数据对象怎样由 <strong>更基本的数据对象构造</strong> 起来的细节隔离开。（对于过程抽象，我们可以理解为：构造一个抽象，它将这一过程的 <strong>使用方式</strong>，和该过程究竟如何通过 <strong>更基本的过程实现的具体细节</strong> 相互分离）  </p>
-</li>
-<li><p>数据抽象的基本思想，就是设法构造出一些使用复合数据对象的程序。我们的程序使用数据的方式应该是这样的：除了完成当前工作所必要的东西之外，它们不对所有数据作任何假设，与此同时，一种‘具体’数据表示的定义，也应该与程序中使用数据的方式无关。这两个部分之间的界面是一组过程，称为 <strong>选择函数和构造函数</strong></p>
-</li>
-</ul>
-<h3 id="2-1-1-实例：有理数的运算"><a href="#2-1-1-实例：有理数的运算" class="headerlink" title="2.1.1 实例：有理数的运算"></a>2.1.1 实例：有理数的运算</h3><p>假定我们要作有理数的算术，包括加减乘除等<br>假定已经有了一种从分子和分母构造有理数的方法，并进一步假定如果有了一个有理数，我们有一种方法取得他的分子和分母。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(make-rat &lt;n&gt; &lt;d&gt;) 返回一个有理数， 分子是n，分母是d</span><br><span class="line">(numer &lt;x&gt;) 返回分子</span><br><span class="line">(denom &lt;x&gt;) 返回分母</span><br></pre></td></tr></table></figure></p>
-<p>目前，我们并不考虑上面的三个过程的具体实现，我们仅根据他们的功能，完成有理数的加减乘除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(define (add-rat x y)</span><br><span class="line">  (make-rat (+ (* (numer x) (denom y))</span><br><span class="line">               (* (numer y) (denom x)))</span><br><span class="line">            (* (denom x) (denom y))))</span><br><span class="line"></span><br><span class="line">(define (sub-rat x y)</span><br><span class="line">  (make-rat (- (* (numer x) (denom y))</span><br><span class="line">               (* (numer y) (denom x)))</span><br><span class="line">            (* (denom x) (denom y))))</span><br><span class="line"></span><br><span class="line">(define (mul-rat x y)</span><br><span class="line">  (make-rat (* (numer x) (numer y))</span><br><span class="line">            (* (denom x) (denom y))))</span><br><span class="line"></span><br><span class="line">(define (div-rat x y)</span><br><span class="line">  (make-rat (* (numer x) (denom y))</span><br><span class="line">            (* (numer y) (denom x))))</span><br><span class="line"></span><br><span class="line">(define (equal-rat? x y)</span><br><span class="line">  (let ((a (* (numer x) (denom y)))</span><br><span class="line">        (b (* (numer y) (denom x))))</span><br><span class="line">    (if (eqv? a b)</span><br><span class="line">        #t</span><br><span class="line">        #f)))</span><br></pre></td></tr></table></figure></p>
-<p>这样，我们有了定义在三个构造过程基础之上的各种运算。而这些基础还没有定义。我们可以使用序对cons进行构造：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(define (make-rat n d) (cons n d))</span><br><span class="line">(define (numer x) (car x))</span><br><span class="line">(define (denom x) (cdr x))</span><br><span class="line">(define (print-rat x))</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-1-2-抽象屏障"><a href="#2-1-2-抽象屏障" class="headerlink" title="2.1.2 抽象屏障"></a>2.1.2 抽象屏障</h3><ul>
-<li>一般而言，数据抽象的基本思想就是为每一类数据对象标示出一组 <strong>基本操作</strong>，使得对这类数据对象的所有操作都可以基于他们表述，而且在操作这些数据对象时也只能使用他们。</li>
-<li>对于数据，可以有多个抽象层次，也就是多个抽象屏障，如有理数的定义：<blockquote>
-<p>使用有理数的程序将仅仅通过有理数包提供的“API”（add-rat, sub-rat, mul-rat, div-rat..)去完成有理数操作；而这些过程转而又是完全基于构造函数和选择函数make-rat, numer, denom实现的。而这些函数又是基于序对实现的，只要序对可以通过cons,car和cdr操作。，有关序对如何实现的细节与有理数包的其余部分都完全没有关系。</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="2-1-3-数据意味着什么"><a href="#2-1-3-数据意味着什么" class="headerlink" title="2.1.3 数据意味着什么"></a>2.1.3 数据意味着什么</h3><ul>
-<li>可以考虑 <strong>序对</strong> ，我们从来没有说过序对是什么，只是说所有的语言为序对的操作提供了三个过程cons，car，cdr。有关这三个操作，我们需要知道的全部东西就是，三个过程的功能。</li>
-<li><p>进一步思考，我们能发现一个令人吃惊的事实：我们完全可以不用任何数据结构，只使用过程就可以实现序对：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(define (cons x y)</span><br><span class="line">  (define (dispatch m)</span><br><span class="line">    (cond ((= m 0) x)</span><br><span class="line">          ((= m 1) y)</span><br><span class="line">          (else (error &quot;argument no 0 or 1&quot; m))))</span><br><span class="line">  dispatch)</span><br><span class="line">(define (car z) (z 0))</span><br><span class="line">(define (cdr z) (z 1))</span><br><span class="line"></span><br><span class="line">(car (cons 0 1)) -&gt; 0</span><br><span class="line">(cdr (cons 0 1)) -&gt; 1</span><br><span class="line"></span><br><span class="line">; cons过程会返回一个过程，而过程car，cdr会使用cons返回的过程并传入；参数，而在cons返回的过程中针对传入的参数进行操作。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以看出，cons返回一个过程，而对这三个方法的定义，完全满足了序对的定义。从这个例子可以看出，我们无法把这一实现和“真正的”数据结构区分开。</p>
-</li>
-<li><strong>数据的过程性表示</strong> 将在我们的程序设计中扮演一种核心角色。有关的程序设计风格通常称为 <strong>消息传递</strong></li>
-</ul>
-<h2 id="2-2-层次性数据和闭包性质"><a href="#2-2-层次性数据和闭包性质" class="headerlink" title="2.2 层次性数据和闭包性质"></a>2.2 层次性数据和闭包性质</h2><ul>
-<li>序对为我们提供了一种用于构造复合数据的基本“粘合剂”。我们可以建立元素本身也是序对的序对，这就是表结构得以作为一种表示工具的根本基础。我们将这种能力成为cons的闭包性质。</li>
-<li>一般的说，某种组合数据对象的操作满足闭包性质，那就是说，通过它组合起来的数据对象得到的结果本身还可以通过同样的操作再进行组合。</li>
-</ul>
-<h3 id="2-2-1-序列的表示"><a href="#2-2-1-序列的表示" class="headerlink" title="2.2.1 序列的表示"></a>2.2.1 序列的表示</h3><ul>
-<li><p>可以使用cons构造序列，同时Scheme提供过程list用以快速构造序列：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(list &lt;a1&gt; &lt;a2&gt; ..) = (cons (a1 (cons a2 (cons ..))))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用map过程，对一个list的所有元素进行操作映射。</p>
-</li>
-</ul>
-<h3 id="2-2-2-层次性结构"><a href="#2-2-2-层次性结构" class="headerlink" title="2.2.2 层次性结构"></a>2.2.2 层次性结构</h3><p>使用list和cons可以构建复合形式的数据，我们可以将它看作树结构，进行递归访问。</p>
-<h3 id="2-2-3-序列作为一种约定的界面"><a href="#2-2-3-序列作为一种约定的界面" class="headerlink" title="2.2.3 序列作为一种约定的界面"></a>2.2.3 序列作为一种约定的界面</h3><p>对于一个复杂的过程，我们可以将其拆分成一个信号流系统，将这个复杂的过程分割成不同的子过程，并且各个子过程之间用信号表示流动。<br>例：给定一个树，计算值为奇数的叶子的平方和。最原始的思想解题过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(define (sum-odd-squares tree)</span><br><span class="line">  (cond ((null? tree) 0)</span><br><span class="line">        ((not (pair? tree))</span><br><span class="line">         (if (odd? tree)</span><br><span class="line">             (square tree)</span><br><span class="line">             0))</span><br><span class="line">        (else (+ (sum-odd-squares (car tree))</span><br><span class="line">                 (sum-odd-squares (cdr tree))))))</span><br></pre></td></tr></table></figure></p>
-<p>我们可以将上面这个复杂的过程归纳为信号流结构：</p>
-<ol>
-<li>枚举出一棵树的每个树叶</li>
-<li>过滤它们，选出其中的奇数树叶</li>
-<li>对选出的每一个数求平方</li>
-<li>用+累加起来得到结果，从0开始</li>
-</ol>
-<p>但在上面的原始过程中，我们并没有体现出信号流结构。我们需要重新组织这些程序，使之能够清晰的反应上面信号流的结构，其中最关键的一点就是将注意力集中在处理过程中从一个步骤流向下一个步骤的“信号”。   </p>
-<ul>
-<li><p>枚举一棵树的所有树叶：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(define (enumerate-tree tree)</span><br><span class="line">  (cond ((null? tree) nil)</span><br><span class="line">        ((not (pair? tree)) (list tree))</span><br><span class="line">        (else (append (enumerate-tree (car tree))</span><br><span class="line">                      (enumerate-tree (cdr tree))))))</span><br><span class="line"></span><br><span class="line">(enumerate-tree (list 1 (list 2 (list 3 4)) 5))</span><br><span class="line">(1 2 3 4 5)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按照给定谓词过滤元素：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(define (filter predicate sequence)</span><br><span class="line">  (cond ((null? sequence) nil)</span><br><span class="line">        ((predicate (car sequence))</span><br><span class="line">         (cons (car sequence)</span><br><span class="line">               (filter predicate (cdr sequence))))</span><br><span class="line">        (else (filter predicate (cdr sequence)))))</span><br><span class="line"></span><br><span class="line">(filter odd? (list 1 2 3 4 5))</span><br><span class="line">(1 3 5)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实现信号流图中的映射步骤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(map square (list 1 2 3 4 5))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实现流图中的累加过程：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(define (accumulate op initial sequence)</span><br><span class="line">  (if (null? sequence)</span><br><span class="line">      initial</span><br><span class="line">      (op (car sequence)</span><br><span class="line">          (accumulate op initial (cdr sequence)))))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>最后，将整个流程整合起来形成一个过程：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(define (sum-odd-squares tree)</span><br><span class="line">  (accumulate +</span><br><span class="line">              0</span><br><span class="line">              (map square</span><br><span class="line">                   (filter odd?</span><br><span class="line">                           (enumerate-tree tree)))))</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>将程序表示为一些针对序列的操作，这样做的价值就在于能帮助我们得到模块化的程序设计，也就是说，得到由一些比较独立的片段的组合构成的设计。在工业设计中，模块化结构是控制复杂性的一种威力强大的策略。</p>
-<h3 id="2-2-4-实例分析：一个图形语言"><a href="#2-2-4-实例分析：一个图形语言" class="headerlink" title="2.2.4 实例分析：一个图形语言"></a>2.2.4 实例分析：一个图形语言</h3><p>在描述一种语言时，应该将注意力集中到语言的基本原语，它的组合手段以及它的抽象手段。详细内容见书P86.</p>
-<h2 id="2-3-符号数据"><a href="#2-3-符号数据" class="headerlink" title="2.3 符号数据"></a>2.3 符号数据</h2><p>到目前为止，我们已经使用过的所有复合数据都是从数值出发构造起来的，在这一节，我们要扩充所用语言的表述能力，引进将任意符号作为数据的功能。</p>
-<h3 id="2-3-1-使用引号表示字符"><a href="#2-3-1-使用引号表示字符" class="headerlink" title="2.3.1 使用引号表示字符"></a>2.3.1 使用引号表示字符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(define a 1)</span><br><span class="line">(define b 2)</span><br><span class="line">(list a b)</span><br><span class="line">&gt;&gt;(1 2)</span><br><span class="line">(list &apos;a &apos;b)</span><br><span class="line">&gt;&gt;(a b)</span><br><span class="line">(list &apos;a b)</span><br><span class="line">&gt;&gt;(a 2)</span><br></pre></td></tr></table></figure>
-
-          
+          <p>让我们进入SICP的第二章：构造数据抽象<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/27/SICP第二章笔记/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -783,64 +718,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h2 id="Sklearn简介"><a href="#Sklearn简介" class="headerlink" title="Sklearn简介"></a>Sklearn简介</h2><p>Sklearn是机器学习领域最知名的python模块之一，广泛的应用到各种机器学习项目中。如果英语足够好的话，可以查看Skearn官网，那里有你想知道的一切。<br><a href="http://scikit-learn.org/stable/" target="_blank" rel="noopener">http://scikit-learn.org/stable/</a><br>Sklearn包含了多种机器学习方式：</p>
-<ul>
-<li>Classification分类</li>
-<li>Regression回归</li>
-<li>Clustering非监督聚类</li>
-<li>Dimensionality reduction数据降维</li>
-<li>Preprocessing数据预处理</li>
-</ul>
-<h2 id="Sklearn安装"><a href="#Sklearn安装" class="headerlink" title="Sklearn安装"></a>Sklearn安装</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>Linux可以直接使用pip进行安装，方便快捷。需要说明的是，sklearn需要Numpy和Scipy模块的支持。也就是说，在安装sklearn前，需要确定电脑已经安装了依赖模块。</p>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>windows安装建议通过Anaconda来安装所有科学计算需要的模块，方便快捷。</p>
-<h2 id="Sklearn模型选择"><a href="#Sklearn模型选择" class="headerlink" title="Sklearn模型选择"></a>Sklearn模型选择</h2><p>在官网上，有一个机器学习模型选择流程图，在进行机器学习模型选择时可以用作参考：<br><a href="http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html</a></p>
-<h2 id="Sklearn初探"><a href="#Sklearn初探" class="headerlink" title="Sklearn初探"></a>Sklearn初探</h2><p>Sklearn把所有及其模型的使用模式整合在了一起，所有模型的调用方式都是一样的。也就是说，学会了一种机器学习模型的使用方法，也就掌握了所有模型的使用方式。</p>
-<h3 id="K近邻方法"><a href="#K近邻方法" class="headerlink" title="K近邻方法"></a>K近邻方法</h3><p>让我们使用Sklearn自带的数据集，使用k近邻算法，探索Sklearn模块的使用模式：</p>
-<ol>
-<li><p>首先导入包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from sklearn import datasets</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.neighbors import KNeighborsClassifier</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>载入数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iris = datasets.load_iris()</span><br><span class="line">iris_X = iris.data</span><br><span class="line">iris_y = iris.target</span><br><span class="line"></span><br><span class="line">print(iris_X[:3,:])</span><br><span class="line">print(iris_y[:3])</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>训练数据集测试数据集分离并训练K近邻模型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(iris_X, iris_y, test_size=0.3)</span><br><span class="line"></span><br><span class="line">kNN = KNeighborsClassifier()</span><br><span class="line">kNN.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>预测和评分：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prediction = kNN.predict(X_test)</span><br><span class="line">score = kNN.score(X_test, y_test)#分类准确率</span><br><span class="line">probability = kNN.predict_proba(X_test)</span><br><span class="line">neighborpoint=knn.kneighbors(iris_x_test[-1],5,False)</span><br><span class="line">#计算与最后一个测试样本距离在最近的5个点，返回的是这些样本的序号组成的数组</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="模型常用属性和功能"><a href="#模型常用属性和功能" class="headerlink" title="模型常用属性和功能"></a>模型常用属性和功能</h2><h3 id="训练和预测"><a href="#训练和预测" class="headerlink" title="训练和预测"></a>训练和预测</h3><p>如上文代码所示：</p>
-<ul>
-<li>model.fit(x_train, y_labels)可以对模型进行训练</li>
-<li>model.predict(x_test)使用训练好的模型进行预测</li>
-<li>每个模型在训练和预测时，都有非常多的参数可以调整，对于新手来说，可以直接使用默认参数。当熟练掌握模型后，可以通过对参数的调整来优化模型。</li>
-</ul>
-<h3 id="模型参数"><a href="#模型参数" class="headerlink" title="模型参数"></a>模型参数</h3><p>Sklearn对每个模型都提供方法，用以取出模型的具体参数信息：</p>
-<ul>
-<li>model.coef_, model.intercept_就属于model的属性。例如对线性回归来说，这两个参数分别代表模型的斜率和截距。</li>
-<li>model.get_params()函数可以返回在模型定义时，定义的参数。</li>
-</ul>
-<h3 id="预测评分"><a href="#预测评分" class="headerlink" title="预测评分"></a>预测评分</h3><ul>
-<li>model.score(x_test, y_test)可以输出模型对测试集合的预测评分。</li>
-</ul>
-<p>以上就是最常见的模型使用方法：1.创建模型 2.训练模型 3.预测/测试模型</p>
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>Sklearn提供便捷强大的数据预处理模块，方便工程师对数据进行快速处理</p>
-<h4 id="数据标准化"><a href="#数据标准化" class="headerlink" title="数据标准化"></a>数据标准化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from sklearn import preprocessing</span><br><span class="line">data = preprocessing.scale(data)</span><br></pre></td></tr></table></figure>
-<h2 id="常用机器学习模型"><a href="#常用机器学习模型" class="headerlink" title="常用机器学习模型"></a>常用机器学习模型</h2><h3 id="k近邻"><a href="#k近邻" class="headerlink" title="k近邻"></a>k近邻</h3><p>sklearn.neighbors封装了所有与k近邻相关的算法模型，包括非监督kNN，分类kNN，回归kNN，以及kNN等几个实现算法等</p>
-<h4 id="常用参数："><a href="#常用参数：" class="headerlink" title="常用参数："></a>常用参数：</h4><ul>
-<li>n_neighbors：kNN中的k值</li>
-<li>radius：限定半径最近邻中的半径</li>
-<li>algorithm：实现算法，提供’ball_tree’, ‘kd_tree’, ‘auto’, ‘brute’</li>
-<li>metric：距离度量方法，提供’euclidean’, ‘manhattan’, ‘chebyshev’, ‘minkowski’等，一般使用默认欧式距离<h4 id="非监督k近邻"><a href="#非监督k近邻" class="headerlink" title="非监督k近邻"></a>非监督k近邻</h4>‘from sklearn.neighbors import NearestNeighbors’</li>
-</ul>
-<h4 id="分类kNN"><a href="#分类kNN" class="headerlink" title="分类kNN"></a>分类kNN</h4><p>‘from sklearn.neighbors import KNeighborsClassifier’</p>
-<h4 id="回归kNN"><a href="#回归kNN" class="headerlink" title="回归kNN"></a>回归kNN</h4><p>‘from sklearn.neighbors import KNeighborsRegressor’</p>
-<h4 id="实现算法"><a href="#实现算法" class="headerlink" title="实现算法"></a>实现算法</h4><p>‘from sklearn.neighbors import KDTree’<br>‘from sklearn.neighbors import BallTree’</p>
-
-          
+          <p>Sklearn是机器学习领域最知名的python模块之一，广泛的应用到各种机器学习项目中。Sklearn使用方便，大多数ML算法的调用形式相同，极其易于入门。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/sklearn学习笔记/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -957,21 +842,14 @@
 
       
         
-          
-            <h1 id="python装饰器"><a href="#python装饰器" class="headerlink" title="python装饰器"></a>python装饰器</h1><p>装饰器类似于java中的面向切面编程，可以将各个函数中重复的操作（插入日志，性能测试，事务处理，缓存等）抽离出来，将这些于函数原本功能无关的雷同代码定义在装饰器中，概括的讲： <strong>装饰器的作用就是为已经存在的对象添加额外的功能</strong></p>
-<h2 id="装饰器简单应用"><a href="#装饰器简单应用" class="headerlink" title="装饰器简单应用"></a>装饰器简单应用</h2><p>看如下代码：decorator函数即定义一个装饰器，foo为一个常规的函数。该代码即为用decorator对f函数进行装饰。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def decorator(func):</span><br><span class="line">	def wrapper():</span><br><span class="line">		print(&apos;this is a decorator&apos;)</span><br><span class="line">		return func()</span><br><span class="line">	return wrapper</span><br><span class="line"></span><br><span class="line">def func():</span><br><span class="line">	print(&apos;i am a normal function&apos;)</span><br><span class="line"></span><br><span class="line">foo = decorator(foo)</span><br><span class="line">foo()</span><br><span class="line"># 调用装饰过得foo函数会首先运行wrapper()中的内容，然后返回foo函数</span><br></pre></td></tr></table></figure></p>
-<h2 id="装饰器的语法糖"><a href="#装饰器的语法糖" class="headerlink" title="装饰器的语法糖"></a>装饰器的语法糖</h2><p>在上面对装饰器的简单实用中，我们发现每次想要对函数进行装饰时，都需要进行一步赋值操作 ‘foo = decorator(foo)’，这种操作让程序变得更为复杂难以调试，所以我们可以使用语法糖完成对函数进行装饰的过程。</p>
-<p>将装饰器的语法糖‘@’放到函数定义的地方，这样就可以省略最后一步的赋值操作。可以将上面的例子改写为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def decorator(func):</span><br><span class="line">	def wrapper():</span><br><span class="line">		print(&apos;this is a decorator&apos;)</span><br><span class="line">		return func()</span><br><span class="line">	return wrapper</span><br><span class="line"></span><br><span class="line">@decorator</span><br><span class="line">def foo():</span><br><span class="line">	print(&apos;i am a normal func&apos;)</span><br><span class="line"></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure></p>
-<p>如上所示，使用语法糖，我们就可以省略最后一步的赋值操作。foo函数不需要作任何修改，只需要在定义函数的地方加上装饰器的语法糖，调用的时候还是和以前一样。</p>
-<h2 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h2><p>以上只是对装饰器最简单的应用，在现实应用中，业务逻辑函数会更加复杂，如果业务逻辑函数foo需要参数，这样在装饰器中我们似乎是需要修改参数，但通过在装饰器定义可变参数，可以更加便捷的实现该功能。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def decorator(func):</span><br><span class="line">	def wrapper(*args):</span><br><span class="line">		print(&apos;this is a decorator&apos;)</span><br><span class="line">		return func(*args)</span><br><span class="line">	return wrapper</span><br><span class="line"></span><br><span class="line">@decorator</span><br><span class="line">def foo(name, age)</span><br><span class="line">  print(&apos;....&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>这样以来，不管业务函数需要多少个参数，我们都不需要对装饰器进行过多的更改。<br>同时，如果在业务逻辑函数中存在指定关键字参数。我们可以在wrapper中定义指定关键字参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def decorator(func):</span><br><span class="line">	def wrapper(*args, **kargs):</span><br><span class="line">		print(&apos;this is a decorator&apos;)</span><br><span class="line">		return func(*args, **kargs)</span><br><span class="line">	return wrapper</span><br><span class="line"></span><br><span class="line">@decorator</span><br><span class="line">def foo(name, age, height=None)</span><br><span class="line">  print(&apos;....&apos;)</span><br></pre></td></tr></table></figure></p>
-<h2 id="带参数的装饰器"><a href="#带参数的装饰器" class="headerlink" title="带参数的装饰器"></a>带参数的装饰器</h2><p>在装饰器中，如果对传入的不同业务逻辑函数需要作不同的装饰，可以在业务逻辑函数定义使用装饰器语法糖时指定参数，从而达到在装饰器中分别处理的目的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def use_logging(level):</span><br><span class="line">    def decorator(func):</span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            if level == &quot;warn&quot;:</span><br><span class="line">                logging.warn(&quot;%s is running&quot; % func.__name__)</span><br><span class="line">            elif level == &quot;info&quot;:</span><br><span class="line">                logging.info(&quot;%s is running&quot; % func.__name__)</span><br><span class="line">            return func(*args)</span><br><span class="line">        return wrapper</span><br><span class="line"></span><br><span class="line">    return decorator</span><br><span class="line"></span><br><span class="line">@use_logging(level=&quot;warn&quot;)</span><br><span class="line">def foo(name=&apos;foo&apos;):</span><br><span class="line">    print(&quot;i am %s&quot; % name)</span><br></pre></td></tr></table></figure></p>
-<p>上面的 use logging 是允许带参数的装饰器。它实际上是对原有装饰器的一个函数封装，并返回一个装饰器。我们可以将它理解为一个含有参数的闭包。当我 们使用@use_logging(level=”warn”)调用的时候，Python 能够发现这一层的封装，并把参数传递到装饰器的环境中。<br>@use_logging(level=”warn”)等价于@decorator</p>
-<h2 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h2><p>装饰器不仅仅是函数，也可以是类，使用类作为装饰器更加灵活强大。类装饰器主要依靠类的’<strong>call</strong>‘方法，当使用@形式将装饰器附加到函数上时，就会调用该方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Foo(object):</span><br><span class="line">  def __init__(self, func):</span><br><span class="line">    self._func = func</span><br><span class="line">  def __call__(self):</span><br><span class="line">    print(&apos;class decorator runing&apos;)</span><br><span class="line">    self._func()</span><br><span class="line">    print(&apos;class decorator ending&apos;)</span><br><span class="line"></span><br><span class="line">@Foo</span><br><span class="line">def bar():</span><br><span class="line">  print(&apos;bar&apos;)</span><br></pre></td></tr></table></figure></p>
-<h2 id="装饰器顺序"><a href="#装饰器顺序" class="headerlink" title="装饰器顺序"></a>装饰器顺序</h2><p>对于一个函数，我们当然可以定义多个装饰器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@a</span><br><span class="line">@b</span><br><span class="line">@c</span><br><span class="line">def f():</span><br><span class="line">  pass</span><br></pre></td></tr></table></figure></p>
-<p>这个函数的执行顺序是从里向外的，最先调用定义在最后的装饰器，等效于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = a(b(c(f)))</span><br></pre></td></tr></table></figure></p>
-
-          
+          <p>python装饰器类似于java中的面向切面编程，是python的高级语法， 可以将各个函数中重复的操作（插入日志，性能测试，事务处理，缓存等）抽离出来，将这些于函数原本功能无关的雷同代码定义在装饰器中，概括的讲： <strong>装饰器的作用就是为已经存在的对象添加额外的功能</strong><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/12/Python装饰器/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1088,30 +966,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h2 id="1-1-程序设计的基本元素"><a href="#1-1-程序设计的基本元素" class="headerlink" title="1.1 程序设计的基本元素"></a>1.1 程序设计的基本元素</h2><p>  一个优秀的程序设计语言，应该是一种框架，可以让程序员通过它自由的组织自己的计算思想。每一种强有力的语言都应该提供三个机制：</p>
-<ul>
-<li>基本表达形式：用于表示语言所关心的最简单的个体</li>
-<li>组合的抽象方法：通过他们可以从较为简单的东西出发构造复杂的元素</li>
-<li>抽象的方法：通过他们可以为复合对象命名，并将他们当作单元去操作<br>在程序设计中，我们需要处理两类要素：过程和数据，数据是一种我们希望去操作的东西，而过程就是有关操作浙西数据的规则描述。<h3 id="1-1-1-正则序求值和应用序求值"><a href="#1-1-1-正则序求值和应用序求值" class="headerlink" title="1.1.1 正则序求值和应用序求值"></a>1.1.1 正则序求值和应用序求值</h3><ul>
-<li>对于一个复合计算过程，“完全展开而后归约”的求值模型称为正则序求值</li>
-<li>“先求值参数而后应用”的方式，被称为应用序求值</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-1-2-牛顿法求平方根"><a href="#1-1-2-牛顿法求平方根" class="headerlink" title="1.1.2 牛顿法求平方根"></a>1.1.2 牛顿法求平方根</h3><p>如果对x的平方根的值有了一个猜测y，那么只需要求出y和x/y的平均值（它一定更接近实际的平方根值）。然后将得到的平均值作为下一个猜测，不断递归。</p>
-<h3 id="1-1-3-过程作为黑箱的抽象"><a href="#1-1-3-过程作为黑箱的抽象" class="headerlink" title="1.1.3 过程作为黑箱的抽象"></a>1.1.3 过程作为黑箱的抽象</h3><p>对于一个复合过程，我们可以将其拆分成多个更小的子过程，而对于父过程而言，子过程即使一个个的黑箱，我们不需要知道子过程的具体实现过程，只需要知道子过程可以完成父过程需要的功能即可。<br><strong>按照过程抽象的思想编程，可以让我们更关注过程本身，至于子过程可以推后实现，相当于将过程解偶</strong></p>
-<h3 id="1-1-4-局部子过程"><a href="#1-1-4-局部子过程" class="headerlink" title="1.1.4 局部子过程"></a>1.1.4 局部子过程</h3><p>对于一般子过程的定义，为了防止该子过程定义后与其他过程重名导致的混淆，应该将只被父过程调用的子过程定义在父过程的内部，即“块结构”。 在其它语言中，可以使用匿名函数，包命名管理等方法。</p>
-<h2 id="1-3-用高阶函数作抽象"><a href="#1-3-用高阶函数作抽象" class="headerlink" title="1.3 用高阶函数作抽象"></a>1.3 用高阶函数作抽象</h2><p>如果一个编程语言将过程限制为只能作为以数作为抽象，那也会严重的限制我们建立抽象的能力。我们需要构造出这样的过程，让它们能以过程作为参数，或者以过程作为返回值。这类能操作过程的过程称为 <strong>高阶过程</strong></p>
-<blockquote>
-<p>函数式语言的设计的核心并不是仅仅想要将函数作为一切操作的核心，而是为了建立更高级，更广泛的过程抽象</p>
-</blockquote>
-<p><strong>let 表达式的一般形式</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(let ((&lt;var1&gt; &lt;exp1&gt;)</span><br><span class="line">      (&lt;var2&gt; &lt;exp2&gt;)</span><br><span class="line">      ...</span><br><span class="line">      )</span><br><span class="line">  &lt;body&gt;)</span><br></pre></td></tr></table></figure></p>
-<h3 id="1-3-4-过程作为返回值"><a href="#1-3-4-过程作为返回值" class="headerlink" title="1.3.4 过程作为返回值"></a>1.3.4 过程作为返回值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(define (yahaha f)</span><br><span class="line">  (lambda (x) (f x x)))</span><br><span class="line"></span><br><span class="line">&gt;&gt;((yahaha *) 2)</span><br><span class="line">&gt;&gt; 4</span><br></pre></td></tr></table></figure>
-<p>定义过程‘yahaha’，该过程会返回一个由lambda定义的过程，在该返回的过程中，会接收参数x，并返回(f x x)</p>
-
-          
+          <p>SICP（《Structure and Interpretation of Computer Science》）被无数外国程序员誉为最值得读的神书之一，同时身在PL研究室的我，EOPL和SICP都是不得不读的书。在这将这本书的读书笔记整理下来。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/22/SICP第一章笔记/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1476,7 +1338,7 @@
 
       
         
-          <p>最近为了提高ML项目能力，准备刷一下Kaggle的竞赛题，总结了整个Kaggle竞赛的解题步骤。</p>
+          <p>最近为了提高ML项目能力，准备刷一下Kaggle的竞赛题，而面对纷繁复杂的题目，最开始的我总是不知道如何下手。在阅读了别人的kernel并完成了几个基础tutorial后，大概对整个流程有了浅显的理解，特此总结了整个Kaggle竞赛的解题步骤。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/12/04/2018-4-3-Kaggle解题步骤/#more" rel="contents">
