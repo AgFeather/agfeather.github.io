@@ -87,20 +87,20 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="本项目是使用python3 + tensorflow，搭建一个基于卷积神经网络模型的离线电影推荐系统，电影数据集用的是MovieLens。核心思想是对于电影和用户的不同属性，构建多个神经网络进而获得每个属性的特征表示。使用这些特征表示构建用户特征矩阵和电影特征矩阵，进而完成：TopK电影推荐，相似用户查找等功能。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/overview.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/dataset.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/movie_embedding.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/movie_nn.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/user_embedding.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/user_nn.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/training.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/loss.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/recommender.jpeg">
-<meta property="og:updated_time" content="2018-07-27T13:15:37.894Z">
+<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/overview.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/dataset.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/movie_embedding.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/movie_nn.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/user_embedding.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/user_nn.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/training.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/loss.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/recommender.jpeg">
+<meta property="og:updated_time" content="2018-07-27T13:20:10.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于深度学习的电影推荐系统">
 <meta name="twitter:description" content="本项目是使用python3 + tensorflow，搭建一个基于卷积神经网络模型的离线电影推荐系统，电影数据集用的是MovieLens。核心思想是对于电影和用户的不同属性，构建多个神经网络进而获得每个属性的特征表示。使用这些特征表示构建用户特征矩阵和电影特征矩阵，进而完成：TopK电影推荐，相似用户查找等功能。">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/images/movie_recommender/overview.jpeg">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/11/基于深度学习的电影推荐系统/source/images/movie_recommender/overview.jpeg">
 
 
 
@@ -365,7 +365,7 @@
       
         <p>本项目是使用python3 + tensorflow，搭建一个基于卷积神经网络模型的离线电影推荐系统，电影数据集用的是MovieLens。核心思想是对于电影和用户的不同属性，构建多个神经网络进而获得每个属性的特征表示。使用这些特征表示构建用户特征矩阵和电影特征矩阵，进而完成：TopK电影推荐，相似用户查找等功能。<br><a id="more"></a></p>
 <p>该项目是我关于深度学习基于推荐系统实践的练习项目，具体代码在我的GitHub上可以找到：<br><a href="https://github.com/YHfeather/Movie_Recommendation_System" target="_blank" rel="noopener">Movie_Recommendation_System</a></p>
-<p>模型的整体架构如下图所示：<br><img src="images/movie_recommender/overview.jpeg" alt="overview"></p>
+<p>模型的整体架构如下图所示：<br><img src="source/images/movie_recommender/overview.jpeg" alt="overview"></p>
 <h2 id="技术说明"><a href="#技术说明" class="headerlink" title="技术说明"></a>技术说明</h2><p>该项目主要使用的技术版本如下：</p>
 <ul>
 <li>python：3.5.2</li>
@@ -373,7 +373,7 @@
 <li>numpy: 1.14.0</li>
 <li>pandas: 0.22</li>
 </ul>
-<h1 id="关于数据集"><a href="#关于数据集" class="headerlink" title="关于数据集"></a>关于数据集</h1><p>本项目使用的是MovieLens的ml-1m数据集，该数据集合包含6,040名用户对3,900个电影的1,000,209个匿名评论。<br><img src="images/movie_recommender/dataset.jpeg" alt="DataSet"><br>数据集包括movies.dat, ratings.dat, users.dat三个文件</p>
+<h1 id="关于数据集"><a href="#关于数据集" class="headerlink" title="关于数据集"></a>关于数据集</h1><p>本项目使用的是MovieLens的ml-1m数据集，该数据集合包含6,040名用户对3,900个电影的1,000,209个匿名评论。<br><img src="source/images/movie_recommender/dataset.jpeg" alt="DataSet"><br>数据集包括movies.dat, ratings.dat, users.dat三个文件</p>
 <h4 id="movies-dat"><a href="#movies-dat" class="headerlink" title="movies.dat"></a>movies.dat</h4><p>该数据集存储了电影信息，包含字段：MovieID，Title，Genres</p>
 <ul>
 <li>MovieID: 电影ID(1-3952)</li>
@@ -418,8 +418,8 @@
 </ol>
 <h2 id="模型构建和训练"><a href="#模型构建和训练" class="headerlink" title="模型构建和训练"></a>模型构建和训练</h2><p>分为<code>movie_nn.py</code> <code>user_nn.py</code> <code>traing.py</code>文件</p>
 <h3 id="movie-nn"><a href="#movie-nn" class="headerlink" title="movie_nn"></a>movie_nn</h3><p>在该文件中，主要包含构建和movie相关的神经网络模型，主要包括对movie特征的embedding和使用卷积神经网络和常规神经网络进行特征提取。</p>
-<h4 id="Embedding-Layer"><a href="#Embedding-Layer" class="headerlink" title="Embedding Layer"></a>Embedding Layer</h4><p><img src="images/movie_recommender/movie_embedding.jpeg" alt="movie_embedding"><br>对电影的三个特征进行embedding操作。</p>
-<h4 id="神经网络结构"><a href="#神经网络结构" class="headerlink" title="神经网络结构"></a>神经网络结构</h4><p>针对movieId和 movie genres分别构建两个神经网络进行训练，对于movie title构建 CNN with sliding window。然后将三个神经网络的输出拼接到一起输入到另一个神经网络，该神经网络的输出就是movie feature representation. 具体结构如下图所示：<br><img src="images/movie_recommender/movie_nn.jpeg" alt="movie_nn"></p>
+<h4 id="Embedding-Layer"><a href="#Embedding-Layer" class="headerlink" title="Embedding Layer"></a>Embedding Layer</h4><p><img src="source/images/movie_recommender/movie_embedding.jpeg" alt="movie_embedding"><br>对电影的三个特征进行embedding操作。</p>
+<h4 id="神经网络结构"><a href="#神经网络结构" class="headerlink" title="神经网络结构"></a>神经网络结构</h4><p>针对movieId和 movie genres分别构建两个神经网络进行训练，对于movie title构建 CNN with sliding window。然后将三个神经网络的输出拼接到一起输入到另一个神经网络，该神经网络的输出就是movie feature representation. 具体结构如下图所示：<br><img src="source/images/movie_recommender/movie_nn.jpeg" alt="movie_nn"></p>
 <h4 id="方法说明"><a href="#方法说明" class="headerlink" title="方法说明"></a>方法说明</h4><ol>
 <li><code>get_inputs</code>定义movie属性：id，genres，title，dropout的placeholder</li>
 <li><code>get_movie_id_embed_layer</code>构建movie id的embedding layer，并返回输入id的embedding</li>
@@ -436,24 +436,24 @@
 </li>
 </ol>
 <h3 id="user-nn"><a href="#user-nn" class="headerlink" title="user_nn"></a>user_nn</h3><p>对user的属性构建神经网络，主要包括对user创建embedding layers，以及创建神经网络进行进行user 特征提取。</p>
-<h4 id="embedding-layer"><a href="#embedding-layer" class="headerlink" title="embedding layer"></a>embedding layer</h4><p>创建四个embedding layers。<br><img src="images/movie_recommender/user_embedding.jpeg" alt="user_embedding"></p>
-<h4 id="神经网络结构-1"><a href="#神经网络结构-1" class="headerlink" title="神经网络结构"></a>神经网络结构</h4><p>分别将user的四个embedding representation vector输入到四个神经网络中，然后将四个神经网络的输出进行连接，输入到另一个神经网络中，该神经网络的输出即为user feature representation.具体结构如下图所示：<br><img src="images/movie_recommender/user_nn.jpeg" alt="user_nn"></p>
+<h4 id="embedding-layer"><a href="#embedding-layer" class="headerlink" title="embedding layer"></a>embedding layer</h4><p>创建四个embedding layers。<br><img src="source/images/movie_recommender/user_embedding.jpeg" alt="user_embedding"></p>
+<h4 id="神经网络结构-1"><a href="#神经网络结构-1" class="headerlink" title="神经网络结构"></a>神经网络结构</h4><p>分别将user的四个embedding representation vector输入到四个神经网络中，然后将四个神经网络的输出进行连接，输入到另一个神经网络中，该神经网络的输出即为user feature representation.具体结构如下图所示：<br><img src="source/images/movie_recommender/user_nn.jpeg" alt="user_nn"></p>
 <h4 id="函数说明"><a href="#函数说明" class="headerlink" title="函数说明"></a>函数说明</h4><ol>
 <li><code>get_inputs</code> 获取user特征的input placeholder</li>
 <li><code>get_user_embedding</code> 对user属性：user_id, gender, age, job进行embedding</li>
 <li><code>get_user_feature_layer</code>对于user的各个属性的embedding representation，分别构建一个小型的神经网络。然后将每个神经网络的输出，也就是各个属性的feature representation进行顺序连接，然后用一个全连接神经网络对连接后的user total feature进行训练，得到user整体的feature representation。</li>
 <li><code>user_feature</code> 顺序连接上述方法，返回user的feature representation。</li>
 </ol>
-<h3 id="training"><a href="#training" class="headerlink" title="training"></a>training</h3><p>对定义的movie_nn 和 user_nn进行训练:<br><img src="images/movie_recommender/training.jpeg" alt="training"></p>
+<h3 id="training"><a href="#training" class="headerlink" title="training"></a>training</h3><p>对定义的movie_nn 和 user_nn进行训练:<br><img src="source/images/movie_recommender/training.jpeg" alt="training"></p>
 <h4 id="流程说明"><a href="#流程说明" class="headerlink" title="流程说明"></a>流程说明</h4><ol>
 <li>首先从user_nn和movie_nn两个文件处获得各自对应的feature representation。</li>
 <li>然后将user feature vector和movie feature vector进行矩阵乘法。得到的数据即为模型的预测输出，表示该user对该movie的预测评分</li>
 <li>使用平方损失函数，AdamgradOptimizer进行训练。</li>
 <li>使用tensorboard保存训练数据</li>
 </ol>
-<h4 id="损失曲线"><a href="#损失曲线" class="headerlink" title="损失曲线"></a>损失曲线</h4><p>训练过程中的loss curve 如下图所示：<br><img src="images/movie_recommender/loss.png" alt="loss"></p>
+<h4 id="损失曲线"><a href="#损失曲线" class="headerlink" title="损失曲线"></a>损失曲线</h4><p>训练过程中的loss curve 如下图所示：<br><img src="source/images/movie_recommender/loss.png" alt="loss"></p>
 <h2 id="推荐测试"><a href="#推荐测试" class="headerlink" title="推荐测试"></a>推荐测试</h2><p>对训练好的模型从多个方面进行测试，包含在<code>recommendation.py</code>文件中。</p>
-<p><img src="images/movie_recommender/recommender.jpeg" alt="recommender"></p>
+<p><img src="source/images/movie_recommender/recommender.jpeg" alt="recommender"></p>
 <h4 id="函数说明："><a href="#函数说明：" class="headerlink" title="函数说明："></a>函数说明：</h4><ol>
 <li><code>get_tensors</code> 获取测试用的placeholder</li>
 <li><code>rating_movie</code> 给定user和movie，对模型进行正向传播，得到的分数即为预测评分</li>
