@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CUDA,Parallel Computing," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》">
+<meta name="keywords" content="CUDA,Parallel Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CUDA 学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/11/12/CUDA note/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-01T10:55:07.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CUDA 学习笔记">
+<meta name="twitter:description" content="这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/12/CUDA note/"/>
+
+
+
+
+
+  <title>CUDA 学习笔记 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/CUDA note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CUDA 学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-12T00:00:00+09:00">
+                2017-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/12/CUDA note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/12/CUDA note/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》</p>
+<a id="more"></a>
+<h2 id="第一个CUDA程序"><a href="#第一个CUDA程序" class="headerlink" title="第一个CUDA程序"></a>第一个CUDA程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">__global__ void kernel(void) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    kernel&lt;&lt;&lt;1, 1&gt;&gt;&gt;();</span><br><span class="line">    printf(&quot;Hello, Word\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>与一般c的hello word不同的是，该代码有两个不同的地方：</p>
+<ol>
+<li>一个空函数kernel(),并且带有修饰符<strong>global</strong></li>
+<li>对这个空函数的调用，并带有修饰字符&lt;&lt;&lt;1, 1&gt;&gt;&gt;</li>
+</ol>
+<p>__global__修饰符告诉编译器，该函数应该编译为在设备而不是主机上运行。</p>
+<p>&lt;&lt;&lt;1, 1&gt;&gt;&gt;表示调用设备代码，尖括号表示将一些参数传递给运行时系统，这些参数并不是传递给设备代码的参数，而是告诉运行时如何启动设备代码。</p>
+<p>下面我们来看一个更复杂的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">__global__ void add(int a, int b, int *c)&#123;</span><br><span class="line">    *c = a + b;</span><br><span class="line">&#125;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int c;</span><br><span class="line">    int *dev_c;</span><br><span class="line">    HANDLE_ERROR(cudaMalloc((void**)&amp;dev_c, sizeof(int)));</span><br><span class="line">    add&lt;&lt;&lt;1, 1&gt;&gt;&gt;(2, 7, dev_c);</span><br><span class="line">    HANDLE_ERROR(cudaMemcpy(&amp;c, dev_c, sizeof(int), cudaMemcpyDeviceToHost));</span><br><span class="line">    printf(&quot;2 + 7 = %d\n&quot;, c);</span><br><span class="line">    cudaFree(dev_c);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码有两个核心概念：</p>
+<ol>
+<li>可以像调用c函数一样将参数传递给核函数</li>
+<li>当设备执行任何有用的操作时，都需要分配内存，例如将计算值返回给主机。</li>
+</ol>
+<p>设备函数调用的传参过程和普通c函数类似，需要注意的是通过’cudaMalloc()’来分配内存，<br>‘cudaMalloc()’函数告诉CUDA运行时在设备上分配内存，</p>
+<pre><code>1. 第一个参数是一个指针，指向用于保存新分配内存地址的变量，
+2. 第二个参数是分配内存的大小。
+3. 该函数的返回类型和malloc()相同，都是&apos;void*&apos;
+</code></pre><p>CUDA大大淡化了主机代码和设备代码之间的差异，但程序员一定不能在主机代码中对’cudaMalloc()’返回的指针进行读取或者写入内存。总的来说，主机指针只能访问主机代码中的内存，而设备指针只能访问设备代码中的内存。</p>
+<p>‘cudaMemocpy()’表示对设备指针的内容和主机指针的内容复制</p>
+<pre><code>1. 第一个参数是主机指针
+2. 第二个参数是设备指针
+3. 第三个参数是内存大小
+4. 第四个参数&apos;cudaMemcpyDeviceToHost&apos;表示从设备复制到主机，同样的&apos;cudaMemcpyHostToDevice&apos;表示主机复制到设备。&apos;cudaMemcpyDeviceToDevice&apos;表示两个指针都位于设备上。
+</code></pre><h2 id="查询设备"><a href="#查询设备" class="headerlink" title="查询设备"></a>查询设备</h2><p>在编写设备代码并在GPU上进行计算时，如果程序能知道设备中拥有多少内存，都有哪些设备等信息无疑是有用的。</p>
+<ol>
+<li>获得支持CUDA的GPU数量：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int count;</span><br><span class="line">cudaGetDeviceCount(&amp;count);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在获取CUDA设备数量后，可以使用’cudaGetDeviceProperties()’查询每个设备的相关信息，CUDA运行时将返回一个’cudaDeviceProp’类型的结构，包含了设备相关属性。结构内的详细信息请Google。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">intmain(void) &#123;</span><br><span class="line">    cudaDeviceProp prop;</span><br><span class="line">    int count;</span><br><span class="line">    cudaGetDeviceCount(count);</span><br><span class="line">    for(int i = 0;i&lt;count; i++)&#123;</span><br><span class="line">        cudaGetDeviceProperties(&amp;prop, i);</span><br><span class="line">        printf(&quot;Name: %s\n&quot;, prop.name);</span><br><span class="line">        printf(&quot;Total global memory: %ld\n&quot;, prop.totalGlobalMem);</span><br><span class="line">        printf(&quot;Total constant memory: %ld\n&quot;, prop.totalConstMem);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在编写代码中，偶尔会需要指定CUDA设备，比如说主机和设备之间通信频繁的话，最好选用集成GPU。我们可以通过’cudaChooseDevice()’选择设备。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int main(void) &#123;</span><br><span class="line">    cudaDeviceProp prop;</span><br><span class="line">    int dev;</span><br><span class="line">    cudaGetDevice(&amp;dev);</span><br><span class="line">    printf(&quot;ID of current CUDA device: %d\n&quot;, dev);</span><br><span class="line">    memset(&amp;prop, 0, sizeof(cudaDeviceProp));</span><br><span class="line">    prop.major = 1;</span><br><span class="line">    prop.minor = 3;</span><br><span class="line">    cudaChooseDevice(&amp;dev, &amp;prop);</span><br><span class="line">    printf(&quot;ID of CUDA device choset to revision 1.3: %d\n&quot;, dev);</span><br><span class="line">    cudaSetDevice(dev);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="CUDA-并行编程"><a href="#CUDA-并行编程" class="headerlink" title="CUDA 并行编程"></a>CUDA 并行编程</h1><h3 id="矢量求和运算"><a href="#矢量求和运算" class="headerlink" title="矢量求和运算"></a>矢量求和运算</h3><p>输入两个vector，将其对应位相加的结果保存在第三个vector中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#define N 10</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int a[N], b[N], c[N];</span><br><span class="line">    int *dev_a, *dev_b, *dev_c;</span><br><span class="line"></span><br><span class="line">    // 在GPU上分配内存</span><br><span class="line">    cudaMelloc((void**)&amp;dev_a, N * sizeof(int));</span><br><span class="line">    cudaMelloc((void**)&amp;dev_b, N * sizeof(int));</span><br><span class="line">    cudaMelloc((void**)&amp;dev_c, N * sizeof(int));</span><br><span class="line"></span><br><span class="line">    //在CPU上初始化三个数组</span><br><span class="line">    for (int i = 0; i&lt;N; i++)&#123;</span><br><span class="line">        a[i] = -i;</span><br><span class="line">        b[i] = i * i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //将a，b两个数组复制到GPU内存上</span><br><span class="line">    cudaMemcpy(dev_a, a, N*sizeof(int), cudaMemcpyHostToDevice);</span><br><span class="line">    cudaMemcpy(dev_b, b, N*sizeof(int), cudaMemcpyHostToDevice);</span><br><span class="line"></span><br><span class="line">    add&lt;&lt;&lt;N, 1&gt;&gt;&gt;(dev_a, dev_b, dev_c);</span><br><span class="line"></span><br><span class="line">    //将GPU上的计算结果返回到主机中</span><br><span class="line">    cudaMemcpy(c, dev_c, N * sizeof(int), cudaMemcpyDeviceToHost)</span><br><span class="line"></span><br><span class="line">    for(int i = 0; i&lt;N; i++)&#123;</span><br><span class="line">        printf(&quot;%d + %d = %d\n&quot;, a[i], b[i], c[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cudaFree(dev_a);</span><br><span class="line">    cudaFree(dev_b);</span><br><span class="line">    cudaFree(dev_c);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__global__ void add(int *a, int *b, int *c)&#123;</span><br><span class="line">    int tid = blockIdx.x;</span><br><span class="line">    if (tid &lt; N)</span><br><span class="line">        c[tid] = a[tid] + b[tid];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里我们要说明的是，在调用设备函数add&lt;&lt;&lt;N, M&gt;&gt;&gt;时，两个参数的意义：</p>
+<pre><code>1. 第一个参数表示运行时创建N个设备函数的副本并以并行的方式运行他们，我们将每个并行执行环境都称为一个线程块(block)。如果指定kernel&lt;&lt;&lt;256,1&gt;&gt;&gt;,那么将有256个线程块在GPU上运行。
+2. 第二个参数表示在每个线程块中创建的线程数量M。
+3. 在GPU中，一共有N*M个并行线程运行
+</code></pre><p>但在运行核函数的时候，我们往往需要知道当前的核函数是哪个block，所以在核函数中，我们看到’int tid = blockIdx.x’，blockIdx是一个内置变量，在CUDA运行时已经预先定义了这个变量。而后面的’.x’是因为CUDA支持二维线性块数组，所以有了’.x’, ‘.y’。</p>
+<p>在启动核函数时，我们将并行线程块的数量指定为N，这个并行线程块集合也称为一个线程格(Grid)，这个告诉运行时，我们想要一个一维的线程格，其中包括N个线程块。每个线程块的blockIdx.x值都是不同的，第一个线程块的blockIdx.x为0，最后一个为N-1。</p>
+<h4 id="各种前缀的区别"><a href="#各种前缀的区别" class="headerlink" title="各种前缀的区别"></a>各种前缀的区别</h4><ol>
+<li><strong>device</strong> 用来定义GPU全局变量和函数，该变量或函数保存在GPU上，与<strong>global</strong>不同的是，device智能在device或global函数中被调用，不能直接写在主函数中。</li>
+<li><strong>host</strong> CPU函数</li>
+<li><strong>global</strong> GPU函数，必须从CPU代用</li>
+<li><strong>shared</strong> 声明的变量会驻留在共享内存中，对于在GPU上启动的每个线程块，CUDA编译器都会创建该变量的一个副本，线程块中的每个线程都共享这块内存，但是线程却无法看到也不难修改其他线程块的变量副本。使得一个线程块中的多个线程能在计算机上进行通信和协作，访问共享内存的延迟要远低于访问普通缓冲区的延迟。</li>
+<li><strong>constant</strong> 常量内存保存在设备函数执行期间不会发生变化的数据，nvidia硬件提供了64KB的常量内存。常量内存里的变量声明也要加上 <strong>constant</strong> 修饰符，如果是数组的话，要在编译时为这个数组提交一个固定的大小，如<strong>constant</strong> int a[10]。</li>
+</ol>
+<h1 id="第五章，线程协作"><a href="#第五章，线程协作" class="headerlink" title="第五章，线程协作"></a>第五章，线程协作</h1><p>在上一张的矢量加法中，我们调用核函数’add&lt;&lt;&lt;N, 1&gt;&gt;&gt;’，表示启动N个核函数，每个核函数中有1个线程。在本章我们稍作修改，改为启动一个线程块，该线程块包含N个线程：’add&lt;&lt;&lt;1, N&gt;&gt;&gt;’，对应的，在核函数中，取线程块索引改为取线程索引：’int tid = threadIdx.x + blockIdx.x * blockDim.x’。新出现的变量blockDim保存的是线程块中每一维的线程数量，由于使用的是一维线程块，所以只用到blockDim.x。</p>
+<p>对比这两种方法，GPU可以一次启动65535个线程块，而一般而言，每个线程块内的最多启动512个线程，这是第一个不同。</p>
+<p>而如果我们需要实现任意长度vector加法，以上的数量限制显然是不能实现的，这里我们只需要修改一下核函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__global__ add(int *a, int *b, int *c) &#123;</span><br><span class="line">    int tid = threadIdx.x + blockIdx.x blockDim.x;</span><br><span class="line">    while (tid &lt; N) &#123;</span><br><span class="line">        c[tid] = a[tid] + b[tid];</span><br><span class="line">        tid += gridDim.x * blockDim.x; // 每次位移一个线程grid内的所有线程数量</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-3-共享内存和同步"><a href="#5-3-共享内存和同步" class="headerlink" title="5.3 共享内存和同步"></a>5.3 共享内存和同步</h2><p>在CUDA C用 <strong>shared</strong> 关键字添加变量声明，这将使这个变量驻留在共享内存中。<br>共享内存：对于GPU上启动的每个线程块，CUDA编译器都会创建该变量的一个副本，线程块中每个线程都共享这块内存，但线程却无法看到也不能修改其他线程块的变量副本，这使得线程块中的多个线程能够在计算上进行通信和协作，同时，共享内存缓冲区驻留在GPU上，所以访问共享内存的延迟要远远低于访问普通缓冲区的延迟。但与此同时，需要一种机制来实现线程之间的同步。</p>
+<p>‘ __syncthreads(); ‘<br>对所有线程块中的线程进行同步，<br>该函数确保线程块中的每个线程都执行完syncthreads前面的语句后，才会执行下一条语句。</p>
+<p>共享内存实现向量内积：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">#define imin(a, b) = (a&lt;b?a:b)</span><br><span class="line"></span><br><span class="line">const int N = 33 * 1024;</span><br><span class="line">const int threadsPerBlock = 256;</span><br><span class="line"></span><br><span class="line">__global__ void dot(float *a, float *b, float *c)&#123;</span><br><span class="line">    __shared__ float cache[threadsPerBlock]; //GPU共享内存</span><br><span class="line">    int tid = threadIdx.x + blockDim.x * blockIdx.x;</span><br><span class="line">    int cacheIndex = threadIdx.x;</span><br><span class="line">    float temp = 0;</span><br><span class="line">    while (tid &lt; N) &#123;</span><br><span class="line">        temp += a[tid] * b[tid];</span><br><span class="line">        tid += blockDim.x * gridIdx.x;</span><br><span class="line">    &#125;</span><br><span class="line">    cache[cacheIndex] = temp;</span><br><span class="line"></span><br><span class="line">    // 对所有线程块中的线程进行同步，</span><br><span class="line">    // 该函数确保线程块中的每个线程都执行完syncthreads前面的语句后，才会执行下一条语句。</span><br><span class="line">    __syncthreads();</span><br><span class="line"></span><br><span class="line">    //对于归约运算来说，以下代码要求threadPerBlock必须是2的指数</span><br><span class="line">    //基本思想：每个线程将cache[]中的两个值加起来，然后将结果保存回cache[]</span><br><span class="line">    //因为是将两个值归约成一个值，所以每次执行下来，得到的结果数量为开始时的一半。</span><br><span class="line">    //在log2(threadPerBlock)个步骤后，结果就是cache[]的总和。</span><br><span class="line">    int i = blockDim.x/2;</span><br><span class="line">    while (i != 0)&#123;</span><br><span class="line">        if (cacheIndex &lt; i)</span><br><span class="line">            cache[cacheIndex] += cache[cacheIndex + i];</span><br><span class="line">        __syncthreads();</span><br><span class="line">        i /= 2;</span><br><span class="line">    &#125;</span><br><span class="line">    if (cacheIndex == 0)//为了防止带来不必要的冗余计算，只让cacheIndex==0线程进行最后的保存操作</span><br><span class="line">        c[blockIdx.x] = cache[0];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const int blocksPerGrid = imin(32, (N+threadsPerBlock-1) / threadsPerBlock);</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    float *a, *b, c, *partial_c;</span><br><span class="line">    float *dev_a, *dev_b, *dev_partial_c;</span><br><span class="line"></span><br><span class="line">    //在CPU上分配内存</span><br><span class="line">    a = new float[N];</span><br><span class="line">    b = new float[N];</span><br><span class="line">    partial_c = new float[blocksPerGrid];</span><br><span class="line"></span><br><span class="line">    //在GPU上分配内存</span><br><span class="line">    cudaMelloc((void**)&amp;dev_a, N*sizeof(float));</span><br><span class="line">    cudaMelloc((void**)&amp;dev_b, N*sizeof(float));</span><br><span class="line">    cudaMelloc((void**)&amp;dev_partial_c, blocksPerGrid*sizeof(float));</span><br><span class="line"></span><br><span class="line">    //填充主机内存</span><br><span class="line">    for (int i = 0; i&lt;N; i++)&#123;</span><br><span class="line">        a[i] = i;</span><br><span class="line">        b[i] = i*2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //将主机内存复制到GPU上</span><br><span class="line">    cudaMemcpy(dev_a, a, N*sizeof(float), cudaMemcpyHostToDevice);</span><br><span class="line">    cudaMemcpy(dev_b, b, N*sizeof(float), cudaMemcpyHostToDevice);</span><br><span class="line"></span><br><span class="line">    dot&lt;&lt;&lt;blocksPerGrid, threadsPerBlock&gt;&gt;&gt;(dev_a, dev_b, dev_partial_c)</span><br><span class="line"></span><br><span class="line">    cudaMemcpy(partial_c, dev_partial_c, N*sizeof(float), cudaMemcpyDeviceToHost);</span><br><span class="line"></span><br><span class="line">    //在CPU上完成最终求和运算</span><br><span class="line">    c = 0;</span><br><span class="line">    for (int i = 0; i&lt;blocksPerGrid; i++)&#123;</span><br><span class="line">        c += partial_c[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cudaFree(dev_a);</span><br><span class="line">    cudaFree(dev_b);</span><br><span class="line">    cudaFree(dev_partial_c);</span><br><span class="line"></span><br><span class="line">    delete [] a;</span><br><span class="line">    delete [] b;</span><br><span class="line">    delete [] partial_c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在核函数中，经常出现基于threadIdx的判断语句，说明有些thread是不能执行一部分if条件内的代码的， <strong>当某些线程需要执行一条指令，而其他线程不需要执行时，这种情况就被称为线程发散（Thread Divergence），正常情况下，发散的分支只会使得某些线程处于空闲状态，而其他线程将执行分支中的代码</strong>。 但在syncthreads()的情况中，线程发散造成的后果很糟糕，CUDA将确保： <strong>除非线程块中的每个线程都执行了syncthreads()，否则没有任何线程能执行syncthreads()后面的代码。也就是说，如果syncthreads()位于发散分支中，那么一些线程将永远无法执行syncthreads()，会导致程序出错。</strong></p>
+<h1 id="第六章-常量内存与事件"><a href="#第六章-常量内存与事件" class="headerlink" title="第六章 常量内存与事件"></a>第六章 常量内存与事件</h1><p>本章介绍通过GPU上特殊的内存区域来加速应用程序的执行：常量内存。以及如果通过事件来测量CUDA应用程序的性能。</p>
+<h2 id="常量内存"><a href="#常量内存" class="headerlink" title="常量内存"></a>常量内存</h2><p>从名字可以看出，常量内存用于保存在核函数执行期间不会发生变化的数据，在某些情况中，用常量内存替换全局内存能有效的减少内存带宽。</p>
+<p>光线跟踪例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>使用’cudaMemcpytoSymbol()’从主机内存复制到GPU的常量内存中。</p>
+<p>使用常量内存可以节省内存带宽，主要原因有两个：</p>
+<pre><code>1. 对于常量内存的单次读操作可以广播到其他的“邻近”线程，这将节约15次读取操作。
+2. 常量内存的数据将被缓存起来，因此对相同地址的连续操作将不会产生额外的内存通信量。
+</code></pre><p>为了回答“临近线程”的概念，我们需要先知道“线程束(Warp)”是什么。<strong>线程束可以看成是一组线程通过交织而形成的一个整体，在CUDA架构中，线程束是指一个包含32个线程的集合，这个线程集合被“编织在一起”并且以“步调一致”的形式执行。</strong> 在程序中的每一行，线程束中的每个线程都将在不同的数据上执行相同的指令。  </p>
+<p>当处理常量内存时， NVIDIA将把单词内存读取操作广播到每个半线程束（half-warp）包含了16个线程，如果半个线程束中的每个线程都从常量内存上读取数据，那么GPU只会产生一次读取请求然后将数据广播到每个线程。如果从常量内存中读取大量的数据，那么这种方式产生的内存流量只是使用全局内存的1/16。同时在实际应用中，不仅仅减少15/16，由于这块内存时不会发生变化的，所以硬件会主动把常量数据缓存在GPU缓存中，在第一次从常量内存读取后，当其他半线程束请求同一个地址时，将直接命中缓存，更加减少了内存流量。</p>
+<p>需要注意的是： 半线程束广播实际上是一把双刃剑，</p>
+<pre><code>- 当16个线程都读取相同地址时，性能确实可以大大提高，但当所有16个线程分别读取不同地址时，它的效率实际上会降低
+- 只有当16个线程是相同读取请求时，才值得将这个读取操作广播到16个线程。然而，如果16个线程需要访问的常量内存中的不同数据，那么这16次不同的读取操作会被 **串行化**， 从而需要16倍的时间来发出请求，但如果从全局内存中读取，这些请求会同时发出，这种情况下，从常量内存读取就会慢于从全局内存读取。
+</code></pre><h2 id="用事件来测试性能"><a href="#用事件来测试性能" class="headerlink" title="用事件来测试性能"></a>用事件来测试性能</h2><p>CUDA事件本质上是一个GPU时间戳，使用起来很容易，只需要两步：首先创建一个事件，然后记录一个事件。当然，最后也需要另一个事件记录结束时间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cudaEvent_t start, end;</span><br><span class="line">cudaEventCreate(&amp;start);</span><br><span class="line">cudaEventCreate(&amp;end);</span><br><span class="line">cudaEventRecord(start, 0);</span><br><span class="line"></span><br><span class="line">// do something in GPU</span><br><span class="line"></span><br><span class="line">cudaEventRecord(end, 0);</span><br><span class="line">cudaEventSynchronize(stop); //同步事件，告诉运行时阻塞后面的语句，直到GPU执行到达stop事件。</span><br><span class="line"></span><br><span class="line">float elapsedTime;</span><br><span class="line">cudaEventElapsedTime(&amp;elapsedTime, start, end);//计算用时</span><br><span class="line">cudaEventDestroy(start);</span><br><span class="line">cudaEventDestroy(end);</span><br></pre></td></tr></table></figure></p>
+<p>但在CUDA程序中，实际上当GPU开始执行代码，在GPU执行完之前，CPU会继续执行程序的下一行代码。这样做可以提高性能，让GPU和CPU并行，但从逻辑上来说，计时工作就会变得复杂。CUDA有’cudaEventSynchronize()’函数来告诉CPU在某个事件上同步。</p>
+<p>‘cudaEventElapsedTime(float*, cudaEvent_t, cudaEvent_t)’用于计算时间时间，返回单位为毫秒。</p>
+<h1 id="第七章-纹理内存（Texture-Memory）"><a href="#第七章-纹理内存（Texture-Memory）" class="headerlink" title="第七章 纹理内存（Texture Memory）"></a>第七章 纹理内存（Texture Memory）</h1><p>和常量内存一样， 纹理内存是另一种只读内存，在特定的访问模式中，纹理内存同样能够提升性能并减少内存流量。</p>
+<p>纹理内存是专门为那些在内存访问模式中存在大量空间局部性的图形应用程序设计的，在某个计算程序中，这意味着 <strong>一个线程读取的位置可能与邻近线程读取的位置“非常接近”</strong>。</p>
+<h2 id="简单应用：热传递模型"><a href="#简单应用：热传递模型" class="headerlink" title="简单应用：热传递模型"></a>简单应用：热传递模型</h2><p>问题的具体定义见书第97页</p>
+<p>定义纹理变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">texture&lt;float&gt; textureA;</span><br><span class="line">texture&lt;float&gt; textureB;</span><br><span class="line"></span><br><span class="line">cudaMalloc((void**)&amp;deviceA, sizeof(float));</span><br><span class="line">cudaBindTexture(NULL, textureA, deviceA, sizeof(float));</span><br><span class="line"></span><br><span class="line">cudaUnbindTexture(textureA); //释放纹理绑定</span><br><span class="line">cudaUnbindTexture(textureB);</span><br></pre></td></tr></table></figure></p>
+<p>定义之后，我们需要为纹理变量分配内存，使用’cudaBindTexture()’将这些变量绑定到内存缓冲区，相当于告诉CUDA两件事：</p>
+<ol>
+<li>我们希望将指定的缓冲区作为纹理来使用。</li>
+<li>我们希望将纹理的引用作为纹理的“名字”。</li>
+</ol>
+<h2 id="使用二维纹理内存"><a href="#使用二维纹理内存" class="headerlink" title="使用二维纹理内存"></a>使用二维纹理内存</h2><p>声明二维纹理内存方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">texture&lt;float, 2&gt; textureA;</span><br><span class="line">texture&lt;float, 2&gt; textureB;</span><br></pre></td></tr></table></figure></p>
+<h1 id="第八章-图形互操作性"><a href="#第八章-图形互操作性" class="headerlink" title="第八章 图形互操作性"></a>第八章 图形互操作性</h1><p>本章介绍GPU的图形计算和通用计算之间的互操作。</p>
+<h1 id="第九章-原子性"><a href="#第九章-原子性" class="headerlink" title="第九章 原子性"></a>第九章 原子性</h1><p>本章内容：</p>
+<ol>
+<li>了解NIVIDIA GPU的计算功能集</li>
+<li>了解原子操作以及为什么需要使用它们</li>
+<li>了解如何在CUDA C核函数中执行带有原子操作的运算</li>
+</ol>
+<p>NVIDIA将对于支持CUDA的不同GPU的各种功能统称为计算功能集，高版本计算功能集是低版本计算功能集的超集。</p>
+<p>在NVIDIA的计算功能集中，只有版本高于1.1的功能集才支持全局内存原子操作，高于1.2的功能集才支持共享内存原子操作。所以在编译时我们需要告诉编译器该代码只有在指定版本的更高版本才可以编译优化，指令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -arch=sm_11</span><br></pre></td></tr></table></figure></p>
+<h1 id="第十章-流操作"><a href="#第十章-流操作" class="headerlink" title="第十章 流操作"></a>第十章 流操作</h1><h2 id="页锁定主机内存"><a href="#页锁定主机内存" class="headerlink" title="页锁定主机内存"></a>页锁定主机内存</h2><p>CUDA提供自己独特的方式来分配主机内存’cudaHostAlloc()’。和标准的c内存分配’malloc()’不同的是，后者将分配标准的，可分页的主机内存，而前者将分配页锁定的主机内存。页锁定内存也称为固定内存或者不可分页内存。它有一个重要属性：操作系统将不会对这块内存分页并交换到磁盘上，从而确保该内存始终驻留在物理内存中。由于GPU知道内存的物理地址，因此可以通过“直接内存访问DMA”技术来在GPU和主机之间复制数据，而使用锁页内存时，DMA不需要重新查找内存地址，所以速度会比正常的可分页内存快2倍左右。</p>
+<p>当然使用页锁定内存的缺点也是显而易见的：主机的虚拟内存机制完全作废，每个页锁定内存都需要分配物理内存，这意味着系统将更快的耗尽内存。因此应用程序在物理内存较小的机器上会运行失败，也意味着应用程序将影响系统上其他运行的应用程序性能。</p>
+<h2 id="CUDA流"><a href="#CUDA流" class="headerlink" title="CUDA流"></a>CUDA流</h2><p>CUDA流表示一个GPU操作队列，并且该队列中的操作将以指定的顺序执行。</p>
+<p>一个简单的cuda流使用代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#define N (1024*1024)</span><br><span class="line">#define FULL_DATA_SIZE (N*20)</span><br><span class="line"></span><br><span class="line">cudaStream_t stream;</span><br><span class="line">cudaStreamCreate(&amp;stream); //定义并初始化CUDA流</span><br><span class="line"></span><br><span class="line">int *host_a, *host_b, *host_c;</span><br><span class="line">int *dev_a, *dev_b, *dev_c;</span><br><span class="line">//分配设备内存</span><br><span class="line">cudaMalloc((void**)&amp;dev_a, N * sizeof(int));</span><br><span class="line">cudaMalloc((void**)&amp;dev_b, N * sizeof(int));</span><br><span class="line">cudaMalloc((void**)&amp;dev_c, N * sizeof(int));</span><br><span class="line">//分配由流使用的页锁定内存</span><br><span class="line">cudaHostAlloc((void**)&amp;host_a, FULL_DATA_SIZE * sizeof(int),cudaHostAllocDefault);</span><br><span class="line">cudaHostAlloc((void**)&amp;host_b, FULL_DATA_SIZE * sizeof(int),cudaHostAllocDefault);</span><br><span class="line">cudaHostAlloc((void**)&amp;host_c, FULL_DATA_SIZE * sizeof(int),cudaHostAllocDefault);</span><br><span class="line"></span><br><span class="line">for(int i = 0; i&lt;FULL_DATA_SIZE; i++)&#123;</span><br><span class="line">    host_a[i] = rand();</span><br><span class="line">    host_b[i] = rand();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在使用流操作时，不需要将输入缓冲区整体都复制到GPU，而是将输入缓冲区划分为更小的块，并在每个块上执行一个包含三个步骤的过程：<strong>1.我们将部分输入缓冲区复制到GPU；2.在这部分缓冲区上运行核函数；3.然后将输出缓冲区中的这部分结果复制回主机</strong>。这么操作的应用场景通常是：GPU的内存远小于主机内存，无法一次将整个缓冲区都填充到GPU中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//在整个数据上循环，每个数据块的大小为N</span><br><span class="line">for(int i = 0;i&lt;FULL_DATA_SIZE; i+=N)&#123;</span><br><span class="line">    //将锁定内存以异步方式复制到设备上</span><br><span class="line">    cudaMemcpyAsync(dev_a, host_a+i, N*sizeof(int), cudaMemcpyHostToDevice,stream);</span><br><span class="line">    cudaMemcpyAsync(dev_b, host_b+i, N*sizeof(int), cudaMemcpyHostToDevice,stream);</span><br><span class="line">    kernel&lt;&lt;&lt;N/256, 256, 0, stream&gt;&gt;&gt;(dev_a, dev_b, dev_c);//声明核函数异步执行stram中的操作</span><br><span class="line">    //将数据从设备复制回锁定内存</span><br><span class="line">    cudaMemcpyAsync(host_c+i, dev_c, N*sizeof(int), cudaMemcpyDeviceToHost, stream);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>没有使用常见的’cudaMemcpy()’，而是使用一个新函数’cuddaMemcpyAsync()’。前者是以同步方式执行，意味着 <strong>当函数返回时，复制操作就已经完成，并且在输出缓冲区中包含了复制进去的内容</strong>。异步函数相反，<strong>调用时只是放置一个请求，表示流中执行一次内存复制操作，这个流是通过参数stream来指定的，当函数返回时，我们无法确保复制操作是否已经启动，只能保证的是复制操作肯定会当下一个被放入流中的操作之前执行。流就像一个有序的GPU工作队列，GPU每次从该队列中取出工作并执行</strong></p>
+<h2 id="使用多个CUDA流"><a href="#使用多个CUDA流" class="headerlink" title="使用多个CUDA流"></a>使用多个CUDA流</h2><p>在上个例子中，由于仅仅使用了一个流，并不会带来多大的性能提升，CUDA流只有在存在多个流操作时才会显示它的强大威力。<br>具体应用见书154页。</p>
+<h2 id="GPU的工作调度机制"><a href="#GPU的工作调度机制" class="headerlink" title="GPU的工作调度机制"></a>GPU的工作调度机制</h2><h1 id="第11章-多个GPU系统上的CUDA"><a href="#第11章-多个GPU系统上的CUDA" class="headerlink" title="第11章 多个GPU系统上的CUDA"></a>第11章 多个GPU系统上的CUDA</h1><p>见书164页</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>## CUBLAS<br>著名的线性代数库</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CUDA/" rel="tag"><i class="fa fa-tag"></i> CUDA</a>
+          
+            <a href="/tags/Parallel-Computing/" rel="tag"><i class="fa fa-tag"></i> Parallel Computing</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/04/2018-4-3-Kaggle解题步骤/" rel="prev" title="Kaggle解题步骤">
+                Kaggle解题步骤 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个CUDA程序"><span class="nav-number">1.</span> <span class="nav-text">第一个CUDA程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询设备"><span class="nav-number">2.</span> <span class="nav-text">查询设备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA-并行编程"><span class="nav-number"></span> <span class="nav-text">CUDA 并行编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#矢量求和运算"><span class="nav-number">0.1.</span> <span class="nav-text">矢量求和运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#各种前缀的区别"><span class="nav-number">0.1.1.</span> <span class="nav-text">各种前缀的区别</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五章，线程协作"><span class="nav-number"></span> <span class="nav-text">第五章，线程协作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-共享内存和同步"><span class="nav-number">1.</span> <span class="nav-text">5.3 共享内存和同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第六章-常量内存与事件"><span class="nav-number"></span> <span class="nav-text">第六章 常量内存与事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量内存"><span class="nav-number">1.</span> <span class="nav-text">常量内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用事件来测试性能"><span class="nav-number">2.</span> <span class="nav-text">用事件来测试性能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第七章-纹理内存（Texture-Memory）"><span class="nav-number"></span> <span class="nav-text">第七章 纹理内存（Texture Memory）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单应用：热传递模型"><span class="nav-number">1.</span> <span class="nav-text">简单应用：热传递模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用二维纹理内存"><span class="nav-number">2.</span> <span class="nav-text">使用二维纹理内存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第八章-图形互操作性"><span class="nav-number"></span> <span class="nav-text">第八章 图形互操作性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第九章-原子性"><span class="nav-number"></span> <span class="nav-text">第九章 原子性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第十章-流操作"><span class="nav-number"></span> <span class="nav-text">第十章 流操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#页锁定主机内存"><span class="nav-number">1.</span> <span class="nav-text">页锁定主机内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA流"><span class="nav-number">2.</span> <span class="nav-text">CUDA流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用多个CUDA流"><span class="nav-number">3.</span> <span class="nav-text">使用多个CUDA流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GPU的工作调度机制"><span class="nav-number">4.</span> <span class="nav-text">GPU的工作调度机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第11章-多个GPU系统上的CUDA"><span class="nav-number"></span> <span class="nav-text">第11章 多个GPU系统上的CUDA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后记"><span class="nav-number"></span> <span class="nav-text">后记</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/12/CUDA note/';
+          this.page.identifier = '2017/11/12/CUDA note/';
+          this.page.title = 'CUDA 学习笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
