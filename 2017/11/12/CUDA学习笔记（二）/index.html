@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="SICP,Programming Language," />
+  <meta name="keywords" content="CUDA,Parallel Computing," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="SICP（《Structure and Interpretation of Computer Science》）被无数外国程序员誉为最值得读的神书之一，同时身在PL研究室的我，EOPL和SICP都是不得不读的书。在这将这本书的读书笔记整理下来。">
-<meta name="keywords" content="SICP,Programming Language">
+<meta name="description" content="这是我学习CUDA整理的笔记，这是第二篇，主要讲的是线程块内共享内存你的概念，然后通过向量点乘的例子理解共享内存的使用方法。">
+<meta name="keywords" content="CUDA,Parallel Computing">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SICP第一章:构造过程抽象">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/SICP第一章笔记/index.html">
+<meta property="og:title" content="CUDA 学习笔记（二）">
+<meta property="og:url" content="http://yoursite.com/2017/11/12/CUDA学习笔记（二）/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="SICP（《Structure and Interpretation of Computer Science》）被无数外国程序员誉为最值得读的神书之一，同时身在PL研究室的我，EOPL和SICP都是不得不读的书。在这将这本书的读书笔记整理下来。">
+<meta property="og:description" content="这是我学习CUDA整理的笔记，这是第二篇，主要讲的是线程块内共享内存你的概念，然后通过向量点乘的例子理解共享内存的使用方法。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-26T04:50:15.803Z">
+<meta property="og:updated_time" content="2018-08-03T13:48:17.124Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SICP第一章:构造过程抽象">
-<meta name="twitter:description" content="SICP（《Structure and Interpretation of Computer Science》）被无数外国程序员誉为最值得读的神书之一，同时身在PL研究室的我，EOPL和SICP都是不得不读的书。在这将这本书的读书笔记整理下来。">
+<meta name="twitter:title" content="CUDA 学习笔记（二）">
+<meta name="twitter:description" content="这是我学习CUDA整理的笔记，这是第二篇，主要讲的是线程块内共享内存你的概念，然后通过向量点乘的例子理解共享内存的使用方法。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/22/SICP第一章笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/12/CUDA学习笔记（二）/"/>
 
 
 
 
 
-  <title>SICP第一章:构造过程抽象 | Black Feather</title>
+  <title>CUDA 学习笔记（二） | Black Feather</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/SICP第一章笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/CUDA学习笔记（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SICP第一章:构造过程抽象</h1>
+          <h1 class="post-title" itemprop="name headline">CUDA 学习笔记（二）</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-22T00:00:00+09:00">
-                2018-03-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-12T00:00:00+09:00">
+                2017-11-12
               </time>
             
 
@@ -293,28 +293,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Programming-Language/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming Language</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -323,9 +301,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/22/SICP第一章笔记/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/12/CUDA学习笔记（二）/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/22/SICP第一章笔记/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/12/CUDA学习笔记（二）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -353,28 +331,15 @@
       
 
       
-        <p>SICP（《Structure and Interpretation of Computer Science》）被无数外国程序员誉为最值得读的神书之一，同时身在PL研究室的我，EOPL和SICP都是不得不读的书。在这将这本书的读书笔记整理下来。</p>
+        <p>这是我学习CUDA整理的笔记，这是第二篇，主要讲的是线程块内共享内存你的概念，然后通过向量点乘的例子理解共享内存的使用方法。</p>
 <a id="more"></a>
-<h2 id="1-1-程序设计的基本元素"><a href="#1-1-程序设计的基本元素" class="headerlink" title="1.1 程序设计的基本元素"></a>1.1 程序设计的基本元素</h2><p>  一个优秀的程序设计语言，应该是一种框架，可以让程序员通过它自由的组织自己的计算思想。每一种强有力的语言都应该提供三个机制：</p>
-<ul>
-<li>基本表达形式：用于表示语言所关心的最简单的个体</li>
-<li>组合的抽象方法：通过他们可以从较为简单的东西出发构造复杂的元素</li>
-<li>抽象的方法：通过他们可以为复合对象命名，并将他们当作单元去操作<br>在程序设计中，我们需要处理两类要素：过程和数据，数据是一种我们希望去操作的东西，而过程就是有关操作浙西数据的规则描述。<h3 id="1-1-1-正则序求值和应用序求值"><a href="#1-1-1-正则序求值和应用序求值" class="headerlink" title="1.1.1 正则序求值和应用序求值"></a>1.1.1 正则序求值和应用序求值</h3><ul>
-<li>对于一个复合计算过程，“完全展开而后归约”的求值模型称为正则序求值</li>
-<li>“先求值参数而后应用”的方式，被称为应用序求值</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-1-2-牛顿法求平方根"><a href="#1-1-2-牛顿法求平方根" class="headerlink" title="1.1.2 牛顿法求平方根"></a>1.1.2 牛顿法求平方根</h3><p>如果对x的平方根的值有了一个猜测y，那么只需要求出y和x/y的平均值（它一定更接近实际的平方根值）。然后将得到的平均值作为下一个猜测，不断递归。</p>
-<h3 id="1-1-3-过程作为黑箱的抽象"><a href="#1-1-3-过程作为黑箱的抽象" class="headerlink" title="1.1.3 过程作为黑箱的抽象"></a>1.1.3 过程作为黑箱的抽象</h3><p>对于一个复合过程，我们可以将其拆分成多个更小的子过程，而对于父过程而言，子过程即使一个个的黑箱，我们不需要知道子过程的具体实现过程，只需要知道子过程可以完成父过程需要的功能即可。<br><strong>按照过程抽象的思想编程，可以让我们更关注过程本身，至于子过程可以推后实现，相当于将过程解偶</strong></p>
-<h3 id="1-1-4-局部子过程"><a href="#1-1-4-局部子过程" class="headerlink" title="1.1.4 局部子过程"></a>1.1.4 局部子过程</h3><p>对于一般子过程的定义，为了防止该子过程定义后与其他过程重名导致的混淆，应该将只被父过程调用的子过程定义在父过程的内部，即“块结构”。 在其它语言中，可以使用匿名函数，包命名管理等方法。</p>
-<h2 id="1-3-用高阶函数作抽象"><a href="#1-3-用高阶函数作抽象" class="headerlink" title="1.3 用高阶函数作抽象"></a>1.3 用高阶函数作抽象</h2><p>如果一个编程语言将过程限制为只能作为以数作为抽象，那也会严重的限制我们建立抽象的能力。我们需要构造出这样的过程，让它们能以过程作为参数，或者以过程作为返回值。这类能操作过程的过程称为 <strong>高阶过程</strong></p>
-<blockquote>
-<p>函数式语言的设计的核心并不是仅仅想要将函数作为一切操作的核心，而是为了建立更高级，更广泛的过程抽象</p>
-</blockquote>
-<p><strong>let 表达式的一般形式</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(let ((&lt;var1&gt; &lt;exp1&gt;)</span><br><span class="line">      (&lt;var2&gt; &lt;exp2&gt;)</span><br><span class="line">      ...</span><br><span class="line">      )</span><br><span class="line">  &lt;body&gt;)</span><br></pre></td></tr></table></figure></p>
-<h3 id="1-3-4-过程作为返回值"><a href="#1-3-4-过程作为返回值" class="headerlink" title="1.3.4 过程作为返回值"></a>1.3.4 过程作为返回值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(define (yahaha f)</span><br><span class="line">  (lambda (x) (f x x)))</span><br><span class="line"></span><br><span class="line">&gt;&gt;((yahaha *) 2)</span><br><span class="line">&gt;&gt; 4</span><br></pre></td></tr></table></figure>
-<p>定义过程‘yahaha’，该过程会返回一个由lambda定义的过程，在该返回的过程中，会接收参数x，并返回(f x x)</p>
+<h1 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h1><h2 id="共享内存和同步"><a href="#共享内存和同步" class="headerlink" title="共享内存和同步"></a>共享内存和同步</h2><p>在CUDA C用 <strong>shared</strong> 关键字添加变量声明，这将使这个变量驻留在共享内存中。主要作用是存放一个 <strong>线程块</strong> 中的线程会频繁访问的数据。对比全局内存来说，共享内存大小要小几个数量级，但访问速度会比全局内存快。<br>共享内存：对于GPU上启动的每个线程块，CUDA编译器都会创建该变量的一个副本，线程块中每个线程都共享这块内存，但线程却无法看到也不能修改其他线程块的变量副本，这使得线程块中的多个线程能够在计算上进行通信和协作，同时，共享内存缓冲区驻留在GPU上，所以访问共享内存的延迟要远远低于访问普通缓冲区的延迟。但与此同时，需要一种机制来实现线程之间的同步。</p>
+<h4 id="向量内积"><a href="#向量内积" class="headerlink" title="向量内积"></a>向量内积</h4><p>通过共享内存来实现向量内积：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">const int N = 12 * 256;</span><br><span class="line">const int threadsPerBlock = 256;</span><br><span class="line">const int blocksPerGrid = (N+threadsPerBlock-1) / threadsPerBlock;</span><br><span class="line"></span><br><span class="line">__global__ void dot(float *a, float *b, float *c)&#123;</span><br><span class="line">    __shared__ float cache[threadsPerBlock]; //GPU共享内存</span><br><span class="line">    int tid = threadIdx.x + blockDim.x * blockIdx.x;</span><br><span class="line">    int cacheIndex = threadIdx.x;</span><br><span class="line">    float temp = 0;</span><br><span class="line">    while (tid &lt; N) &#123;</span><br><span class="line">        temp += a[tid] * b[tid];</span><br><span class="line">        tid += blockDim.x * gridDim.x;</span><br><span class="line">    &#125;</span><br><span class="line">    cache[cacheIndex] = temp;</span><br><span class="line"></span><br><span class="line">    // 对所有线程块中的线程进行同步，</span><br><span class="line">    __syncthreads();</span><br><span class="line"></span><br><span class="line">    //归约运算</span><br><span class="line">    int i = blockDim.x/2;</span><br><span class="line">    while (i != 0)&#123;</span><br><span class="line">        if (cacheIndex &lt; i)</span><br><span class="line">            cache[cacheIndex] += cache[cacheIndex + i];</span><br><span class="line">        __syncthreads();</span><br><span class="line">        i /= 2;</span><br><span class="line">    &#125;</span><br><span class="line">    if (cacheIndex == 0)&#123;//为了防止带来不必要的冗余计算，只让cacheIndex==0线程进行最后的保存操作</span><br><span class="line">        c[blockIdx.x] = cache[0];</span><br><span class="line">        printf(&quot;%f\n&quot;, cache[0]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    float a[N], b[N], c, partial_c[N];</span><br><span class="line">    float *dev_a, *dev_b, *dev_partial_c;</span><br><span class="line"></span><br><span class="line">    //在GPU上分配内存</span><br><span class="line">    cudaMalloc((void**)&amp;dev_a, N*sizeof(float));</span><br><span class="line">    cudaMalloc((void**)&amp;dev_b, N*sizeof(float));</span><br><span class="line">    cudaMalloc((void**)&amp;dev_partial_c, blocksPerGrid*sizeof(float));</span><br><span class="line"></span><br><span class="line">    //填充主机内存</span><br><span class="line">    for (int i = 0; i&lt;N; i++)&#123;</span><br><span class="line">        a[i] = (float)i;</span><br><span class="line">        b[i] = (float)i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //将主机内存复制到GPU上</span><br><span class="line">    cudaMemcpy(dev_a, a, N*sizeof(float), cudaMemcpyHostToDevice);</span><br><span class="line">    cudaMemcpy(dev_b, b, N*sizeof(float), cudaMemcpyHostToDevice);</span><br><span class="line">    dot&lt;&lt;&lt;blocksPerGrid, threadsPerBlock&gt;&gt;&gt;(dev_a, dev_b, dev_partial_c);</span><br><span class="line">    cudaMemcpy(partial_c, dev_partial_c, blocksPerGrid*sizeof(float), cudaMemcpyDeviceToHost);</span><br><span class="line"></span><br><span class="line">    //在CPU上完成最终求和运算</span><br><span class="line">    c = 0;</span><br><span class="line">    for (int i = 0; i&lt;blocksPerGrid; i++)&#123;</span><br><span class="line">        c += partial_c[i];</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;\n%f\n&quot;, c);</span><br><span class="line">    cudaFree(dev_a);</span><br><span class="line">    cudaFree(dev_b);</span><br><span class="line">    cudaFree(dev_partial_c);</span><br><span class="line"></span><br><span class="line">    delete [] a;</span><br><span class="line">    delete [] b;</span><br><span class="line">    delete [] partial_c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>整体思路：首先所有线程计算自己对应的乘法，然后将结果保存到block的共享内存中。然后每个block中指定一个thread将<br>该block内所有thread保存在共享内存的乘积结果归约加和到一起，得到该block中所有thread乘积的和。最后再将每个block的共享内存的求和结果最后求和，得到结果。</p>
+<h4 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h4><p>‘ __syncthreads(); ‘<br>对所有线程块中的线程进行同步，<br>该函数确保线程块中的每个线程都执行完syncthreads前面的语句后，才会执行下一条语句。</p>
+<h4 id="归约运算"><a href="#归约运算" class="headerlink" title="归约运算"></a>归约运算</h4><p>基本思想：每个线程将cache[]中的两个值加起来，然后将结果保存回cache[]，因为是将两个值归约成一个值，所以每次执行下来，得到的结果数量为开始时的一半。在log2(threadPerBlock)个步骤后，结果就是cache[]的总和。</p>
+<h4 id="syncthreads-注意事项"><a href="#syncthreads-注意事项" class="headerlink" title="syncthreads()注意事项"></a>syncthreads()注意事项</h4><p>在核函数中，经常出现基于threadIdx的判断语句，说明有些thread是不能执行一部分if条件内的代码的， <strong>当某些线程需要执行一条指令，而其他线程不需要执行时，这种情况就被称为线程发散（Thread Divergence），正常情况下，发散的分支只会使得某些线程处于空闲状态，而其他线程将执行分支中的代码</strong>。 但在syncthreads()的情况中，线程发散造成的后果很糟糕，CUDA将确保： <strong>除非线程块中的每个线程都执行了syncthreads()，否则没有任何线程能执行syncthreads()后面的代码。也就是说，如果syncthreads()位于发散分支中，那么一些线程将永远无法执行syncthreads()，会导致程序出错。</strong></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过向量点乘的例子，理解了共享内存的概念和简单应用方法</p>
 
       
     </div>
@@ -421,9 +386,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SICP/" rel="tag"><i class="fa fa-tag"></i> SICP</a>
+            <a href="/tags/CUDA/" rel="tag"><i class="fa fa-tag"></i> CUDA</a>
           
-            <a href="/tags/Programming-Language/" rel="tag"><i class="fa fa-tag"></i> Programming Language</a>
+            <a href="/tags/Parallel-Computing/" rel="tag"><i class="fa fa-tag"></i> Parallel Computing</a>
           
         </div>
       
@@ -436,8 +401,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/11/基于深度学习的电影推荐系统/" rel="next" title="基于深度学习的电影推荐系统">
-                <i class="fa fa-chevron-left"></i> 基于深度学习的电影推荐系统
+              <a href="/2017/11/12/CUDA学习笔记(一)/" rel="next" title="CUDA学习笔记(一)">
+                <i class="fa fa-chevron-left"></i> CUDA学习笔记(一)
               </a>
             
           </div>
@@ -446,8 +411,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/11/机器学习西瓜书知识点整理/" rel="prev" title="机器学习西瓜书知识点整理">
-                机器学习西瓜书知识点整理 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/04/Kaggle解题步骤/" rel="prev" title="Kaggle解题步骤">
+                Kaggle解题步骤 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -606,7 +571,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-程序设计的基本元素"><span class="nav-number">1.</span> <span class="nav-text">1.1 程序设计的基本元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-正则序求值和应用序求值"><span class="nav-number">1.1.</span> <span class="nav-text">1.1.1 正则序求值和应用序求值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-牛顿法求平方根"><span class="nav-number">1.2.</span> <span class="nav-text">1.1.2 牛顿法求平方根</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-过程作为黑箱的抽象"><span class="nav-number">1.3.</span> <span class="nav-text">1.1.3 过程作为黑箱的抽象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-局部子过程"><span class="nav-number">1.4.</span> <span class="nav-text">1.1.4 局部子过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-用高阶函数作抽象"><span class="nav-number">2.</span> <span class="nav-text">1.3 用高阶函数作抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-4-过程作为返回值"><span class="nav-number">2.1.</span> <span class="nav-text">1.3.4 过程作为返回值</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#共享内存"><span class="nav-number">1.</span> <span class="nav-text">共享内存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#共享内存和同步"><span class="nav-number">1.1.</span> <span class="nav-text">共享内存和同步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#向量内积"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">向量内积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程同步"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">线程同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归约运算"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">归约运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#syncthreads-注意事项"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">syncthreads()注意事项</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -776,9 +741,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/03/22/SICP第一章笔记/';
-          this.page.identifier = '2018/03/22/SICP第一章笔记/';
-          this.page.title = 'SICP第一章:构造过程抽象';
+          this.page.url = 'http://yoursite.com/2017/11/12/CUDA学习笔记（二）/';
+          this.page.identifier = '2017/11/12/CUDA学习笔记（二）/';
+          this.page.title = 'CUDA 学习笔记（二）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://blackfeather.disqus.com/embed.js';
