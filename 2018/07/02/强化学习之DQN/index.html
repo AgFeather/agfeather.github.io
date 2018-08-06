@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="DQN全称Deep Q Network，是一种将传统强化学习算法Q-Learning和Deep Learning相结合的算法。最有名的DQN应用应该就是在围棋上打败全人类的AlphaGo了。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-06T08:37:27.248Z">
+<meta property="og:image" content="http://yoursite.com/images/reinforce_learning/DQN_alg.jpg">
+<meta property="og:updated_time" content="2018-08-06T12:00:20.947Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="强化学习之DQN">
 <meta name="twitter:description" content="DQN全称Deep Q Network，是一种将传统强化学习算法Q-Learning和Deep Learning相结合的算法。最有名的DQN应用应该就是在围棋上打败全人类的AlphaGo了。">
+<meta name="twitter:image" content="http://yoursite.com/images/reinforce_learning/DQN_alg.jpg">
 
 
 
@@ -334,10 +336,12 @@
         <p>DQN全称Deep Q Network，是一种将传统强化学习算法Q-Learning和Deep Learning相结合的算法。最有名的DQN应用应该就是在围棋上打败全人类的AlphaGo了。</p>
 <a id="more"></a>
 <h2 id="传统强化学习"><a href="#传统强化学习" class="headerlink" title="传统强化学习"></a>传统强化学习</h2><p>在<a href="">强化学习之Q_Learning</a>中我们已经了解到强化学习的基本概念以及Q_Learning的思想和。而Q_Learning算法面临一个巨大的问题：当State个数过于庞大时，Q_table会变得特别大，以至于每次执行学习循环时table的查找会消耗大量时间，严重影响效率，同时过大的Q_table也会造成存储问题。对于这个问题，DQN是一个非常好的解决办法。</p>
-<h3 id="Q-Learning和Deep-Neural-Network"><a href="#Q-Learning和Deep-Neural-Network" class="headerlink" title="Q_Learning和Deep Neural Network"></a>Q_Learning和Deep Neural Network</h3><p>我们可以通过一个神经网络学习并预测每个State和Action对应的Q值，这样我们就不在需要记录巨大的Q表，只需要训练一个神经网络即可。具体流程如下：输入一个状态，神经网络输出所有动作对应的预测Q值，然后按照Q Learning的原则，使用梯度下降方法对网络进行更新。<br>形象的理解，就是Agent接收当前State的种种信息，然后在神经网络大脑中对自己可以做的每个Action默默评估，选择自认为最优的行为执行，做出动作后然后通过环境的反馈不断更新神经网络。</p>
-<h4 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h4><p>在DQN中，一共包括两个神经网络：Target_Net 和 Q_Net。 <strong>结构上这两个神经网络完全相同</strong>（可以包含卷积层，池化层，全连接层）。<strong>两个神经网络的输入都是当前状态的一些信息，输出是每一个action对应的预测Q值</strong>。</p>
-<h4 id="记忆库"><a href="#记忆库" class="headerlink" title="记忆库"></a>记忆库</h4><p>（ReplayMemeory）记忆库本质上是一个二维表，表的每一行都是一个马尔科夫节点。举个例子：比如当前Agent处在状态s_t下，并执行action_a到达下一个状态s_t_1，同时获得奖励reward值r_t，以及游戏是否结束t_t。那么由：[s_t, a_t, s_t_1, r_t, t_t]构成的一个list就是一个马尔科夫节点。说明当前状态和下一个状态之间的关系。</p>
-<h4 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h4><p>在训练时我们只训练Q_Net，并不训练Target_Net。Target_Net权值的更新来自于对Q_Net权值的直接复制。</p>
+<h2 id="Q-Learning和Deep-Neural-Network"><a href="#Q-Learning和Deep-Neural-Network" class="headerlink" title="Q_Learning和Deep Neural Network"></a>Q_Learning和Deep Neural Network</h2><p>我们可以通过一个神经网络学习并预测每个State和Action对应的Q值，这样我们就不在需要记录巨大的Q表，只需要训练一个神经网络即可。具体流程如下：输入一个状态，神经网络输出所有动作对应的预测Q值，然后按照Q Learning的原则，使用梯度下降方法对网络进行更新。<br>形象的理解，就是Agent接收当前State的种种信息，然后在神经网络大脑中对自己可以做的每个Action默默评估，选择自认为最优的行为执行，做出动作后然后通过环境的反馈不断更新神经网络。</p>
+<p>整个DQN算法结构如下：<br><img src="/images/reinforce_learning/DQN_alg.jpg" alt="DQN_Algorithm"></p>
+<h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>在DQN中，一共有三个组件：包括两个神经网络Target_Net、Q_Net和用来存储训练数据的记忆库（ReplayMemory）。</p>
+<h4 id="Q-Net和Target-Net"><a href="#Q-Net和Target-Net" class="headerlink" title="Q_Net和Target_Net"></a>Q_Net和Target_Net</h4><p><strong>结构上这两个神经网络完全相同</strong>（可以包含卷积层，全连接层）。<strong>两个神经网络的输入都是当前状态的一些信息，输出是每一个action对应的预测Q值</strong>。<br>在最开始学习DQN的时候，一定会有这样的困惑，为什么要有两个神经网络？这两个神经网络的作用是什么？在这里我做个简单的不严谨说明便于理解：Q_Net是一个实时的网络（每次输入状态，就是用Q_Net的预测作为输出动作）。而Target_Net是用来计算Q更新公式求训练label的（将s的下一个状态s_输入Target_Net，输出的最大值作为Q(s’, a’)，计算更新公式得到Q(s, a)作为真实label）。<br>所以要想理解DQN两个网络工作机制的核心，只需要记住这一句话：<strong>Q_Net做出预测，Target_Net计算真实label，然后计算loss反向传播Q_Net</strong><br>在训练时，我们只对Q_Net做反向传播更新权重，Target_Net的权重更新来自于对Q_Net的直接复制。</p>
+<h4 id="记忆库"><a href="#记忆库" class="headerlink" title="记忆库"></a>记忆库</h4><p>（ReplayMemeory）记忆库本质上是一个二维表，表的每一行都是一个马尔科夫节点表示一条记忆。举个例子：比如当前Agent处在状态s_t下，并执行action a_t到达下一个状态s_t_1，同时获得奖励reward值r_t。那么由：[s_t, a_t, r_t, s_t_1]构成的一个list就是一个马尔科夫节点。说明当前状态和下一个状态之间的关系。<br>记忆库是作为对神经网络的训练数据集存在，可以理解为一小段Q表信息。每次从环境获得一个[状态，动作，奖励，新状态]，就将其更新到记忆库中。</p>
+<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>在训练时我们只训练Q_Net，并不训练Target_Net。Target_Net权值的更新来自于对Q_Net权值的直接复制。</p>
 <ol>
 <li>每一次对Q_Net的迭代训练，就会从记忆库中随机抽取一个batch的马尔科夫节点[s_t, a_t, s_t_1, r_t, t_t]记忆。</li>
 <li>然后将s_t输入到Q_Net中，得到Q_Net对s_t状态下每个action预测的Q值，然后取出 action a_t 对应的Q值这就是Q_Net的预测值Q(a_t|s_t)。</li>
@@ -444,8 +448,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/27/自制编程语言/" rel="prev" title="自制编程语言">
-                自制编程语言 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/12/强化学习之Q_Learning/" rel="prev" title="强化学习之Q_Learning">
+                强化学习之Q_Learning <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +537,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -544,7 +548,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -604,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#传统强化学习"><span class="nav-number">1.</span> <span class="nav-text">传统强化学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-Learning和Deep-Neural-Network"><span class="nav-number">1.1.</span> <span class="nav-text">Q_Learning和Deep Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#网络结构"><span class="nav-number">1.1.1.</span> <span class="nav-text">网络结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#记忆库"><span class="nav-number">1.1.2.</span> <span class="nav-text">记忆库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#训练过程"><span class="nav-number">1.1.3.</span> <span class="nav-text">训练过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程"><span class="nav-number">1.1.4.</span> <span class="nav-text">算法流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#传统强化学习"><span class="nav-number">1.</span> <span class="nav-text">传统强化学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-Learning和Deep-Neural-Network"><span class="nav-number">2.</span> <span class="nav-text">Q_Learning和Deep Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络结构"><span class="nav-number">2.1.</span> <span class="nav-text">网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q-Net和Target-Net"><span class="nav-number">2.1.1.</span> <span class="nav-text">Q_Net和Target_Net</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#记忆库"><span class="nav-number">2.1.2.</span> <span class="nav-text">记忆库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练过程"><span class="nav-number">2.2.</span> <span class="nav-text">训练过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程"><span class="nav-number">2.2.1.</span> <span class="nav-text">算法流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

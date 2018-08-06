@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Skills," />
+  <meta name="keywords" content="Machine Learning,Reinforce Learning," />
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3">
-<meta name="keywords" content="Skills">
+<meta name="description" content="Q_Learning是最典型，最简单的强化学习算法，但其蕴含的思想却影响了很多其它的RL算法，现将Q_Learning的思路和特点做以总结。">
+<meta name="keywords" content="Machine Learning,Reinforce Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="atom运行python3">
-<meta property="og:url" content="http://yoursite.com/2018/02/11/atom运行python并修改为python3/index.html">
+<meta property="og:title" content="强化学习之Q_Learning">
+<meta property="og:url" content="http://yoursite.com/2018/07/12/强化学习之Q_Learning/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3">
+<meta property="og:description" content="Q_Learning是最典型，最简单的强化学习算法，但其蕴含的思想却影响了很多其它的RL算法，现将Q_Learning的思路和特点做以总结。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-26T04:46:20.525Z">
+<meta property="og:image" content="http://yoursite.com/images/q_learning/q_update.png">
+<meta property="og:updated_time" content="2018-08-06T07:46:27.592Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="atom运行python3">
-<meta name="twitter:description" content="atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3">
+<meta name="twitter:title" content="强化学习之Q_Learning">
+<meta name="twitter:description" content="Q_Learning是最典型，最简单的强化学习算法，但其蕴含的思想却影响了很多其它的RL算法，现将Q_Learning的思路和特点做以总结。">
+<meta name="twitter:image" content="http://yoursite.com/images/q_learning/q_update.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/11/atom运行python并修改为python3/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/12/强化学习之Q_Learning/"/>
 
 
 
 
 
-  <title>atom运行python3 | Black Feather</title>
+  <title>强化学习之Q_Learning | Black Feather</title>
   
 
 
@@ -253,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/11/atom运行python并修改为python3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/强化学习之Q_Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -270,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">atom运行python3</h1>
+          <h1 class="post-title" itemprop="name headline">强化学习之Q_Learning</h1>
         
 
         <div class="post-meta">
@@ -282,8 +284,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-11T00:00:00+09:00">
-                2018-02-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T00:00:00+09:00">
+                2018-07-12
               </time>
             
 
@@ -305,8 +307,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Skills/" itemprop="url" rel="index">
-                    <span itemprop="name">Skills</span>
+                  <a href="/categories/Reinforce-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Reinforce Learning</span>
                   </a>
                 </span>
 
@@ -323,9 +325,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/11/atom运行python并修改为python3/#comments" itemprop="discussionUrl">
+                <a href="/2018/07/12/强化学习之Q_Learning/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/11/atom运行python并修改为python3/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/07/12/强化学习之Q_Learning/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -353,19 +355,27 @@
       
 
       
-        <p>atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3</p>
+        <p>Q_Learning是最典型，最简单的强化学习算法，但其蕴含的思想却影响了很多其它的RL算法，现将Q_Learning的思路和特点做以总结。</p>
 <a id="more"></a>
-<h2 id="下载script插件"><a href="#下载script插件" class="headerlink" title="下载script插件"></a>下载script插件</h2><p>点击左上角“Atom” -&gt; “preference” -&gt; “install”，在搜索框输入“script”下载安装script运行插件。下载完成后，我们可以新建一个py文件进行测试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">print(sys.version)</span><br></pre></td></tr></table></figure></p>
-<p>运行快捷键：Mac：”command + i”，我们可以看到，控制台输出的python版本为2.7，如果python2.7刚好满足你的日常编程需要，到此atom运行python就搞定了。</p>
-<h2 id="修改python3"><a href="#修改python3" class="headerlink" title="修改python3"></a>修改python3</h2><p>如果你使用的是python3，那么需要修改一下atom的默认python运行版本。点击左上角atom：<br>preference –&gt; Open Config Folder –&gt; packages –&gt; lib –&gt; grammars –&gt; python.coffee<br>可以看到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">exports.Python =</span><br><span class="line">  &apos;Selection Based&apos;:</span><br><span class="line">    command: &apos;python3&apos;</span><br><span class="line">    args: (context) -&gt; [&apos;-u&apos;, &apos;-c&apos;, context.getCode()]</span><br><span class="line"></span><br><span class="line">  &apos;File Based&apos;:</span><br><span class="line">    command: &apos;python3&apos;</span><br><span class="line">    args: (&#123;filepath&#125;) -&gt; [&apos;-u&apos;, filepath]</span><br></pre></td></tr></table></figure></p>
-<p>修改command: ‘python’ 为 “python3” 即可（本文已经进行修改）</p>
-<h2 id="python2和python3并存"><a href="#python2和python3并存" class="headerlink" title="python2和python3并存"></a>python2和python3并存</h2><p>如果你是大部分时间需要python2，偶尔运行一下python3，那么往复修改配置文件就会显得麻烦，script插件可以配置多个运行环境满足该需求：</p>
+<p>Agent，Environment，State，Reward，Action 是强化学习中最基本的几个概念，Agent在当前的State下执行Action，并从Environment处获得反馈和更新的State，Agent接收reward反馈，更新自己的策略模式并进入到下个State，进而不断循环上述过程打到学习的目的。这就是强化学习最一般的概念。</p>
+<h2 id="Q-Learning概念"><a href="#Q-Learning概念" class="headerlink" title="Q_Learning概念"></a>Q_Learning概念</h2><p>Q-Learning是最直接反应上述过程的学习算法，通过构建Q_table，记录每个State状态下每个Action的Q值（相当于在该状态下采取该动作的奖惩值），并通过环境返回的Reward不断更新Q_table直至算法可以快速准确的在每个State下做出相对正确的Action。Q_Table的更新算法如下：<br><img src="/images/q_learning/q_update.png" alt="q_learning"><br>其中：</p>
 <ul>
-<li>点击上方“packages” -&gt; “Script” -&gt; “configure script”</li>
-<li>到此会出现一个对话框，在“commend”输入python3即可，并‘run’一下，就会发现当前文件已经使用python3进行运行。</li>
-<li>完成上述配置后，以后如果想要运行python3，可以使用快捷键：’command + shift + k’，就会出现你已经配置好的运行环境，再按一下回车就可以运行了。</li>
-<li>默认的python2运行快捷键仍然是 “command + i”</li>
+<li>Q(s, a) 表示在s状态下动作a的Q值</li>
+<li>r 表示如果在s状态实行a，环境返回的reward值</li>
+<li>gamma 表示衰减率，用来衡量当前状态的更新和之后状态的关系。gamma的存在让Q表的更新有了”前瞻性”。（如果下个状态s’最大的q值很低，说明新状态s’是一个很差的状态，Q(s, a)对应的q值就会很小，让agent尽可能不在s执行a动作到达差状态s’。</li>
+<li>Max(Q(s’, a’)) 表示在状态s执行动作a后，到达新状态s’，并返回新状态s’时对应所有状态Q值的最大值。</li>
 </ul>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><p>现在我们已经知道了Q_Learning的运行原理本质上是从Environment的反馈更新Q表，同时也理解了更新方法。下面看一下整个Q_Learning算法的具体流程：</p>
+<ol>
+<li>初始化一个Q表，行对应着所有的state，列对应着所有的action</li>
+<li>初始化state</li>
+<li>根据当前state选择动作action。（贪心选择当前state对应Q值最大的action，同时有一定概率随机选择action）</li>
+<li>将当前state和选择的action输入到环境中，环境返回下一个状态s_ 、本次执行动作的奖励r、以及游戏是否终止t</li>
+<li>找到新状态s_下所有动作q值最大的值，根据更新公式对Q(s, a)进行更新。</li>
+<li>从新状态s_不断重复3至5步，直到游戏结束完成一个epoch。循环数个epoch会发现模型收敛。</li>
+</ol>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>这里是两个我用Python写的Q_Learning简单例子，主要参考了<a href="https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/" target="_blank" rel="noopener">莫烦Python</a>的教程，为了便于理解，在代码里我写了尽可能多的注释以便将整个Q_Learning的运行原理解释清楚。具体例子请看下面的URL。<br><a href="https://github.com/YHfeather/ML_Engineer/tree/master/Reinforcement%20Learning/Q_learning" target="_blank" rel="noopener">Q_Learning Example</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是我整理的Q_Learning的简单教程，Q_Learning和很多强化学习算法的基础，比如Sarsa，DQN等。理解Q Learning在我看来只需要记住这句话： <strong>在状态s执行动作a到达新状态s_并获得奖励r，根据r和新状态最大的q值对目前状态s和动作a的q值Q(s, a)进行更新</strong></p>
 
       
     </div>
@@ -412,7 +422,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Skills/" rel="tag"><i class="fa fa-tag"></i> Skills</a>
+            <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
+          
+            <a href="/tags/Reinforce-Learning/" rel="tag"><i class="fa fa-tag"></i> Reinforce Learning</a>
           
         </div>
       
@@ -425,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/23/Kaggle项目之Titanic/" rel="next" title="Kaggle之Titanic">
-                <i class="fa fa-chevron-left"></i> Kaggle之Titanic
+              <a href="/2018/07/02/强化学习之DQN/" rel="next" title="强化学习之DQN">
+                <i class="fa fa-chevron-left"></i> 强化学习之DQN
               </a>
             
           </div>
@@ -435,8 +447,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/11/基于深度学习的电影推荐系统/" rel="prev" title="基于深度学习的电影推荐系统">
-                基于深度学习的电影推荐系统 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/27/自制编程语言/" rel="prev" title="自制编程语言">
+                自制编程语言 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -595,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载script插件"><span class="nav-number">1.</span> <span class="nav-text">下载script插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改python3"><span class="nav-number">2.</span> <span class="nav-text">修改python3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python2和python3并存"><span class="nav-number">3.</span> <span class="nav-text">python2和python3并存</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-Learning概念"><span class="nav-number">1.</span> <span class="nav-text">Q_Learning概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法流程"><span class="nav-number">2.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -765,9 +777,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/02/11/atom运行python并修改为python3/';
-          this.page.identifier = '2018/02/11/atom运行python并修改为python3/';
-          this.page.title = 'atom运行python3';
+          this.page.url = 'http://yoursite.com/2018/07/12/强化学习之Q_Learning/';
+          this.page.identifier = '2018/07/12/强化学习之Q_Learning/';
+          this.page.title = '强化学习之Q_Learning';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://blackfeather.disqus.com/embed.js';
