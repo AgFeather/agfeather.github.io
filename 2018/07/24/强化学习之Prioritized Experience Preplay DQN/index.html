@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Machine Learning,Deep Learning," />
+  <meta name="keywords" content="Machine Learning,Reinforce Learning," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
-<meta name="keywords" content="Machine Learning,Deep Learning">
+<meta name="description" content="DQN是一个非常强大的模型，成功的将强化学习和深度学习结合到了一起，但在实际应用中，DQN往往会遇到很多问题，Prioritized Experience Replay即是一种用来解决DQN记忆库中样本不均衡的问题。">
+<meta name="keywords" content="Machine Learning,Reinforce Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习补充知识">
-<meta property="og:url" content="http://yoursite.com/2018/05/22/深度学习补充知识/index.html">
+<meta property="og:title" content="强化学习之Prioritized Experience Replay DQN">
+<meta property="og:url" content="http://yoursite.com/2018/07/24/强化学习之Prioritized Experience Preplay DQN/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
+<meta property="og:description" content="DQN是一个非常强大的模型，成功的将强化学习和深度学习结合到了一起，但在实际应用中，DQN往往会遇到很多问题，Prioritized Experience Replay即是一种用来解决DQN记忆库中样本不均衡的问题。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/nn_knowledge/batch_normalization.jpg">
-<meta property="og:updated_time" content="2018-08-07T07:30:08.163Z">
+<meta property="og:updated_time" content="2018-08-07T07:30:42.550Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度学习补充知识">
-<meta name="twitter:description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
-<meta name="twitter:image" content="http://yoursite.com/images/nn_knowledge/batch_normalization.jpg">
+<meta name="twitter:title" content="强化学习之Prioritized Experience Replay DQN">
+<meta name="twitter:description" content="DQN是一个非常强大的模型，成功的将强化学习和深度学习结合到了一起，但在实际应用中，DQN往往会遇到很多问题，Prioritized Experience Replay即是一种用来解决DQN记忆库中样本不均衡的问题。">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/22/深度学习补充知识/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/24/强化学习之Prioritized Experience Preplay DQN/"/>
 
 
 
 
 
-  <title>深度学习补充知识 | Black Feather</title>
+  <title>强化学习之Prioritized Experience Replay DQN | Black Feather</title>
   
 
 
@@ -255,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/深度学习补充知识/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/24/强化学习之Prioritized Experience Preplay DQN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -272,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深度学习补充知识</h1>
+          <h1 class="post-title" itemprop="name headline">强化学习之Prioritized Experience Replay DQN</h1>
         
 
         <div class="post-meta">
@@ -284,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T00:00:00+09:00">
-                2018-05-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-24T00:00:00+09:00">
+                2018-07-24
               </time>
             
 
@@ -307,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
+                  <a href="/categories/Reinforce-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Reinforce Learning</span>
                   </a>
                 </span>
 
@@ -325,9 +323,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/22/深度学习补充知识/#comments" itemprop="discussionUrl">
+                <a href="/2018/07/24/强化学习之Prioritized Experience Preplay DQN/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/22/深度学习补充知识/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/07/24/强化学习之Prioritized Experience Preplay DQN/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -355,10 +353,15 @@
       
 
       
-        <p>深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。</p>
-<a id="more"></a>
-<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>Batch Normalization是将分散的数据统一的一种方法。<br>神经网络的训练效率受数据分布影响，如果输入神经元的数值过大或过小，该输入值会在激活函数的饱和区，也就是说这个时候的梯度几乎为0，导致梯度消失，很难更新权重。<br>Batch Normalization相当于在每层hidden layer之间对数据进行归一化，让数据分布集中在（-1， 1）之间，这样下一层神经元的输入大部分会落到激活函数的工作区，BP时更新梯度较大，模型可以更快收敛。<br><img src="/images/nn_knowledge/batch_normalization.jpg" alt="batch_normalization"></p>
-<p>一般应用Batch Normalization时往往还进行反向Normalization，将Normalized的数据用可训练的参数再扩展和平移回去，目的是让神经网络自己学习扩展平移参数，进而检测此次的Batch Normalization是否起到优化作用。</p>
+        <p>DQN是一个非常强大的模型，成功的将强化学习和深度学习结合到了一起，但在实际应用中，DQN往往会遇到很多问题，Prioritized Experience Replay即是一种用来解决DQN记忆库中样本不均衡的问题。<br><a id="more"></a></p>
+<h2 id="记忆库样本不均衡问题"><a href="#记忆库样本不均衡问题" class="headerlink" title="记忆库样本不均衡问题"></a>记忆库样本不均衡问题</h2><p>想想一下个简单的RL场景：机器人在走迷宫。我们设定没有成功到达出口的奖励值为-1， 成功到达出口的奖励值为100，同时只有一个出口。这时我们会发现DQN的训练过程非常缓慢，因为在DQN的记忆库中，只有非常少的几条记忆对应的奖励值时100，而且因为传统DQN是从记忆库中随机采样，DQN会很难学习到这几条“有价值”的记忆。也就是说，因为记忆库中的正负样本不均衡，会导致DQN训练时间过长。</p>
+<p>而Prioritized Replay通过更加重视这些少量的记忆样本，达到加快学习速度的目的。</p>
+<h2 id="Prioritized-Replay原理"><a href="#Prioritized-Replay原理" class="headerlink" title="Prioritized Replay原理"></a>Prioritized Replay原理</h2><p>PR的重点在于训练Q_Net时，每次从记忆库中选取batch个记忆是不再使用随机抽样，而是按照Memory中的样本优先级来抽取，这样可以更加高效的进行学习。</p>
+<h4 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h4><p>而样本优先级p的设定可以根据TD-error来计算，每次更新Q_Net时计算的误差值（具体计算方法请查看之前的DQN笔记或者Double DQN笔记）。TD-error值越大，说明Q_Net的估计误差越大，越需要用这个样本进行学习，优先级p也就越高。</p>
+<h4 id="SumTree"><a href="#SumTree" class="headerlink" title="SumTree"></a>SumTree</h4><p>在有了优先级p的计算方式之后，下一个问题就是如何根据p进行采样。如果Q_Net每个batch的训练都对记忆库根据p进行排序会非常消耗计算力。<a href="https://arxiv.org/abs/1511.05952" target="_blank" rel="noopener">Prioritized Experience Replay</a>这篇论文提出了SumTree结构，可以不需要对记忆库中的记忆排序而获取高优先级的训练记忆。</p>
+<p>SumTree是一个二叉树，节点保存一个int值，该值等于左右子树节点的和。每个叶节点表示一个记忆样本。容易推断出根节点的值是所有数据p值的和。<br>一个SumTree的例子如下：<br><a href="/images/reinforce_Learning/sumtree.png">SumTree</a></p>
+<p>进行抽样时， 将p的总和（也就是根节点的值）除batch size。也就是将p值分为batch size个区间。拿上图举例, 假设batch size为6, 这时的区间拥有的 priority 可能是这样.<br>[0-7], [7-14], [14-21], [21-28], [28-35], [35-42]<br>然后在每个区间里随机选取一个数. 比如在第区间 [21-28] 里选到了24, 就按照这个 24 从最顶上的42开始向下搜索. 首先看到最顶上 42 下面有两个 child nodes, 拿着手中的24对比左边的 child 29, 如果 左边的 child 比自己手中的值大, 那我们就走左边这条路, 接着再对比 29 下面的左边那个点 13, 这时, 手中的 24 比 13 大, 那我们就走右边的路, 并且将手中的值根据 13 修改一下, 变成 24-13 = 11. 接着拿着 11 和 13 左下角的 12 比, 结果 12 比 11 大, 那我们就选 12 当做这次选到的 priority, 并且也选择 12 对应的数据.</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>这里是一个应用Prioritized Replay DQN的小车爬山例子，代码来自于<a href="https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/4-6-prioritized-replay/" target="_blank" rel="noopener">莫烦Python</a>。代码的URL如下：<a href="https://github.com/YHfeather/ML_Engineer/tree/master/Reinforcement%20Learning/DQN_Prioritied_Replay" target="_blank" rel="noopener">DQN with Prioritized Replay</a></p>
 
       
     </div>
@@ -407,7 +410,7 @@
           
             <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
           
-            <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
+            <a href="/tags/Reinforce-Learning/" rel="tag"><i class="fa fa-tag"></i> Reinforce Learning</a>
           
         </div>
       
@@ -420,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/21/Scheme语言基本语法/" rel="next" title="Scheme基本语法">
-                <i class="fa fa-chevron-left"></i> Scheme基本语法
+              <a href="/2018/07/23/强化学习之Double DQN/" rel="next" title="强化学习之Double DQN">
+                <i class="fa fa-chevron-left"></i> 强化学习之Double DQN
               </a>
             
           </div>
@@ -430,8 +433,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/12/强化学习之Q_Learning/" rel="prev" title="强化学习之Q_Learning">
-                强化学习之Q_Learning <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/25/强化学习之Dueling DQN/" rel="prev" title="强化学习之Dueling DQN">
+                强化学习之Dueling DQN <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -590,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">1.</span> <span class="nav-text">Batch Normalization</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#记忆库样本不均衡问题"><span class="nav-number">1.</span> <span class="nav-text">记忆库样本不均衡问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prioritized-Replay原理"><span class="nav-number">2.</span> <span class="nav-text">Prioritized Replay原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级"><span class="nav-number">2.0.1.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SumTree"><span class="nav-number">2.0.2.</span> <span class="nav-text">SumTree</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li></ol></div>
             
 
           </div>
@@ -760,9 +763,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/05/22/深度学习补充知识/';
-          this.page.identifier = '2018/05/22/深度学习补充知识/';
-          this.page.title = '深度学习补充知识';
+          this.page.url = 'http://yoursite.com/2018/07/24/强化学习之Prioritized Experience Preplay DQN/';
+          this.page.identifier = '2018/07/24/强化学习之Prioritized Experience Preplay DQN/';
+          this.page.title = '强化学习之Prioritized Experience Replay DQN';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://blackfeather.disqus.com/embed.js';

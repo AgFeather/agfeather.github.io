@@ -253,6 +253,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/21/各种Boosting树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/21/各种Boosting树/" itemprop="url">各种Boosting树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-21T00:00:00+09:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/21/各种Boosting树/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/21/各种Boosting树/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在集成学习中，Boosting为代表的算法有着非常优秀的性能，本文主要介绍几种Boosting树的原理和应用。包括GBDT和xgboost。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/21/各种Boosting树/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/Hadoop入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -805,302 +940,14 @@
 
       
         
-          
-            <h1 id="第二章-模型评估与选择"><a href="#第二章-模型评估与选择" class="headerlink" title="第二章 模型评估与选择"></a>第二章 模型评估与选择</h1><ul>
-<li>学习器在训练集上的误差称为训练误差或者经验误差，在新样本上的误差称为泛华误差<h2 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h2></li>
-<li>留出法：直接将数据集分为两个不相交的子集，一个训练，一个测试。一般需要多次划分对评估结果取平均值。</li>
-<li>交叉验证：将数据集分成k个大小相同的子集，每次用一个子集i作为测试，用剩下的k-1作为训练，然后遍历k个子集会产生k个训练/测试结果。留一法：让k=数据集大小，也就是说每次直选一个样本进行测试。</li>
-<li>自助法：有放回的从原始数据集采样，每次取一个数据复制放入新数据集，然后将该数据放回，重复采样直到新数据集大小为m，初始数据集中会有36%的样本未出现在新数据集中，用新数据训练，用未出现的数据集做测试。<ol>
-<li>自助法在数据集小，难以有效划分时有用，但改变了初始数据集的分布，引入了估计偏差。</li>
-</ol>
-</li>
-</ul>
-<h2 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h2><ul>
-<li>错误率和精度</li>
-<li>查准率，查全率，F1值</li>
-<li>P-R曲线（查准率，查全率曲线）<ol>
-<li>将预测结果从最可能到最不可能进行排序，按照此顺序逐个把样本作为正例进行预测，并记录每一刻的P-R值</li>
-<li>可以比较PR曲线下的面积来比较模型性能，或者比较平衡点（P==R）的大小</li>
-<li>可以根据不同任务需求采用不同的截断点，更重视P则选择排序靠前的位置截断。。。</li>
-</ol>
-</li>
-<li>ROC曲线&amp;AUC<ul>
-<li>同样将样本从可能正例到不可能正例排序，首先个将所有样例均预测为反例，这时真正例率和假正例率都为0，然后调整阈值，依次将每个样例划分为正例。每次计算真正例率和假正例率绘制ROC曲线</li>
-<li>真正例率：所有真实正例中被预测为正例的比例（对正例预测正确）</li>
-<li>假正例率：所有真实反例中被预测为正例的比例（对反例预测错误）</li>
-<li>RUC考虑的事样本预测的排序质量，因此它与排序误差有紧密联系</li>
-<li>ROC曲线下方围成的面积即为AUC</li>
-<li>因为AUC为点连成的非光滑曲线，所以可以通过计算各个相邻点组成的小矩形面积之和得出AUC</li>
-</ul>
-</li>
-</ul>
-<ol start="5">
-<li>代价敏感误差率与代价曲线<ul>
-<li>构建有代价权重的混淆矩阵，然后可以依据此计算表示代价的ROC曲线</li>
-</ul>
-</li>
-</ol>
-<h2 id="比较检验"><a href="#比较检验" class="headerlink" title="比较检验"></a>比较检验</h2><ol>
-<li>假设检验</li>
-<li>交叉验证t检验</li>
-<li>McNemar检验from</li>
-<li>Friedman检验和Nemenyi后续检验</li>
-<li>偏差和方差</li>
-</ol>
-<h1 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h1><h2 id="最小二乘法和其矩阵形式"><a href="#最小二乘法和其矩阵形式" class="headerlink" title="最小二乘法和其矩阵形式"></a>最小二乘法和其矩阵形式</h2><pre><code>1. 基于均方误差最小化来进行模型求解的方法称为最小二乘法
-2. 在线性回归模型中最小二乘法就是试图找到一条直线，使所有样本到直线的欧式距离之和最小
-3. 最小二乘法即对每个参数求偏导，并令其等于0.
-4. 最小二乘法的矩阵表示和解法（原理相同，只是变为对矩阵求偏导）
-5. **对数线性回归** 实质上已是在求输入空间到输出空间的非线性函数映射：ln(y) = wx + b
-6. **广义线性模型** y = g-1(wx + b)
-</code></pre><h2 id="逻辑斯蒂回归"><a href="#逻辑斯蒂回归" class="headerlink" title="逻辑斯蒂回归"></a>逻辑斯蒂回归</h2><ul>
-<li>优点：实现简单，分类时计算量非常小，速度快，存储资源低</li>
-<li>缺点：容易欠拟合，准确度不高。只能处理二分类问题（衍生的softmax可解决），样本必须线性可分。<h4 id="LR推导"><a href="#LR推导" class="headerlink" title="LR推导"></a>LR推导</h4>掌握<h4 id="几率和对数几率"><a href="#几率和对数几率" class="headerlink" title="几率和对数几率"></a>几率和对数几率</h4><ol>
-<li>y/(1-y)称为几率，反映了样本作为正例的相对可能性。对几率取对数为对数几率</li>
-<li>ln(y/(1-y)) = wx + b 等价于 y = 1/(1+exp(-wx-b))</li>
-<li>由上式可看出，LR本质上是训练一个线性模型，逼近真是label的对数几率，也就是数据作为正例的相对可能性。</li>
-</ol>
-</li>
-</ul>
-<h2 id="线性判别分析（LDA）"><a href="#线性判别分析（LDA）" class="headerlink" title="线性判别分析（LDA）"></a>线性判别分析（LDA）</h2><ul>
-<li>书第60页<br>LDA思想：给定训练数据集，设法将样例投影到一条直线上，是的同类样例的投影点尽可能接近，异类样例的投影点尽可能远离。<strong>衡量同类样例距离尽可能小只需要让协方差尽可能小，异类样例距离尽可能大只需要让类中心之间的距离尽可能大。</strong><br>在对新样例进行分类时，将其投影到同样的这条直线上，再根据投影点的位置来判断新样本的类别。</li>
-</ul>
-<h2 id="3-5-多分类学习"><a href="#3-5-多分类学习" class="headerlink" title="3.5 多分类学习"></a>3.5 多分类学习</h2><p>多分类学习的基本思路是“拆解法”，即将多个分类任务拆为若干个二分类任务求解。经典的拆分策略有三种：‘一对一’，‘一对余’，‘多对多’</p>
-<ol>
-<li>一对一OvO：将N个类别两两配对，产生N*(N-1)/2个二分类任务。在 <strong>测试阶段</strong> ，新样本将同时提交给所有分类器，于是我们得到N(N-1)/2个分类结果，最终结果可以通过投票产生，即把被预测最多的类别作为最终分类结果。</li>
-<li>一对余OvR：每次将一个类作为正例，剩下的N-1个类作为反例来训练N个分类器。在 <strong>测试阶段</strong> 若仅有一个分类器预测为正例，则对应的类别标记作为最终分类结果。若有多个分类器预测为正例，则通常考虑各个分类器的预测置信度，选择置信度最大的类别标记为分类结果。</li>
-<li>多对多MvM：每次将若干类作为正类，若干类其他类作为反类，显然OvO和OvM是MvM的特例。MvM正反类的构造必须有特殊的设计，不能随意选取，通常使用“纠错输出码（ECOC）”技术。<ul>
-<li>ECOE技术详见书第65页</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-6-类别不平衡问题"><a href="#3-6-类别不平衡问题" class="headerlink" title="3.6 类别不平衡问题"></a>3.6 类别不平衡问题</h2><ol>
-<li>对于线性分类y=wx+b, 我们通常认为y&gt;0.5为正例y&lt;0.5为反例，说明几率y/(1-y)的阈值为0.5，表示分类器认为正反例可能性相同。所以我们只需要修改分类器预测几率的阈值即可：若y/(1-y) &gt; m+/m-则判定为正例。</li>
-<li>解决类别不平衡学习的一个基本策略：<strong>再缩放</strong>，对预测出的几率乘以正负例的比值即为模型的预测输出。</li>
-<li>实际应用中共有三种做法： <strong>欠采样，过采样，阈值移动</strong><ul>
-<li>欠采样即去除一些反例使得正反例数目接近，由于欠采样可能丢失重要信息，实践中使用EasyEnsemble利用集成学习将反例划分为若干个集合供不同学习器使用，这样对于每个学习器来说都是欠采样，但在全局看来不会丢失信息。</li>
-<li>过采样即增加一些正例使得正反例数目接近（不能简单地对正例进行重复否则会产生严重的过拟合，SMOTE算法通过对训练集里的正例进行插值来产生额外的正例。</li>
-<li>阈值移动即为开始所述，对预测几率乘以正反例数量的比值</li>
-</ul>
-</li>
-</ol>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="为什么不直接对loss-function求偏导-0，而要用梯度下降？"><a href="#为什么不直接对loss-function求偏导-0，而要用梯度下降？" class="headerlink" title="为什么不直接对loss function求偏导=0，而要用梯度下降？"></a>为什么不直接对loss function求偏导=0，而要用梯度下降？</h3><ol>
-<li>逻辑回归没有解析解，就是说无法显式的表现函数的偏导，只能通过数值求解的方法迭代地找到最优解。</li>
-<li>即使有解析解，大部分神经网络的loss为非凸函数，KKT条件（偏导为0是其中一项）仅仅是非凸函数最优化的必要非充分条件。</li>
-<li>偏导为0可能并非是局部极值</li>
-</ol>
-<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><ul>
-<li>优点：计算量小，可解释性强，比较适合处理有缺失值的样本，能够处理不相关特征</li>
-<li>容易过拟合（集成树方法减少了过拟合现象）<h2 id="划分选择"><a href="#划分选择" class="headerlink" title="划分选择"></a>划分选择</h2><h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4>信息熵值越小，纯度越高。<h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4></li>
-<li>一般而言，信息增益越大，意味着使用属性a来进行划分所获得的“纯度提升”越大。</li>
-<li>缺点：信息增益倾向于选择可取值数目较多的属性。<h4 id="增益率"><a href="#增益率" class="headerlink" title="增益率"></a>增益率</h4></li>
-<li>增益率为：信息增益/分割属性的信息熵</li>
-<li>缺点：增益率倾向于选择取值数目较少的属性<h4 id="ID3决策树算法"><a href="#ID3决策树算法" class="headerlink" title="ID3决策树算法"></a>ID3决策树算法</h4></li>
-</ul>
-<ol>
-<li>ID3决策树生成算法采用信息增益生成决策树（见P75）</li>
-<li>基于信息增益的划分法会偏向选取取值多的属性（如果用ID进行划分，也就是每个分治只有一个样本，每个分治纯度最大，但这样显然不具备泛化能力）<h4 id="ID4-5决策树算法"><a href="#ID4-5决策树算法" class="headerlink" title="ID4.5决策树算法"></a>ID4.5决策树算法</h4></li>
-<li>为克服基于信息增益的算法偏向选择属性多的缺点，ID4.5基于信息增益率生成决策树</li>
-<li>信息增益率即： （属性A的信息增益）/（属性A的信息熵）</li>
-<li>增益率准则倾向选择取值少的属性，因此C4.5算法并不是简单选用增益率划分，而是使用了一个启发式方法：先从候选划分属性中找出信息增益高于平均水平的属性，再从中选择增益率最高的。<h4 id="基尼系数"><a href="#基尼系数" class="headerlink" title="基尼系数"></a>基尼系数</h4></li>
-</ol>
-<ul>
-<li>CART树使用基尼系数进行属性划分</li>
-<li>如果是二分类问题，基尼系数为：Gini(p) = 2p(1-p)</li>
-<li>直观来说，基尼系数反应了从数据集随机抽取两个样本，其类别标记不一致的概率，因此Gini系数越小，数据集的纯度越高。</li>
-</ul>
-<h2 id="决策树剪枝"><a href="#决策树剪枝" class="headerlink" title="决策树剪枝"></a>决策树剪枝</h2><ul>
-<li>决策树剪枝的基本策略有“预剪枝”和“后剪枝”。<h4 id="预剪枝"><a href="#预剪枝" class="headerlink" title="预剪枝"></a>预剪枝</h4><ol>
-<li>预剪枝是指在决策树生成过程中，对每个节点在划分前先进行估计，若当前节点的划分不能带来决策树泛华性能的提升，则停止划分并将当前节点标记为叶节点；首先单独分出一个测试集，然后分别测试当前节点不分裂，和节点分裂后的分类准确率，如果节点分裂后的准确率更高，则进行划分。 <strong>比较划分前后在验证集的精度是否提高</strong></li>
-<li>预剪枝有欠拟合风险<h4 id="后剪枝"><a href="#后剪枝" class="headerlink" title="后剪枝"></a>后剪枝</h4></li>
-<li>后剪枝则是先训练一颗完整的决策树，然后自底向上的对非叶节点进行考察，若将该节点对应的子节点替换为叶节点能带来决策树泛化性能的提升，则将该子树替换为叶节点。对于一棵训练好的决策树，自底向上分别考察每个非叶节点，并分别计算保留该节点领衔的叶节点时决策树在测试集的准确率，和将该节点的叶节点进行剪除后决策树在测试集的准确率。如果剪除该节点（将该节点的叶节点向上回滚，该节点作为叶节点）的准确率大于保留该节点，则剪除该节点。  <strong>比较划分前后在验证集的精度是否提高</strong></li>
-<li>后剪枝也可以通过构建决策树loss function，最小化loss实现。</li>
-<li>后剪枝欠拟合风险小，泛化性能优于预剪枝，但需要先生成再剪枝，开销大。</li>
-</ol>
-</li>
-</ul>
-<h2 id="连续值和缺失值"><a href="#连续值和缺失值" class="headerlink" title="连续值和缺失值"></a>连续值和缺失值</h2><h4 id="连续值"><a href="#连续值" class="headerlink" title="连续值"></a>连续值</h4><ul>
-<li>对于取值为连续值的属性，考察该属性的所有取值，并从小到大排列。分别以任意相邻的取值的中值作为分割点，计算信息增益，并选取信息增益最大的点作为分割点。（其中可以将原节点的信息熵改为期望，因为每个取值的概率都为1/n） （具体公式见书84页）</li>
-<li>与离散属性不同，若当前节点划分属性为连续属性，该属性还可作为其后代节点的划分属性。<h4 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h4>三种情况：</li>
-</ul>
-<ol>
-<li><p>如何在属性值缺失的情况下进行划分属性的选择（如何重构信息增益）<br>假如使用ID3算法，那么选择分类属性时，就要计算所有属性的熵增(信息增益，Gain)。假设10个样本，属性是a,b,c。在计算a属性熵时发现，第10个样本的a属性缺失，那么就把第10个样本去掉，前9个样本组成新的样本集，在新样本集上按正常方法计算a属性的熵增。然后结果乘0.9（新样本占raw样本的比例），就是a属性最终的熵。</p>
-</li>
-<li><p>分类属性选择完成，对训练样本分类，发现属性缺失怎么办？<br>比如该节点是根据a属性划分，但是待分类样本a属性缺失，怎么办呢？假设a属性离散，有1,2两种取值，那么就把该样本分配到两个子节点中去，但是权重由1变为相应离散值个数占样本的比例。然后计算错误率的时候，注意，不是每个样本都是权重为1，存在分数。<br>就是说可以将样本划入所有子节点，且定义样本权值为（每个子节点中实例数目/父节点实例数目），直观的看，就是让同一个样本以不同的概率划入到不同的子节点中去。在子节点的继续分裂时，计算比例时缺失值的使用权重而不是为1.</p>
-</li>
-<li>训练完成，给测试集样本分类，有缺失值怎么办？<br>这时候，就不能按比例分配了，因为你必须给该样本一个确定的label，而不是薛定谔的label。这时候根据投票来确定，或者填充缺失值。</li>
-</ol>
-<h2 id="多变量决策树"><a href="#多变量决策树" class="headerlink" title="多变量决策树"></a>多变量决策树</h2><ul>
-<li>通常决策树相当于用多个平行于轴线的线段对特征空间进行分割。这样的分类边界使得学习结果具有较好的可解释性，因为每一段划分都直接对应了某个属性的取值，<strong>但在分类边界比较复杂时，对于同一个属性，必须使用很多段划分才能获得较好的近似，此时决策树会相当复杂</strong>。</li>
-<li><strong>若能使用斜的划分边界，则决策树模型会大大简化</strong>，“多变量决策树” 就是能实现这样斜划分甚至更复杂划分的决策树。</li>
-<li>以斜划分为例，在此类决策树中，<strong>非节点不再是仅针对某个属性，而是对属性的线性组合进行测试，换言之，每个非叶节点是一个形如 wa=t 的线性分类器，w表示属性a的权重，w和t可以在节点所含的样本集和属性集上学得</strong></li>
-<li>于是，与传统的单变量决策树不同，在多变量决策树的学习过程中，不是为每个节点寻找一个最优划分属性，而是试图建立一个合适的线性分类器。</li>
-</ul>
-<h2 id="CART树"><a href="#CART树" class="headerlink" title="CART树"></a>CART树</h2><h2 id="决策树用于回归"><a href="#决策树用于回归" class="headerlink" title="决策树用于回归"></a>决策树用于回归</h2><h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><h2 id="梯度下降算法推导"><a href="#梯度下降算法推导" class="headerlink" title="梯度下降算法推导"></a>梯度下降算法推导</h2><h1 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h1><ul>
-<li>优点：<ol>
-<li>可用于线性/非线性分类，也可以用于回归</li>
-<li>泛化误差较低</li>
-<li>容易解释</li>
-<li>计算复杂度较低</li>
-</ol>
-</li>
-<li>缺点：<ol>
-<li>对参数和核函数的选择比较敏感</li>
-<li>原始的SVM只比较擅长处理二分类问题</li>
-</ol>
-</li>
-</ul>
-<h2 id="传统支持向量机"><a href="#传统支持向量机" class="headerlink" title="传统支持向量机"></a>传统支持向量机</h2><p>距离超平面最近的几个训练样本点使距离等式成立，这几个样本点称为支持向量。两个异类支持向量到超平面的距离之和称为“间隔”。</p>
-<h2 id="支持向量机对偶形式"><a href="#支持向量机对偶形式" class="headerlink" title="支持向量机对偶形式"></a>支持向量机对偶形式</h2><h4 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h4><p>掌握</p>
-<h4 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h4><h4 id="SMO算法"><a href="#SMO算法" class="headerlink" title="SMO算法"></a>SMO算法</h4><p>SMO的基本思路是先固定ai之外的所有参数，然后求ai上的机制，由于存在约束sum(aiyi)=0，若固定ai之外的其他变量则ai可以由其他变量导出。于是SMO每次选择两个变量ai，aj。并固定其他参数，这样在参数初始化后，SMO不断执行如下两个步骤直至收敛：</p>
-<pre><code>1. 选取一对需要更新的变量ai和aj
-2. 固定剩余的参数，求解SVM对偶式的公式获得更新后的ai和aj
-</code></pre><p>注意到只要ai和aj有一个不满足KKT条件，目标函数就会在迭代后增大，KKT条件违背程度越大，变量更新后可能导致的目标函数值增幅越大。<br>于是SMO先选取违背KKT条件程度最大的变量，第二个选取使目标函数值增幅最快的变量，但比较变量复杂度过大，SMO采用启发式方法：选取两个变量所对应样本之间的间隔最大，这样的两个变量有很大差别，对目标函数的更新有更大帮助。<br>SMO每次选取两个变量优化对偶公式时，会发现该公式具有闭式解，不必用数值优化方法即可高效计算出更新后的ai，aj。</p>
-<h2 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h2><p>可将样本从原始空间映射到一个高维看空间，使得样本在这个高维空间线性可分。如果原始空间是有限维，即属性有限，那么一定存在一个高维空间使样本可分。<br>我们发现SVM的对偶式中包含xi和xj的内积运算，使用映射方法只需要将原始空间内的内积运算转换为高维映射空间内的映射运算即可。但映射空间往往维度过高，计算复杂，所以假设存在核函数k(xi, xj) = xi,xj的內积，有了这个核函数在对偶式中只需将內积替换成核函数即可。</p>
-<h4 id="核函数条件"><a href="#核函数条件" class="headerlink" title="核函数条件"></a>核函数条件</h4><p>只要一个对称函数所对应的和矩阵半正定，它就能作为核函数使用。</p>
-<h4 id="核函数的种类"><a href="#核函数的种类" class="headerlink" title="核函数的种类"></a>核函数的种类</h4><p>核函数选择成了SVM的最大变数，若核函数不适合，样本被映射到了一个不适合的空间，会导致性能不佳。<br>常见的核函数有：</p>
-<ol>
-<li>线性核</li>
-<li>多项式核</li>
-<li>高斯核</li>
-<li>拉普拉斯核</li>
-<li>Sigmoid核<br>此外，还可以通过函数线性组合得到新的核函数。</li>
-</ol>
-<h2 id="软间隔支持向量机"><a href="#软间隔支持向量机" class="headerlink" title="软间隔支持向量机"></a>软间隔支持向量机</h2><p>在现实任务中我们很难恰到好处的找个某个核函数使得训练集在特征空间线性可分，也很难推是否是由过拟合造成的。所以我们允许SVM在一些样本上出错，引入软间隔概念。同时引入松弛变量的概念。</p>
-<h4 id="软间隔SVM推导"><a href="#软间隔SVM推导" class="headerlink" title="软间隔SVM推导"></a>软间隔SVM推导</h4><p>掌握（软间隔的对偶形式和硬间隔的对偶形式唯一区别在于对ai的约束，软间隔的约束为’0&lt;=ai&lt;=C’, 硬间隔的约束仅为’0&lt;=ai’</p>
-<h4 id="软间隔SVM的KKT条件"><a href="#软间隔SVM的KKT条件" class="headerlink" title="软间隔SVM的KKT条件"></a>软间隔SVM的KKT条件</h4><p>理解</p>
-<h4 id="SVM优缺点"><a href="#SVM优缺点" class="headerlink" title="SVM优缺点"></a>SVM优缺点</h4><ul>
-<li>时空开销比较大，训练时间长</li>
-<li>核函数的选取比较难，主要靠经验。</li>
-<li>在小训练集上往往得到比较好的结果；</li>
-<li>使用核函数避开了高纬空间的复杂性；</li>
-<li>泛化能力强。<h3 id="SVM和LR的异同"><a href="#SVM和LR的异同" class="headerlink" title="SVM和LR的异同"></a>SVM和LR的异同</h3></li>
-</ul>
-<ol>
-<li>两者都为线性模型</li>
-<li>两者都是判别模型</li>
-<li>本质上来讲是损失函数的不同，LR为交叉熵损失（对数损失），SVM为hinge损失</li>
-<li>由于损失函数不同，LR直接依赖所有数据分布，SVM只关心支持向量</li>
-<li>SVM依赖距离测度，需要正则化，LR不受影响</li>
-<li>SVM自带正则项，LR需要在Loss Function上添加。</li>
-</ol>
-<h2 id="支持向量回归"><a href="#支持向量回归" class="headerlink" title="支持向量回归"></a>支持向量回归</h2><p>对于传统回归模型通常直接计算模型输出和真实输出之间的差别来计算损失，只有当两个输出完全相同时loss才为0。SVR容忍预测和label之间最多有e的偏差，即当f预测和label之间的差别大于e才计算损失。相当于以f为中心，构建了一个宽度为2e的间隔带，样本落入该间隔带则被认为是分类正确的。</p>
-<h4 id="SVR公式推导"><a href="#SVR公式推导" class="headerlink" title="SVR公式推导"></a>SVR公式推导</h4><p>掌握</p>
-<h1 id="贝叶斯方法"><a href="#贝叶斯方法" class="headerlink" title="贝叶斯方法"></a>贝叶斯方法</h1><h2 id="极大似然估计"><a href="#极大似然估计" class="headerlink" title="极大似然估计"></a>极大似然估计</h2><p>掌握</p>
-<h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><p>公式，多个概率概念掌握</p>
-<h4 id="朴素贝叶斯处理连续属性"><a href="#朴素贝叶斯处理连续属性" class="headerlink" title="朴素贝叶斯处理连续属性"></a>朴素贝叶斯处理连续属性</h4><p>对于连续属性可以考虑概率密度函数，假定该属性遵循正太分布，由此得出连续属性的概率</p>
-<h4 id="拉普拉斯平滑"><a href="#拉普拉斯平滑" class="headerlink" title="拉普拉斯平滑"></a>拉普拉斯平滑</h4><p>通俗的说，拉普拉斯平滑即在计算概率的时候，分别在分子上加1，分母上加属性的取值种类。</p>
-<h4 id="朴素贝叶斯优化"><a href="#朴素贝叶斯优化" class="headerlink" title="朴素贝叶斯优化"></a>朴素贝叶斯优化</h4><ol>
-<li>可以将涉及到的所有概率先计算好存储起来，在进行预测时只需要“查表”即可进行判别。</li>
-<li>当数据有多属性时，涉及到多属性连乘问题，可以将原连乘问题转换为对数连加问题加快计算速度。<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4></li>
-</ol>
-<ul>
-<li>优点：对小规模数据表现很好，适合多分类任务</li>
-<li>缺点：对输入数据的表达形式很敏感<h2 id="半朴素贝叶斯分类器"><a href="#半朴素贝叶斯分类器" class="headerlink" title="半朴素贝叶斯分类器"></a>半朴素贝叶斯分类器</h2></li>
-<li>基本想法是适当考虑一部分属性间的相互依赖信息，从而既不需要进行完全联合概率计算，又不至于彻底忽略了比较性强的属性依赖关系。</li>
-<li>“独依赖估计”是半朴素贝叶斯分类器最常用的一种策略，所谓“独依赖”就是假设每个属性在类别之外最多仅依赖一个其他属性。</li>
-<li>半朴素贝叶斯不是很常见，具体细节见书p154</li>
-</ul>
-<h2 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h2><p>也称“信念网络”，借助有向无环图来刻画属性之间的依赖关系，并使用条件概率表来描述属性的联合概率分布。</p>
-<h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><h4 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h4><h4 id="推断"><a href="#推断" class="headerlink" title="推断"></a>推断</h4><p>吉布斯采样，EM算法</p>
-<h1 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h1><p>通过构建并结合多个学习器来完成学习任务，总体思路是：1. 先产生一组“个体学习器”，再用某种策略将他们结合起来。</p>
-<ul>
-<li>同质的个体学习器也可以称为“基学习器”</li>
-<li>异质集成中的个体学习器由不同算法组成，常称为“组件学习器”<br>集成学通过多个学习器的组合，通常会有比单一学习器更显著的泛化性能。<br>如何产生“好而不同”的个体学习器是集成学习的研究核心。<br>目前的集成学习方法大致可以分为两类：</li>
-</ul>
-<ol>
-<li>个体学习器之间存在强依赖关系，必须串行生成序列化方法，代表是Boosting。</li>
-<li>个体学习器之间不存在强依赖关系，可同时生成的并行化方法，代表是Bagging和随机森林</li>
-</ol>
-<h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><p>Boosting是一族可将弱学习器提升为强学习器的方法：这族算法工作原理类似：先从初始训练集训练出一个基学习器，再根据基学习器的表现对训练样本分布进行调整，使得先前基学习器的错误样本更受关注然后基于调整后的样本分布训练下一个基学习器。最后将这些基学习器组合到一起。</p>
-<ul>
-<li>优点：<ol>
-<li>低泛化误差</li>
-<li>容易实现，准确率较高，不需要大量调参</li>
-</ol>
-</li>
-<li>缺点：<ol>
-<li>对异常点过于敏感<h4 id="AdaBoost"><a href="#AdaBoost" class="headerlink" title="AdaBoost"></a>AdaBoost</h4></li>
-</ol>
-</li>
-<li>常规公式推导</li>
-<li>基于加性模型，即学习基学习器的线性组合来最小化指数损失函数</li>
-</ul>
-<h2 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h2><p>基本思想是对训练集进行采样，产生出若干个不同的子集，再从每个子集中训练一个基学习器。常使用的采样方法为“自助采样法”。<br>我们可以采样出T个含有m个样本的采样集，用每个采样集训练出一个基学习器，字啊将这些基学习器进行结合就是Bagging的基本流程。<br>Bagging对于分类任务采用简单投票法，对于回归任务采用简单平均法。<br>对于每个基学习器的包外样本，可以用其进行泛化性能估计或者辅助剪枝（决策树）</p>
-<h2 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h2><p>随机森林是在Bagging的基础上进一步在决策树的训练过程中引入了 <strong>随机属性选择</strong>。<br>在RF中，对基决策树的每个节点，<strong>先从该节点的属性集合中随机选择一个包含k个属性的子集，然后再从这个子集中选择一个最优属性用于划分，这里的参数k控制了随机性的引入程度，若k=d，则基决策树的构建和传统决策树相同；若k=1，则随机选择一个属性用于划分，一般情况下推荐k=log2d</strong><br>RF中的基学习器的多样性不仅仅来自于样本扰动（对原始数据集进行自助采样），还来自属性随机。</p>
-<h2 id="结合策略"><a href="#结合策略" class="headerlink" title="结合策略"></a>结合策略</h2><ol>
-<li>对于回归问题：简单平均法、加权平均法</li>
-<li>对于分类问题：绝对多数投票法，相对对数投票法，加权投票法。</li>
-</ol>
-<h2 id="Stacking"><a href="#Stacking" class="headerlink" title="Stacking"></a>Stacking</h2><p>先从初始数据集训练出初始学习器，然后再生成一个新数据集用于训练次级学习器。在这个新的数据集中，初级学习器的输出被当做样例输入特征，儿初始样本的标记被当做样例标记。</p>
-<h2 id="集成学习的多样性度量"><a href="#集成学习的多样性度量" class="headerlink" title="集成学习的多样性度量"></a>集成学习的多样性度量</h2><p>见书P186页</p>
-<h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><h2 id="性能度量-1"><a href="#性能度量-1" class="headerlink" title="性能度量"></a>性能度量</h2><ul>
-<li>用来评估聚类效果的好坏<ul>
-<li>同一簇的样本尽可能的彼此相似，不同簇的样本尽可能不同。</li>
-<li>簇内相似度尽可能高，簇间相似度尽可能低</li>
-</ul>
-</li>
-<li>两类性能度量：<ol>
-<li>将聚类结果与某个参考模型进行比较，称为”外部目标”</li>
-<li>直接考察聚类结果而不利用任何参考模型，称为“内部目标”·</li>
-</ol>
-</li>
-<li>三个聚类性能度量外部指标：<ol>
-<li>Jaccard系数</li>
-<li>FM系数</li>
-<li>Rand指数</li>
-</ol>
-<ul>
-<li>上述性能度量都在零一之间，且越大越好</li>
-</ul>
-</li>
-<li>两个聚类性能度量内部指标<ol>
-<li>DB指数</li>
-<li>Dunn指数</li>
-</ol>
-<ul>
-<li>DBI越小越好，DI越大越好</li>
-</ul>
-</li>
-</ul>
-<h2 id="距离计算"><a href="#距离计算" class="headerlink" title="距离计算"></a>距离计算</h2><ul>
-<li>闵可夫斯基距离度量：<ol>
-<li>当p=2时，即为欧氏距离</li>
-<li>当p=1时，即为曼哈顿距离</li>
-</ol>
-</li>
-<li>使用闵可夫斯基距离时，注意只能针对有序属性特征</li>
-<li>对于无序属性，可以采用VDM</li>
-<li>对于一般问题，可以将闵可夫斯基度量和VDM相结合，前者处理有序属性，后者处理无序属性</li>
-</ul>
-<h2 id="原型聚类"><a href="#原型聚类" class="headerlink" title="原型聚类"></a>原型聚类</h2><h3 id="k均值算法"><a href="#k均值算法" class="headerlink" title="k均值算法"></a>k均值算法</h3><ul>
-<li>优点：思想简单，理论成熟，既可以回归也可以分类</li>
-<li>缺点：计算量大，样本不平衡问题，需要大量内存<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4></li>
-</ul>
-<ol>
-<li>设定聚类簇数为k，随机选取k个样本作为初始均值向量。</li>
-<li>考察剩余样本，分别计算剩余样本到这k个均值向量的距离，并将其加入距离最近的聚类簇中</li>
-<li>计算每个新聚类簇的均值向量，返回第二步直至收敛。<h3 id="学习向量量化LVQ"><a href="#学习向量量化LVQ" class="headerlink" title="学习向量量化LVQ"></a>学习向量量化LVQ</h3><h3 id="高斯混合聚类算法"><a href="#高斯混合聚类算法" class="headerlink" title="高斯混合聚类算法"></a>高斯混合聚类算法</h3>见书206页<h3 id="密度聚类"><a href="#密度聚类" class="headerlink" title="密度聚类"></a>密度聚类</h3>假设聚类结构能通过样本分布的紧密程度确定。<h4 id="DBSCAN-密度聚类算法"><a href="#DBSCAN-密度聚类算法" class="headerlink" title="DBSCAN 密度聚类算法"></a>DBSCAN 密度聚类算法</h4><h3 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h3>试图在不同层次对数据集进行划分，从而形成树形的聚类结构。<h4 id="AGNES-层次聚类算法"><a href="#AGNES-层次聚类算法" class="headerlink" title="AGNES 层次聚类算法"></a>AGNES 层次聚类算法</h4></li>
-</ol>
-<h1 id="第十章-降维与度量学习"><a href="#第十章-降维与度量学习" class="headerlink" title="第十章 降维与度量学习"></a>第十章 降维与度量学习</h1><h2 id="k近邻学习"><a href="#k近邻学习" class="headerlink" title="k近邻学习"></a>k近邻学习</h2><ul>
-<li>分类任务中使用投票法，回归任务中使用平均法，也可以使用加权平均法</li>
-<li>是懒惰学习 lazy learning的著名代表，没有显式的训练过程。（相应的，那些在训练阶段就对样本进行学习处理的方法称为急切学习 eager learning）</li>
-<li>k值越大，模型越简单，</li>
-</ul>
-<h2 id="低维嵌入"><a href="#低维嵌入" class="headerlink" title="低维嵌入"></a>低维嵌入</h2><p>在高维情形下出现的数据样本稀疏，距离计算困难等问题被称为维度灾难（curse of dimensionality）</p>
-<h3 id="MDS算法"><a href="#MDS算法" class="headerlink" title="MDS算法"></a>MDS算法</h3><p>见书P227页</p>
-<h2 id="主成分分析-PCA"><a href="#主成分分析-PCA" class="headerlink" title="主成分分析 PCA"></a>主成分分析 PCA</h2><p>见书229页</p>
-<h2 id="核化线性降维"><a href="#核化线性降维" class="headerlink" title="核化线性降维"></a>核化线性降维</h2><p>非线性降维的一种方法，是基于核技巧对线性降维方法进行核化</p>
-<h2 id="流形学习"><a href="#流形学习" class="headerlink" title="流形学习"></a>流形学习</h2><h3 id="等度量映射"><a href="#等度量映射" class="headerlink" title="等度量映射"></a>等度量映射</h3><h3 id="局部线性嵌入"><a href="#局部线性嵌入" class="headerlink" title="局部线性嵌入"></a>局部线性嵌入</h3><h2 id="度量学习"><a href="#度量学习" class="headerlink" title="度量学习"></a>度量学习</h2><h1 id="第11章-特征选择与稀疏学习"><a href="#第11章-特征选择与稀疏学习" class="headerlink" title="第11章 特征选择与稀疏学习"></a>第11章 特征选择与稀疏学习</h1><h1 id="补充-1"><a href="#补充-1" class="headerlink" title="补充"></a>补充</h1><p>5.6 逻辑回归模型 vs 最大熵模型 MaxEnt</p>
-<p>简单粗暴的说：逻辑回归跟最大熵模型没有本质区别。逻辑回归是最大熵对应为二类时的特殊情况，也就是说，当逻辑回归扩展为多类别的时候，就是最大熵模型。</p>
-<p>最大熵原理：学习概率模型的时候，在所有可能的概率模型（分布）中，熵最大的模型是最好的模型。</p>
-<h2 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h2><p>有时候因为样本的产生和隐含变量有关（隐含变量是不能观察的），而求模型的参数时一般采用最大似然估计，由于含有了隐含变量，所以对似然函数参数求导是求不出来的，这时可以采用EM算法来求模型的参数的（对应模型参数个数可能有多个），EM算法一般分为2步：</p>
-<p>　　E步：选取一组参数，求出在该参数下隐含变量的条件概率值；</p>
-<p>　　M步：结合E步求出的隐含变量条件概率，求出似然函数下界函数（本质上是某个期望函数）的最大值。</p>
-<p>　　重复上面2步直至收敛。</p>
-<h4 id="使用Jensen不等式确定下界"><a href="#使用Jensen不等式确定下界" class="headerlink" title="使用Jensen不等式确定下界"></a>使用Jensen不等式确定下界</h4><h2 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h2><p>原理，于GRU的区别</p>
-
-          
+          <p>周志华老师的《机器学习》因为拿西瓜举例，被称为“西瓜书”，作为几乎是所有机器学习爱好者几乎人手必备的一本书，西瓜书浅显易懂，深入浅出，是非常好的入门教材。本文是对西瓜书中我认为比较重要的知识点的整理（或者说是考点），权当做一个知识点索引。这里受限于篇幅，对于每个知识点仅仅是列出了大体概念，如果想要深入理解每个知识点还是需要认真回去读西瓜书。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/11/机器学习西瓜书知识点整理/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1838,141 +1685,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/12/04/Kaggle解题步骤/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/CUDA学习笔记(一)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dongfang Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Black Feather">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/12/CUDA学习笔记(一)/" itemprop="url">CUDA学习笔记(一)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-12T00:00:00+09:00">
-                2017-11-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/12/CUDA学习笔记(一)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/12/CUDA学习笔记(一)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/12/CUDA学习笔记(一)/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>

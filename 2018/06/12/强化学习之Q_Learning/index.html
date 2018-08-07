@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Machine Learning,Deep Learning," />
+  <meta name="keywords" content="Machine Learning,Reinforce Learning," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
-<meta name="keywords" content="Machine Learning,Deep Learning">
+<meta name="description" content="Q_Learning是最典型，最简单的强化学习算法，但其蕴含的思想却影响了很多其它的RL算法，现将Q_Learning的思路和特点做以总结。">
+<meta name="keywords" content="Machine Learning,Reinforce Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习补充知识">
-<meta property="og:url" content="http://yoursite.com/2018/05/22/深度学习补充知识/index.html">
+<meta property="og:title" content="强化学习之Q_Learning">
+<meta property="og:url" content="http://yoursite.com/2018/06/12/强化学习之Q_Learning/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
+<meta property="og:description" content="Q_Learning是最典型，最简单的强化学习算法，但其蕴含的思想却影响了很多其它的RL算法，现将Q_Learning的思路和特点做以总结。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/nn_knowledge/batch_normalization.jpg">
-<meta property="og:updated_time" content="2018-08-07T07:30:08.163Z">
+<meta property="og:image" content="http://yoursite.com/images/q_learning/q_update.png">
+<meta property="og:updated_time" content="2018-08-07T07:30:41.436Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度学习补充知识">
-<meta name="twitter:description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
-<meta name="twitter:image" content="http://yoursite.com/images/nn_knowledge/batch_normalization.jpg">
+<meta name="twitter:title" content="强化学习之Q_Learning">
+<meta name="twitter:description" content="Q_Learning是最典型，最简单的强化学习算法，但其蕴含的思想却影响了很多其它的RL算法，现将Q_Learning的思路和特点做以总结。">
+<meta name="twitter:image" content="http://yoursite.com/images/q_learning/q_update.png">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/22/深度学习补充知识/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/12/强化学习之Q_Learning/"/>
 
 
 
 
 
-  <title>深度学习补充知识 | Black Feather</title>
+  <title>强化学习之Q_Learning | Black Feather</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/深度学习补充知识/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/强化学习之Q_Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深度学习补充知识</h1>
+          <h1 class="post-title" itemprop="name headline">强化学习之Q_Learning</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T00:00:00+09:00">
-                2018-05-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T00:00:00+09:00">
+                2018-06-12
               </time>
             
 
@@ -307,8 +307,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
+                  <a href="/categories/Reinforce-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Reinforce Learning</span>
                   </a>
                 </span>
 
@@ -325,9 +325,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/22/深度学习补充知识/#comments" itemprop="discussionUrl">
+                <a href="/2018/06/12/强化学习之Q_Learning/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/22/深度学习补充知识/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/06/12/强化学习之Q_Learning/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -355,10 +355,27 @@
       
 
       
-        <p>深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。</p>
+        <p>Q_Learning是最典型，最简单的强化学习算法，但其蕴含的思想却影响了很多其它的RL算法，现将Q_Learning的思路和特点做以总结。</p>
 <a id="more"></a>
-<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>Batch Normalization是将分散的数据统一的一种方法。<br>神经网络的训练效率受数据分布影响，如果输入神经元的数值过大或过小，该输入值会在激活函数的饱和区，也就是说这个时候的梯度几乎为0，导致梯度消失，很难更新权重。<br>Batch Normalization相当于在每层hidden layer之间对数据进行归一化，让数据分布集中在（-1， 1）之间，这样下一层神经元的输入大部分会落到激活函数的工作区，BP时更新梯度较大，模型可以更快收敛。<br><img src="/images/nn_knowledge/batch_normalization.jpg" alt="batch_normalization"></p>
-<p>一般应用Batch Normalization时往往还进行反向Normalization，将Normalized的数据用可训练的参数再扩展和平移回去，目的是让神经网络自己学习扩展平移参数，进而检测此次的Batch Normalization是否起到优化作用。</p>
+<p>Agent，Environment，State，Reward，Action 是强化学习中最基本的几个概念，Agent在当前的State下执行Action，并从Environment处获得反馈和更新的State，Agent接收reward反馈，更新自己的策略模式并进入到下个State，进而不断循环上述过程打到学习的目的。这就是强化学习最一般的概念。</p>
+<h2 id="Q-Learning概念"><a href="#Q-Learning概念" class="headerlink" title="Q_Learning概念"></a>Q_Learning概念</h2><p>Q-Learning是最直接反应上述过程的学习算法，通过构建Q_table，记录每个State状态下每个Action的Q值（相当于在该状态下采取该动作的奖惩值），并通过环境返回的Reward不断更新Q_table直至算法可以快速准确的在每个State下做出相对正确的Action。Q_Table的更新算法如下：<br><img src="/images/q_learning/q_update.png" alt="q_learning"><br>其中：</p>
+<ul>
+<li>Q(s, a) 表示在s状态下动作a的Q值</li>
+<li>r 表示如果在s状态实行a，环境返回的reward值</li>
+<li>gamma 表示衰减率，用来衡量当前状态的更新和之后状态的关系。gamma的存在让Q表的更新有了”前瞻性”。（如果下个状态s’最大的q值很低，说明新状态s’是一个很差的状态，Q(s, a)对应的q值就会很小，让agent尽可能不在s执行a动作到达差状态s’。</li>
+<li>Max(Q(s’, a’)) 表示在状态s执行动作a后，到达新状态s’，并返回新状态s’时对应所有状态Q值的最大值。</li>
+</ul>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><p>现在我们已经知道了Q_Learning的运行原理本质上是从Environment的反馈更新Q表，同时也理解了更新方法。下面看一下整个Q_Learning算法的具体流程：</p>
+<ol>
+<li>初始化一个Q表，行对应着所有的state，列对应着所有的action</li>
+<li>初始化state</li>
+<li>根据当前state选择动作action。（贪心选择当前state对应Q值最大的action，同时有一定概率随机选择action）</li>
+<li>将当前state和选择的action输入到环境中，环境返回下一个状态s_ 、本次执行动作的奖励r、以及游戏是否终止t</li>
+<li>找到新状态s_下所有动作q值最大的值，根据更新公式对Q(s, a)进行更新。</li>
+<li>从新状态s_不断重复3至5步，直到游戏结束完成一个epoch。循环数个epoch会发现模型收敛。</li>
+</ol>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>这里是两个我用Python写的Q_Learning简单例子，主要参考了<a href="https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/" target="_blank" rel="noopener">莫烦Python</a>的教程，为了便于理解，在代码里我写了尽可能多的注释以便将整个Q_Learning的运行原理解释清楚。具体例子请看下面的URL。<br><a href="https://github.com/YHfeather/ML_Engineer/tree/master/Reinforcement%20Learning/Q_learning" target="_blank" rel="noopener">Q_Learning Example</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是我整理的Q_Learning的简单教程，Q_Learning和很多强化学习算法的基础，比如Sarsa，DQN等。理解Q Learning在我看来只需要记住这句话： <strong>在状态s执行动作a到达新状态s_并获得奖励r，根据r和新状态最大的q值对目前状态s和动作a的q值Q(s, a)进行更新</strong></p>
 
       
     </div>
@@ -407,7 +424,7 @@
           
             <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
           
-            <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
+            <a href="/tags/Reinforce-Learning/" rel="tag"><i class="fa fa-tag"></i> Reinforce Learning</a>
           
         </div>
       
@@ -420,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/21/Scheme语言基本语法/" rel="next" title="Scheme基本语法">
-                <i class="fa fa-chevron-left"></i> Scheme基本语法
+              <a href="/2018/05/22/深度学习补充知识/" rel="next" title="深度学习补充知识">
+                <i class="fa fa-chevron-left"></i> 深度学习补充知识
               </a>
             
           </div>
@@ -430,8 +447,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/12/强化学习之Q_Learning/" rel="prev" title="强化学习之Q_Learning">
-                强化学习之Q_Learning <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/02/强化学习之DQN/" rel="prev" title="强化学习之DQN">
+                强化学习之DQN <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -590,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">1.</span> <span class="nav-text">Batch Normalization</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-Learning概念"><span class="nav-number">1.</span> <span class="nav-text">Q_Learning概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法流程"><span class="nav-number">2.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -760,9 +777,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/05/22/深度学习补充知识/';
-          this.page.identifier = '2018/05/22/深度学习补充知识/';
-          this.page.title = '深度学习补充知识';
+          this.page.url = 'http://yoursite.com/2018/06/12/强化学习之Q_Learning/';
+          this.page.identifier = '2018/06/12/强化学习之Q_Learning/';
+          this.page.title = '强化学习之Q_Learning';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://blackfeather.disqus.com/embed.js';
