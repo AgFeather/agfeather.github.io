@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="GBDTGradient Boosting是一种Boosting的方法，它主要的思想是，每一次建立模型是在之前建立模型损失函数的梯度下降方向。损失函数是评价模型性能（一般为拟合程度+正则项），认为损失函数越小，性能越好。而让损失函数持续下降，就能使得模型不断改性提升性能，其最好的方法就是使损失函数沿着梯度方向下降（讲道理梯度方向上下降最快）。 Gradient Boost是一个框架，里面可以套入很">
+<meta name="description" content="在集成学习中，Boosting为代表的算法有着非常优秀的性能，本文主要介绍几种Boosting树的原理和应用。包括GBDT和xgboost。">
 <meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="各种boosting树">
+<meta property="og:title" content="各种Boosting树">
 <meta property="og:url" content="http://yoursite.com/2018/04/21/各种Boosting树/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="GBDTGradient Boosting是一种Boosting的方法，它主要的思想是，每一次建立模型是在之前建立模型损失函数的梯度下降方向。损失函数是评价模型性能（一般为拟合程度+正则项），认为损失函数越小，性能越好。而让损失函数持续下降，就能使得模型不断改性提升性能，其最好的方法就是使损失函数沿着梯度方向下降（讲道理梯度方向上下降最快）。 Gradient Boost是一个框架，里面可以套入很">
+<meta property="og:description" content="在集成学习中，Boosting为代表的算法有着非常优秀的性能，本文主要介绍几种Boosting树的原理和应用。包括GBDT和xgboost。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/other_ML_knowledge/gbdt_alg.png">
 <meta property="og:image" content="http://yoursite.com/images/other_ML_knowledge/gbdt_math2.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="http://yoursite.com/images/other_ML_knowledge/xgboost_fomula.jpy">
 <meta property="og:image" content="http://yoursite.com/images/other_ML_knowledge/xgboost_math1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/other_ML_knowledge/xgboost_math2.png">
-<meta property="og:updated_time" content="2018-08-01T13:36:46.226Z">
+<meta property="og:updated_time" content="2018-08-07T06:46:18.624Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="各种boosting树">
-<meta name="twitter:description" content="GBDTGradient Boosting是一种Boosting的方法，它主要的思想是，每一次建立模型是在之前建立模型损失函数的梯度下降方向。损失函数是评价模型性能（一般为拟合程度+正则项），认为损失函数越小，性能越好。而让损失函数持续下降，就能使得模型不断改性提升性能，其最好的方法就是使损失函数沿着梯度方向下降（讲道理梯度方向上下降最快）。 Gradient Boost是一个框架，里面可以套入很">
+<meta name="twitter:title" content="各种Boosting树">
+<meta name="twitter:description" content="在集成学习中，Boosting为代表的算法有着非常优秀的性能，本文主要介绍几种Boosting树的原理和应用。包括GBDT和xgboost。">
 <meta name="twitter:image" content="http://yoursite.com/images/other_ML_knowledge/gbdt_alg.png">
 
 
@@ -135,7 +135,7 @@
 
 
 
-  <title>各种boosting树 | Black Feather</title>
+  <title>各种Boosting树 | Black Feather</title>
   
 
 
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">各种boosting树</h1>
+          <h1 class="post-title" itemprop="name headline">各种Boosting树</h1>
         
 
         <div class="post-meta">
@@ -340,7 +340,9 @@
       
 
       
-        <h2 id="GBDT"><a href="#GBDT" class="headerlink" title="GBDT"></a>GBDT</h2><p>Gradient Boosting是一种Boosting的方法，它主要的思想是，每一次建立模型是在之前建立模型损失函数的梯度下降方向。损失函数是评价模型性能（一般为拟合程度+正则项），认为损失函数越小，性能越好。而让损失函数持续下降，就能使得模型不断改性提升性能，其最好的方法就是使损失函数沿着梯度方向下降（讲道理梯度方向上下降最快）。</p>
+        <p>在集成学习中，Boosting为代表的算法有着非常优秀的性能，本文主要介绍几种Boosting树的原理和应用。包括GBDT和xgboost。</p>
+<a id="more"></a>
+<h2 id="GBDT"><a href="#GBDT" class="headerlink" title="GBDT"></a>GBDT</h2><p>Gradient Boosting是一种Boosting的方法，它主要的思想是，每一次建立模型是在之前建立模型损失函数的梯度下降方向。损失函数是评价模型性能（一般为拟合程度+正则项），认为损失函数越小，性能越好。而让损失函数持续下降，就能使得模型不断改性提升性能，其最好的方法就是使损失函数沿着梯度方向下降（讲道理梯度方向上下降最快）。</p>
 <p>Gradient Boost是一个框架，里面可以套入很多不同的算法。</p>
 <p>主要由三个概念组成：回归决策树，Gradient Boosting，Shrinkage。</p>
 <h4 id="回归决策树"><a href="#回归决策树" class="headerlink" title="回归决策树"></a>回归决策树</h4><p>GBDT的核心在于累加所有树的结果作为最终结果，而 <strong>分类树的结果累加是没有意义的， 所以GBDT中的树都是回归树，不是分类树</strong>。<br>GBDT调整后可以用于分类问题，但内部还是回归树。<br><strong>回归树在每个节点（不一定是叶子节点）都会得到一个预测值。</strong> 以年龄为例，该预测值等于属于这个节点所有人年龄的平均值，分枝时穷举每一个feature的每一个阈值找到最好的分割点，但衡量最好的标准不再是最大熵，而是最小化均方差。</p>
@@ -586,7 +588,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -829,7 +831,7 @@
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2018/04/21/各种Boosting树/';
           this.page.identifier = '2018/04/21/各种Boosting树/';
-          this.page.title = '各种boosting树';
+          this.page.title = '各种Boosting树';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://blackfeather.disqus.com/embed.js';

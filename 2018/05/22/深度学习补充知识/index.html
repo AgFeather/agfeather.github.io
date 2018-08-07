@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Machine Learning,Reinforce Learning," />
+  <meta name="keywords" content="Machine Learning,Deep Learning," />
 
 
 
@@ -79,20 +79,23 @@
 
 
 
-<meta name="description" content="在实际应用DQN的过程中，会出现各种问题，其中一个问题就是过估计（Overestimate），如果在DQN训练过程中试着输出Q值，可能发现Q值会非常大，这就是过估计。而Double DQN就是对传统DQN的一个改进方式，可以很好的解决过估计问题。">
-<meta name="keywords" content="Machine Learning,Reinforce Learning">
+<meta name="description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
+<meta name="keywords" content="Machine Learning,Deep Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="强化学习之Double DQN">
-<meta property="og:url" content="http://yoursite.com/2018/07/23/强化学习之Double DQN/index.html">
+<meta property="og:title" content="深度学习补充知识">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/深度学习补充知识/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="在实际应用DQN的过程中，会出现各种问题，其中一个问题就是过估计（Overestimate），如果在DQN训练过程中试着输出Q值，可能发现Q值会非常大，这就是过估计。而Double DQN就是对传统DQN的一个改进方式，可以很好的解决过估计问题。">
+<meta property="og:description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/reinforce_learning/double_DQN_update.png">
-<meta property="og:updated_time" content="2018-08-07T02:31:01.237Z">
+<meta property="og:image" content="http://yoursite.com/images/nn_knowledge/batch_normalization.jpg">
+<meta property="og:image" content="http://yoursite.com/images/nn_knowledge/lstm.jpg">
+<meta property="og:image" content="http://yoursite.com/images/nn_knowledge/gru.png">
+<meta property="og:image" content="http://yoursite.com/images/nn_knowledge/compare.png">
+<meta property="og:updated_time" content="2018-08-07T06:48:31.658Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="强化学习之Double DQN">
-<meta name="twitter:description" content="在实际应用DQN的过程中，会出现各种问题，其中一个问题就是过估计（Overestimate），如果在DQN训练过程中试着输出Q值，可能发现Q值会非常大，这就是过估计。而Double DQN就是对传统DQN的一个改进方式，可以很好的解决过估计问题。">
-<meta name="twitter:image" content="http://yoursite.com/images/reinforce_learning/double_DQN_update.png">
+<meta name="twitter:title" content="深度学习补充知识">
+<meta name="twitter:description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
+<meta name="twitter:image" content="http://yoursite.com/images/nn_knowledge/batch_normalization.jpg">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/23/强化学习之Double DQN/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/深度学习补充知识/"/>
 
 
 
 
 
-  <title>强化学习之Double DQN | Black Feather</title>
+  <title>深度学习补充知识 | Black Feather</title>
   
 
 
@@ -255,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/强化学习之Double DQN/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/深度学习补充知识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -272,7 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">强化学习之Double DQN</h1>
+          <h1 class="post-title" itemprop="name headline">深度学习补充知识</h1>
         
 
         <div class="post-meta">
@@ -284,8 +287,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-23T00:00:00+09:00">
-                2018-07-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T00:00:00+09:00">
+                2018-05-22
               </time>
             
 
@@ -307,8 +310,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reinforce-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Reinforce Learning</span>
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
                   </a>
                 </span>
 
@@ -325,9 +328,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/23/强化学习之Double DQN/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/22/深度学习补充知识/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/07/23/强化学习之Double DQN/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/22/深度学习补充知识/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -355,26 +358,18 @@
       
 
       
-        <p>在实际应用DQN的过程中，会出现各种问题，其中一个问题就是过估计（Overestimate），如果在DQN训练过程中试着输出Q值，可能发现Q值会非常大，这就是过估计。而Double DQN就是对传统DQN的一个改进方式，可以很好的解决过估计问题。<br><a id="more"></a></p>
-<h2 id="过估计的原因"><a href="#过估计的原因" class="headerlink" title="过估计的原因"></a>过估计的原因</h2><p>在DQN中，我们知道是用Target_Net的输出值中的最大值作为Q_Learning更新公式中的Max(Q(s’, a’))来得到Q(s, a)的真实label值，进而和Q_Net的预测值做比较更新神经网络。而Target_Net本身就是一个没有训练完成的，包含误差的神经网络，这就导致了Q值的过估计。</p>
-<h2 id="DoubleDQN的解决方法"><a href="#DoubleDQN的解决方法" class="headerlink" title="DoubleDQN的解决方法"></a>DoubleDQN的解决方法</h2><p>Double DQN的想法是引入另一个神经网络来打消这些最大误差的影响。而DQN中本身就有两个神经网络，所以我们直接Q_Net估计Target_Net中的最大动作值，然后用这个被Q_Net估计出来的动作选择Target_Net的Q(s’,).<br>对比一下DQN的更新方法和Double的更新方法会更好理解：</p>
+        <p>深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。</p>
+<a id="more"></a>
+<h2 id="什么是Batch-Normalization"><a href="#什么是Batch-Normalization" class="headerlink" title="什么是Batch Normalization"></a>什么是Batch Normalization</h2><p>是将分散的数据统一的一种方法。<br>神经网络的训练效率受数据分布影响，如果输入神经元的数值过大或过小，该输入值会在激活函数的饱和区，也就是说这个时候的梯度几乎为0，导致梯度消失，很难更新权重。<br>Batch Normalization相当于在每层hidden layer之间对数据进行归一化，让数据分布集中在（-1， 1）之间，这样下一层神经元的输入大部分会落到激活函数的工作区，BP时更新梯度较大，模型可以更快收敛。<br><img src="/images/nn_knowledge/batch_normalization.jpg" alt="batch_normalization"></p>
+<p>一般应用Batch Normalization时往往还进行反向Normalization，将Normalized的数据用可训练的参数再扩展和平移回去，目的是让神经网络自己学习扩展平移参数，进而检测此次的Batch Normalization是否起到优化作用。</p>
+<h2 id="LSTM的原理"><a href="#LSTM的原理" class="headerlink" title="LSTM的原理"></a>LSTM的原理</h2><p>本质上是增加了一个叫cell的结构，用来保存神经网络的“记忆”。每次训练时，一个LSTM中共发生三种变换：遗忘门，记忆门，输出门。<br><img src="/images/nn_knowledge/lstm.jpg" alt="lstm"></p>
 <ul>
-<li>传统DQN：gamma<em>Q_next = gamma </em> Max(Q(s’, a’))   //取Target_Net对s’状态预测的所有动作最大值用来更新</li>
-<li>Double DQN：gamma<em>Q_next = gamma </em> Q(s’, argmax(Q_Net(s’, a’))) //先用Q_Net对s’状态进行估计，找到Q值最大的动作，再用Target_Net中对应的最大动作的值Target_Net(s’, a’)来更新。<br>Double DQN的更新公式也就变成了：<br><img src="/images/reinforce_learning/double_DQN_update.png" alt="double_DQN_update"></li>
+<li><strong>遗忘门</strong> 首先结合当前输入x和上一时刻的输出ht-1，经过sigmoid，计算遗忘门，与cell相乘，相当于对cell内容进行选择性遗忘。</li>
+<li><strong>记忆门</strong> 对x和ht-1和和进行tanh变换，同时对其进行sigmoid变换当做记忆门阀。两者相乘后与cell相加，作为cell当前时刻的state</li>
+<li><strong>输出门</strong> 对x和ht-1进行sigmoid变换当做输出门阀，同时对当前cell的state进行tanh变换，然后与输出门阀相乘，作为当前时刻LSTM的输出。<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4>解决了普通RNN无法很好处理远程依赖问题</li>
 </ul>
-<h2 id="DoubleDQN更新流程"><a href="#DoubleDQN更新流程" class="headerlink" title="DoubleDQN更新流程"></a>DoubleDQN更新流程</h2><p>DoubleDQN在整体上和DQN没有任何区别，只是在训练Q_Net时计算真实label值进而计算误差反向传播时有区别，我们只着眼于这个区别：<br>更新流程如下：</p>
-<ol>
-<li>每次训练有数据：[s, a, r, s_]，分别表示当前状态s，要采取的行动a，获得的奖励r，以及到达的新状态s_</li>
-<li>对于输入状态s，Q_Net预测所有动作的Q值，并找到动作a对应的Q值设为 q_pre</li>
-<li>对于输入状态s_, Q_Net预测所有动作的Q值，并找到最大Q值对应的动作 a_next</li>
-<li>将状态s_输入到Target_Net中，得到所有动作的Q值。我们找到在第2步得到的动作a_next对应的q值, 设为q_up。</li>
-<li>根据更新公式计算真实label的值：q_label = r + gamma * q_up</li>
-<li>计算误差：sqrt( (q_pre - q_label)^2 )，对Q_Net进行反向传播</li>
-<li>重复2至6步，不断训练Q_Net</li>
-</ol>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>这里借用了OpenAI的gym中的一个Pendulum环境。主要参考的是<a href="https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/4-5-double_DQN/" target="_blank" rel="noopener">莫烦Python</a>的教学实例。</p>
-<p>该项目在我的GitHub上。具体项目URL：<a href="https://github.com/YHfeather/ML_Engineer/tree/master/Reinforcement%20Learning/Double_DQN" target="_blank" rel="noopener">Double DQN Example</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>DQN是一个非常强大的算法，它成功的将深度学习和强化学习相结合。但在具体应用中会遇到各种各样的问题，而Double DQN就是一种解决Q值过大导致过估计的方法。Double DQN在结构和运行机制上和DQN误差，主要区别就在于训练Q_Net时对真实label的计算不同于传统DQN。</p>
+<h2 id="GRU-门循环单元"><a href="#GRU-门循环单元" class="headerlink" title="GRU 门循环单元"></a>GRU 门循环单元</h2><p>GRU是LSTM的一种变体，保持了LSTM的效果同时又使结构更加简单，所以很流行。<br>在GRU中，将LSTM的输入门，遗忘门，输出门合并成了两个门：<strong>更新门和重置门，更新门用于控制前一时刻的状态信息被带入到当前状态中的程度，更新门的值越大说明前一时刻的状态信息带入越多。重置门用于控制忽略前一时刻状态信息的程度，重置门越小说明忽略的越多</strong><br><img src="/images/nn_knowledge/gru.png" alt="gru"><br>图中zt为更新门，rt为重置门</p>
+<p><img src="/images/nn_knowledge/compare.png" alt="compare"></p>
 
       
     </div>
@@ -423,7 +418,7 @@
           
             <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
           
-            <a href="/tags/Reinforce-Learning/" rel="tag"><i class="fa fa-tag"></i> Reinforce Learning</a>
+            <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
           
         </div>
       
@@ -436,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/12/强化学习之Q_Learning/" rel="next" title="强化学习之Q_Learning">
-                <i class="fa fa-chevron-left"></i> 强化学习之Q_Learning
+              <a href="/2018/05/21/Scheme语言基本语法/" rel="next" title="Scheme基本语法">
+                <i class="fa fa-chevron-left"></i> Scheme基本语法
               </a>
             
           </div>
@@ -446,8 +441,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/25/强化学习之Dueling DQN/" rel="prev" title="强化学习之Dueling DQN">
-                强化学习之Dueling DQN <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/02/强化学习之DQN/" rel="prev" title="强化学习之DQN">
+                强化学习之DQN <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -606,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#过估计的原因"><span class="nav-number">1.</span> <span class="nav-text">过估计的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DoubleDQN的解决方法"><span class="nav-number">2.</span> <span class="nav-text">DoubleDQN的解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DoubleDQN更新流程"><span class="nav-number">3.</span> <span class="nav-text">DoubleDQN更新流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">4.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Batch-Normalization"><span class="nav-number">1.</span> <span class="nav-text">什么是Batch Normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM的原理"><span class="nav-number">2.</span> <span class="nav-text">LSTM的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">2.0.1.</span> <span class="nav-text">功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GRU-门循环单元"><span class="nav-number">3.</span> <span class="nav-text">GRU 门循环单元</span></a></li></ol></div>
             
 
           </div>
@@ -776,9 +771,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/07/23/强化学习之Double DQN/';
-          this.page.identifier = '2018/07/23/强化学习之Double DQN/';
-          this.page.title = '强化学习之Double DQN';
+          this.page.url = 'http://yoursite.com/2018/05/22/深度学习补充知识/';
+          this.page.identifier = '2018/05/22/深度学习补充知识/';
+          this.page.title = '深度学习补充知识';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://blackfeather.disqus.com/embed.js';
