@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="本文是我在学习过程中遇到的所有知识点的补充，文章的整体框架和基础知识点参考的周志华老师《机器学习》这本书。在《机器学习》讲解的基础知识上，加入了我自己在学习过程中遇到的知识点作为补充。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-16T12:06:47.918Z">
+<meta property="og:updated_time" content="2018-08-18T08:34:20.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习常见问题和知识点整理">
 <meta name="twitter:description" content="本文是我在学习过程中遇到的所有知识点的补充，文章的整体框架和基础知识点参考的周志华老师《机器学习》这本书。在《机器学习》讲解的基础知识上，加入了我自己在学习过程中遇到的知识点作为补充。">
@@ -334,7 +334,7 @@
         <p>本文是我在学习过程中遇到的所有知识点的补充，文章的整体框架和基础知识点参考的周志华老师《机器学习》这本书。<br>在《机器学习》讲解的基础知识上，加入了我自己在学习过程中遇到的知识点作为补充。</p>
 <a id="more"></a>
 <h1 id="模型评估选择"><a href="#模型评估选择" class="headerlink" title="模型评估选择"></a>模型评估选择</h1><ul>
-<li>学习器在训练集上的误差称为训练误差或者经验误差，在新样本上的误差称为泛化误差<h4 id="生成模型和判别模型"><a href="#生成模型和判别模型" class="headerlink" title="生成模型和判别模型"></a>生成模型和判别模型</h4>详情见我的另一篇总结文章<a href="">生成模型和判别模型</a><h4 id="模型评估方法"><a href="#模型评估方法" class="headerlink" title="模型评估方法"></a>模型评估方法</h4></li>
+<li>学习器在训练集上的误差称为训练误差或者经验误差，在新样本上的误差称为泛化误差<h4 id="生成模型和判别模型"><a href="#生成模型和判别模型" class="headerlink" title="生成模型和判别模型"></a>生成模型和判别模型</h4>详情见我的另一篇总结文章<a href="https://yhfeather.github.io/2017/10/12/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B/#more" target="_blank" rel="noopener">生成模型和判别模型</a><h4 id="模型评估方法"><a href="#模型评估方法" class="headerlink" title="模型评估方法"></a>模型评估方法</h4></li>
 <li>留出法：直接将数据集分为两个不相交的子集，一个训练，一个测试。一般需要多次划分对评估结果取平均值。</li>
 <li>交叉验证：将数据集分成k个大小相同的子集，每次用一个子集i作为测试，用剩下的k-1作为训练，然后遍历k个子集会产生k个训练/测试结果。留一法：让k=数据集大小，也就是说每次直选一个样本进行测试。</li>
 <li>自助法：有放回的从原始数据集采样，每次取一个数据复制放入新数据集，然后将该数据放回，重复采样直到新数据集大小为m，初始数据集中会有36%的样本未出现在新数据集中，用新数据训练，用未出现的数据集做测试。 自助法在数据集小，难以有效划分时有用，但改变了初始数据集的分布，引入了估计偏差。<h4 id="模型性能度量"><a href="#模型性能度量" class="headerlink" title="模型性能度量"></a>模型性能度量</h4></li>
@@ -417,10 +417,11 @@
 <li>即使有解析解，大部分神经网络的loss为非凸函数，KKT条件（偏导为0是其中一项）仅仅是非凸函数最优化的必要非充分条件。</li>
 <li>偏导为0可能并非是局部极值</li>
 </ol>
-<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><p>详情请见我另一篇整理文章: <a href="">各种树: 从决策树到xgboost</a></p>
+<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><p>详情请见我另一篇整理文章: <a href="https://yhfeather.github.io/2018/04/21/%E5%90%84%E7%A7%8DBoosting%E6%A0%91/" target="_blank" rel="noopener">各种树: 从决策树到xgboost</a></p>
 <h1 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h1><h2 id="传统支持向量机"><a href="#传统支持向量机" class="headerlink" title="传统支持向量机"></a>传统支持向量机</h2><p>距离超平面最近的几个训练样本点使距离等式成立，这几个样本点称为支持向量。两个异类支持向量到超平面的距离之和称为“间隔”。</p>
 <h2 id="支持向量机对偶形式"><a href="#支持向量机对偶形式" class="headerlink" title="支持向量机对偶形式"></a>支持向量机对偶形式</h2><h4 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h4><p>掌握</p>
-<h4 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h4><h4 id="SMO算法"><a href="#SMO算法" class="headerlink" title="SMO算法"></a>SMO算法</h4><p>SMO的基本思路是先固定ai之外的所有参数，然后求ai上的极值，由于存在约束sum(aiyi)=0，若固定ai之外的其他变量则ai可以由其他变量导出。于是SMO每次选择两个变量ai，aj。并固定其他参数，这样在参数初始化后，SMO不断执行如下两个步骤直至收敛：</p>
+<h4 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h4><p>KKT条件是一个具有很强几何意义的结论。需要掌握</p>
+<h4 id="SMO算法"><a href="#SMO算法" class="headerlink" title="SMO算法"></a>SMO算法</h4><p>SMO的基本思路是先固定ai之外的所有参数，然后求ai上的极值，由于存在约束sum(aiyi)=0，若固定ai之外的其他变量则ai可以由其他变量导出。于是SMO每次选择两个变量ai，aj。并固定其他参数，这样在参数初始化后，SMO不断执行如下两个步骤直至收敛：</p>
 <pre><code>1. 选取一对需要更新的变量ai和aj
 2. 固定剩余的参数，求解SVM对偶式的公式获得更新后的ai和aj
 </code></pre><p>注意到只要ai和aj有一个不满足KKT条件，目标函数就会在迭代后增大，KKT条件违背程度越大，变量更新后可能导致的目标函数值增幅越大。<br>于是SMO先选取违背KKT条件程度最大的变量，第二个选取使目标函数值增幅最快的变量，但比较变量复杂度过大，SMO采用启发式方法：选取两个变量所对应样本之间的间隔最大，这样的两个变量有很大差别，对目标函数的更新有更大帮助。   </p>
@@ -438,7 +439,7 @@
 <h4 id="软间隔SVM推导"><a href="#软间隔SVM推导" class="headerlink" title="软间隔SVM推导"></a>软间隔SVM推导</h4><p>掌握（软间隔的对偶形式和硬间隔的对偶形式唯一区别在于对ai的约束，软间隔的约束为’0&lt;=ai&lt;=C’, 硬间隔的约束仅为’0&lt;=ai’</p>
 <h4 id="软间隔SVM的KKT条件"><a href="#软间隔SVM的KKT条件" class="headerlink" title="软间隔SVM的KKT条件"></a>软间隔SVM的KKT条件</h4><p>理解</p>
 <h2 id="支持向量回归"><a href="#支持向量回归" class="headerlink" title="支持向量回归"></a>支持向量回归</h2><p>对于传统回归模型通常直接计算模型输出和真实输出之间的差别来计算损失，只有当两个输出完全相同时loss才为0。SVR容忍预测和label之间最多有e的偏差，即当f预测和label之间的差别大于e才计算损失。相当于以f为中心，构建了一个宽度为2e的间隔带，样本落入该间隔带则被认为是分类正确的。</p>
-<h4 id="SVR公式推导"><a href="#SVR公式推导" class="headerlink" title="SVR公式推导"></a>SVR公式推导</h4><p>掌握</p>
+<h4 id="SVR公式推导"><a href="#SVR公式推导" class="headerlink" title="SVR公式推导"></a>SVR公式推导</h4><p>假设我们能容忍f(x)和y之间最多有e的偏差，即当f(x)与y之间的差别绝对值大于e时才计算损失。相当于以f(x)为中心，构建了一个宽度为2e的间隔带，若样本落入此间隔带则认为被预测正确。</p>
 <h2 id="补充考点"><a href="#补充考点" class="headerlink" title="补充考点"></a>补充考点</h2><h4 id="SVM优缺点"><a href="#SVM优缺点" class="headerlink" title="SVM优缺点"></a>SVM优缺点</h4><ul>
 <li>优点：<ol>
 <li>可用于线性/非线性分类，也可以用于回归</li>
@@ -745,7 +746,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -756,7 +757,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -767,7 +768,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
