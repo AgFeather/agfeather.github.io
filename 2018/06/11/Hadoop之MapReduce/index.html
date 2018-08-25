@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hadoop," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MapReduce计算模型在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。 MapReduce Job每个MapReduce任务会被初始化为一个Job，每个Job分为两个阶段：map阶段和reduce阶段。 InputFormat()">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop值MapReduce">
+<meta property="og:url" content="http://yoursite.com/2018/06/11/Hadoop之MapReduce/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="MapReduce计算模型在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。 MapReduce Job每个MapReduce任务会被初始化为一个Job，每个Job分为两个阶段：map阶段和reduce阶段。 InputFormat()">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-21T11:05:02.171Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop值MapReduce">
+<meta name="twitter:description" content="MapReduce计算模型在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。 MapReduce Job每个MapReduce任务会被初始化为一个Job，每个Job分为两个阶段：map阶段和reduce阶段。 InputFormat()">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/11/Hadoop之MapReduce/"/>
+
+
+
+
+
+  <title>Hadoop值MapReduce | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/Hadoop之MapReduce/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hadoop值MapReduce</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-11T00:00:00+09:00">
+                2018-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/11/Hadoop之MapReduce/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/11/Hadoop之MapReduce/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="MapReduce计算模型"><a href="#MapReduce计算模型" class="headerlink" title="MapReduce计算模型"></a>MapReduce计算模型</h1><p>在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。</p>
+<h2 id="MapReduce-Job"><a href="#MapReduce-Job" class="headerlink" title="MapReduce Job"></a>MapReduce Job</h2><p>每个MapReduce任务会被初始化为一个Job，每个Job分为两个阶段：map阶段和reduce阶段。</p>
+<h4 id="InputFormat-和InputSplit"><a href="#InputFormat-和InputSplit" class="headerlink" title="InputFormat()和InputSplit"></a>InputFormat()和InputSplit</h4><p>InputSplit是Hadoop定义的用来传送给每个单独map数据，InputSplit存储的并非数据本身，而还是一个分片长度和一个记录数据位置的数组。当数据传送给map时，map会将输入分片传送到InputFormat上，InputFormat会创建可供map处理的key-value对。也就是说， <strong>InputFormat()方法是用来生成可供map处理的key-value对的</strong>。<br>Hadoop预定义了多种将不同类型的输入数据转化为key-value对的方法， 他们都继承自InputFormat。<br>其中FileInputFormat又有多个子类。<br>在key-value对中，<strong>key值时每个数据记录在数据分片中的字节偏移量，数据类型是LongWritable，value值时每行的内容，数据类型是Text</strong></p>
+<h4 id="OutputFormat"><a href="#OutputFormat" class="headerlink" title="OutputFormat"></a>OutputFormat</h4><p>每个输入格式都有一种输出格式与其对应，outputFormat会将每条记录以一行的形式存入文本文件中，它的key-value对可以试任意的。</p>
+<h4 id="Map和Reduce"><a href="#Map和Reduce" class="headerlink" title="Map和Reduce"></a>Map和Reduce</h4><p>Map函数接收InputFormat处理所产生的key-value对，经过map函数的处理后输出key-value对，Hadoop会将map输出的中间结果存储在磁盘上而不是HDFS上。Reduce会读取map的输出数据，这时的key-value数据中key相同的value已经被合并为一个list，reduce函数会对输入的数据进行处理并将结果存储在HDFS上。<br>自定义Map类时需要继承自Mapper类。自定义Reduce类继承自Reducer类。并分别在类中重写map()和reduce()函数。以下为WordCount的map和reduce实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class WordCountMapper</span><br><span class="line">        extends Mapper&lt;LongWritable, Text, Text, IntWritable&gt;&#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void map(LongWritable key, Text value, Context context)</span><br><span class="line">        throws IOException, InterruptedException&#123;</span><br><span class="line">        String line = value.toString();</span><br><span class="line">        String[] words = line.split(&quot; &quot;);</span><br><span class="line">        for(String word: words)&#123;</span><br><span class="line">            context.write(new Text(word), new IntWritable(1));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Reduce类实现如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class WordCountReducer extends Reducer&lt;Text, IntWritable, Text, IntWritable&gt;&#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void reduce(Text key, Iteterable&lt;IntWritable&gt; values, Context context)</span><br><span class="line">            throws IOException, InterruptedException&#123;</span><br><span class="line">        Integer count = 0;</span><br><span class="line">        for(IntWritable value:values)&#123;</span><br><span class="line">            count += value.get();</span><br><span class="line">        &#125;</span><br><span class="line">        context.write(key, new IntWritable(count));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<ol>
+<li>reduce task的数量可以通过程序制定，当有多个reduce task时，每个task都会生成一个输出文件</li>
+<li>没有reduce任务的时候，系统会直接将map task的输出作为最终输出，有多少个map task文件就有多少个输出文件。</li>
+</ol>
+<h2 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h2><ol>
+<li>编写代码</li>
+<li>编译成.class文件</li>
+<li>将所有class文件打包成jar文件</li>
+<li>上传到Hadoop</li>
+<li>运行jar文件</li>
+</ol>
+<p>Hadoop运行MapReduce任务时，JobTracker调度任务给TaskTracker，TaskTracker执行任务时会返回进度报告，JobTracker会记录进度的进行状况，如果某个TaskTracker上的任务失败，JobTracker会把这个任务分配给另一台TaskTracker。</p>
+<h2 id="MapReduce优化"><a href="#MapReduce优化" class="headerlink" title="MapReduce优化"></a>MapReduce优化</h2><p>MapReduce模型的优化设计到很多方面，主要为：1. 计算性能优化；2. IO操作优化</p>
+<h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><p>MapReduce擅长处理少量的大数据，不擅长处理大量的小数据。所以可以在使用MapReduce前对数据进行预处理合并。当一个map任务只需要几秒就可以运行结束时，应该给他分配更多任务。一般而言，一个map任务的运行时间在一分钟比较好。</p>
+<h3 id="map和reduce的数量"><a href="#map和reduce的数量" class="headerlink" title="map和reduce的数量"></a>map和reduce的数量</h3><p>定义两个概念：map任务槽和reduce任务槽，表示这个Hadoop集群能够同时运行的map/reduce任务的数量。</p>
+<h3 id="combine函数"><a href="#combine函数" class="headerlink" title="combine函数"></a>combine函数</h3><p>combine函数用于在本地合并数据，也就是说，在map处理数据后，先将map的输出进行一个预合并，然后再将合并的结果传送给reduce，这样会大大减少网络IO的消耗。例如：在wordcount中，每个map可能都会生成大量的(the, 1)输出，如果将这些输出一个个的都传递个reduce，会浪费很多IO，可以在combine函数中，先将map的输出进行合并（the，10）。</p>
+<h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><p>可以对map的输出和最终的输出进行压缩。通常情况下map的输出会很多大，对其进行压缩可以有效的减少数据在网络的传输量。</p>
+<h3 id="自定义comparator"><a href="#自定义comparator" class="headerlink" title="自定义comparator"></a>自定义comparator</h3><p>可以通过自定义comparator实现数据的二进制比较，这样可以省去数据序列化和反序列化的时间，提高运行效率。</p>
+<h1 id="Hadoop中的IO"><a href="#Hadoop中的IO" class="headerlink" title="Hadoop中的IO"></a>Hadoop中的IO</h1><h2 id="IO操作中的数据检查"><a href="#IO操作中的数据检查" class="headerlink" title="IO操作中的数据检查"></a>IO操作中的数据检查</h2><p>Hadoop是由上千台主机集成的，这么多主机同时运行时，难免会有主机损坏，所以对于Hadoop来说，进行数据完整性检查是非常重要的。</p>
+<h3 id="校验和方式"><a href="#校验和方式" class="headerlink" title="校验和方式"></a>校验和方式</h3><p>通过对比新旧校验和来确定数据是否损坏。循环冗余校验被广泛应用在Hadoop网络IO检查，数据完整性检查等方面。</p>
+<h2 id="数据压缩"><a href="#数据压缩" class="headerlink" title="数据压缩"></a>数据压缩</h2><p>对于HDFS来说，文件压缩是必须的，它会带来两个好处：1.减少文件所需的存储空间；2.加快文件在网络上的传输速度。<br>Hadoop文件压缩模块都在’package org.apache.hadoop.io.compress’中。<br>Hadoop支持多种压缩格式和压缩算法。</p>
+<h3 id="MapReduce中使用压缩"><a href="#MapReduce中使用压缩" class="headerlink" title="MapReduce中使用压缩"></a>MapReduce中使用压缩</h3><p>只需要在它的Job配置时配置好conf就可以了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 设置map处理后数据的压缩代码</span><br><span class="line">JobConf conf = new Jobconf();</span><br><span class="line">conf.setBoolean(&quot;mapred.compress.map.output&quot;, true);</span><br><span class="line"></span><br><span class="line">// 设置output输出压缩代码</span><br><span class="line">JobConf conf = new JobConf();</span><br><span class="line">conf.setBoolean(&quot;mapred.output.compress&quot;, true);</span><br><span class="line">conf.setClass(&quot;mapred.output.compression.codec&quot;, GzipCodec.class, CompressionCodec.class);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" rel="tag"><i class="fa fa-tag"></i> Hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/深度学习面试知识/" rel="next" title="深度学习补充知识">
+                <i class="fa fa-chevron-left"></i> 深度学习补充知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/12/强化学习之Q_Learning/" rel="prev" title="强化学习之Q_Learning">
+                强化学习之Q_Learning <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MapReduce计算模型"><span class="nav-number">1.</span> <span class="nav-text">MapReduce计算模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MapReduce-Job"><span class="nav-number">1.1.</span> <span class="nav-text">MapReduce Job</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#InputFormat-和InputSplit"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">InputFormat()和InputSplit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OutputFormat"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">OutputFormat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Map和Reduce"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">Map和Reduce</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行流程"><span class="nav-number">1.2.</span> <span class="nav-text">运行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MapReduce优化"><span class="nav-number">1.3.</span> <span class="nav-text">MapReduce优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据预处理"><span class="nav-number">1.3.1.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map和reduce的数量"><span class="nav-number">1.3.2.</span> <span class="nav-text">map和reduce的数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combine函数"><span class="nav-number">1.3.3.</span> <span class="nav-text">combine函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩"><span class="nav-number">1.3.4.</span> <span class="nav-text">压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义comparator"><span class="nav-number">1.3.5.</span> <span class="nav-text">自定义comparator</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop中的IO"><span class="nav-number">2.</span> <span class="nav-text">Hadoop中的IO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO操作中的数据检查"><span class="nav-number">2.1.</span> <span class="nav-text">IO操作中的数据检查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#校验和方式"><span class="nav-number">2.1.1.</span> <span class="nav-text">校验和方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据压缩"><span class="nav-number">2.2.</span> <span class="nav-text">数据压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MapReduce中使用压缩"><span class="nav-number">2.2.1.</span> <span class="nav-text">MapReduce中使用压缩</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/06/11/Hadoop之MapReduce/';
+          this.page.identifier = '2018/06/11/Hadoop之MapReduce/';
+          this.page.title = 'Hadoop值MapReduce';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

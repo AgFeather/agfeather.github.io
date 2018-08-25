@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Machine Learning,xgboost," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="xgboost是一个非常强大的梯度提升树，在之前的文章中，详细介绍了xgboost对传统GBDT的优化。这篇文章介绍如何在项目中使用xgboost。">
+<meta name="keywords" content="Machine Learning,xgboost">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xgboost实战">
+<meta property="og:url" content="http://yoursite.com/2018/03/25/xgboost实战/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="xgboost是一个非常强大的梯度提升树，在之前的文章中，详细介绍了xgboost对传统GBDT的优化。这篇文章介绍如何在项目中使用xgboost。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-25T14:03:36.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="xgboost实战">
+<meta name="twitter:description" content="xgboost是一个非常强大的梯度提升树，在之前的文章中，详细介绍了xgboost对传统GBDT的优化。这篇文章介绍如何在项目中使用xgboost。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/25/xgboost实战/"/>
+
+
+
+
+
+  <title>xgboost实战 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/xgboost实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">xgboost实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-25T00:00:00+09:00">
+                2018-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/25/xgboost实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/25/xgboost实战/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>xgboost是一个非常强大的梯度提升树，在之前的文章中，详细介绍了xgboost对传统GBDT的优化。这篇文章介绍如何在项目中使用xgboost。<br><a id="more"></a></p>
+<h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><p>xgboost支持三种数据格式的载入</p>
+<ol>
+<li>libsvm格式的文本数据</li>
+<li>numpy的二维数组数据</li>
+<li>xgboost的二进制缓存文件</li>
+<li>scipy.sparse格式的数据<br>只需要将libsvm/numpy/scipy.sparse数据对象作为参数传递给函数’xgb.DMatrix(“fileObject”)’，就可以将原始格式数据转换为xgboost的DMatrix数据格式<br>例：numpy二维数组转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = np.random.rand(5,10) # 随机生成5个样本， 每个样本包含10个特征属性</span><br><span class="line">label = np.random.randint(2, size=5)</span><br><span class="line">dtrain = xgb.DMatrix(data, label=label)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="样本设置权重参数"><a href="#样本设置权重参数" class="headerlink" title="样本设置权重参数"></a>样本设置权重参数</h3><p>xgboost可以对训练数据进行加权，使用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">weight = np.random.rand(5,1)</span><br><span class="line">dtrain = xgb.DMatrix(data, label=label, weight=weight)</span><br></pre></td></tr></table></figure></p>
+<h3 id="保存为二进制文件"><a href="#保存为二进制文件" class="headerlink" title="保存为二进制文件"></a>保存为二进制文件</h3><p>可以将DMatrix格式的数据保存为xgboost的二进制文件，这样下次加载时可以提高加载速度：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dtrain = xgb.DMatrix(&apos;train.svm.txt&apos;)</span><br><span class="line">dtrain.save_binary(&quot;train.buffer&quot;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="保存模型"><a href="#保存模型" class="headerlink" title="保存模型"></a>保存模型</h2><p>对于训练完成的模型，可以将其保存在本地：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bst.save_model(&apos;xgb.model&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>也可以导出训练好的模型到txt文件，或者导出模型的特征映射<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bst.dump_model(&apos;dump.raw.txt&apos;) # dump model</span><br><span class="line">bst.dump_model(&apos;dump.raw.txt&apos;,&apos;featmap.txt&apos;) # dump model with feature map</span><br></pre></td></tr></table></figure></p>
+<p>加载模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bst = bgb.Booster(&#123;&apos;nthread&apos;:4&#125;) # init model</span><br><span class="line">bst.load_model(&quot;model.bin&quot;) # load model</span><br></pre></td></tr></table></figure></p>
+<h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><p>xgboost是通过字典来存储参数的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">params = &#123;</span><br><span class="line">    &apos;booster&apos;: &apos;gbtree&apos;,           # 使用的基学习器</span><br><span class="line">    &apos;objective&apos;: &apos;multi:softmax&apos;,  # 指定问题类型，multi:softmax表示多分类问题；reg:gamma表示回归问题</span><br><span class="line">    &apos;num_class&apos;: 10,               # 类别数，与 multisoftmax 并用</span><br><span class="line">    &apos;gamma&apos;: 0.1,                  # 用于控制是否后剪枝的参数,越大越保守，一般0.1、0.2</span><br><span class="line">    &apos;max_depth&apos;: 12,               # 构建树的深度，越大越容易过拟合</span><br><span class="line">    &apos;lambda&apos;: 2,                   # 控制模型复杂度的权重值的L2正则化项参数，参数越大，模型越不容易过拟合。</span><br><span class="line">    &apos;subsample&apos;: 0.7,              # 随机采样训练样本</span><br><span class="line">    &apos;colsample_bytree&apos;: 0.7,       # 生成树时进行的列采样</span><br><span class="line">    &apos;min_child_weight&apos;: 3,</span><br><span class="line">    &apos;silent&apos;: 1,                   # 设置成1则没有运行信息输出，最好是设置为0.</span><br><span class="line">    &apos;eta&apos;: 0.007,                  # 如同学习率</span><br><span class="line">    &apos;seed&apos;: 1000,</span><br><span class="line">    &apos;nthread&apos;: 4,                  # cpu 线程数</span><br><span class="line">&#125;</span><br><span class="line">params_list = params.items()</span><br><span class="line">model = xgb.train(dtrain, params_list, num_rounds)</span><br></pre></td></tr></table></figure></p>
+<p>xgboost包含三种参数：general parameters，booster parameters和task parameters。由于xgboost参数众多，所以这里只考虑常见的，需要调参的参数。</p>
+<ul>
+<li>General parameters<br>该参数参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。</li>
+<li>Booster parameters<br>这取决于使用哪种booster。</li>
+<li>Task parameters<br>控制学习的场景，例如在回归问题中会使用不同的参数控制排序。<h3 id="General-Parameters"><a href="#General-Parameters" class="headerlink" title="General Parameters"></a>General Parameters</h3></li>
+<li>booster [default=gbtree]<br>有两中模型可以选择gbtree和gblinear。gbtree使用基于树的模型进行提升计算，gblinear使用线性模型进行提升计算。缺省值为gbtree</li>
+<li>silent [default=0]<br>取0时表示打印出运行时信息，取1时表示以缄默方式运行，不打印运行时信息。缺省值为0。建议打印运行状况</li>
+<li>nthread<br>XGBoost运行时的线程数。缺省值是当前系统可以获得的最大线程数<h3 id="Parameters-for-TreeBooster"><a href="#Parameters-for-TreeBooster" class="headerlink" title="Parameters for TreeBooster"></a>Parameters for TreeBooster</h3></li>
+<li>eta [default=0.3]<br>为了防止过拟合，更新过程中用到的收缩步长。在每次提升计算之后，算法会直接获得新特征的权重。 eta通过缩减特征的权重使提升计算过程更加保守。缺省值为0.3 取值范围为：[0,1]</li>
+<li>gamma [default=0]<br>用于控制是否后剪枝的参数,越大越保守，一般0.1、0.2。 取值范围为：[0,∞]</li>
+<li>max_depth [default=6]<br>树的最大深度。缺省值为6 取值范围为：[1,∞]</li>
+<li>min_child_weight [default=1]<br>孩子节点中最小的样本权重和。如果一个叶子节点的样本权重和小于min_child_weight则拆分过程结束。在现行回归模型中，这个参数是指建立每个模型所需要的最小样本数。该值越大，越保守，不容易过拟合。 取值范围为：[0,∞]</li>
+<li>subsample [default=1]<br>用于训练模型的子样本占整个样本集合的比例。如果设置为0.5则意味着XGBoost将随机的从整个样本集合中随机的抽取出50%的子样本建立树模型，这能够防止过拟合。 取值范围为：(0,1]</li>
+<li>colsample_bytree [default=1]<br>在建立树时对特征采样的比例。缺省值为1 取值范围为：(0,1]<h3 id="Parameters-for-LinearBooster"><a href="#Parameters-for-LinearBooster" class="headerlink" title="Parameters for LinearBooster"></a>Parameters for LinearBooster</h3></li>
+<li>lambda [default=0]<br>L2 正则的惩罚系数</li>
+<li>alpha [default=0]<br>L1 正则的惩罚系数</li>
+<li>lambda_bias<br>在偏置上的L2正则。缺省值为0（在L1上没有偏置项的正则，因为L1时偏置不重要）<h3 id="Task-Parameters"><a href="#Task-Parameters" class="headerlink" title="Task Parameters"></a>Task Parameters</h3></li>
+<li>objective [ default=reg:linear ]<br>定义学习任务及相应的学习目标，可选的目标函数如下：<ol>
+<li>“reg:linear” —— 线性回归。</li>
+<li>“reg:logistic”—— 逻辑回归。</li>
+<li>“binary:logistic”—— 二分类的逻辑回归问题，输出为概率。</li>
+<li>“binary:logitraw”—— 二分类的逻辑回归问题，输出的结果为wTx。</li>
+<li>“count:poisson”—— 计数问题的poisson回归，输出结果为poisson分布。在poisson回归中，max_delta_step的缺省值为0.7。(used to safeguard optimization)</li>
+<li>“multi:softmax” –让XGBoost采用softmax目标函数处理多分类问题，同时需要设置参数num_class（类别个数）</li>
+<li>“multi:softprob” –和softmax一样，但是输出的是ndata * nclass的向量，可以将该向量reshape成ndata行nclass列的矩阵。没行数据表示样本所属于每个类别的概率。</li>
+<li>“rank:pairwise” rank任务，方法是最小化pairwise loss</li>
+</ol>
+</li>
+<li>eval_metric [ default according to objective ]<br>校验数据所需要的评价指标，不同的目标函数将会有缺省的评价指标（rmse for regression, and error for classification, mean average precision for ranking, ‘auc’, ‘logloss’, ‘merror’, and so on…）<br>用户可以添加多种评价指标，对于Python用户要以list传递参数对给程序，而不是map参数</li>
+</ul>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><h3 id="显示重要特征"><a href="#显示重要特征" class="headerlink" title="显示重要特征"></a>显示重要特征</h3><p>GBDT的一大应用就是特征选择，xgboost提供’plot_importance(model)’方法， 可以基于F-score绘制每个特征的值，值越大，表示该属性越重要。</p>
+<h2 id="xgboost实战应用"><a href="#xgboost实战应用" class="headerlink" title="xgboost实战应用"></a>xgboost实战应用</h2><p>XGBoost有两大类接口：XGBoost原生接口 和 scikit-learn接口 ，并且XGBoost能够实现 分类 和 回归 两种任务。</p>
+<h3 id="基于原生接口的分类"><a href="#基于原生接口的分类" class="headerlink" title="基于原生接口的分类"></a>基于原生接口的分类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"># read in the iris data</span><br><span class="line">iris = load_iris()</span><br><span class="line"></span><br><span class="line">X = iris.data</span><br><span class="line">y = iris.target</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)</span><br><span class="line"></span><br><span class="line">params = &#123;</span><br><span class="line">    &apos;booster&apos;: &apos;gbtree&apos;,</span><br><span class="line">    &apos;objective&apos;: &apos;multi:softmax&apos;,</span><br><span class="line">    &apos;num_class&apos;: 3,</span><br><span class="line">    &apos;gamma&apos;: 0.1,</span><br><span class="line">    &apos;max_depth&apos;: 6,</span><br><span class="line">    &apos;lambda&apos;: 2,</span><br><span class="line">    &apos;subsample&apos;: 0.7,</span><br><span class="line">    &apos;colsample_bytree&apos;: 0.7,</span><br><span class="line">    &apos;min_child_weight&apos;: 3,</span><br><span class="line">    &apos;silent&apos;: 1,</span><br><span class="line">    &apos;eta&apos;: 0.1,</span><br><span class="line">    &apos;seed&apos;: 1000,</span><br><span class="line">    &apos;nthread&apos;: 4,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">plst = params.items()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dtrain = xgb.DMatrix(X_train, y_train)</span><br><span class="line">num_rounds = 500</span><br><span class="line">model = xgb.train(plst, dtrain, num_rounds)</span><br><span class="line"></span><br><span class="line"># 对测试集进行预测</span><br><span class="line">dtest = xgb.DMatrix(X_test)</span><br><span class="line">ans = model.predict(dtest)</span><br><span class="line"></span><br><span class="line"># 计算准确率</span><br><span class="line">cnt1 = 0</span><br><span class="line">cnt2 = 0</span><br><span class="line">for i in range(len(y_test)):</span><br><span class="line">    if ans[i] == y_test[i]:</span><br><span class="line">        cnt1 += 1</span><br><span class="line">    else:</span><br><span class="line">        cnt2 += 1</span><br><span class="line"></span><br><span class="line">print(&quot;Accuracy: %.2f %% &quot; % (100 * cnt1 / (cnt1 + cnt2)))</span><br><span class="line"></span><br><span class="line"># 显示重要特征</span><br><span class="line">plot_importance(model)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="基于sklearn的分类"><a href="#基于sklearn的分类" class="headerlink" title="基于sklearn的分类"></a>基于sklearn的分类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># read in the iris data</span><br><span class="line">iris = load_iris()</span><br><span class="line"></span><br><span class="line">X = iris.data</span><br><span class="line">y = iris.target</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)</span><br><span class="line"></span><br><span class="line"># 训练模型</span><br><span class="line">model = xgb.XGBClassifier(max_depth=5, learning_rate=0.1, n_estimators=160, silent=True, objective=&apos;multi:softmax&apos;)</span><br><span class="line">model.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"># 对测试集进行预测</span><br><span class="line">ans = model.predict(X_test)</span><br><span class="line"></span><br><span class="line"># 计算准确率</span><br><span class="line">cnt1 = 0</span><br><span class="line">cnt2 = 0</span><br><span class="line">for i in range(len(y_test)):</span><br><span class="line">    if ans[i] == y_test[i]:</span><br><span class="line">        cnt1 += 1</span><br><span class="line">    else:</span><br><span class="line">        cnt2 += 1</span><br><span class="line"></span><br><span class="line">print(&quot;Accuracy: %.2f %% &quot; % (100 * cnt1 / (cnt1 + cnt2)))</span><br><span class="line"></span><br><span class="line"># 显示重要特征</span><br><span class="line">plot_importance(model)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
+          
+            <a href="/tags/xgboost/" rel="tag"><i class="fa fa-tag"></i> xgboost</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/22/SICP第一章笔记/" rel="next" title="SICP第一章:构造过程抽象">
+                <i class="fa fa-chevron-left"></i> SICP第一章:构造过程抽象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/30/推荐系统实战笔记/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据格式"><span class="nav-number">1.</span> <span class="nav-text">数据格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#样本设置权重参数"><span class="nav-number">1.1.</span> <span class="nav-text">样本设置权重参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存为二进制文件"><span class="nav-number">1.2.</span> <span class="nav-text">保存为二进制文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存模型"><span class="nav-number">2.</span> <span class="nav-text">保存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数设置"><span class="nav-number">3.</span> <span class="nav-text">参数设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Parameters"><span class="nav-number">3.1.</span> <span class="nav-text">General Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameters-for-TreeBooster"><span class="nav-number">3.2.</span> <span class="nav-text">Parameters for TreeBooster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameters-for-LinearBooster"><span class="nav-number">3.3.</span> <span class="nav-text">Parameters for LinearBooster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Parameters"><span class="nav-number">3.4.</span> <span class="nav-text">Task Parameters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法"><span class="nav-number">4.</span> <span class="nav-text">常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示重要特征"><span class="nav-number">4.1.</span> <span class="nav-text">显示重要特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xgboost实战应用"><span class="nav-number">5.</span> <span class="nav-text">xgboost实战应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于原生接口的分类"><span class="nav-number">5.1.</span> <span class="nav-text">基于原生接口的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于sklearn的分类"><span class="nav-number">5.2.</span> <span class="nav-text">基于sklearn的分类</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/03/25/xgboost实战/';
+          this.page.identifier = '2018/03/25/xgboost实战/';
+          this.page.title = 'xgboost实战';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
