@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="TensorFlow,Reinforce Learning," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="DQN全称Deep Q Network，是一种将传统强化学习算法Q-Learning和Deep Learning相结合的算法。最有名的DQN应用应该就是在围棋上打败全人类的AlphaGo了。">
+<meta name="keywords" content="TensorFlow,Reinforce Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习之DQN">
+<meta property="og:url" content="http://yoursite.com/2018/07/02/Reinforce Learning/强化学习之DQN/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="DQN全称Deep Q Network，是一种将传统强化学习算法Q-Learning和Deep Learning相结合的算法。最有名的DQN应用应该就是在围棋上打败全人类的AlphaGo了。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/reinforce_learning/DQN_alg.jpg">
+<meta property="og:updated_time" content="2018-08-06T12:00:20.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强化学习之DQN">
+<meta name="twitter:description" content="DQN全称Deep Q Network，是一种将传统强化学习算法Q-Learning和Deep Learning相结合的算法。最有名的DQN应用应该就是在围棋上打败全人类的AlphaGo了。">
+<meta name="twitter:image" content="http://yoursite.com/images/reinforce_learning/DQN_alg.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/02/Reinforce Learning/强化学习之DQN/"/>
+
+
+
+
+
+  <title>强化学习之DQN | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/Reinforce Learning/强化学习之DQN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">强化学习之DQN</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-02T00:00:00+09:00">
+                2018-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/02/Reinforce Learning/强化学习之DQN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/02/Reinforce Learning/强化学习之DQN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>DQN全称Deep Q Network，是一种将传统强化学习算法Q-Learning和Deep Learning相结合的算法。最有名的DQN应用应该就是在围棋上打败全人类的AlphaGo了。</p>
+<a id="more"></a>
+<h2 id="传统强化学习"><a href="#传统强化学习" class="headerlink" title="传统强化学习"></a>传统强化学习</h2><p>在<a href="">强化学习之Q_Learning</a>中我们已经了解到强化学习的基本概念以及Q_Learning的思想和。而Q_Learning算法面临一个巨大的问题：当State个数过于庞大时，Q_table会变得特别大，以至于每次执行学习循环时table的查找会消耗大量时间，严重影响效率，同时过大的Q_table也会造成存储问题。对于这个问题，DQN是一个非常好的解决办法。</p>
+<h2 id="Q-Learning和Deep-Neural-Network"><a href="#Q-Learning和Deep-Neural-Network" class="headerlink" title="Q_Learning和Deep Neural Network"></a>Q_Learning和Deep Neural Network</h2><p>我们可以通过一个神经网络学习并预测每个State和Action对应的Q值，这样我们就不在需要记录巨大的Q表，只需要训练一个神经网络即可。具体流程如下：输入一个状态，神经网络输出所有动作对应的预测Q值，然后按照Q Learning的原则，使用梯度下降方法对网络进行更新。<br>形象的理解，就是Agent接收当前State的种种信息，然后在神经网络大脑中对自己可以做的每个Action默默评估，选择自认为最优的行为执行，做出动作后然后通过环境的反馈不断更新神经网络。</p>
+<p>整个DQN算法结构如下：<br><img src="/images/reinforce_learning/DQN_alg.jpg" alt="DQN_Algorithm"></p>
+<h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>在DQN中，一共有三个组件：包括两个神经网络Target_Net、Q_Net和用来存储训练数据的记忆库（ReplayMemory）。</p>
+<h4 id="Q-Net和Target-Net"><a href="#Q-Net和Target-Net" class="headerlink" title="Q_Net和Target_Net"></a>Q_Net和Target_Net</h4><p><strong>结构上这两个神经网络完全相同</strong>（可以包含卷积层，全连接层）。<strong>两个神经网络的输入都是当前状态的一些信息，输出是每一个action对应的预测Q值</strong>。<br>在最开始学习DQN的时候，一定会有这样的困惑，为什么要有两个神经网络？这两个神经网络的作用是什么？在这里我做个简单的不严谨说明便于理解：Q_Net是一个实时的网络（每次输入状态，就是用Q_Net的预测作为输出动作）。而Target_Net是用来计算Q更新公式求训练label的（将s的下一个状态s_输入Target_Net，输出的最大值作为Q(s’, a’)，计算更新公式得到Q(s, a)作为真实label）。<br>所以要想理解DQN两个网络工作机制的核心，只需要记住这一句话：<strong>Q_Net做出预测，Target_Net计算真实label，然后计算loss反向传播Q_Net</strong><br>在训练时，我们只对Q_Net做反向传播更新权重，Target_Net的权重更新来自于对Q_Net的直接复制。</p>
+<h4 id="记忆库"><a href="#记忆库" class="headerlink" title="记忆库"></a>记忆库</h4><p>（ReplayMemeory）记忆库本质上是一个二维表，表的每一行都是一个马尔科夫节点表示一条记忆。举个例子：比如当前Agent处在状态s_t下，并执行action a_t到达下一个状态s_t_1，同时获得奖励reward值r_t。那么由：[s_t, a_t, r_t, s_t_1]构成的一个list就是一个马尔科夫节点。说明当前状态和下一个状态之间的关系。<br>记忆库是作为对神经网络的训练数据集存在，可以理解为一小段Q表信息。每次从环境获得一个[状态，动作，奖励，新状态]，就将其更新到记忆库中。</p>
+<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>在训练时我们只训练Q_Net，并不训练Target_Net。Target_Net权值的更新来自于对Q_Net权值的直接复制。</p>
+<ol>
+<li>每一次对Q_Net的迭代训练，就会从记忆库中随机抽取一个batch的马尔科夫节点[s_t, a_t, s_t_1, r_t, t_t]记忆。</li>
+<li>然后将s_t输入到Q_Net中，得到Q_Net对s_t状态下每个action预测的Q值，然后取出 action a_t 对应的Q值这就是Q_Net的预测值Q(a_t|s_t)。</li>
+<li>然后将s_t_1喂入Target-Net, 得到Target_Net在状态s_t_1下，对每一个action对应的Q值，然后取最大的Q值作为Max(Q(s’, a’))</li>
+<li>根据贝尔曼公式（Q Learning更新方法）计算对应的Q(s, a)作为真实label值。</li>
+<li>最后用上一步计算的Q(s, a)减去Q_Net的预测值Q(a_t|s_t)作为误差反向传播，更新Q_Net。</li>
+<li>然后再每次Q_Net的训练迭代到一定次数的时候更新Target_Net（将Q_Net的参数完全复制到Target_Net）中。</li>
+</ol>
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><ol>
+<li>初始化状态、环境以及DQN</li>
+<li>DQN通过当前状态s的观测值选择行为a<ol>
+<li>将输入状态s的种种观测值observation输入到Q_Net，Q_Net预测每个动作对应的Q值</li>
+<li>大概率返回预测Q值最大的动作，小概率随机返回一个动作。增加DQN的探索性</li>
+</ol>
+</li>
+<li>环境根据s和a，返回下一个新状态s_，奖励值r以及是否结束t</li>
+<li>DQN存储记忆，将[当前状态s，行为a，奖励r，新状态s_]存储到记忆库中<ol>
+<li>将[s, a, r, s_]存储到DQN的记忆库中</li>
+<li>若已经达到记忆库的大小，则不断删除旧记忆，实现记忆库更新</li>
+</ol>
+</li>
+<li>每隔指定步骤对神经网络进行一次训练<ol>
+<li>从记忆库中随机选取batch个记忆</li>
+<li>将每个记忆的s输入到Q_Net中，每个记忆的s_输入到Target_Net中。从Q_Net得到在s时每个动作的预测Q值（一个list），从Target_Net中得到s_的预测Q值（一个list）。</li>
+<li>从记忆[s, a, r, s_]中找到动作a，同时找到该动作在Q_Net的预测输出中对应的Q值q_pre，以及Target_Net的预测输出中最大的Q值q_next。</li>
+<li>根据更新公式：Q(s, a) = r + gamma * Max(Q(s_, a_))，该值作为实际的label值</li>
+<li>计算误差，对Q_Net进行反向传播：loss = q_pre - (r + gamma*q_next)</li>
+<li>重复1至5步，实现对Q_Net的训练，每训练指定个step后对Target_Net进行更新。更新方法是将Q_Net的参数直接copy给Target_Net。</li>
+</ol>
+</li>
+<li>更新状态s = s_</li>
+<li>循环2至5步直至环境返回结束状态</li>
+</ol>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>在我的GitHub上实现了一个简单的DQN走迷宫的例子，（参考<a href="https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/" target="_blank" rel="noopener">莫烦Python</a>教程的例子）。为了便于理解，我在代码中尽可能详细的写了注释。这是项目地址：<a href="https://github.com/YHfeather/ML_Engineer/tree/master/Reinforcement%20Learning/DQN" target="_blank" rel="noopener">DQN走迷宫</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>DQN是将传统的强化学习方法Q_Learning和深度学习相结合，得到的一个强力RL模型。DQN在很多任务上取得了非常优秀的表现，著名的AlphaGo即使DQN的代表应用之一，当然AlphaGo的模型要复杂的多的多。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+          
+            <a href="/tags/Reinforce-Learning/" rel="tag"><i class="fa fa-tag"></i> Reinforce Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/25/Project/NLP流水线/" rel="next" title="NLP流水线">
+                <i class="fa fa-chevron-left"></i> NLP流水线
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/23/Reinforce Learning/强化学习之Double DQN/" rel="prev" title="强化学习之Double DQN">
+                强化学习之Double DQN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#传统强化学习"><span class="nav-number">1.</span> <span class="nav-text">传统强化学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-Learning和Deep-Neural-Network"><span class="nav-number">2.</span> <span class="nav-text">Q_Learning和Deep Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络结构"><span class="nav-number">2.1.</span> <span class="nav-text">网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q-Net和Target-Net"><span class="nav-number">2.1.1.</span> <span class="nav-text">Q_Net和Target_Net</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#记忆库"><span class="nav-number">2.1.2.</span> <span class="nav-text">记忆库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练过程"><span class="nav-number">2.2.</span> <span class="nav-text">训练过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程"><span class="nav-number">2.2.1.</span> <span class="nav-text">算法流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/07/02/Reinforce Learning/强化学习之DQN/';
+          this.page.identifier = '2018/07/02/Reinforce Learning/强化学习之DQN/';
+          this.page.title = '强化学习之DQN';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
