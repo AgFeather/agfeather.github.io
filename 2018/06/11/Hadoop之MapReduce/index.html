@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="MapReduce计算模型在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。 MapReduce Job每个MapReduce任务会被初始化为一个Job，每个Job分为两个阶段：map阶段和reduce阶段。 InputFormat()">
+<meta name="description" content="介绍整理MapReduce的结构和使用方法">
 <meta name="keywords" content="Hadoop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hadoop值MapReduce">
+<meta property="og:title" content="Hadoop之MapReduce">
 <meta property="og:url" content="http://yoursite.com/2018/06/11/Hadoop之MapReduce/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="MapReduce计算模型在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。 MapReduce Job每个MapReduce任务会被初始化为一个Job，每个Job分为两个阶段：map阶段和reduce阶段。 InputFormat()">
+<meta property="og:description" content="介绍整理MapReduce的结构和使用方法">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-21T11:05:02.171Z">
+<meta property="og:updated_time" content="2018-08-26T07:13:15.103Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hadoop值MapReduce">
-<meta name="twitter:description" content="MapReduce计算模型在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。 MapReduce Job每个MapReduce任务会被初始化为一个Job，每个Job分为两个阶段：map阶段和reduce阶段。 InputFormat()">
+<meta name="twitter:title" content="Hadoop之MapReduce">
+<meta name="twitter:description" content="介绍整理MapReduce的结构和使用方法">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>Hadoop值MapReduce | Black Feather</title>
+  <title>Hadoop之MapReduce | Black Feather</title>
   
 
 
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hadoop值MapReduce</h1>
+          <h1 class="post-title" itemprop="name headline">Hadoop之MapReduce</h1>
         
 
         <div class="post-meta">
@@ -353,7 +353,8 @@
       
 
       
-        <h1 id="MapReduce计算模型"><a href="#MapReduce计算模型" class="headerlink" title="MapReduce计算模型"></a>MapReduce计算模型</h1><p>在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。</p>
+        <p>介绍整理MapReduce的结构和使用方法<br><a id="more"></a></p>
+<h1 id="MapReduce计算模型"><a href="#MapReduce计算模型" class="headerlink" title="MapReduce计算模型"></a>MapReduce计算模型</h1><p>在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。</p>
 <h2 id="MapReduce-Job"><a href="#MapReduce-Job" class="headerlink" title="MapReduce Job"></a>MapReduce Job</h2><p>每个MapReduce任务会被初始化为一个Job，每个Job分为两个阶段：map阶段和reduce阶段。</p>
 <h4 id="InputFormat-和InputSplit"><a href="#InputFormat-和InputSplit" class="headerlink" title="InputFormat()和InputSplit"></a>InputFormat()和InputSplit</h4><p>InputSplit是Hadoop定义的用来传送给每个单独map数据，InputSplit存储的并非数据本身，而还是一个分片长度和一个记录数据位置的数组。当数据传送给map时，map会将输入分片传送到InputFormat上，InputFormat会创建可供map处理的key-value对。也就是说， <strong>InputFormat()方法是用来生成可供map处理的key-value对的</strong>。<br>Hadoop预定义了多种将不同类型的输入数据转化为key-value对的方法， 他们都继承自InputFormat。<br>其中FileInputFormat又有多个子类。<br>在key-value对中，<strong>key值时每个数据记录在数据分片中的字节偏移量，数据类型是LongWritable，value值时每行的内容，数据类型是Text</strong></p>
 <h4 id="OutputFormat"><a href="#OutputFormat" class="headerlink" title="OutputFormat"></a>OutputFormat</h4><p>每个输入格式都有一种输出格式与其对应，outputFormat会将每条记录以一行的形式存入文本文件中，它的key-value对可以试任意的。</p>
@@ -540,7 +541,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -783,7 +784,7 @@
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2018/06/11/Hadoop之MapReduce/';
           this.page.identifier = '2018/06/11/Hadoop之MapReduce/';
-          this.page.title = 'Hadoop值MapReduce';
+          this.page.title = 'Hadoop之MapReduce';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://blackfeather.disqus.com/embed.js';

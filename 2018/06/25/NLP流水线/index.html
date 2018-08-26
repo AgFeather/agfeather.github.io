@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="NLP项目是一个庞大且复杂的项目，在机器学习中任何复杂的事情通常意味着需要建立一条流水线（pipeline），把复杂问题分解成各个小部分，然后用机器学习模型分别解决每个部分，最后通过吧几个互相馈送结果的模型连接在一起，就可以用来解决非常复杂的问题。 NLP流水线步骤1：句子分割pipeline的第一步是把原始文本拆分成单独的句子。编写一个程序来理解一个句子比理解整个段落要容易的多。编码一个句子分割">
+<meta name="description" content="NLP项目是一个庞大且复杂的项目，在机器学习中任何复杂的事情通常意味着需要建立一条流水线（pipeline），把复杂问题分解成各个小部分，然后用机器学习模型分别解决每个部分，最后通过吧几个互相馈送结果的模型连接在一起，就可以用来解决非常复杂的问题。">
 <meta name="keywords" content="Machine Learning,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP流水线">
 <meta property="og:url" content="http://yoursite.com/2018/06/25/NLP流水线/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="NLP项目是一个庞大且复杂的项目，在机器学习中任何复杂的事情通常意味着需要建立一条流水线（pipeline），把复杂问题分解成各个小部分，然后用机器学习模型分别解决每个部分，最后通过吧几个互相馈送结果的模型连接在一起，就可以用来解决非常复杂的问题。 NLP流水线步骤1：句子分割pipeline的第一步是把原始文本拆分成单独的句子。编写一个程序来理解一个句子比理解整个段落要容易的多。编码一个句子分割">
+<meta property="og:description" content="NLP项目是一个庞大且复杂的项目，在机器学习中任何复杂的事情通常意味着需要建立一条流水线（pipeline），把复杂问题分解成各个小部分，然后用机器学习模型分别解决每个部分，最后通过吧几个互相馈送结果的模型连接在一起，就可以用来解决非常复杂的问题。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/NLP/cixingbiaoji.png">
 <meta property="og:image" content="http://yoursite.com/images/NLP/yilaishu.png">
 <meta property="og:image" content="http://yoursite.com/images/NLP/ner.png">
-<meta property="og:updated_time" content="2018-08-24T02:05:33.143Z">
+<meta property="og:updated_time" content="2018-08-26T07:11:09.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP流水线">
-<meta name="twitter:description" content="NLP项目是一个庞大且复杂的项目，在机器学习中任何复杂的事情通常意味着需要建立一条流水线（pipeline），把复杂问题分解成各个小部分，然后用机器学习模型分别解决每个部分，最后通过吧几个互相馈送结果的模型连接在一起，就可以用来解决非常复杂的问题。 NLP流水线步骤1：句子分割pipeline的第一步是把原始文本拆分成单独的句子。编写一个程序来理解一个句子比理解整个段落要容易的多。编码一个句子分割">
+<meta name="twitter:description" content="NLP项目是一个庞大且复杂的项目，在机器学习中任何复杂的事情通常意味着需要建立一条流水线（pipeline），把复杂问题分解成各个小部分，然后用机器学习模型分别解决每个部分，最后通过吧几个互相馈送结果的模型连接在一起，就可以用来解决非常复杂的问题。">
 <meta name="twitter:image" content="http://yoursite.com/images/NLP/cixingbiaoji.png">
 
 
@@ -335,7 +335,7 @@
       
 
       
-        <p>NLP项目是一个庞大且复杂的项目，在机器学习中任何复杂的事情通常意味着需要建立一条流水线（pipeline），把复杂问题分解成各个小部分，然后用机器学习模型分别解决每个部分，最后通过吧几个互相馈送结果的模型连接在一起，就可以用来解决非常复杂的问题。</p>
+        <p>NLP项目是一个庞大且复杂的项目，在机器学习中任何复杂的事情通常意味着需要建立一条流水线（pipeline），把复杂问题分解成各个小部分，然后用机器学习模型分别解决每个部分，最后通过吧几个互相馈送结果的模型连接在一起，就可以用来解决非常复杂的问题。<br><a id="more"></a></p>
 <h2 id="NLP流水线"><a href="#NLP流水线" class="headerlink" title="NLP流水线"></a>NLP流水线</h2><h3 id="步骤1：句子分割"><a href="#步骤1：句子分割" class="headerlink" title="步骤1：句子分割"></a>步骤1：句子分割</h3><p>pipeline的第一步是把原始文本拆分成单独的句子。编写一个程序来理解一个句子比理解整个段落要容易的多。<br>编码一个句子分割模型可以很简单地在任何看到标点符号的时候拆分句子。但是，现代 NLP 流水线通常使用更为复杂的技术，以应对那些没有被格式化干净的文件。</p>
 <h3 id="步骤2：词汇标记化"><a href="#步骤2：词汇标记化" class="headerlink" title="步骤2：词汇标记化"></a>步骤2：词汇标记化</h3><p>对于已经处理完的句子，下一步就是将句子拆分成不同的单词或者标记，这个步骤叫做标记化，通常也将标点符号当做单独的标记对待。<br>对于英文莱索标记化很容易做到，只因为英文单词之间有空格。</p>
 <h3 id="步骤3：预测标记的词性"><a href="#步骤3：预测标记的词性" class="headerlink" title="步骤3：预测标记的词性"></a>步骤3：预测标记的词性</h3><p>对于每个标记，需要尝试猜测他的词性：名词，动词，形容词等等。知道每个单词的词性可以帮助计算机理解句子的意思。<br>每个单词（和它周围的一些额外的单词用于上下文）输入预先训练的词性分类模型：<br><img src="/images/NLP/cixingbiaoji.png" alt="NLP_cixingyuce"><br>词性模型最初是通过给它提供数以百万计的英语句子来训练的，每一个单词的词性都已经标注出来，并让它学会复制这种行为。<br>最后，对于句子中每个标记，我们可以得到它对应的词性预测。如：is-Verb；china-Noun</p>
@@ -522,7 +522,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

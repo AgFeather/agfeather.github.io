@@ -429,7 +429,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/11/Hadoop之MapReduce/" itemprop="url">Hadoop值MapReduce</a></h1>
+                <a class="post-title-link" href="/2018/06/11/Hadoop之MapReduce/" itemprop="url">Hadoop之MapReduce</a></h1>
         
 
         <div class="post-meta">
@@ -513,38 +513,14 @@
 
       
         
-          
-            <h1 id="MapReduce计算模型"><a href="#MapReduce计算模型" class="headerlink" title="MapReduce计算模型"></a>MapReduce计算模型</h1><p>在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个JobTracker，一个TaskTracker。前者是用于调度工作的，一个Hadoop集群只有一个JobTracker。后者是用于执行工作的。</p>
-<h2 id="MapReduce-Job"><a href="#MapReduce-Job" class="headerlink" title="MapReduce Job"></a>MapReduce Job</h2><p>每个MapReduce任务会被初始化为一个Job，每个Job分为两个阶段：map阶段和reduce阶段。</p>
-<h4 id="InputFormat-和InputSplit"><a href="#InputFormat-和InputSplit" class="headerlink" title="InputFormat()和InputSplit"></a>InputFormat()和InputSplit</h4><p>InputSplit是Hadoop定义的用来传送给每个单独map数据，InputSplit存储的并非数据本身，而还是一个分片长度和一个记录数据位置的数组。当数据传送给map时，map会将输入分片传送到InputFormat上，InputFormat会创建可供map处理的key-value对。也就是说， <strong>InputFormat()方法是用来生成可供map处理的key-value对的</strong>。<br>Hadoop预定义了多种将不同类型的输入数据转化为key-value对的方法， 他们都继承自InputFormat。<br>其中FileInputFormat又有多个子类。<br>在key-value对中，<strong>key值时每个数据记录在数据分片中的字节偏移量，数据类型是LongWritable，value值时每行的内容，数据类型是Text</strong></p>
-<h4 id="OutputFormat"><a href="#OutputFormat" class="headerlink" title="OutputFormat"></a>OutputFormat</h4><p>每个输入格式都有一种输出格式与其对应，outputFormat会将每条记录以一行的形式存入文本文件中，它的key-value对可以试任意的。</p>
-<h4 id="Map和Reduce"><a href="#Map和Reduce" class="headerlink" title="Map和Reduce"></a>Map和Reduce</h4><p>Map函数接收InputFormat处理所产生的key-value对，经过map函数的处理后输出key-value对，Hadoop会将map输出的中间结果存储在磁盘上而不是HDFS上。Reduce会读取map的输出数据，这时的key-value数据中key相同的value已经被合并为一个list，reduce函数会对输入的数据进行处理并将结果存储在HDFS上。<br>自定义Map类时需要继承自Mapper类。自定义Reduce类继承自Reducer类。并分别在类中重写map()和reduce()函数。以下为WordCount的map和reduce实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class WordCountMapper</span><br><span class="line">        extends Mapper&lt;LongWritable, Text, Text, IntWritable&gt;&#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void map(LongWritable key, Text value, Context context)</span><br><span class="line">        throws IOException, InterruptedException&#123;</span><br><span class="line">        String line = value.toString();</span><br><span class="line">        String[] words = line.split(&quot; &quot;);</span><br><span class="line">        for(String word: words)&#123;</span><br><span class="line">            context.write(new Text(word), new IntWritable(1));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Reduce类实现如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class WordCountReducer extends Reducer&lt;Text, IntWritable, Text, IntWritable&gt;&#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void reduce(Text key, Iteterable&lt;IntWritable&gt; values, Context context)</span><br><span class="line">            throws IOException, InterruptedException&#123;</span><br><span class="line">        Integer count = 0;</span><br><span class="line">        for(IntWritable value:values)&#123;</span><br><span class="line">            count += value.get();</span><br><span class="line">        &#125;</span><br><span class="line">        context.write(key, new IntWritable(count));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>注意：</p>
-<ol>
-<li>reduce task的数量可以通过程序制定，当有多个reduce task时，每个task都会生成一个输出文件</li>
-<li>没有reduce任务的时候，系统会直接将map task的输出作为最终输出，有多少个map task文件就有多少个输出文件。</li>
-</ol>
-<h2 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h2><ol>
-<li>编写代码</li>
-<li>编译成.class文件</li>
-<li>将所有class文件打包成jar文件</li>
-<li>上传到Hadoop</li>
-<li>运行jar文件</li>
-</ol>
-<p>Hadoop运行MapReduce任务时，JobTracker调度任务给TaskTracker，TaskTracker执行任务时会返回进度报告，JobTracker会记录进度的进行状况，如果某个TaskTracker上的任务失败，JobTracker会把这个任务分配给另一台TaskTracker。</p>
-<h2 id="MapReduce优化"><a href="#MapReduce优化" class="headerlink" title="MapReduce优化"></a>MapReduce优化</h2><p>MapReduce模型的优化设计到很多方面，主要为：1. 计算性能优化；2. IO操作优化</p>
-<h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><p>MapReduce擅长处理少量的大数据，不擅长处理大量的小数据。所以可以在使用MapReduce前对数据进行预处理合并。当一个map任务只需要几秒就可以运行结束时，应该给他分配更多任务。一般而言，一个map任务的运行时间在一分钟比较好。</p>
-<h3 id="map和reduce的数量"><a href="#map和reduce的数量" class="headerlink" title="map和reduce的数量"></a>map和reduce的数量</h3><p>定义两个概念：map任务槽和reduce任务槽，表示这个Hadoop集群能够同时运行的map/reduce任务的数量。</p>
-<h3 id="combine函数"><a href="#combine函数" class="headerlink" title="combine函数"></a>combine函数</h3><p>combine函数用于在本地合并数据，也就是说，在map处理数据后，先将map的输出进行一个预合并，然后再将合并的结果传送给reduce，这样会大大减少网络IO的消耗。例如：在wordcount中，每个map可能都会生成大量的(the, 1)输出，如果将这些输出一个个的都传递个reduce，会浪费很多IO，可以在combine函数中，先将map的输出进行合并（the，10）。</p>
-<h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><p>可以对map的输出和最终的输出进行压缩。通常情况下map的输出会很多大，对其进行压缩可以有效的减少数据在网络的传输量。</p>
-<h3 id="自定义comparator"><a href="#自定义comparator" class="headerlink" title="自定义comparator"></a>自定义comparator</h3><p>可以通过自定义comparator实现数据的二进制比较，这样可以省去数据序列化和反序列化的时间，提高运行效率。</p>
-<h1 id="Hadoop中的IO"><a href="#Hadoop中的IO" class="headerlink" title="Hadoop中的IO"></a>Hadoop中的IO</h1><h2 id="IO操作中的数据检查"><a href="#IO操作中的数据检查" class="headerlink" title="IO操作中的数据检查"></a>IO操作中的数据检查</h2><p>Hadoop是由上千台主机集成的，这么多主机同时运行时，难免会有主机损坏，所以对于Hadoop来说，进行数据完整性检查是非常重要的。</p>
-<h3 id="校验和方式"><a href="#校验和方式" class="headerlink" title="校验和方式"></a>校验和方式</h3><p>通过对比新旧校验和来确定数据是否损坏。循环冗余校验被广泛应用在Hadoop网络IO检查，数据完整性检查等方面。</p>
-<h2 id="数据压缩"><a href="#数据压缩" class="headerlink" title="数据压缩"></a>数据压缩</h2><p>对于HDFS来说，文件压缩是必须的，它会带来两个好处：1.减少文件所需的存储空间；2.加快文件在网络上的传输速度。<br>Hadoop文件压缩模块都在’package org.apache.hadoop.io.compress’中。<br>Hadoop支持多种压缩格式和压缩算法。</p>
-<h3 id="MapReduce中使用压缩"><a href="#MapReduce中使用压缩" class="headerlink" title="MapReduce中使用压缩"></a>MapReduce中使用压缩</h3><p>只需要在它的Job配置时配置好conf就可以了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 设置map处理后数据的压缩代码</span><br><span class="line">JobConf conf = new Jobconf();</span><br><span class="line">conf.setBoolean(&quot;mapred.compress.map.output&quot;, true);</span><br><span class="line"></span><br><span class="line">// 设置output输出压缩代码</span><br><span class="line">JobConf conf = new JobConf();</span><br><span class="line">conf.setBoolean(&quot;mapred.output.compress&quot;, true);</span><br><span class="line">conf.setClass(&quot;mapred.output.compression.codec&quot;, GzipCodec.class, CompressionCodec.class);</span><br></pre></td></tr></table></figure></p>
-
-          
+          <p>介绍整理MapReduce的结构和使用方法<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/11/Hadoop之MapReduce/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1008,34 +984,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h1><p>HDFS是Hadoop的分布式文件系统。HDFS具有如下特点：</p>
-<ol>
-<li>处理超大文件</li>
-<li>流式地访问数据</li>
-<li>运行于廉价的商用机器集群上<br>由于以上设计的种种考虑，HDFS存在着一定的缺点：</li>
-<li>不适合低延迟数据访问</li>
-<li>无法高效存储大量小文件（由于NameNode大小限制）</li>
-<li>不支持多用户写入及任意修改文件（在HDFS的一个文件只有一个写入者，而且只能在文件末尾执行追加操作）<h2 id="HDFS体系结构"><a href="#HDFS体系结构" class="headerlink" title="HDFS体系结构"></a>HDFS体系结构</h2><h3 id="HDFS相关概念"><a href="#HDFS相关概念" class="headerlink" title="HDFS相关概念"></a>HDFS相关概念</h3><h4 id="块（Block）"><a href="#块（Block）" class="headerlink" title="块（Block）"></a>块（Block）</h4>在HDFS中，文件是以block的形式存储在各个主机上，HDFS默认一个文件块大小为64MB。而且当一个文件存储在HDFS时，该文件是按照逻辑块来进行分割存储的，而不是物理块。也就是说，一个文件的不同块可能被存储在不同的主机上，但逻辑上他们是存储在一起的。<br>在HDFS中，为了处理节点故障，默认将文件块副本数设定为3份，分别存储在集群的不同节点上，当一个块损坏时，NameNode会在另外的主机上读取一个副本并存储。<h4 id="NameNode和DataNode"><a href="#NameNode和DataNode" class="headerlink" title="NameNode和DataNode"></a>NameNode和DataNode</h4>NameNode和DataNode分别承担Master和Worker任务。NameNode管理文件系统的命名空间，维护整个文件系统的文件目录树以及文件的索引目录。从NameNode中你可以获得每个文件的每块所在的DataNode。<br>DataNode是文件系统的Worker节点，用来执行具体任务：存储文件块，被客户端和NameNode调用。同时，它通过心跳通信定时向NameNode发送存储文件的信息。<br>一个HDFS是由一个NameNode和一定数目的DataNode组成的。</li>
-</ol>
-<h2 id="HDFS常用命令"><a href="#HDFS常用命令" class="headerlink" title="HDFS常用命令"></a>HDFS常用命令</h2><ol>
-<li><p>从本地将一个文件复制到HDFS</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -copyFromLocal localPath hdfsPath</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从HDFS复制到本机</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -copyToLocal hdfsPath localPath</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建文件夹</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir DirName</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>用命令行查看HDFS文件列表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -lsr DirName // 查看文件夹下的所有文件详细信息</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="HDFS常用Java-API"><a href="#HDFS常用Java-API" class="headerlink" title="HDFS常用Java API"></a>HDFS常用Java API</h2><h3 id="使用Hadoop-URL读取数据"><a href="#使用Hadoop-URL读取数据" class="headerlink" title="使用Hadoop URL读取数据"></a>使用Hadoop URL读取数据</h3><p>想从HDFS中读取数据，最简单的办法就是使用java.net.URL对象打开一个数据流，从中读取数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">InputStream in = null;</span><br><span class="line">try&#123;</span><br><span class="line">    in = new URL(&quot;hdfs://NameNodeIP/path&quot;).openStream();</span><br><span class="line">&#125;finally&#123;</span><br><span class="line">    IOUtils.closeStream(in);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
+          <p>介绍HDFS的结构和相关操作<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/21/Hadoop之HDFS/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1904,7 +1860,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
