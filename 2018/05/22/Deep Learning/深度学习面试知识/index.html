@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/nn_knowledge/batch_normalization.jpg">
 <meta property="og:image" content="http://yoursite.com/images/deep_learning/sigmoid_bp.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/22/Deep%20Learning/深度学习面试知识/images/deep_learning/resnet_block.png">
-<meta property="og:updated_time" content="2018-08-22T23:54:55.172Z">
+<meta property="og:updated_time" content="2018-08-29T01:28:11.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习补充知识">
 <meta name="twitter:description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
@@ -392,8 +392,9 @@
 <p>对于梯度消失的具体原因，我们可以将反向传播的公式进行展开，这里激活函数我们用Sigmoid举例:<br><img src="/images/deep_learning/sigmoid_bp.png" alt="sigmoid_bp"><br>可以看到，整个反向传播过程是由几个sigmoid函数的导数和权重相乘组成的，而对sigmoid求导发现，sigmoid的导数最大值为0.25，同时我们初始化网络权值时通常也会小于1，也就是说对于上面的链式法则求导，层数越多，求导结果越小，对前几个隐藏层权重的更新也越小。从而导致了梯度消失。</p>
 <h4 id="梯度消失解决办法"><a href="#梯度消失解决办法" class="headerlink" title="梯度消失解决办法"></a>梯度消失解决办法</h4><ul>
 <li>放弃sigmoid函数，使用Relu是最直接的方法</li>
-<li>在网络中加入Batch Normalization<h3 id="梯度爆炸"><a href="#梯度爆炸" class="headerlink" title="梯度爆炸"></a>梯度爆炸</h3><h4 id="梯度爆炸原因"><a href="#梯度爆炸原因" class="headerlink" title="梯度爆炸原因"></a>梯度爆炸原因</h4>在深层网络或递归神经网络中，误差梯度在更新中累积得到一个非常大的梯度，这样的梯度会大幅度更新网络参数，进而导致网络不稳定。在极端情况下，权重的值变得特别大，以至于权重溢出（NaN值）。当梯度爆炸发生时，网络层之间反复乘以大于1.0的梯度值使得梯度值成倍增长，网络不稳定，无法收敛。</li>
+<li>在网络中加入Batch Normalization</li>
 </ul>
+<h3 id="梯度爆炸"><a href="#梯度爆炸" class="headerlink" title="梯度爆炸"></a>梯度爆炸</h3><h4 id="梯度爆炸原因"><a href="#梯度爆炸原因" class="headerlink" title="梯度爆炸原因"></a>梯度爆炸原因</h4><p>在深层网络或递归神经网络中，误差梯度在更新中累积得到一个非常大的梯度，这样的梯度会大幅度更新网络参数，进而导致网络不稳定。在极端情况下，权重的值变得特别大，以至于权重溢出（NaN值）。当梯度爆炸发生时，网络层之间反复乘以大于1.0的梯度值使得梯度值成倍增长，网络不稳定，无法收敛。</p>
 <p>根据链式法则我们知道，如果每一层神经元对上一层的输出的偏导乘上权重结果都大于1的话，在经过足够多层传播之后，误差对输入层的偏导会趋于无穷大</p>
 <h4 id="梯度爆炸现象"><a href="#梯度爆炸现象" class="headerlink" title="梯度爆炸现象"></a>梯度爆炸现象</h4><ul>
 <li>模型无法在训练数据上收敛（比如，损失函数值非常差）；</li>
@@ -616,7 +617,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -627,7 +628,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
