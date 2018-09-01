@@ -88,7 +88,7 @@
 <meta property="og:description" content="整理SVD在推荐系统中的应用">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/recommender_practice/svd_graph.png">
-<meta property="og:updated_time" content="2018-09-01T05:41:17.495Z">
+<meta property="og:updated_time" content="2018-09-01T05:48:03.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVD分解在推荐系统中的应用">
 <meta name="twitter:description" content="整理SVD在推荐系统中的应用">
@@ -343,10 +343,11 @@
 <h2 id="SVD在推荐系统中"><a href="#SVD在推荐系统中" class="headerlink" title="SVD在推荐系统中"></a>SVD在推荐系统中</h2><p>我们知道，在推荐系统中，user-item表是非常关键的数据，这个二维表存储了每个用户对每个item的喜欢程度。而在实际应用中，user-item表往往是一个极其巨大，且极其稀疏的表。而这个稀疏性往往也导致推荐系统很难直接应用user-item数据。<br>通过SVD分解，可以将一个大的矩阵降维，进行有损压缩。</p>
 <h3 id="SVD对user-item矩阵进行分解"><a href="#SVD对user-item矩阵进行分解" class="headerlink" title="SVD对user-item矩阵进行分解"></a>SVD对user-item矩阵进行分解</h3><p>通过上文对SVD分解的定义，对于user-item矩阵A，我们可以将其拆分成三个矩阵的乘积。<br>其中S矩阵，是一个对角矩阵，对角上的每个值就是特征值， <strong>特征值用来表示该矩阵向着该特征值对应的特征向量方向的变化权重。</strong> S矩阵对角线上的值依次减小。值越大，说明矩阵在该特征向量方向上变化越大，该特征向量也就越大。也就是说，我们可以选择前k个大的特征值和特征向量来表示原始矩阵，抛弃剩余的小特征值以及对应的特征向量。这样虽然损失了一定的信息，但大大压缩了矩阵的大小。<br>举例：</p>
 <blockquote>
-<p>user-item矩阵A大小为6<em>4， 经过SVD分解，得到三个矩阵U=6</em>6，S=6<em>4，V=4</em>4。通过对S矩阵的观察发现，S对角上前两个值特别大，所以选择k=2对矩阵进行压缩，压缩后的形状为：U=6<em>2，S=2</em>2，V=2*4。</p>
+<p>user-item矩阵A大小为6<em>4， 经过SVD分解，得到三个矩阵U= 6\</em>6，S= 6*4，V=4*4。通过对S矩阵的观察发现，S对角上前两个值特别大，所以选择k=2对矩阵进行压缩，压缩后的形状为：U= 6*2，S= 2*2，V= 2*4。</p>
 </blockquote>
 <p>得到压缩后的三个矩阵后，将三个矩阵相乘，可以得到压缩后的user-item矩阵。经过对比可以发现，原矩阵和压缩后的矩阵每个元素都非常接近。</p>
-<h3 id="SVD矩阵数据相关性"><a href="#SVD矩阵数据相关性" class="headerlink" title="SVD矩阵数据相关性"></a>SVD矩阵数据相关性</h3><p>如上文例子所示，原始的user-item矩阵大小为6<em>4，即一共有6个user和4个item。经过SVD分解，产生的矩阵U=6</em>2，V=2*4。也就是说，矩阵U的每一行可以表示一个user，矩阵V的每一行表示一个item。<br>可以在坐标系中画出每个user和item的位置。<br><img src="/images/recommender_practice/svd_graph.png" alt="svd_graph"><br>从图中可以看出，Season5和Season6距离很近，用户Ben和用户Fred距离也很近。</p>
+<h3 id="SVD矩阵数据相关性"><a href="#SVD矩阵数据相关性" class="headerlink" title="SVD矩阵数据相关性"></a>SVD矩阵数据相关性</h3><p>如上文例子所示，原始的user-item矩阵大小为6<em>4，即一共有6个user和4个item。经过SVD分解，产生的矩阵U=6</em>2，V=2*4。也就是说，矩阵U的每一行可以表示一个user，矩阵V的每一行表示一个item。<br>可以在坐标系中画出每个user和item的位置。</p>
+<p><img src="/images/recommender_practice/svd_graph.png" alt="svd_graph"><br>从图中可以看出，Season5和Season6距离很近，用户Ben和用户Fred距离也很近。</p>
 <p>至此我们通过SVD分解，将每个user和item的特征向量表示压缩到更小的维度空间，然后计算user之间或者item之间的相似度，进行推荐。</p>
 <h2 id="SVD推荐流程"><a href="#SVD推荐流程" class="headerlink" title="SVD推荐流程"></a>SVD推荐流程</h2><ol>
 <li>将原始的user-item矩阵进行SVD分解，得到三个矩阵U，S，V</li>
