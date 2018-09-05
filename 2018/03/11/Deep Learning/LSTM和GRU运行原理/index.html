@@ -88,10 +88,14 @@
 <meta property="og:description" content="在学习RNN过程中，一定会遇到LSTM和GRU，网上有很多LSTM的入门教程，内容非常详细但在我看来有些过于繁杂，没有突出重点，导致每次看懂LSTM的内在原理后过一段时间都会忘掉。这里我仅仅对LSTM和GRU的特性做出简要总结，力求简短明了，便于记忆。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/deep_learning/rnn_basic.png">
-<meta property="og:image" content="http://yoursite.com/images/nn_knowledge/lstm.jpg">
-<meta property="og:image" content="http://yoursite.com/images/nn_knowledge/gru.png">
-<meta property="og:image" content="http://yoursite.com/images/nn_knowledge/compare.png">
-<meta property="og:updated_time" content="2018-09-01T06:29:27.121Z">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/lstm.jpg">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/forget_gate.jpg">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/update_gate.png">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/output_gate.jpg">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/gru_2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/gru.png">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/compare.png">
+<meta property="og:updated_time" content="2018-09-05T07:54:45.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LSTM和GRU运行原理">
 <meta name="twitter:description" content="在学习RNN过程中，一定会遇到LSTM和GRU，网上有很多LSTM的入门教程，内容非常详细但在我看来有些过于繁杂，没有突出重点，导致每次看懂LSTM的内在原理后过一段时间都会忘掉。这里我仅仅对LSTM和GRU的特性做出简要总结，力求简短明了，便于记忆。">
@@ -369,14 +373,37 @@
 <li>梯度消失<br>梯度消失的具体数学原理不在这里重复，主要原因是在进行反向传播更新参数时，偏导数的值小于1，当多个小于1的值相乘时传递到之前的梯度会变得非常小几乎接近于0，也就是说模型“训练不动了”。<br>对应到RNN中，梯度消失往往会导致长期记忆问题，也就是说RNN只会“着眼”于最近的几个相邻时刻的信息，而对于更远的信息RNN几乎没有办法获取。</li>
 <li>梯度爆炸<br>与梯度消失对应的是梯度爆炸，数学原理同样略去，在网上有很多非常详细的教程。梯度爆炸主要指的是偏导数的值远大于1，多个大于1的值相乘会导致参数的更新变化幅度非常大甚至达到NaN。</li>
 </ol>
-<h2 id="LSTM的原理"><a href="#LSTM的原理" class="headerlink" title="LSTM的原理"></a>LSTM的原理</h2><p>本质上是增加了一个叫cell的结构，用来保存神经网络的“记忆”。每次训练时，一个LSTM中共发生三种变换：遗忘门，记忆门，输出门。<br><img src="/images/nn_knowledge/lstm.jpg" alt="lstm"></p>
+<h2 id="LSTM的原理"><a href="#LSTM的原理" class="headerlink" title="LSTM的原理"></a>LSTM的原理</h2><p>本质上是增加了一个叫cell的结构，用来保存神经网络的“记忆”。每次训练时，一个LSTM中共发生三种变换：遗忘门，记忆门，输出门。<br><img src="/images/deep_learning/lstm.jpg" alt="lstm"></p>
 <ul>
-<li><strong>遗忘门</strong> 首先结合当前输入x和上一时刻的输出ht-1，经过sigmoid，计算遗忘门，与cell相乘，相当于对cell内容进行选择性遗忘。</li>
-<li><strong>记忆门</strong> 对x和ht-1和和进行tanh变换，同时对其进行sigmoid变换当做记忆门阀。两者相乘后与cell相加，作为cell当前时刻的state</li>
-<li><strong>输出门</strong> 对x和ht-1进行sigmoid变换当做输出门阀，同时对当前cell的state进行tanh变换，然后与输出门阀相乘，作为当前时刻LSTM的输出。<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4>解决了普通RNN无法很好处理远程依赖问题</li>
+<li><strong>遗忘门</strong> 首先连接当前时刻输入xt和上一时刻的输出h(t-1)，经过sigmoid，计算遗忘门，与cell相乘，相当于对cell内容进行选择性遗忘。<br><img src="/images/deep_learning/forget_gate.jpg" alt="forget_gate"></li>
+<li><strong>记忆门</strong> 对xt和h(t-1)进行tanh变换得到想要记忆到cell中的信息h’，同时对xt&amp;h(t-1)进行sigmoid变换得到记忆门阀。将h’和记忆门相乘后与cell相加，作为cell当前时刻的state<br><img src="/images/deep_learning/update_gate.png" alt="update_gate"></li>
+<li><strong>输出门</strong> 对x&amp;h(t-1)进行sigmoid得到输出门，同时对当前cell的state进行tanh变换，然后与输出门相乘，作为当前时刻LSTM的输出。<br><img src="/images/deep_learning/output_gate.jpg" alt="output_gate"><h3 id="LSTM运行过程"><a href="#LSTM运行过程" class="headerlink" title="LSTM运行过程"></a>LSTM运行过程</h3>LSTM内部主要有三个阶段，分别对应着三个门：</li>
 </ul>
-<h2 id="GRU-门循环单元"><a href="#GRU-门循环单元" class="headerlink" title="GRU 门循环单元"></a>GRU 门循环单元</h2><p>GRU是LSTM的一种变体，保持了LSTM的效果同时又使结构更加简单，所以很流行。<br>在GRU中，将LSTM的输入门，遗忘门，输出门合并成了两个门：<strong>更新门和重置门，更新门用于控制前一时刻的状态信息被带入到当前状态中的程度，更新门的值越大说明前一时刻的状态信息带入越多。重置门用于控制忽略前一时刻状态信息的程度，重置门越小说明忽略的越多</strong><br><img src="/images/nn_knowledge/gru.png" alt="gru"><br>图中zt为更新门，rt为重置门</p>
-<p><img src="/images/nn_knowledge/compare.png" alt="compare"></p>
+<ol>
+<li>遗忘阶段：这个阶段主要是对上一个节点传进来的输入进行选择性忘记。简单来说就是会 “忘记不重要的，记住重要的”。</li>
+<li>选择记忆阶段：这个阶段将这个阶段的输入有选择性地进行“记忆”。主要是会对输入 进行选择记忆。哪些重要则着重记录下来，哪些不重要，则少记一些。</li>
+<li>输出阶段：这个阶段将决定哪些将会被当成当前状态的输出。</li>
+</ol>
+<h3 id="LSTM总结"><a href="#LSTM总结" class="headerlink" title="LSTM总结"></a>LSTM总结</h3><p>通过门控状态来控制传输状态，记住需要长时间记忆的，忘记不重要的信息；而不像普通的RNN那样只能够“呆萌”地仅有一种记忆叠加方式。对很多需要“长期记忆”的任务来说，尤其好用。<br>但也因为引入了很多内容，导致参数变多，也使得训练难度加大了很多。因此很多时候我们往往会使用效果和LSTM相当但参数更少的GRU来构建大训练量的模型。</p>
+<h2 id="GRU-门循环单元"><a href="#GRU-门循环单元" class="headerlink" title="GRU 门循环单元"></a>GRU 门循环单元</h2><p>GRU是LSTM的一种变体，保持了LSTM的效果同时又使结构更加简单，相比LSTM，GRU能够达到几乎相同的效果，并且相比之下更容易进行训练，能够很大程度上提高训练效率，因此很多时候会更倾向于使用GRU。</p>
+<h3 id="GRU结构"><a href="#GRU结构" class="headerlink" title="GRU结构"></a>GRU结构</h3><p>GRU的结构和普通的RNN一样，不同于LSTM使用了cell和hidden state两种状态。GRU只有hidden state。</p>
+<h4 id="GRU门结构"><a href="#GRU门结构" class="headerlink" title="GRU门结构"></a>GRU门结构</h4><p>在GRU中，将LSTM的输入门，遗忘门，输出门合并成了两个门：<strong>更新门z和重置门r，两个门都是对当前时刻输入和上一个hidden state结合后的向量进行sigmoid。</strong></p>
+<h4 id="GRU流程"><a href="#GRU流程" class="headerlink" title="GRU流程"></a>GRU流程</h4><h5 id="1-重置hidden-state"><a href="#1-重置hidden-state" class="headerlink" title="1 重置hidden state"></a>1 重置hidden state</h5><p>首先使用重置门r和上一个hidden state h(t-1)相乘，即对state进行重置后，得到重置后的状态h(t-1)’。</p>
+<h5 id="2-计算h’"><a href="#2-计算h’" class="headerlink" title="2 计算h’"></a>2 计算h’</h5><p>然后将其与当前时刻输入xt进行拼接，在通过一个tanh函数将数据压缩到-1~1之间，得到h’。</p>
+<h5 id="3-更新记忆阶段"><a href="#3-更新记忆阶段" class="headerlink" title="3 更新记忆阶段"></a>3 更新记忆阶段</h5><p>GRU的最后一个阶段叫“更新记忆”阶段，在这个阶段，同时进行“遗忘”和“记忆”两个步骤<br>此时，h’主要包含了当前时刻的输入xt数据。接下来，需要有针对的将h’添加到当前时刻的hidden state中。相当于“记忆了当前时刻的状态”。<br>我们用更新门z和上一个时刻的hidden state：h(t-1)以及上一步计算得到的h’计算当前时刻的hidden state：ht。</p>
+<blockquote>
+<p>ht = z*h(t-1) + (1-z)h’</p>
+</blockquote>
+<p>更新门（这里的 z ）的范围为0~1。门控信号越接近1，代表”记忆“下来的数据越多；而越接近0则代表”遗忘“的越多。<br><img src="/images/deep_learning/gru_2.jpg" alt="gru_2"></p>
+<h3 id="GRU特点"><a href="#GRU特点" class="headerlink" title="GRU特点"></a>GRU特点</h3><p>GRU最大的特点就是使用了同一个门控 z 就同时可以进行遗忘和选择记忆（LSTM则要使用多个门控）。</p>
+<ul>
+<li>z*h(t-1) 表示对上一个hidden state的选择性遗忘，这时更新门可以看做遗忘门</li>
+<li>(1-z)h’ 表示对包含当前时刻输入信息的h’进行选择性记忆，(1-z)也会选择性的忘记h’中一些不重要的信息。</li>
+<li>综上，ht即包含了对上一个时刻t-1信息的选择遗忘，又包含了对当前时刻的选择性记忆</li>
+<li>这里z和(1-z)是联动的，也就是说，对t-1遗忘的越多，对t的记忆就越多，反之亦然。</li>
+</ul>
+<p><img src="/images/deep_learning/gru.png" alt="gru"><br>图中zt为更新门，rt为重置门</p>
+<h3 id="GRU和LSTM的关系"><a href="#GRU和LSTM的关系" class="headerlink" title="GRU和LSTM的关系"></a>GRU和LSTM的关系</h3><p>GRU提出于2014年，LSTM是1997年。GRU的本质结构是和LSTM相似的。<br>我们知道重置门r可以将h(t-1)和xt转换成h’。<br>这里的h’实际上就是LSTM中的hidden state；而GRU中上一个节点传下来的h(t-1)则对应LSTM中的cell state。 z对应着LSTM中的遗忘门，(1-z)对应LSTM中的更新门。<br><img src="/images/deep_learning/compare.png" alt="compare"></p>
 
       
     </div>
@@ -535,7 +562,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -606,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN"><span class="nav-number">1.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN常规变种"><span class="nav-number">1.1.</span> <span class="nav-text">RNN常规变种</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Deep-RNN"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">Deep RNN</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bi-Directional-RNN"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">Bi_Directional RNN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN问题"><span class="nav-number">1.2.</span> <span class="nav-text">RNN问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM的原理"><span class="nav-number">2.</span> <span class="nav-text">LSTM的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">2.0.1.</span> <span class="nav-text">功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GRU-门循环单元"><span class="nav-number">3.</span> <span class="nav-text">GRU 门循环单元</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN"><span class="nav-number">1.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN常规变种"><span class="nav-number">1.1.</span> <span class="nav-text">RNN常规变种</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Deep-RNN"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">Deep RNN</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bi-Directional-RNN"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">Bi_Directional RNN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN问题"><span class="nav-number">1.2.</span> <span class="nav-text">RNN问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM的原理"><span class="nav-number">2.</span> <span class="nav-text">LSTM的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LSTM运行过程"><span class="nav-number">2.1.</span> <span class="nav-text">LSTM运行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSTM总结"><span class="nav-number">2.2.</span> <span class="nav-text">LSTM总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GRU-门循环单元"><span class="nav-number">3.</span> <span class="nav-text">GRU 门循环单元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GRU结构"><span class="nav-number">3.1.</span> <span class="nav-text">GRU结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GRU门结构"><span class="nav-number">3.1.1.</span> <span class="nav-text">GRU门结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GRU流程"><span class="nav-number">3.1.2.</span> <span class="nav-text">GRU流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-重置hidden-state"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">1 重置hidden state</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-计算h’"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">2 计算h’</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-更新记忆阶段"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">3 更新记忆阶段</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GRU特点"><span class="nav-number">3.2.</span> <span class="nav-text">GRU特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GRU和LSTM的关系"><span class="nav-number">3.3.</span> <span class="nav-text">GRU和LSTM的关系</span></a></li></ol></li></ol></div>
             
 
           </div>

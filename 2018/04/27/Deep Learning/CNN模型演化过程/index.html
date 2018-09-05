@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep Learning," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文介绍了从LeNet到ResNet的CNN模型演化过程">
+<meta name="keywords" content="Deep Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CNN模型演化过程">
+<meta property="og:url" content="http://yoursite.com/2018/04/27/Deep Learning/CNN模型演化过程/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="本文介绍了从LeNet到ResNet的CNN模型演化过程">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/04/27/Deep%20Learning/CNN模型演化过程/images/deep_learning/resnet_block.png">
+<meta property="og:updated_time" content="2018-09-05T11:22:21.837Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CNN模型演化过程">
+<meta name="twitter:description" content="本文介绍了从LeNet到ResNet的CNN模型演化过程">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/27/Deep%20Learning/CNN模型演化过程/images/deep_learning/resnet_block.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/27/Deep Learning/CNN模型演化过程/"/>
+
+
+
+
+
+  <title>CNN模型演化过程 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/Deep Learning/CNN模型演化过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CNN模型演化过程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T00:00:00+09:00">
+                2018-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/27/Deep Learning/CNN模型演化过程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/27/Deep Learning/CNN模型演化过程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文介绍了从LeNet到ResNet的CNN模型演化过程</p>
+<a id="more"></a>
+<h2 id="几个经典CNN模型"><a href="#几个经典CNN模型" class="headerlink" title="几个经典CNN模型"></a>几个经典CNN模型</h2><h4 id="LeNet"><a href="#LeNet" class="headerlink" title="LeNet"></a>LeNet</h4><p>卷积神经网络的鼻祖，由两个卷积层、两个池化层和两个全连接层组成，卷积都是5*5的模板，stride=1，池化都是MAX。</p>
+<h4 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h4><p>AlexNet最大的贡献是证明了CNN在复杂模型上的有效性。</p>
+<ul>
+<li>在LeNet的基础上使用了5个卷积层，五个最大池化层和三个全连接层。输出端是一个softmax。</li>
+<li>为了加快训练速度，使用了ReLU和GPU并行</li>
+<li>为了减少过拟合，采用了dropout和data augmentation（数据增强）以及LRN（局部相应归一化）</li>
+<li>AlexNet确立了CNN在CV中的统治地位</li>
+</ul>
+<h4 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h4><p>相当于AlexNet的增强版，有着结构简单但深度更深，精度更强的优势。特点是连续卷积多，计算量巨大。</p>
+<ul>
+<li>VGG 与 AlexNet 最鲜明的对比是卷积层、卷积核设计的变化。VGGNet 探索了卷积神经网络的深度与其性能之间的关系，通过反复堆叠 3x3 的小型卷积核和 2x2 的最大池化层，成功构筑了 16~19 层深的卷积神经网络。</li>
+<li>证明了可以用多个小卷积核堆叠等价于一个大卷积核，而多个小卷积核的参数量要更少</li>
+<li>VGG性能优异：同 AlexNet 提升明显，同 GoogleNet, ResNet 相比，表现相近</li>
+<li>VGG是选择最多的基本模型，方便进行结构的优化、设计，SSD, RCNN，等其他任务的基本模型(base model)</li>
+</ul>
+<h4 id="GoogleNet"><a href="#GoogleNet" class="headerlink" title="GoogleNet"></a>GoogleNet</h4><ul>
+<li>GoogleNet的特点是结构复杂，多分辨率融合，证明了用更多的卷积，更深的层次可以得到更好的效果</li>
+<li>GoogleNet主要目标是找到最优的稀疏结构单元，也就是 Inception module。Inception 结构是将不同的卷积层通过并联的方式结合在一起，它主要改进了网络内部计算资源的利用率，让我们能在固定计算资源下增加神经网络深度和宽度。</li>
+<li>GooLeNet 的 Inception 对特征图进行了三种不同的卷积(1x1, 3x3, 5x5)来提取多个尺度的信息，也就是提取更多的特征。举个例子，一张图片有两个人，近处一个远处一个，如果只用 5x5，可能对近处的人的学习比较好，而对远处那个人，由于尺寸的不匹配，达不到理想的学习效果，而采用不同卷积核来学习，相当于融合了不同的分辨率，可以较好的解决这个问题。把这些卷积核卷积后提取的 feature map进行聚合操作合并作为输出，但会发现这样结构下的参数暴增，耗费大量的计算资源。</li>
+<li>改进方案，在 3x3，5x5 之前，以及 pooling 以后都跟上一个 1x1 的卷积用以降维，就可以在提取更多特征的同时，大量减少参数，降低计算量。1x1 的卷积核性价比很高，很小的计算量就能增加一层特征变换和非线性化(如果后面接 ReLU)，另外，这也是一种降维的方式，可以减少过拟合。</li>
+<li>GoogleNet实现了参数数量更少，但准确率更高的效果。</li>
+<li>提出了Batch Normalization</li>
+</ul>
+<h4 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h4><h2 id="ResNet网络"><a href="#ResNet网络" class="headerlink" title="ResNet网络"></a>ResNet网络</h2><p>深度卷积网络自然的整合了低中高不同层次的特征，特征的层次可以靠加深网络的层次来丰富。从而，在构建卷积网络时，网络的深度越高，可抽取的特征层次就越丰富。<br>但是当使用更深层的网络时，会发生梯度消失、爆炸问题，这个问题很大程度通过标准的初始化和正则化层来基本解决，这样可以确保几十层的网络能够收敛，但是随着网络层数的增加，梯度消失或者爆炸的问题仍然存在。</p>
+<h3 id="网络退化问题"><a href="#网络退化问题" class="headerlink" title="网络退化问题"></a>网络退化问题</h3><p><strong>网络退化问题</strong>，举个例子，假设已经有了一个最优化的网络结构，是18层。当我们设计网络结构的时候，并不知道多少层的网络最优化网络结构，假设设计了34层网络结构。那么多出来的16层其实是冗余的，我们希望训练网络的过程中，模型能够自己训练这五层为恒等映射，也就是经过这层时的输入与输出完全一样。但是往往模型很难将这16层恒等映射的参数学习正确，那么就一定会不比最优化的18层网络结构性能好，这就是随着网络深度增加，模型会产生退化现象。它不是由过拟合产生的，而是由冗余的网络层学习了不是恒等映射的参数造成的。</p>
+<h3 id="残差块"><a href="#残差块" class="headerlink" title="残差块"></a>残差块</h3><p>ResNet希望网络可以自动训练出哪些隐藏层是冗余的，并将冗余层的输入输出相等。具体方法是将原网络的基层改成一个残差块，残差块的构造如下：<br><img src="images/deep_learning/resnet_block.png" alt="ResNet_block"><br>X是这一层残差块的输入，也称作F(x)为残差，x为输入值，F（X）是经过第一层线性变化并激活后的输出，该图表示在残差网络中，第二层进行线性变化之后激活之前，F(x)加入了这一层输入值X，然后再进行激活后输出。在第二层输出值激活前加入X，这条路径称作shortcut连接。</p>
+<h3 id="残差块原理"><a href="#残差块原理" class="headerlink" title="残差块原理"></a>残差块原理</h3><p>假设该层是冗余的，我们想让该层的映射h(x)=x，但这是比较困难的。ResNet想到避免去学习该层恒等映射的参数，使用了如上图的结构，让h(x)=F(x)+x;这里的F(x)我们称作残差项，我们发现，要想让该冗余层能够恒等映射，我们只需要学习F(x)=0。学习F(x)=0比学习h(x)=x要简单，因为一般每层网络中的参数初始化偏向于0，这样在相比于更新该网络层的参数来学习h(x)=x，该冗余层学习F(x)=0的更新参数能够更快收敛。</p>
+<h3 id="ResNet使用技巧"><a href="#ResNet使用技巧" class="headerlink" title="ResNet使用技巧"></a>ResNet使用技巧</h3><p>如果遇到了h(x) = F(x)+x中，F(x)和x维度不同，需要对x进行线性变换。可以使用zero-padding方法增加维度。或者采用一个新的1*1卷积映射但这样会增加参数。<br>ResNet由于自身网络结构原因，进行反向传播时的梯度恒大于1，解决了梯度消失问题。</p>
+<h3 id="ResNet特点"><a href="#ResNet特点" class="headerlink" title="ResNet特点"></a>ResNet特点</h3><ul>
+<li>由微软提出。ResNet的层数最多，训练用了8个GPU三周完成。</li>
+<li>最大特性是允许原始输入信息传输到后面的层中，可以将一个卷积层的输出和输入相融合后再输入到下一个卷积层。这样使得后面的层可以直接学习残差，整个神经网络只需要学习输入输出差别的那部分，简化了学习目标和难度。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/21/Machine Learning/各种Boosting树/" rel="next" title="机器学习中的树算法总结">
+                <i class="fa fa-chevron-left"></i> 机器学习中的树算法总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/27/Reading/SICP第二章笔记/" rel="prev" title="SICP第二章:构造数据抽象">
+                SICP第二章:构造数据抽象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个经典CNN模型"><span class="nav-number">1.</span> <span class="nav-text">几个经典CNN模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeNet"><span class="nav-number">1.0.1.</span> <span class="nav-text">LeNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AlexNet"><span class="nav-number">1.0.2.</span> <span class="nav-text">AlexNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VGG"><span class="nav-number">1.0.3.</span> <span class="nav-text">VGG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GoogleNet"><span class="nav-number">1.0.4.</span> <span class="nav-text">GoogleNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ResNet"><span class="nav-number">1.0.5.</span> <span class="nav-text">ResNet</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResNet网络"><span class="nav-number">2.</span> <span class="nav-text">ResNet网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络退化问题"><span class="nav-number">2.1.</span> <span class="nav-text">网络退化问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#残差块"><span class="nav-number">2.2.</span> <span class="nav-text">残差块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#残差块原理"><span class="nav-number">2.3.</span> <span class="nav-text">残差块原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet使用技巧"><span class="nav-number">2.4.</span> <span class="nav-text">ResNet使用技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet特点"><span class="nav-number">2.5.</span> <span class="nav-text">ResNet特点</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/04/27/Deep Learning/CNN模型演化过程/';
+          this.page.identifier = '2018/04/27/Deep Learning/CNN模型演化过程/';
+          this.page.title = 'CNN模型演化过程';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
