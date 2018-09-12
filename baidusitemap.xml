@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/08/30/Algorithms/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%E4%B9%8BBitMap/</loc>
+    <lastmod>2018-09-12T07:33:14.437Z</lastmod>
+    <data>
+        <display>
+        <title>经典算法总结之BitMap</title>
+        <pubTime>2018-08-29T15:00:00.000Z</pubTime>
+        
+        <tag>Algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://yoursite.com/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/04/22/Machine%20Learning/%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E4%B9%8BGBDT/</loc>
-    <lastmod>2018-09-08T07:04:22.130Z</lastmod>
+    <lastmod>2018-09-09T04:04:11.429Z</lastmod>
     <data>
         <display>
         <title>树学习算法总结之GBDT</title>
@@ -71,9 +91,9 @@
         <title>Python中的Magic Method</title>
         <pubTime>2018-08-15T15:00:00.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>Programming Language</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -414,9 +434,9 @@
         
         <tag>Deep Learning</tag>
          
-        <tag>Project</tag>
-         
         <tag>Recommender System</tag>
+         
+        <tag>Project</tag>
          
          
            
@@ -479,9 +499,9 @@
         <title>Java字符串</title>
         <pubTime>2017-09-11T15:00:00.000Z</pubTime>
         
-        <tag>Programming Language</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Programming Language</tag>
          
          
            
@@ -501,9 +521,9 @@
         <title>Python变量作用域</title>
         <pubTime>2018-08-20T15:00:00.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>Programming Language</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -523,9 +543,9 @@
         <title>python装饰器</title>
         <pubTime>2018-04-11T15:00:00.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>Programming Language</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -904,9 +924,9 @@
         <title>自制编程语言</title>
         <pubTime>2018-07-26T15:00:00.000Z</pubTime>
         
-        <tag>Programming Language</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Programming Language</tag>
          
         <tag>Project</tag>
          

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Machine Learning," />
+  <meta name="keywords" content="Algorithm," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="监督学习的任务就是从数据中学习一个模型，应用这一模型，对给定的输入X预测相应的输出Y。这个模型的一般形式为决策函数Y=f(X)或者条件概率分布P(Y|X)。而生成模型和判别模型的区别就是如何求得P(Y|X).">
-<meta name="keywords" content="Machine Learning">
+<meta name="description" content="本文总结一些常见的经典算法，这些算法更重于思想，实现起来比较简单。故将其总结到了一起。">
+<meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="生成模型和判别模型">
-<meta property="og:url" content="http://yoursite.com/2017/10/12/Machine Learning/生成模型和判别模型/index.html">
+<meta property="og:title" content="经典算法总结之BitMap">
+<meta property="og:url" content="http://yoursite.com/2018/08/30/Algorithms/经典算法总结之BitMap/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="监督学习的任务就是从数据中学习一个模型，应用这一模型，对给定的输入X预测相应的输出Y。这个模型的一般形式为决策函数Y=f(X)或者条件概率分布P(Y|X)。而生成模型和判别模型的区别就是如何求得P(Y|X).">
+<meta property="og:description" content="本文总结一些常见的经典算法，这些算法更重于思想，实现起来比较简单。故将其总结到了一起。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-01T06:31:51.056Z">
+<meta property="og:updated_time" content="2018-09-12T07:33:14.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生成模型和判别模型">
-<meta name="twitter:description" content="监督学习的任务就是从数据中学习一个模型，应用这一模型，对给定的输入X预测相应的输出Y。这个模型的一般形式为决策函数Y=f(X)或者条件概率分布P(Y|X)。而生成模型和判别模型的区别就是如何求得P(Y|X).">
+<meta name="twitter:title" content="经典算法总结之BitMap">
+<meta name="twitter:description" content="本文总结一些常见的经典算法，这些算法更重于思想，实现起来比较简单。故将其总结到了一起。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/12/Machine Learning/生成模型和判别模型/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/30/Algorithms/经典算法总结之BitMap/"/>
 
 
 
 
 
-  <title>生成模型和判别模型 | Black Feather</title>
+  <title>经典算法总结之BitMap | Black Feather</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/12/Machine Learning/生成模型和判别模型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/30/Algorithms/经典算法总结之BitMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">生成模型和判别模型</h1>
+          <h1 class="post-title" itemprop="name headline">经典算法总结之BitMap</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T00:00:00+09:00">
-                2017-10-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-30T00:00:00+09:00">
+                2018-08-30
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -323,9 +323,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/12/Machine Learning/生成模型和判别模型/#comments" itemprop="discussionUrl">
+                <a href="/2018/08/30/Algorithms/经典算法总结之BitMap/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/12/Machine Learning/生成模型和判别模型/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/08/30/Algorithms/经典算法总结之BitMap/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -353,40 +353,18 @@
       
 
       
-        <p>监督学习的任务就是从数据中学习一个模型，应用这一模型，对给定的输入X预测相应的输出Y。这个模型的一般形式为决策函数Y=f(X)或者条件概率分布P(Y|X)。而生成模型和判别模型的区别就是如何求得P(Y|X).<br><a id="more"></a></p>
-<p>决策函数Y=f(X)：你输入一个X，它就输出一个Y，这个Y与一个阈值比较，根据比较结果判定X属于哪个类别。例如两类（w1和w2）分类问题，如果Y大于阈值，X就属于类w1，如果小于阈值就属于类w2。这样就得到了该X对应的类别了。</p>
-<p>条件概率分布P(Y|X)：你输入一个X，它通过比较它属于所有类的概率，然后输出概率最大的那个作为该X对应的类别。例如：如果P(w1|X)大于P(w2|X)，那么我们就认为X是属于w1类的。</p>
-<h2 id="生成方法和判别方法"><a href="#生成方法和判别方法" class="headerlink" title="生成方法和判别方法"></a>生成方法和判别方法</h2><p>监督学习方法分生成方法（Generative approach）和判别方法（Discriminative approach），所学到的模型分别称为生成模型（Generative Model）和判别模型（Discriminative Model）。</p>
-<h4 id="判别方法"><a href="#判别方法" class="headerlink" title="判别方法"></a>判别方法</h4><p>由数据直接学习决策函数Y=f(X)或者条件概率分布P(Y|X)作为预测的模型，即判别模型。<br>基本思想是有限样本条件下建立判别函数，不关心样本是以何种概率分布产生的，直接研究预测模型。典型的判别模型包括： <strong>k近邻，感知机，决策树，支持向量机等。</strong></p>
-<h6 id="判别方法的特点"><a href="#判别方法的特点" class="headerlink" title="判别方法的特点"></a>判别方法的特点</h6><ul>
-<li>判别方法寻找不同类别之间的最优分类面，反映的是异类数据之间的差异;</li>
-<li>判别方法利用了训练数据的类别标识信息，直接学习的是条件概率P(Y|X)或者决策函数f(X)，直接面对预测，往往学习的准确率更高；</li>
-<li>由于直接学习条件概率P(Y|X)或者决策函数f(X)，可以对数据进行各种程度上的抽象、定义特征并使用特征，因此可以简化学习问题。</li>
-<li>缺点是不能反映训练数据本身的特性</li>
-</ul>
-<h4 id="生成方法"><a href="#生成方法" class="headerlink" title="生成方法"></a>生成方法</h4><p>由数据学习联合概率密度分布P(X,Y)，然后求出条件概率分布P(Y|X)作为预测的模型，即生成模型：P(Y|X)= P(X,Y)/ P(X)。基本思想是首先建立样本的联合概率概率密度模型P(X,Y)，然后再得到后验概率P(Y|X)，再利用它进行分类。<br>这样的方法之所以称为生成方法，是因为模型表示了给定输入X产生输出Y的生成关系。用于随机生成的观察值建模，特别是在给定某些隐藏参数情况下。典型的生成模型有：<strong>朴素贝叶斯和隐马尔科夫模型等。</strong> 这种方法一般建立在统计学和Bayes理论的基础之上。</p>
-<h6 id="生成方法的特点"><a href="#生成方法的特点" class="headerlink" title="生成方法的特点"></a>生成方法的特点</h6><ul>
-<li>从统计的角度表示数据的分布情况，能够反映同类数据本身的分布情况;</li>
-<li>生成方法还原出联合概率分布P(X, y)，而判别方法不能；</li>
-<li>生成方法的学习收敛速度更快、即当样本容量增加的时候，学到的模型可以更快地收敛于真实模型（由于已经学习到了概率分布）；</li>
-<li>当存在隐变量时，仍可以用生成方法学习，此时判别方法不能用</li>
-</ul>
-<h2 id="判别模型和生成模型对比"><a href="#判别模型和生成模型对比" class="headerlink" title="判别模型和生成模型对比"></a>判别模型和生成模型对比</h2><p>（1）训练时，二者优化准则不同<br>生成模型优化训练数据的联合分布概率；<br>判别模型优化训练数据的条件分布概率，判别模型与序列标记问题有较好的对应性。<br>（2）对于观察序列的处理不同<br>生成模型中，观察序列作为模型的一部分；<br>判别模型中，观察序列只作为条件，因此可以针对观察序列设计灵活的特征。<br>（3）训练复杂度不同<br>判别模型训练复杂度较高。<br>（4）本质区别<br>判别模型估计的是条件概率分布P(Y|X), 生成模型估计的是联合概率分布P(X, Y)<br>（5）由生成模型可以得到判别模型，但由判别模型得不到生成模型。</p>
-<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><p>例如我们有一个输入数据x，然后我们想将它分类为标签y。（迎面走过来一个人，你告诉我这个是男的还是女的）</p>
-<p>生成模型学习联合概率分布p(x,y)，而判别模型学习条件概率分布p(y|x)。</p>
-<p>下面是个简单的例子：</p>
-<p>例如我们有以下(x,y)形式的数据：(1,0), (1,0), (2,0), (2, 1)</p>
-<p>那么p(x,y)是：</p>
-<pre><code>      y=0   y=1
-    -----------
-x=1 | 1/2   0
-x=2 | 1/4   1/4
-</code></pre><p>而p(y|x) 是：</p>
-<pre><code>    y=0   y=1
-    -----------
-x=1| 1     0
-x=2| 1/2   1/2
-</code></pre>
+        <p>本文总结一些常见的经典算法，这些算法更重于思想，实现起来比较简单。故将其总结到了一起。</p>
+<a id="more"></a>
+<h2 id="BitMap"><a href="#BitMap" class="headerlink" title="BitMap"></a>BitMap</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>如何对大量整数进行去重？我们知道，一般情况下一个int占用4字节，现在有10亿个小于1亿的int数文件，要求输出0~1亿这些整数中，从未在文件中出现的整数。<br>10亿个数大概大小为3.72G，显然不能直接将如此庞大的数据一次性读入内存，而如果分批次读取有会大量消耗IO。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>构建一个长度为1亿的bit数组。我们知道1 bit有两个取值，1或0。这里，我们用1表示该位置表示的index出现过，0表示未出现。就可以将原 10亿<em>4</em>8 bit的数组大小压缩成10亿 bit。</p>
+<h3 id="具体思路"><a href="#具体思路" class="headerlink" title="具体思路"></a>具体思路</h3><p>这时候会遇到一个问题：常见编程语言数据存储的最小单位为字节（即便是boolean类型根据java虚拟机规范，也是四个字节）。而我们为了压缩内存，用的数据类型是bit而不是字节。这就涉及到第一个问题，如何转换。<br>为了快速定位需要改变的bit，需要找到两个值：index和position，前者为对应的在字节数组的index，后者为在该字节对应的位。<br>比如说输入的数字为N，对应的</p>
+<p>index(N) = N/8 = N&gt;&gt;&gt;3<br>position(N) = N%8 = N&amp;0x07</p>
+<h4 id="add方法"><a href="#add方法" class="headerlink" title="add方法"></a>add方法</h4><p>在明确了定位index和position的方法后，向一个bits[]添加元素的方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private byte[] bits;</span><br><span class="line">public void add(int x)&#123;</span><br><span class="line">    int index = x&gt;&gt;&gt;3;</span><br><span class="line">    int position = x&amp;0x07;</span><br><span class="line">    bits[index] |= (1&lt;&lt;position);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意这里需要对’1’进行左移position位，然后和原元素取或。</p>
+<h4 id="clear方法"><a href="#clear方法" class="headerlink" title="clear方法"></a>clear方法</h4><p>将给定元素N从bits[]数组中删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void clear(int x)&#123;</span><br><span class="line">    int index = x&gt;&gt;&gt;3;</span><br><span class="line">    int position = x &amp; 0x07;</span><br><span class="line">    bits[index] &amp;= ~(1&lt;&lt;position) // 取与</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="contain方法"><a href="#contain方法" class="headerlink" title="contain方法"></a>contain方法</h4><p>判断输入int整数是否包含在bits[]中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public boolean contain(int x)&#123;</span><br><span class="line">    int index = x &gt;&gt;&gt; 3;</span><br><span class="line">    int position = x &amp; 0x07</span><br><span class="line">    if ((bits[index]&gt;&gt;position)&amp;1) == 1)</span><br><span class="line">        return true;</span><br><span class="line">    else</span><br><span class="line">        return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="java-util-BitSet类"><a href="#java-util-BitSet类" class="headerlink" title="java.util.BitSet类"></a>java.util.BitSet类</h3><p>在java中，直接提供了BitSet类方便我们使用，常见方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bits = BitSet(int size)</span><br><span class="line">bits.clear(int index) 将指定index设为false</span><br><span class="line">bits.get(int index) 返回对应index的值</span><br><span class="line">bits.set(int index, boolean v)</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -432,7 +410,7 @@ x=2| 1/2   1/2
       
         <div class="post-tags">
           
-            <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
+            <a href="/tags/Algorithm/" rel="tag"><i class="fa fa-tag"></i> Algorithm</a>
           
         </div>
       
@@ -445,8 +423,8 @@ x=2| 1/2   1/2
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/12/Programming Language/Java字符串/" rel="next" title="Java字符串">
-                <i class="fa fa-chevron-left"></i> Java字符串
+              <a href="/2018/08/25/Machine Learning/SVD分解在推荐系统中的应用/" rel="next" title="SVD分解在推荐系统中的应用">
+                <i class="fa fa-chevron-left"></i> SVD分解在推荐系统中的应用
               </a>
             
           </div>
@@ -454,10 +432,6 @@ x=2| 1/2   1/2
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/12/CUDA/CUDA学习笔记（二）/" rel="prev" title="CUDA 学习笔记（二）">
-                CUDA 学习笔记（二） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -615,7 +589,7 @@ x=2| 1/2   1/2
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成方法和判别方法"><span class="nav-number">1.</span> <span class="nav-text">生成方法和判别方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#判别方法"><span class="nav-number">1.0.1.</span> <span class="nav-text">判别方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#判别方法的特点"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">判别方法的特点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成方法"><span class="nav-number">1.0.2.</span> <span class="nav-text">生成方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#生成方法的特点"><span class="nav-number">1.0.2.0.1.</span> <span class="nav-text">生成方法的特点</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判别模型和生成模型对比"><span class="nav-number">2.</span> <span class="nav-text">判别模型和生成模型对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#举例"><span class="nav-number">3.</span> <span class="nav-text">举例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BitMap"><span class="nav-number">1.</span> <span class="nav-text">BitMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方法"><span class="nav-number">1.2.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体思路"><span class="nav-number">1.3.</span> <span class="nav-text">具体思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#add方法"><span class="nav-number">1.3.1.</span> <span class="nav-text">add方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#clear方法"><span class="nav-number">1.3.2.</span> <span class="nav-text">clear方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contain方法"><span class="nav-number">1.3.3.</span> <span class="nav-text">contain方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-util-BitSet类"><span class="nav-number">1.4.</span> <span class="nav-text">java.util.BitSet类</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -785,9 +759,9 @@ x=2| 1/2   1/2
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/10/12/Machine Learning/生成模型和判别模型/';
-          this.page.identifier = '2017/10/12/Machine Learning/生成模型和判别模型/';
-          this.page.title = '生成模型和判别模型';
+          this.page.url = 'http://yoursite.com/2018/08/30/Algorithms/经典算法总结之BitMap/';
+          this.page.identifier = '2018/08/30/Algorithms/经典算法总结之BitMap/';
+          this.page.title = '经典算法总结之BitMap';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://blackfeather.disqus.com/embed.js';

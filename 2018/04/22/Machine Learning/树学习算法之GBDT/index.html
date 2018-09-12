@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/images/other_ML_knowledge/decision_tree.jpg">
 <meta property="og:image" content="http://yoursite.com/images/other_ML_knowledge/boosting_tree.jpg">
 <meta property="og:image" content="http://yoursite.com/images/other_ML_knowledge/gbdt_feature_select.png">
-<meta property="og:updated_time" content="2018-09-08T07:04:22.130Z">
+<meta property="og:updated_time" content="2018-09-09T04:04:11.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树学习算法总结之GBDT">
 <meta name="twitter:description" content="在机器学习中，决策树扮演了很重要的决策，不仅仅是传统的决策树，bagging集成方法的代表随机森林以及Boosting集成方法Adaboot，GBDT，xgboost都是基于决策树。决策树广泛的应用于机器学习的各个领域并且取得了良好的效果。本文就是对整个决策树体系的整理：从决策树到xgboost">
@@ -378,7 +378,7 @@
 <li>GBDT 也可用于二分类问题（设定阈值，大于为正，否则为负）和多分类问题。</li>
 </ul>
 <h3 id="GBDT用于分类"><a href="#GBDT用于分类" class="headerlink" title="GBDT用于分类"></a>GBDT用于分类</h3><p>首先，无论是回归任务还是分类任务，GBDT内部的决策树都是CART回归树。而由于GBDT是不断拟合上一棵树的残差，而在分类任务中类别的相减是没有意义的。所以GBDT应用于分类任务时，需要对模型进行一定的修改。</p>
-<h4 id="为每一个类构建GBDT"><a href="#为每一个类构建GBDT" class="headerlink" title="为每一个类构建GBDT"></a>为每一个类构建GBDT</h4><p>GBDT用于分类任务的方法核心思想是：<strong>对每一个类都构建一个GBDT</strong>。<br>举个例子：分类任务一共有三个类，我们可以用one-hot-encoding来表示每个样本的类别，设样本x属于第二类，则x对应的label为：[0, 1, 0]。</p>
+<h4 id="为每一个类构建GBDT"><a href="#为每一个类构建GBDT" class="headerlink" title="为每一个类构建GBDT"></a>为每一个类构建GBDT</h4><p>GBDT用于分类任务的方法核心思想是：<strong>对每一个类都构建一个GBDT</strong>。<br>举个例子：分类任务一共有三个类，我们可以用one-hot-encoding来表示每个样本的类别，设样本x属于第二类，则x对应的label为：[0, 1, 0]。<br>针对这个有三个类的分类，实质上是在 <strong>每轮训练的时候同时训练三棵树，第一棵树针对样本x的第一类，输入为(x, 0)，第二棵树针对样本的第二类，输入为(x, 1)，第三棵树针对样本第三类，输入为(x, 0)</strong>，而这三棵树就将原问题转换为了三个回归问题，拟合的label分别为：0，1，0。<br>在测试阶段，将测试数据同时输入到三个GBDT中，得到三个预测值，然后可以通过softmax将其转换为对应每个label预测的概率值。</p>
 <h3 id="GBDT和随机森林比较"><a href="#GBDT和随机森林比较" class="headerlink" title="GBDT和随机森林比较"></a>GBDT和随机森林比较</h3><h4 id="GBDT和随机森林的相同点"><a href="#GBDT和随机森林的相同点" class="headerlink" title="GBDT和随机森林的相同点"></a>GBDT和随机森林的相同点</h4><ul>
 <li>都是由多棵树组成，最终的结果都由多棵树共同决定。<h4 id="GBDT和随机森林的不同点"><a href="#GBDT和随机森林的不同点" class="headerlink" title="GBDT和随机森林的不同点"></a>GBDT和随机森林的不同点</h4></li>
 <li>组成随机森林的可以是分类树、回归树；组成 GBDT 只能是回归树；</li>
@@ -470,8 +470,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/27/Deep Learning/CNN模型演化过程/" rel="prev" title="CNN模型演化过程">
-                CNN模型演化过程 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/27/Reading/SICP第二章笔记/" rel="prev" title="SICP第二章:构造数据抽象">
+                SICP第二章:构造数据抽象 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -559,7 +559,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
