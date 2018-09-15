@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="总结python使用过程中有用的函数和技巧。">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python使用技巧之基础篇">
+<meta property="og:url" content="http://yoursite.com/2018/05/26/Programming Language/Python常用函数总结/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="总结python使用过程中有用的函数和技巧。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-12T09:28:11.782Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python使用技巧之基础篇">
+<meta name="twitter:description" content="总结python使用过程中有用的函数和技巧。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/26/Programming Language/Python常用函数总结/"/>
+
+
+
+
+
+  <title>Python使用技巧之基础篇 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/Programming Language/Python常用函数总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python使用技巧之基础篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T00:00:00+09:00">
+                2018-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/26/Programming Language/Python常用函数总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/26/Programming Language/Python常用函数总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>总结python使用过程中有用的函数和技巧。</p>
+<a id="more"></a>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="Number相关"><a href="#Number相关" class="headerlink" title="Number相关"></a>Number相关</h3><p>因为python是动态语言，不需要指定变量的类型，如果想要指定类型，可以在赋值时进行操作。如： long型是无限大小整数，整数 <strong>最后一项是大写或小写的L</strong></p>
+<h4 id="python常见类型转换"><a href="#python常见类型转换" class="headerlink" title="python常见类型转换"></a>python常见类型转换</h4><ol>
+<li>int(); long(); float();</li>
+<li>str()</li>
+<li>repr() 将对象转换为表达式字符串</li>
+<li>tuple(); list();</li>
+<li>chr() 将一个int转换为字符（ASCII）</li>
+<li>unichr() 将一个整数转为字符（Unicode）</li>
+<li>ord() 将一个字符转换成对应的ASCII值</li>
+<li>hex() 将一个整数转换成十六进制字符串</li>
+<li>oct() 将一个整数转换成八进制字符串<h4 id="常见数学函数"><a href="#常见数学函数" class="headerlink" title="常见数学函数"></a>常见数学函数</h4></li>
+<li>abs(); log(x, y); log10(); max(); min(); pow(); sqrt()</li>
+<li>ceil() 返回数字的上入整数，如math.ceil(4.1) 返回5</li>
+<li>exp(x) 返回e的x次幂</li>
+<li>floor(x) 返回数字的下舍整数，如math.floor(4.9) 返回4</li>
+<li>modf(x)    返回x的整数部分与小数部分，两部分的数值符号与x相同，整数部分以浮点型表示。<h4 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h4></li>
+<li>choose(seq) 从序列seq中随机选择一个元素返回</li>
+<li>randrange(start, stop, step) 从指定范围内，按指定基数递增的集合中获取一个随机数</li>
+<li>seed() 改变随机数种子</li>
+<li>shuffle(seq) 将序列所有元素洗牌</li>
+<li>uniform(x, y) 随机生成一个实数，取值范围在[x,y]之间<h4 id="内置常量"><a href="#内置常量" class="headerlink" title="内置常量"></a>内置常量</h4></li>
+<li>pi 圆周率</li>
+<li>e 自然常数</li>
+</ol>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>Python 使用反斜杠()转义特殊字符，如果你不想让反斜杠发生转义，可以在字符串前面添加一个 r，表示原始字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(&apos;Ru\noob&apos;)</span><br><span class="line">Ru</span><br><span class="line">oob</span><br><span class="line">print(r&apos;Ru\noob&apos;)</span><br><span class="line">Ru\noob</span><br></pre></td></tr></table></figure></p>
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><h4 id="list-insert-index-obj"><a href="#list-insert-index-obj" class="headerlink" title="list.insert(index, obj)"></a>list.insert(index, obj)</h4><p>向指定位置插入一个对象</p>
+<h2 id="内置函数使用"><a href="#内置函数使用" class="headerlink" title="内置函数使用"></a>内置函数使用</h2><h3 id="round-对变量进行四舍五入"><a href="#round-对变量进行四舍五入" class="headerlink" title="round()对变量进行四舍五入"></a>round()对变量进行四舍五入</h3><p>在python3中，可以使用round()函数进行四舍五入输出：</p>
+<blockquote>
+<p>round(x, n)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(round(3.4)) #3</span><br><span class="line">print(round(3.5)) #4</span><br><span class="line">print(round(1.95555, 2)) #1.86 保留小数点后2位</span><br><span class="line">print(round(1241757, -3)) #1242000 舍去小数点前3位</span><br></pre></td></tr></table></figure>
+<h2 id="编程技巧"><a href="#编程技巧" class="headerlink" title="编程技巧"></a>编程技巧</h2><h3 id="数据向量化"><a href="#数据向量化" class="headerlink" title="数据向量化"></a>数据向量化</h3><p>在python中，对w和x进行乘法时，使用numpy的向量乘法要远快于使用for循环进行逐步相乘，一般情况下前者比后者快300倍左右。所以对ML代码尽可能向量化将大大加快运行速度。<br>经验法则：<strong>只要有其他可能，就不要使用显式for循环</strong></p>
+<h3 id="python广播机制"><a href="#python广播机制" class="headerlink" title="python广播机制"></a>python广播机制</h3><p>python的广播机制可以让不同维度的向量或者矩阵进行标量运算，同时也允许矩阵和实数进行标量运算。<br>在不精通广播机制的情况下，python-numpy经常会导致一些奇怪的bug，以下为使用广播机制构建ML程序的建议：</p>
+<ol>
+<li>不要使用秩为1的标量数组，而应该创建向量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = np.random.randn(5)</span><br><span class="line">a.shape = (5,) #表示秩为1的数组</span><br><span class="line"></span><br><span class="line">a = np.random.randn(5, 1)</span><br><span class="line">a.shape = (5, 1) #表示一个形状为5 * 1的矩阵</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这样会让程序更加容易理解<br>同时也可以用reshape将秩为1的数组转换为二维矩阵：’a.reshape(5, 1)’</p>
+<ol start="2">
+<li>在不确定数据的形状时，通常使用assert()声明，避免程序出现奇怪的bug<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.random.randn(5, 1)</span><br><span class="line">assert(a.shape == (5,1))</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="使用assert确保中间值"><a href="#使用assert确保中间值" class="headerlink" title="使用assert确保中间值"></a>使用assert确保中间值</h3><p>我们知道python是动态语言，不需要指定类型，方便的同时往往而已会让程序不可控，尤其是在数据处理相关的任务上。而使用assert语句可以在程序中对代码进行判断，大大加强代码的可读性。而且assert的运行速度非常快，几乎不会消耗运行时间。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/Deep Learning/深度学习面试知识/" rel="next" title="深度学习补充知识">
+                <i class="fa fa-chevron-left"></i> 深度学习补充知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/11/Hadoop/Hadoop之MapReduce/" rel="prev" title="Hadoop之MapReduce">
+                Hadoop之MapReduce <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Number相关"><span class="nav-number">1.1.</span> <span class="nav-text">Number相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python常见类型转换"><span class="nav-number">1.1.1.</span> <span class="nav-text">python常见类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见数学函数"><span class="nav-number">1.1.2.</span> <span class="nav-text">常见数学函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机数"><span class="nav-number">1.1.3.</span> <span class="nav-text">随机数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内置常量"><span class="nav-number">1.1.4.</span> <span class="nav-text">内置常量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">1.2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.3.</span> <span class="nav-text">list</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#list-insert-index-obj"><span class="nav-number">1.3.1.</span> <span class="nav-text">list.insert(index, obj)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置函数使用"><span class="nav-number">2.</span> <span class="nav-text">内置函数使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#round-对变量进行四舍五入"><span class="nav-number">2.1.</span> <span class="nav-text">round()对变量进行四舍五入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程技巧"><span class="nav-number">3.</span> <span class="nav-text">编程技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据向量化"><span class="nav-number">3.1.</span> <span class="nav-text">数据向量化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python广播机制"><span class="nav-number">3.2.</span> <span class="nav-text">python广播机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用assert确保中间值"><span class="nav-number">3.3.</span> <span class="nav-text">使用assert确保中间值</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/05/26/Programming Language/Python常用函数总结/';
+          this.page.identifier = '2018/05/26/Programming Language/Python常用函数总结/';
+          this.page.title = 'Python使用技巧之基础篇';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

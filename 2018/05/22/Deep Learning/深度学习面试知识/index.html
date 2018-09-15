@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/nn_knowledge/batch_normalization.jpg">
 <meta property="og:image" content="http://yoursite.com/images/deep_learning/sigmoid_bp.png">
-<meta property="og:updated_time" content="2018-09-05T08:05:37.018Z">
+<meta property="og:updated_time" content="2018-09-15T05:32:55.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习补充知识">
 <meta name="twitter:description" content="深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。">
@@ -358,9 +358,12 @@
       
         <p>深度学习知识点复杂繁多，同时各个点之间往往有很深的联系，这篇文章总结了我在学习CNN和RNN过程中遇到的小知识点的补充。</p>
 <a id="more"></a>
-<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h4 id="BP算法推导过程"><a href="#BP算法推导过程" class="headerlink" title="BP算法推导过程"></a>BP算法推导过程</h4><h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>Batch Normalization是将分散的数据统一的一种方法。<br>神经网络的训练效率受数据分布影响，如果输入神经元的数值过大或过小，该输入值会在激活函数的饱和区，也就是说这个时候的梯度几乎为0，导致梯度消失，很难更新权重。<br>Batch Normalization相当于在每层hidden layer之间对数据进行归一化，让数据分布集中在（-1， 1）之间，这样下一层神经元的输入大部分会落到激活函数的工作区，BP时更新梯度较大，模型可以更快收敛。<br><img src="/images/nn_knowledge/batch_normalization.jpg" alt="batch_normalization"></p>
+<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h3 id="BP算法推导过程"><a href="#BP算法推导过程" class="headerlink" title="BP算法推导过程"></a>BP算法推导过程</h3><h3 id="常见参数初始化方法"><a href="#常见参数初始化方法" class="headerlink" title="常见参数初始化方法"></a>常见参数初始化方法</h3><p>全零初始化方法在前向传播过程中会使得隐层神经元的激活值均未0，在反向过程中根据BP公式，不同维度的参数会得到相同的更新。 需要破坏这种“对称性”。</p>
+<h4 id="标准初始化"><a href="#标准初始化" class="headerlink" title="标准初始化"></a>标准初始化</h4><p>标准初始化方法通过对方差乘以一个系数确保每层神经元的输出具有相同的方差，提高训练收敛速度。<br>标准均匀初始化方法保证了激活函数的输入值的均值为0，方差为常量1/3，和网络的层数和神经元的数量无关。<br>标准正态初始化方法保证激活函数的输入均值为0，方差为1。</p>
+<h4 id="Xavier初始化（glorot初始化）"><a href="#Xavier初始化（glorot初始化）" class="headerlink" title="Xavier初始化（glorot初始化）"></a>Xavier初始化（glorot初始化）</h4><p>glorot认为优秀的初始化应该使得各层的激活值和状态梯度的方差在传播过程中的方差保持一致。<br>glorot假设DNN使用激活值关于0对称且在0处梯度为1的激活函数(如tanh)。</p>
+<h4 id="He-初始化"><a href="#He-初始化" class="headerlink" title="He 初始化"></a>He 初始化</h4><h3 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h3><p>Batch Normalization是将分散的数据统一的一种方法。<br>神经网络的训练效率受数据分布影响，如果输入神经元的数值过大或过小，该输入值会在激活函数的饱和区，也就是说这个时候的梯度几乎为0，导致梯度消失，很难更新权重。<br>Batch Normalization相当于在每层hidden layer之间对数据进行归一化，让数据分布集中在（-1， 1）之间，这样下一层神经元的输入大部分会落到激活函数的工作区，BP时更新梯度较大，模型可以更快收敛。<br><img src="/images/nn_knowledge/batch_normalization.jpg" alt="batch_normalization"></p>
 <p>一般应用Batch Normalization时往往还进行反向Normalization，将Normalized的数据用可训练的参数再扩展和平移回去，目的是让神经网络自己学习扩展平移参数，进而检测此次的Batch Normalization是否起到优化作用。</p>
-<h2 id="梯度消失和梯度爆炸"><a href="#梯度消失和梯度爆炸" class="headerlink" title="梯度消失和梯度爆炸"></a>梯度消失和梯度爆炸</h2><p>层数比较多的神经网络模型在训练时会出现一些问题，其中就包括梯度消失问题（gradient vanishing problem）和梯度爆炸问题（gradient exploding problem）。梯度消失问题和梯度爆炸问题一般随着网络层数的增加会变得越来越明显。</p>
+<h3 id="梯度消失和梯度爆炸"><a href="#梯度消失和梯度爆炸" class="headerlink" title="梯度消失和梯度爆炸"></a>梯度消失和梯度爆炸</h3><p>层数比较多的神经网络模型在训练时会出现一些问题，其中就包括梯度消失问题（gradient vanishing problem）和梯度爆炸问题（gradient exploding problem）。梯度消失问题和梯度爆炸问题一般随着网络层数的增加会变得越来越明显。</p>
 <h3 id="梯度消失"><a href="#梯度消失" class="headerlink" title="梯度消失"></a>梯度消失</h3><h4 id="梯度消失原因"><a href="#梯度消失原因" class="headerlink" title="梯度消失原因"></a>梯度消失原因</h4><p>对于多层神经网络，当梯度消失发生时，接近输出层的hidden layer权重正常更新，但接近输入层的权重更新会非常缓慢，导致前几层的权值几乎不变，这就导致了前几层就相当于一个映射层。这是此深层网络的学习就等价于只有后几层的浅层网络的学习了。</p>
 <p>对于梯度消失的具体原因，我们可以将反向传播的公式进行展开，这里激活函数我们用Sigmoid举例:<br><img src="/images/deep_learning/sigmoid_bp.png" alt="sigmoid_bp"><br>可以看到，整个反向传播过程是由几个sigmoid函数的导数和权重相乘组成的，而对sigmoid求导发现，sigmoid的导数最大值为0.25，同时我们初始化网络权值时通常也会小于1，也就是说对于上面的链式法则求导，层数越多，求导结果越小，对前几个隐藏层权重的更新也越小。从而导致了梯度消失。</p>
 <h4 id="梯度消失解决办法"><a href="#梯度消失解决办法" class="headerlink" title="梯度消失解决办法"></a>梯度消失解决办法</h4><ul>
@@ -425,6 +428,10 @@
 </ol>
 </li>
 </ul>
+<h2 id="其它考点"><a href="#其它考点" class="headerlink" title="其它考点"></a>其它考点</h2><ol>
+<li>Relu缺点：负值的那部分永无翻身之日，而且改变了输出的分布状态，最好可以加上一个BN来改进</li>
+<li>lstm参数数量计算：（1+cell_size+embed_size) <em> cell_size </em> 4</li>
+</ol>
 
       
     </div>
@@ -484,8 +491,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/21/Programming Language/Scheme语言基本语法/" rel="next" title="Scheme基本语法">
-                <i class="fa fa-chevron-left"></i> Scheme基本语法
+              <a href="/2018/05/21/Hadoop/Hadoop之HDFS/" rel="next" title="Hadoop之HDFS">
+                <i class="fa fa-chevron-left"></i> Hadoop之HDFS
               </a>
             
           </div>
@@ -494,8 +501,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/11/Hadoop/Hadoop之MapReduce/" rel="prev" title="Hadoop之MapReduce">
-                Hadoop之MapReduce <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/26/Programming Language/Python常用函数总结/" rel="prev" title="Python使用技巧之基础篇">
+                Python使用技巧之基础篇 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -583,7 +590,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -594,7 +601,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -605,7 +612,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -654,7 +661,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BP算法推导过程"><span class="nav-number">1.0.1.</span> <span class="nav-text">BP算法推导过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">2.</span> <span class="nav-text">Batch Normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度消失和梯度爆炸"><span class="nav-number">3.</span> <span class="nav-text">梯度消失和梯度爆炸</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度消失"><span class="nav-number">3.1.</span> <span class="nav-text">梯度消失</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度消失原因"><span class="nav-number">3.1.1.</span> <span class="nav-text">梯度消失原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度消失解决办法"><span class="nav-number">3.1.2.</span> <span class="nav-text">梯度消失解决办法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度爆炸"><span class="nav-number">3.2.</span> <span class="nav-text">梯度爆炸</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度爆炸原因"><span class="nav-number">3.2.1.</span> <span class="nav-text">梯度爆炸原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度爆炸现象"><span class="nav-number">3.2.2.</span> <span class="nav-text">梯度爆炸现象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度爆炸解决办法"><span class="nav-number">3.2.3.</span> <span class="nav-text">梯度爆炸解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么Dropout可以解决过拟合"><span class="nav-number">4.</span> <span class="nav-text">为什么Dropout可以解决过拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用激活函数"><span class="nav-number">5.</span> <span class="nav-text">常用激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sigmoid"><span class="nav-number">5.1.</span> <span class="nav-text">sigmoid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tanh"><span class="nav-number">5.2.</span> <span class="nav-text">Tanh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReLU"><span class="nav-number">5.3.</span> <span class="nav-text">ReLU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Leaky-ReLU"><span class="nav-number">5.4.</span> <span class="nav-text">Leaky ReLU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见损失函数"><span class="nav-number">6.</span> <span class="nav-text">常见损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow的优缺点"><span class="nav-number">7.</span> <span class="nav-text">TensorFlow的优缺点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BP算法推导过程"><span class="nav-number">1.1.</span> <span class="nav-text">BP算法推导过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见参数初始化方法"><span class="nav-number">1.2.</span> <span class="nav-text">常见参数初始化方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标准初始化"><span class="nav-number">1.2.1.</span> <span class="nav-text">标准初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xavier初始化（glorot初始化）"><span class="nav-number">1.2.2.</span> <span class="nav-text">Xavier初始化（glorot初始化）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#He-初始化"><span class="nav-number">1.2.3.</span> <span class="nav-text">He 初始化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">1.3.</span> <span class="nav-text">Batch Normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度消失和梯度爆炸"><span class="nav-number">1.4.</span> <span class="nav-text">梯度消失和梯度爆炸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度消失"><span class="nav-number">1.5.</span> <span class="nav-text">梯度消失</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度消失原因"><span class="nav-number">1.5.1.</span> <span class="nav-text">梯度消失原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度消失解决办法"><span class="nav-number">1.5.2.</span> <span class="nav-text">梯度消失解决办法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度爆炸"><span class="nav-number">1.6.</span> <span class="nav-text">梯度爆炸</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度爆炸原因"><span class="nav-number">1.6.1.</span> <span class="nav-text">梯度爆炸原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度爆炸现象"><span class="nav-number">1.6.2.</span> <span class="nav-text">梯度爆炸现象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度爆炸解决办法"><span class="nav-number">1.6.3.</span> <span class="nav-text">梯度爆炸解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么Dropout可以解决过拟合"><span class="nav-number">2.</span> <span class="nav-text">为什么Dropout可以解决过拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用激活函数"><span class="nav-number">3.</span> <span class="nav-text">常用激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sigmoid"><span class="nav-number">3.1.</span> <span class="nav-text">sigmoid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tanh"><span class="nav-number">3.2.</span> <span class="nav-text">Tanh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReLU"><span class="nav-number">3.3.</span> <span class="nav-text">ReLU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Leaky-ReLU"><span class="nav-number">3.4.</span> <span class="nav-text">Leaky ReLU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见损失函数"><span class="nav-number">4.</span> <span class="nav-text">常见损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow的优缺点"><span class="nav-number">5.</span> <span class="nav-text">TensorFlow的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它考点"><span class="nav-number">6.</span> <span class="nav-text">其它考点</span></a></li></ol></div>
             
 
           </div>

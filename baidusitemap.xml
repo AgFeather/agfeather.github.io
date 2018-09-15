@@ -4,6 +4,182 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/08/13/Machine%20Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-09-15T05:51:30.738Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2018-08-13T12:46:01.104Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/22/Deep%20Learning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86/</loc>
+    <lastmod>2018-09-15T05:32:55.710Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习补充知识</title>
+        <pubTime>2018-05-21T15:00:00.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/26/Reinforce%20Learning/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8BOpenAI%20Gym/</loc>
+    <lastmod>2018-09-14T06:53:13.892Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2018-04-25T15:00:00.000Z</pubTime>
+        
+        <tag>Reinforce Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reinforce Learning" url="http://yoursite.com/categories/Reinforce-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/27/Deep%20Learning/CNN%E6%A8%A1%E5%9E%8B%E6%BC%94%E5%8C%96%E8%BF%87%E7%A8%8B/</loc>
+    <lastmod>2018-09-14T06:02:13.138Z</lastmod>
+    <data>
+        <display>
+        <title>CNN模型演化过程</title>
+        <pubTime>2018-04-26T15:00:00.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/11/Programming%20Language/Java%E9%9B%86%E5%90%88/</loc>
+    <lastmod>2018-09-14T04:57:33.741Z</lastmod>
+    <data>
+        <display>
+        <title>Java集合</title>
+        <pubTime>2018-09-10T15:00:00.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://yoursite.com/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/11/Programming%20Language/Java%20HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2018-09-14T04:09:16.862Z</lastmod>
+    <data>
+        <display>
+        <title>Java HashMap实现原理</title>
+        <pubTime>2018-09-10T15:00:00.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://yoursite.com/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/07/23/Reinforce%20Learning/DQN%E5%B8%B8%E8%A7%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2018-09-13T01:40:05.549Z</lastmod>
+    <data>
+        <display>
+        <title>DQN的常见优化方法</title>
+        <pubTime>2018-07-22T15:00:00.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+        <tag>Reinforce Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reinforce Learning" url="http://yoursite.com/categories/Reinforce-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/26/Programming%20Language/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-09-12T09:28:11.782Z</lastmod>
+    <data>
+        <display>
+        <title>Python使用技巧之基础篇</title>
+        <pubTime>2018-05-25T15:00:00.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/28/Deep%20Learning/TensorFlow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2018-09-12T09:23:23.783Z</lastmod>
+    <data>
+        <display>
+        <title>TensorFlow常用函数整理</title>
+        <pubTime>2017-11-27T15:00:00.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>TensorFlow</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/08/30/Algorithms/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%E4%B9%8BBitMap/</loc>
     <lastmod>2018-09-12T07:33:14.437Z</lastmod>
     <data>
@@ -84,6 +260,28 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/07/15/Algorithms/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%A2%98/</loc>
+    <lastmod>2018-09-06T04:44:41.267Z</lastmod>
+    <data>
+        <display>
+        <title>面试常见的海量数据处理题</title>
+        <pubTime>2018-07-14T15:00:00.000Z</pubTime>
+        
+        <tag>Big Data</tag>
+         
+        <tag>Interview</tag>
+         
+         
+           
+             
+              <breadCrumb title="Big Data" url="http://yoursite.com/categories/Big-Data/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/08/16/Programming%20Language/Python%E4%B8%AD%E7%9A%84Magic%20Method/</loc>
     <lastmod>2018-09-05T11:54:26.205Z</lastmod>
     <data>
@@ -119,46 +317,6 @@
            
              
               <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/04/27/Deep%20Learning/CNN%E6%A8%A1%E5%9E%8B%E6%BC%94%E5%8C%96%E8%BF%87%E7%A8%8B/</loc>
-    <lastmod>2018-09-05T11:22:21.837Z</lastmod>
-    <data>
-        <display>
-        <title>CNN模型演化过程</title>
-        <pubTime>2018-04-26T15:00:00.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/05/22/Deep%20Learning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2018-09-05T08:05:37.018Z</lastmod>
-    <data>
-        <display>
-        <title>深度学习补充知识</title>
-        <pubTime>2018-05-21T15:00:00.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
           
         </display>
     </data>
@@ -225,6 +383,26 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/04/18/Deep%20Learning/TensorFlow%E4%B9%8B%E5%B8%B8%E8%A7%81debug%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2018-09-03T14:42:55.844Z</lastmod>
+    <data>
+        <display>
+        <title>TensorFlow之常见debug方法</title>
+        <pubTime>2018-04-17T15:00:00.000Z</pubTime>
+        
+        <tag>TensorFlow</tag>
+         
+         
+           
+             
+              <breadCrumb title="TensorFlow" url="http://yoursite.com/categories/TensorFlow/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/05/13/Reinforce%20Learning/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%A7%8D%E7%B1%BB/</loc>
     <lastmod>2018-09-01T06:35:35.216Z</lastmod>
     <data>
@@ -269,28 +447,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/07/23/Reinforce%20Learning/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8BDouble%20DQN/</loc>
-    <lastmod>2018-09-01T06:35:27.199Z</lastmod>
-    <data>
-        <display>
-        <title>强化学习之Double DQN</title>
-        <pubTime>2018-07-22T15:00:00.000Z</pubTime>
-        
-        <tag>Machine Learning</tag>
-         
-        <tag>Reinforce Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Reinforce Learning" url="http://yoursite.com/categories/Reinforce-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2018/07/02/Reinforce%20Learning/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8BDQN/</loc>
     <lastmod>2018-09-01T06:35:22.648Z</lastmod>
     <data>
@@ -313,56 +469,12 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/07/25/Reinforce%20Learning/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8BDueling%20DQN/</loc>
-    <lastmod>2018-09-01T06:35:18.319Z</lastmod>
-    <data>
-        <display>
-        <title>强化学习之Dueling DQN</title>
-        <pubTime>2018-07-24T15:00:00.000Z</pubTime>
-        
-        <tag>Machine Learning</tag>
-         
-        <tag>Reinforce Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Reinforce Learning" url="http://yoursite.com/categories/Reinforce-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2018/07/25/Reinforce%20Learning/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8BPolicy%20Gradients/</loc>
     <lastmod>2018-09-01T06:35:13.564Z</lastmod>
     <data>
         <display>
         <title>强化学习之Policy gradient</title>
         <pubTime>2018-07-24T15:00:00.000Z</pubTime>
-        
-        <tag>Machine Learning</tag>
-         
-        <tag>Reinforce Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Reinforce Learning" url="http://yoursite.com/categories/Reinforce-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/07/24/Reinforce%20Learning/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8BPrioritized%20Experience%20Preplay%20DQN/</loc>
-    <lastmod>2018-09-01T06:35:10.009Z</lastmod>
-    <data>
-        <display>
-        <title>强化学习之Prioritized Experience Replay DQN</title>
-        <pubTime>2018-07-23T15:00:00.000Z</pubTime>
         
         <tag>Machine Learning</tag>
          
@@ -782,25 +894,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/11/28/Deep%20Learning/TensorFlow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%95%B4%E7%90%86/</loc>
-    <lastmod>2018-09-01T06:29:09.351Z</lastmod>
-    <data>
-        <display>
-        <title>TensorFlow常用函数整理</title>
-        <pubTime>2017-11-27T15:00:00.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>TensorFlow</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2017/11/12/CUDA/CUDA%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/</loc>
     <lastmod>2018-09-01T06:28:38.671Z</lastmod>
     <data>
@@ -1006,6 +1099,40 @@
              
               <breadCrumb title="Reading" url="http://yoursite.com/categories/Reading/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/07/11/Hadoop/Hive%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2018-08-22T06:38:08.071Z</lastmod>
+    <data>
+        <display>
+        <title>Hive学习笔记</title>
+        <pubTime>2018-07-10T15:00:00.000Z</pubTime>
+        
+        <tag>Hadoop</tag>
+         
+        <tag>Hive</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/08/16/Machine%20Learning/%E5%B8%B8%E8%A7%81%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</loc>
+    <lastmod>2018-08-15T15:09:36.185Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2018-08-15T15:09:36.185Z</pubTime>
+        
+         
+           
         </display>
     </data>
     </url>

@@ -88,7 +88,7 @@
 <meta property="og:description" content="本文介绍了从LeNet到ResNet的CNN模型演化过程">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/04/27/Deep%20Learning/CNN模型演化过程/images/deep_learning/resnet_block.png">
-<meta property="og:updated_time" content="2018-09-05T11:22:21.837Z">
+<meta property="og:updated_time" content="2018-09-14T06:02:13.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CNN模型演化过程">
 <meta name="twitter:description" content="本文介绍了从LeNet到ResNet的CNN模型演化过程">
@@ -389,6 +389,10 @@
 <li>由微软提出。ResNet的层数最多，训练用了8个GPU三周完成。</li>
 <li>最大特性是允许原始输入信息传输到后面的层中，可以将一个卷积层的输出和输入相融合后再输入到下一个卷积层。这样使得后面的层可以直接学习残差，整个神经网络只需要学习输入输出差别的那部分，简化了学习目标和难度。</li>
 </ul>
+<h2 id="CNN知识点补充"><a href="#CNN知识点补充" class="headerlink" title="CNN知识点补充"></a>CNN知识点补充</h2><h3 id="为什么使用1-1大小的卷积核"><a href="#为什么使用1-1大小的卷积核" class="headerlink" title="为什么使用1*1大小的卷积核"></a>为什么使用1*1大小的卷积核</h3><ol>
+<li>在大多数情况下它作用是升/降特征的维度，这里的维度指的是通道数（厚度），而不改变图片的宽和高。</li>
+<li>用另一种角度去理解1*1卷积，可以把它看成是一种全连接。输入层大小等于输入通道数，输出层大小等于输出通道数。</li>
+</ol>
 
       
     </div>
@@ -547,7 +551,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -558,7 +562,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -569,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -618,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个经典CNN模型"><span class="nav-number">1.</span> <span class="nav-text">几个经典CNN模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeNet"><span class="nav-number">1.0.1.</span> <span class="nav-text">LeNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AlexNet"><span class="nav-number">1.0.2.</span> <span class="nav-text">AlexNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VGG"><span class="nav-number">1.0.3.</span> <span class="nav-text">VGG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GoogleNet"><span class="nav-number">1.0.4.</span> <span class="nav-text">GoogleNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ResNet"><span class="nav-number">1.0.5.</span> <span class="nav-text">ResNet</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResNet网络"><span class="nav-number">2.</span> <span class="nav-text">ResNet网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络退化问题"><span class="nav-number">2.1.</span> <span class="nav-text">网络退化问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#残差块"><span class="nav-number">2.2.</span> <span class="nav-text">残差块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#残差块原理"><span class="nav-number">2.3.</span> <span class="nav-text">残差块原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet使用技巧"><span class="nav-number">2.4.</span> <span class="nav-text">ResNet使用技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet特点"><span class="nav-number">2.5.</span> <span class="nav-text">ResNet特点</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个经典CNN模型"><span class="nav-number">1.</span> <span class="nav-text">几个经典CNN模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeNet"><span class="nav-number">1.0.1.</span> <span class="nav-text">LeNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AlexNet"><span class="nav-number">1.0.2.</span> <span class="nav-text">AlexNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VGG"><span class="nav-number">1.0.3.</span> <span class="nav-text">VGG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GoogleNet"><span class="nav-number">1.0.4.</span> <span class="nav-text">GoogleNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ResNet"><span class="nav-number">1.0.5.</span> <span class="nav-text">ResNet</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResNet网络"><span class="nav-number">2.</span> <span class="nav-text">ResNet网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络退化问题"><span class="nav-number">2.1.</span> <span class="nav-text">网络退化问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#残差块"><span class="nav-number">2.2.</span> <span class="nav-text">残差块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#残差块原理"><span class="nav-number">2.3.</span> <span class="nav-text">残差块原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet使用技巧"><span class="nav-number">2.4.</span> <span class="nav-text">ResNet使用技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet特点"><span class="nav-number">2.5.</span> <span class="nav-text">ResNet特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN知识点补充"><span class="nav-number">3.</span> <span class="nav-text">CNN知识点补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用1-1大小的卷积核"><span class="nav-number">3.1.</span> <span class="nav-text">为什么使用1*1大小的卷积核</span></a></li></ol></li></ol></div>
             
 
           </div>

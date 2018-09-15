@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="TensorFlow常用方法整理">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-01T06:29:09.351Z">
+<meta property="og:updated_time" content="2018-09-12T09:23:23.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TensorFlow常用函数整理">
 <meta name="twitter:description" content="TensorFlow常用方法整理">
@@ -347,6 +347,29 @@
 </li>
 </ul>
 <h3 id="tf-unstack-value-num-axis"><a href="#tf-unstack-value-num-axis" class="headerlink" title="tf.unstack(value, num, axis)"></a>tf.unstack(value, num, axis)</h3><p>将输入的tensor按照axis分割成若干个小的tensor，切割后的子tensor维度-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A=[[1,2,3],</span><br><span class="line">   [4,5,6]]</span><br><span class="line">a1 = tf.unstack(A, num=3, axis=1)</span><br><span class="line">a1 = [ [1, 4],   [2, 5],   [3, 6] ]</span><br><span class="line">a2 = tf.unstack(A, num=2, axis=0)</span><br><span class="line">a2 = [ [1,2,3],  [4,5,6] ]</span><br></pre></td></tr></table></figure></p>
+<h2 id="卷积操作"><a href="#卷积操作" class="headerlink" title="卷积操作"></a>卷积操作</h2><p>TensorFlow提供三种卷积操作，分别对应着1维，2维，3维数据。</p>
+<h3 id="tf-conv1d"><a href="#tf-conv1d" class="headerlink" title="tf.conv1d()"></a>tf.conv1d()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">conv1d(</span><br><span class="line">    value,</span><br><span class="line">    filters,</span><br><span class="line">    stride,</span><br><span class="line">    padding,</span><br><span class="line">    use_cudnn_on_gpu=None,</span><br><span class="line">    data_format=None,</span><br><span class="line">    name=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>常见的卷积输入都为2维，但特殊情况下也会输入1维tensor。和2维处理原理相同，只是形状需要改变。<br>其中：</p>
+<ol>
+<li>input为输入tensor，形状为[batch, in_width, in_channels]</li>
+<li>filter为卷积核，形状为[filter_width, in_channels, output_channels]</li>
+<li>strides为步长，形状为一个整数</li>
+<li>padding为对input的padding方法， 有两个取值：’VALID’和’SAME’，前者表示不做0填充，后者表示对input进行0填充使得卷积的输出大小和输入相同。</li>
+</ol>
+<p>实际上，一维卷积方法在运行时，会把数据增加一维，然后使用conv2d计算。</p>
+<h3 id="tf-conv2d"><a href="#tf-conv2d" class="headerlink" title="tf.conv2d()"></a>tf.conv2d()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">conv2d(</span><br><span class="line">    input,</span><br><span class="line">    filter,</span><br><span class="line">    strides,</span><br><span class="line">    padding,</span><br><span class="line">    use_cudnn_on_gpu=True,</span><br><span class="line">    data_format=&apos;NHWC&apos;,</span><br><span class="line">    name=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ol>
+<li>input为输入tensor，形状为[batch, n_height, in_width, in_channels]</li>
+<li>filter为卷积核，形状为[filter_height, filter_width, in_channels, output_channels]</li>
+<li>strides为步长，形状为[1, step_dim1, step_dim2, 1]</li>
+<li>padding为对input的padding方法， 有两个取值：’VALID’和’SAME’，前者表示不做0填充，后者表示对input进行0填充使得卷积的输出大小和输入相同。</li>
+</ol>
+<h3 id="tf-conv3d"><a href="#tf-conv3d" class="headerlink" title="tf.conv3d()"></a>tf.conv3d()</h3><p>和商量个相同，只是把维度提高到了三维</p>
+<ol>
+<li>input形状为：[batch, in_depth, in_height, in_width, in_channels]</li>
+<li>filter形状为：[filter_depth, filter_height, filter_width, in_channels, output_channels]</li>
+</ol>
 
       
     </div>
@@ -507,7 +530,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -518,7 +541,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -529,7 +552,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -578,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tensor形状相关操作"><span class="nav-number">1.</span> <span class="nav-text">tensor形状相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-shape-input"><span class="nav-number">1.1.</span> <span class="nav-text">tf.shape(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-size-input"><span class="nav-number">1.2.</span> <span class="nav-text">tf.size(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-rank-input"><span class="nav-number">1.3.</span> <span class="nav-text">tf.rank(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-reshape-input-shape"><span class="nav-number">1.4.</span> <span class="nav-text">tf.reshape(input, shape)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-expand-dims-input-axis-None"><span class="nav-number">1.5.</span> <span class="nav-text">tf.expand_dims(input, axis=None)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-squeeze"><span class="nav-number">1.6.</span> <span class="nav-text">tf.squeeze()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-split-value-name-or-size-split-axis-0"><span class="nav-number">1.7.</span> <span class="nav-text">tf.split(value, name_or_size_split, axis=0)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-unstack-value-num-axis"><span class="nav-number">1.8.</span> <span class="nav-text">tf.unstack(value, num, axis)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tensor形状相关操作"><span class="nav-number">1.</span> <span class="nav-text">tensor形状相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-shape-input"><span class="nav-number">1.1.</span> <span class="nav-text">tf.shape(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-size-input"><span class="nav-number">1.2.</span> <span class="nav-text">tf.size(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-rank-input"><span class="nav-number">1.3.</span> <span class="nav-text">tf.rank(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-reshape-input-shape"><span class="nav-number">1.4.</span> <span class="nav-text">tf.reshape(input, shape)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-expand-dims-input-axis-None"><span class="nav-number">1.5.</span> <span class="nav-text">tf.expand_dims(input, axis=None)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-squeeze"><span class="nav-number">1.6.</span> <span class="nav-text">tf.squeeze()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-split-value-name-or-size-split-axis-0"><span class="nav-number">1.7.</span> <span class="nav-text">tf.split(value, name_or_size_split, axis=0)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-unstack-value-num-axis"><span class="nav-number">1.8.</span> <span class="nav-text">tf.unstack(value, num, axis)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积操作"><span class="nav-number">2.</span> <span class="nav-text">卷积操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-conv1d"><span class="nav-number">2.1.</span> <span class="nav-text">tf.conv1d()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-conv2d"><span class="nav-number">2.2.</span> <span class="nav-text">tf.conv2d()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-conv3d"><span class="nav-number">2.3.</span> <span class="nav-text">tf.conv3d()</span></a></li></ol></li></ol></div>
             
 
           </div>
