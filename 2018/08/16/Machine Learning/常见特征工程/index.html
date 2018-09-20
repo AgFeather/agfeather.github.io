@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="特征工程在特征工程中，特征选择是指从原有特征集合中选出自己，不改变原有特征空间。特征降维是指将原有的特征重新组合成包含信息更多的特征，改变了原有的特征空间。 降维方法常见的降维方法由一下几种： PCA主成分分析SVD奇异值分解Sammon映射特征选择方法卡方检验，信息增益，皮尔逊系数，互信息系数，相关系数。通过确定各个特征和label之间的相关度，或者各个特征之间的相关度来选择特征。皮尔逊">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-15T15:09:36.185Z">
+<meta property="og:updated_time" content="2018-09-18T07:25:03.032Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Black Feather">
 <meta name="twitter:description" content="特征工程在特征工程中，特征选择是指从原有特征集合中选出自己，不改变原有特征空间。特征降维是指将原有的特征重新组合成包含信息更多的特征，改变了原有的特征空间。 降维方法常见的降维方法由一下几种： PCA主成分分析SVD奇异值分解Sammon映射特征选择方法卡方检验，信息增益，皮尔逊系数，互信息系数，相关系数。通过确定各个特征和label之间的相关度，或者各个特征之间的相关度来选择特征。皮尔逊">
@@ -331,7 +331,7 @@
       
 
       
-        <h1 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h1><p>在特征工程中，特征选择是指从原有特征集合中选出自己，不改变原有特征空间。特征降维是指将原有的特征重新组合成包含信息更多的特征，改变了原有的特征空间。</p>
+        <h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h2><p>在特征工程中，特征选择是指从原有特征集合中选出自己，不改变原有特征空间。特征降维是指将原有的特征重新组合成包含信息更多的特征，改变了原有的特征空间。</p>
 <h3 id="降维方法"><a href="#降维方法" class="headerlink" title="降维方法"></a>降维方法</h3><p>常见的降维方法由一下几种：</p>
 <h4 id="PCA主成分分析"><a href="#PCA主成分分析" class="headerlink" title="PCA主成分分析"></a>PCA主成分分析</h4><h4 id="SVD奇异值分解"><a href="#SVD奇异值分解" class="headerlink" title="SVD奇异值分解"></a>SVD奇异值分解</h4><h4 id="Sammon映射"><a href="#Sammon映射" class="headerlink" title="Sammon映射"></a>Sammon映射</h4><h3 id="特征选择方法"><a href="#特征选择方法" class="headerlink" title="特征选择方法"></a>特征选择方法</h3><p>卡方检验，信息增益，皮尔逊系数，互信息系数，相关系数。通过确定各个特征和label之间的相关度，或者各个特征之间的相关度来选择特征。<br>皮尔逊系数只能衡量线性相关性而互信息系数能很好地衡量各种相关性。<br>通过L1正则项来选择特征</p>
 <h3 id="常见特征工程手法"><a href="#常见特征工程手法" class="headerlink" title="常见特征工程手法"></a>常见特征工程手法</h3><ol>
@@ -358,7 +358,12 @@
 </ol>
 </li>
 </ol>
-<p>总结<br>对于理解数据、数据的结构、特点来说，单变量特征选择是个非常好的选择。尽管可以用它对特征进行排序来优化模型，但由于它不能发现冗余（例如假如一个特征子集，其中的特征之间具有很强的关联，那么从中选择最优的特征时就很难考虑到冗余的问题）。<br>正则化的线性模型对于特征理解和特征选择来说是非常强大的工具。L1正则化能够生成稀疏的模型，对于选择特征子集来说非常有用；相比起L1正则化，L2正则化的表现更加稳定，由于有用的特征往往对应系数非零，因此L2正则化对于数据的理解来说很合适。由于响应变量和特征之间往往是非线性关系，可以采用basis expansion的方式将特征转换到一个更加合适的空间当中，在此基础上再考虑运用简单的线性模型。<br>随机森林是一种非常流行的特征选择方法，它易于使用，一般不需要feature engineering、调参等繁琐的步骤，并且很多工具包都提供了平均不纯度下降方法。它的两个主要问题，1是重要的特征有可能得分很低（关联特征问题），2是这种方法对特征变量类别多的特征越有利（偏向问题）。尽管如此，这种方法仍然非常值得在你的应用中试一试。<br>特征选择在很多机器学习和数据挖掘场景中都是非常有用的。在使用的时候要弄清楚自己的目标是什么，然后找到哪种方法适用于自己的任务。当选择最优特征以提升模型性能的时候，可以采用交叉验证的方法来验证某种方法是否比其他方法要好。当用特征选择的方法来理解数据的时候要留心，特征选择模型的稳定性非常重要，稳定性差的模型很容易就会导致错误的结论。对数据进行二次采样然后在子集上运行特征选择算法能够有所帮助，如果在各个子集上的结果是一致的，那就可以说在这个数据集上得出来的结论是可信的，可以用这种特征选择模型的结果来理解数据。</p>
+<h3 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h3><ol>
+<li>用平均值、中值、分位数、众数、随机值等替代。效果一般，因为等于人为增加了噪声。</li>
+<li>用其他变量做预测模型来算出缺失变量。效果比方法1略好。有一个根本缺陷，如果其他变量和缺失变量无关，则预测的结果无意义。如果预测结果相当准确，则又说明这个变量是没必要加入建模的。一般情况下，介于两者之间。</li>
+<li>最精确的做法，把变量映射到高维空间。比如性别，有男、女、缺失三种情况，则映射成3个变量：是否男、是否女、是否缺失。连续型变量也可以这样处理。比如Google、百度的CTR预估模型，预处理时会把所有变量都这样处理，达到几亿维。这样做的好处是完整保留了原始数据的全部信息、不用考虑缺失值、不用考虑线性不可分之类的问题。缺点是计算量大大提升。</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>对于理解数据、数据的结构、特点来说，单变量特征选择是个非常好的选择。尽管可以用它对特征进行排序来优化模型，但由于它不能发现冗余（例如假如一个特征子集，其中的特征之间具有很强的关联，那么从中选择最优的特征时就很难考虑到冗余的问题）。<br>正则化的线性模型对于特征理解和特征选择来说是非常强大的工具。L1正则化能够生成稀疏的模型，对于选择特征子集来说非常有用；相比起L1正则化，L2正则化的表现更加稳定，由于有用的特征往往对应系数非零，因此L2正则化对于数据的理解来说很合适。由于响应变量和特征之间往往是非线性关系，可以采用basis expansion的方式将特征转换到一个更加合适的空间当中，在此基础上再考虑运用简单的线性模型。<br>随机森林是一种非常流行的特征选择方法，它易于使用，一般不需要feature engineering、调参等繁琐的步骤，并且很多工具包都提供了平均不纯度下降方法。它的两个主要问题，1是重要的特征有可能得分很低（关联特征问题），2是这种方法对特征变量类别多的特征越有利（偏向问题）。尽管如此，这种方法仍然非常值得在你的应用中试一试。<br>特征选择在很多机器学习和数据挖掘场景中都是非常有用的。在使用的时候要弄清楚自己的目标是什么，然后找到哪种方法适用于自己的任务。当选择最优特征以提升模型性能的时候，可以采用交叉验证的方法来验证某种方法是否比其他方法要好。当用特征选择的方法来理解数据的时候要留心，特征选择模型的稳定性非常重要，稳定性差的模型很容易就会导致错误的结论。对数据进行二次采样然后在子集上运行特征选择算法能够有所帮助，如果在各个子集上的结果是一致的，那就可以说在这个数据集上得出来的结论是可信的，可以用这种特征选择模型的结果来理解数据。</p>
 
       
     </div>
@@ -582,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#特征工程"><span class="nav-number">1.</span> <span class="nav-text">特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#降维方法"><span class="nav-number">1.0.1.</span> <span class="nav-text">降维方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PCA主成分分析"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">PCA主成分分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SVD奇异值分解"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">SVD奇异值分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sammon映射"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">Sammon映射</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征选择方法"><span class="nav-number">1.0.2.</span> <span class="nav-text">特征选择方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见特征工程手法"><span class="nav-number">1.0.3.</span> <span class="nav-text">常见特征工程手法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#特征工程"><span class="nav-number">1.</span> <span class="nav-text">特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#降维方法"><span class="nav-number">1.1.</span> <span class="nav-text">降维方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PCA主成分分析"><span class="nav-number">1.1.1.</span> <span class="nav-text">PCA主成分分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SVD奇异值分解"><span class="nav-number">1.1.2.</span> <span class="nav-text">SVD奇异值分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sammon映射"><span class="nav-number">1.1.3.</span> <span class="nav-text">Sammon映射</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征选择方法"><span class="nav-number">1.2.</span> <span class="nav-text">特征选择方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见特征工程手法"><span class="nav-number">1.3.</span> <span class="nav-text">常见特征工程手法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺失值处理"><span class="nav-number">1.4.</span> <span class="nav-text">缺失值处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
