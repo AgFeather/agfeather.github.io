@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/07/15/Algorithms/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%A2%98/</loc>
+    <lastmod>2018-09-22T11:55:00.453Z</lastmod>
+    <data>
+        <display>
+        <title>面试常见的海量数据处理题</title>
+        <pubTime>2018-07-14T15:00:00.000Z</pubTime>
+        
+        <tag>Algorithm</tag>
+         
+        <tag>Big Data</tag>
+         
+        <tag>Interview</tag>
+         
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://yoursite.com/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/08/16/Machine%20Learning/%E5%B8%B8%E8%A7%81%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</loc>
     <lastmod>2018-09-18T07:25:03.032Z</lastmod>
     <data>
@@ -126,9 +150,9 @@
         <title>TensorFlow常用函数整理</title>
         <pubTime>2017-11-27T15:00:00.000Z</pubTime>
         
-        <tag>Deep Learning</tag>
-         
         <tag>TensorFlow</tag>
+         
+        <tag>Deep Learning</tag>
          
          
            
@@ -288,28 +312,6 @@
            
              
               <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/07/15/Algorithms/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%A2%98/</loc>
-    <lastmod>2018-09-06T04:44:41.267Z</lastmod>
-    <data>
-        <display>
-        <title>面试常见的海量数据处理题</title>
-        <pubTime>2018-07-14T15:00:00.000Z</pubTime>
-        
-        <tag>Big Data</tag>
-         
-        <tag>Interview</tag>
-         
-         
-           
-             
-              <breadCrumb title="Big Data" url="http://yoursite.com/categories/Big-Data/"/>
           
         </display>
     </data>
@@ -1032,11 +1034,11 @@
         <title>自制编程语言</title>
         <pubTime>2018-07-26T15:00:00.000Z</pubTime>
         
-        <tag>Project</tag>
-         
         <tag>Java</tag>
          
         <tag>Programming Language</tag>
+         
+        <tag>Project</tag>
          
         <tag>Reading</tag>
          
