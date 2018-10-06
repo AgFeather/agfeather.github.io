@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/09/21/Deep%20Learning/TensorFlow%E4%B9%8Btfdbg/</loc>
+    <lastmod>2018-09-24T02:35:19.199Z</lastmod>
+    <data>
+        <display>
+        <title>TensorFlow之tfdbg</title>
+        <pubTime>2018-09-20T15:00:00.000Z</pubTime>
+        
+        <tag>TensorFlow</tag>
+         
+         
+           
+             
+              <breadCrumb title="TensorFlow" url="http://yoursite.com/categories/TensorFlow/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/07/15/Algorithms/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%A2%98/</loc>
     <lastmod>2018-09-22T11:55:00.453Z</lastmod>
     <data>
@@ -21,6 +41,46 @@
            
              
               <breadCrumb title="Algorithm" url="http://yoursite.com/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/11/Deep%20Learning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%B0%83%E5%8F%82%E7%BB%8F%E9%AA%8C/</loc>
+    <lastmod>2018-09-19T03:09:47.868Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习调参经验</title>
+        <pubTime>2018-09-10T15:00:00.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/06/21/Deep%20Learning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-09-19T02:56:11.719Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习优化算法总结</title>
+        <pubTime>2018-06-20T15:00:00.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
           
         </display>
     </data>
@@ -150,9 +210,9 @@
         <title>TensorFlow常用函数整理</title>
         <pubTime>2017-11-27T15:00:00.000Z</pubTime>
         
-        <tag>TensorFlow</tag>
-         
         <tag>Deep Learning</tag>
+         
+        <tag>TensorFlow</tag>
          
          
            
@@ -628,9 +688,9 @@
         <title>Java字符串</title>
         <pubTime>2017-09-11T15:00:00.000Z</pubTime>
         
-        <tag>Java</tag>
-         
         <tag>Programming Language</tag>
+         
+        <tag>Java</tag>
          
          
            
@@ -1034,13 +1094,13 @@
         <title>自制编程语言</title>
         <pubTime>2018-07-26T15:00:00.000Z</pubTime>
         
-        <tag>Java</tag>
-         
-        <tag>Programming Language</tag>
-         
         <tag>Project</tag>
          
         <tag>Reading</tag>
+         
+        <tag>Programming Language</tag>
+         
+        <tag>Java</tag>
          
          
            
@@ -1057,11 +1117,11 @@
         <title>SICP第一章:构造过程抽象</title>
         <pubTime>2018-03-21T15:00:00.000Z</pubTime>
         
-        <tag>Programming Language</tag>
-         
         <tag>SICP</tag>
          
         <tag>Reading</tag>
+         
+        <tag>Programming Language</tag>
          
          
            
@@ -1081,11 +1141,11 @@
         <title>SICP第二章:构造数据抽象</title>
         <pubTime>2018-04-26T15:00:00.000Z</pubTime>
         
-        <tag>Programming Language</tag>
-         
         <tag>SICP</tag>
          
         <tag>Reading</tag>
+         
+        <tag>Programming Language</tag>
          
          
            
