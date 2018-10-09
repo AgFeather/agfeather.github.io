@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="TensorFlow," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="模型的保存和回复是深度学习中非常重要的一部分，我们可以将训练好的模型保存到本地文件，并在任何想要使用该模型的时候从文件中加载，这样我们就不需要每次都重新训练模型。">
+<meta name="keywords" content="TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow之模型保存和回复">
+<meta property="og:url" content="http://yoursite.com/2018/09/02/Deep Learning/TensorFlow之模型保存和回复/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="模型的保存和回复是深度学习中非常重要的一部分，我们可以将训练好的模型保存到本地文件，并在任何想要使用该模型的时候从文件中加载，这样我们就不需要每次都重新训练模型。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-08T07:44:33.948Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow之模型保存和回复">
+<meta name="twitter:description" content="模型的保存和回复是深度学习中非常重要的一部分，我们可以将训练好的模型保存到本地文件，并在任何想要使用该模型的时候从文件中加载，这样我们就不需要每次都重新训练模型。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/02/Deep Learning/TensorFlow之模型保存和回复/"/>
+
+
+
+
+
+  <title>TensorFlow之模型保存和回复 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/Deep Learning/TensorFlow之模型保存和回复/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TensorFlow之模型保存和回复</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-02T00:00:00+09:00">
+                2018-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TensorFlow/" itemprop="url" rel="index">
+                    <span itemprop="name">TensorFlow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/02/Deep Learning/TensorFlow之模型保存和回复/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/02/Deep Learning/TensorFlow之模型保存和回复/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>模型的保存和回复是深度学习中非常重要的一部分，我们可以将训练好的模型保存到本地文件，并在任何想要使用该模型的时候从文件中加载，这样我们就不需要每次都重新训练模型。<br><a id="more"></a></p>
+<h2 id="TensorFlow模型保存"><a href="#TensorFlow模型保存" class="headerlink" title="TensorFlow模型保存"></a>TensorFlow模型保存</h2><p>TensorFlow使用 ‘tf.train.Saver()’用来保存和回复模型</p>
+<h3 id="保存模型"><a href="#保存模型" class="headerlink" title="保存模型"></a>保存模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">a = tf.get_variable(&apos;a&apos;, [])</span><br><span class="line">b = tf.get_variable(&apos;b&apos;, [])</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br><span class="line">saver.save(sess, &apos;checkpoints/tftcp.model&apos;)</span><br></pre></td></tr></table></figure>
+<p>打开保存路径，会发现里面包含四个文件：</p>
+<ol>
+<li>model.data-00000-of00001 包含模型中训练好的权重，可能是最大的文件</li>
+<li>model.meta 模型的网络结构，包含重建模型的全部信息</li>
+<li>model.index 连接前两个文件的索引结构，用于在数据文件中找到对应节点的参数</li>
+<li>checkpoint 如果在整个训练过程中保存了多个版本的模型，该文件会对每个模型进行跟踪。</li>
+</ol>
+<h3 id="恢复模型"><a href="#恢复模型" class="headerlink" title="恢复模型"></a>恢复模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">a = tf.get_variable(&apos;a&apos;, [])</span><br><span class="line">b = tf.get_variable(&apos;b&apos;, [])</span><br><span class="line"></span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">saver.restore(sess, &apos;checkpoints/tftcp.model&apos;)</span><br><span class="line">sess.run([a,b])</span><br></pre></td></tr></table></figure>
+<p>通过如上方法即可将模型回复，可以发现在运行前并不需要初始化a和b，因为restore运算会将变量的值从文件复制到会话中。</p>
+<h3 id="获取变量"><a href="#获取变量" class="headerlink" title="获取变量"></a>获取变量</h3><p>当一个 tf.train.Saver 程序初始化后，它会查看当前图形并获取变量列表；这是 saver「关心」的永久存储的变量列表。我们可以用._var_list 属性来检查：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">a = tf.get_variable(&apos;a&apos;, [])</span><br><span class="line">b = tf.get_variable(&apos;b&apos;, [])</span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line">c = tf.get_variable(&apos;c&apos;, [])</span><br><span class="line">print(saver._var_list)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;[&lt;tf.Variable &apos;a:0&apos; shape=() dtype=float32_ref&gt;, &lt;tf.Variable &apos;b:0&apos; shape=() dtype=float32_ref&gt;]</span><br></pre></td></tr></table></figure></p>
+<p>因为在创建 saver 时 c 还没有出现，所以它并没有成为函数的一部分。一般来说，你要在创建 saver 之前确保已经创建了所有的变量。</p>
+<p>当然，在某些特定的情况下，可能只需保存变量的一个子集。当创建 var_list 以期望它跟踪可用变量子集时，tf.train.Saver 允许传递 var_list。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">a = tf.get_variable(&apos;a&apos;, [])</span><br><span class="line">b = tf.get_variable(&apos;b&apos;, [])</span><br><span class="line">c = tf.get_variable(&apos;c&apos;, [])</span><br><span class="line">saver = tf.train.Saver(var_list=[a,b])</span><br><span class="line">print(saver._var_list)</span><br></pre></td></tr></table></figure>
+<h3 id="模型局部加载"><a href="#模型局部加载" class="headerlink" title="模型局部加载"></a>模型局部加载</h3><p>有的时候，我们只想要从文件中加载模型的一部分当前模型下：<br>如下保存代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">a = tf.get_variable(&apos;a&apos;, [])</span><br><span class="line">b = tf.get_variable(&apos;b&apos;, [])</span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(tf.global_variables_initializer())</span><br><span class="line">saver.save(sess, save_path)</span><br></pre></td></tr></table></figure></p>
+<p>如下加载代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = tf.get_variable(&apos;a&apos;, [])</span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">saver = tf.restore(sess, saved_path)</span><br><span class="line">sess.run(a)</span><br></pre></td></tr></table></figure></p>
+<p>从上述代码中，我们将变量a，和b保存在文件中。在加载代码中，我们仅新建了一个变量a并令其name=’a’，然后从文件中restore，会发现上述代码可以运行，加载过程自动按照变量名称进行匹配，丢弃没有被加载的变量。</p>
+<p>但如果加载文件变成如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">a = tf.get_variable(&apos;a&apos;, [])</span><br><span class="line">b = tf.get_variable(&apos;c&apos;, [])</span><br><span class="line">save_path = &apos;check/model.model&apos;</span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">saver.restore(sess, save_path)</span><br><span class="line">print(sess.run(b))</span><br></pre></td></tr></table></figure></p>
+<p>上述代码会报错，因为在保存的文件中，并不存在一个变量名为’c’的变量。代码不知道该将变量’c’赋值为文件中的哪个变量。<br>为了解决上述问题，’tf.train.Saver()’提供了参数用来指定变量的加载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">x = tf.get_variable(&apos;x&apos;, [])</span><br><span class="line">y = tf.get_variable(&apos;y&apos;, [])</span><br><span class="line">save_path = &apos;check/model.model&apos;</span><br><span class="line">saver = tf.train.Saver(var_list=&#123;&apos;a&apos;:x, &apos;b&apos;:y&#125;)</span><br><span class="line">sess = tf.Session()</span><br><span class="line">saver.restore(sess, save_path)</span><br><span class="line">print(sess.run(x))</span><br></pre></td></tr></table></figure></p>
+<p>通过Saver的参数var_list来指定文件中的变量值和模型的中变量的映射关系，key为文件中的变量名， value为当前模型中的变量。</p>
+<h3 id="模型检查"><a href="#模型检查" class="headerlink" title="模型检查"></a>模型检查</h3><p>如果想加载的模型来源于网络或由自己创建（两个月前），那你很可能不知道原始变量是如何命名的。要检查保存的模型，需要使用官方 Tensorflow 库的一些工具。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">x = tf.get_variable(&apos;x&apos;, [])</span><br><span class="line">y = tf.get_variable(&apos;y&apos;, [])</span><br><span class="line">save_path = &apos;check/model.model&apos;</span><br><span class="line">print(tf.contrib.framework.list_variables(save_path))</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;[(&apos;a&apos;, []), (&apos;b&apos;, [])]</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以获得保存文件中各个参数的名称和shape。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/30/Algorithms/经典算法总结之BitMap/" rel="next" title="经典算法总结之BitMap">
+                <i class="fa fa-chevron-left"></i> 经典算法总结之BitMap
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/05/Deep Learning/TensorFlow之RNN/" rel="prev" title="TensorFlow之RNN">
+                TensorFlow之RNN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow模型保存"><span class="nav-number">1.</span> <span class="nav-text">TensorFlow模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保存模型"><span class="nav-number">1.1.</span> <span class="nav-text">保存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恢复模型"><span class="nav-number">1.2.</span> <span class="nav-text">恢复模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取变量"><span class="nav-number">1.3.</span> <span class="nav-text">获取变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型局部加载"><span class="nav-number">1.4.</span> <span class="nav-text">模型局部加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型检查"><span class="nav-number">1.5.</span> <span class="nav-text">模型检查</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/09/02/Deep Learning/TensorFlow之模型保存和回复/';
+          this.page.identifier = '2018/09/02/Deep Learning/TensorFlow之模型保存和回复/';
+          this.page.title = 'TensorFlow之模型保存和回复';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

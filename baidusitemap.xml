@@ -4,6 +4,88 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/04/27/Programming%20Language/Python%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/</loc>
+    <lastmod>2018-10-09T05:06:29.938Z</lastmod>
+    <data>
+        <display>
+        <title>Python编码规范</title>
+        <pubTime>2018-04-26T15:00:00.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/02/Deep%20Learning/TensorFlow%E4%B9%8B%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98%E5%92%8C%E5%9B%9E%E5%A4%8D/</loc>
+    <lastmod>2018-10-08T07:44:33.948Z</lastmod>
+    <data>
+        <display>
+        <title>TensorFlow之模型保存和回复</title>
+        <pubTime>2018-09-01T15:00:00.000Z</pubTime>
+        
+        <tag>TensorFlow</tag>
+         
+         
+           
+             
+              <breadCrumb title="TensorFlow" url="http://yoursite.com/categories/TensorFlow/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/08/28/Programming%20Language/Python%E4%B9%8BCollections/</loc>
+    <lastmod>2018-10-06T09:28:27.065Z</lastmod>
+    <data>
+        <display>
+        <title>Python之Collections</title>
+        <pubTime>2018-08-27T15:00:00.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/05/Deep%20Learning/TensorFlow%E4%B9%8BRNN/</loc>
+    <lastmod>2018-10-06T04:36:52.391Z</lastmod>
+    <data>
+        <display>
+        <title>TensorFlow之RNN</title>
+        <pubTime>2018-09-04T15:00:00.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>TensorFlow</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/09/21/Deep%20Learning/TensorFlow%E4%B9%8Btfdbg/</loc>
     <lastmod>2018-09-24T02:35:19.199Z</lastmod>
     <data>
@@ -623,9 +705,9 @@
         
         <tag>Deep Learning</tag>
          
-        <tag>Project</tag>
-         
         <tag>Recommender System</tag>
+         
+        <tag>Project</tag>
          
          
            
@@ -688,9 +770,9 @@
         <title>Java字符串</title>
         <pubTime>2017-09-11T15:00:00.000Z</pubTime>
         
-        <tag>Programming Language</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Programming Language</tag>
          
          
            
@@ -1094,13 +1176,13 @@
         <title>自制编程语言</title>
         <pubTime>2018-07-26T15:00:00.000Z</pubTime>
         
-        <tag>Project</tag>
-         
-        <tag>Reading</tag>
+        <tag>Java</tag>
          
         <tag>Programming Language</tag>
          
-        <tag>Java</tag>
+        <tag>Project</tag>
+         
+        <tag>Reading</tag>
          
          
            
@@ -1117,11 +1199,11 @@
         <title>SICP第一章:构造过程抽象</title>
         <pubTime>2018-03-21T15:00:00.000Z</pubTime>
         
+        <tag>Programming Language</tag>
+         
         <tag>SICP</tag>
          
         <tag>Reading</tag>
-         
-        <tag>Programming Language</tag>
          
          
            
@@ -1141,11 +1223,11 @@
         <title>SICP第二章:构造数据抽象</title>
         <pubTime>2018-04-26T15:00:00.000Z</pubTime>
         
+        <tag>Programming Language</tag>
+         
         <tag>SICP</tag>
          
         <tag>Reading</tag>
-         
-        <tag>Programming Language</tag>
          
          
            
