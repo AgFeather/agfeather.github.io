@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Deep Learning,TensorFlow," />
+  <meta name="keywords" content="TensorFlow,Deep Learning," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="TensorFlow常用方法整理">
-<meta name="keywords" content="Deep Learning,TensorFlow">
+<meta name="keywords" content="TensorFlow,Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TensorFlow常用函数整理">
 <meta property="og:url" content="http://yoursite.com/2017/11/28/Deep Learning/TensorFlow常用函数整理/index.html">
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="TensorFlow常用方法整理">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-17T23:49:10.234Z">
+<meta property="og:updated_time" content="2018-10-10T09:19:22.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TensorFlow常用函数整理">
 <meta name="twitter:description" content="TensorFlow常用方法整理">
@@ -376,6 +376,25 @@
 <p>这时候打印的是2，3，4，5，6</p>
 <p>解释：对于control_dependencies这个管理器，只有当里面的操作是一个op时，才会生效，也就是先执行传入的参数op，再执行里面的op。而y=x仅仅是tensor的一个简单赋值，不是定义的op，所以在图中不会形成一个节点，这样该管理器就失效了。tf.identity是返回一个一模一样新的tensor的op，这会增加一个新节点到gragh中，这时control_dependencies就会生效，所以第二种情况的输出符合预期。</p>
 <h3 id="tf-assign-x-new-number"><a href="#tf-assign-x-new-number" class="headerlink" title="tf.assign(x, new_number)"></a>tf.assign(x, new_number)</h3><p>这个函数的功能主要是把A的值变为new_number</p>
+<h2 id="TensorFlow优化器方法和梯度裁剪"><a href="#TensorFlow优化器方法和梯度裁剪" class="headerlink" title="TensorFlow优化器方法和梯度裁剪"></a>TensorFlow优化器方法和梯度裁剪</h2><h3 id="tf-train-AdamOptimizer"><a href="#tf-train-AdamOptimizer" class="headerlink" title="tf.train.AdamOptimizer()"></a>tf.train.AdamOptimizer()</h3><h4 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h4><ul>
+<li>compute_gradients(loss)<br>  根据传入的loss计算梯度，返回值是一个list，list中的元素是(gradient, variable)对，表示对每个变量的更新梯度</li>
+<li>apply_gradients(grads_and_vars,global_step=None)<br>  参数grads_and_vars是一个(gradient,variable)的list。（compute_gradients）的返回值<br>  对每个variable根据其gradient进行更新。<br>  返回一个operation，表示运行该apply_gradients</li>
+<li>minimize(loss) 同时运行compute_gradients() 和 apply_gradients()</li>
+</ul>
+<p>通常情况下，直接使用minimize()函数即可，但当需要对梯度进行操作时（梯度裁剪），就需要分别运行两个步骤。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">optimizer = tf.train.AdamOptimizer(learning_rate)</span><br><span class="line">gradients = optimizer.compute_gradients(loss)</span><br><span class="line">clipped_gradients = []</span><br><span class="line">for grad, var in gradients:</span><br><span class="line">    if grad is not None:</span><br><span class="line">        grad = tf.clip_by_value(grad, -1., 1.)</span><br><span class="line">        clipped_gradients.append((grad, var))</span><br><span class="line">train_op = optimizer.apply_gradients(clipped_gradients)</span><br></pre></td></tr></table></figure></p>
+<h3 id="梯度裁剪"><a href="#梯度裁剪" class="headerlink" title="梯度裁剪"></a>梯度裁剪</h3><p>在TensorFlow中，提供如下几种梯度裁剪方法：tf.clip_by_norm, tf.clip_by_global_norm, tf.clip_by_average_norm, tf.clip_by_value.</p>
+<ul>
+<li>tf.clip_by_norm(tensor, clip_norm)<br>如果输入tensor的l2范式值大于clip_norm，则tensor = tensor * clip_norm / l2(tensor)</li>
+<li>tf.clip_by_global_norm(t_list, clip_norm)<br>对t_list中的各个梯度tensor进行裁剪，t_list[i] <em> clip_norm / max(global_norm, clip_norm)<br>并且：global_norm = sqrt(sum([l2norm(t)\</em>*2 for t in t_list]))</li>
+<li>tf.clip_by_value(t, clip_value_min, clip_value_max)<br>最直接的裁剪方法，直接裁剪输入tensor的最大值和最小值。</li>
+</ul>
+<h2 id="tf中的Batch-Normalization"><a href="#tf中的Batch-Normalization" class="headerlink" title="tf中的Batch Normalization"></a>tf中的Batch Normalization</h2><ul>
+<li><p>tf.nn.moments(tensor, axis) 返回两个参数，分别是均值和方差。<br>输入tensor的shape为[batch_size, height, width, kernels]，第二个参数axis是一个int数组，表示要进行计算的维度。</p>
+</li>
+<li><p>tf.nn.batch_normalization(x, mean, variance, offset, scale, variance_epsilon)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def batch_norm(tensor):</span><br><span class="line">    epsilon = 1e-3</span><br><span class="line">    axis = list(range(len(tensor.get_shape()) - 1))</span><br><span class="line">    batch_mean, batch_var = tf.nn.moments(tensor, axis)</span><br><span class="line">    BN_tensor = tf.nn.batch_normalization(tensor, batch_mean, batch_var, offset=None, scale=None, variance_epsilon=epsilon)</span><br><span class="line">    return BN_tensor</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -422,9 +441,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
-          
             <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
           
         </div>
       
@@ -437,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/12/CUDA/CUDA笔记（五）/" rel="next" title="CUDA 学习笔记（五）">
-                <i class="fa fa-chevron-left"></i> CUDA 学习笔记（五）
+              <a href="/2017/11/12/CUDA/CUDA学习笔记（二）/" rel="next" title="CUDA 学习笔记（二）">
+                <i class="fa fa-chevron-left"></i> CUDA 学习笔记（二）
               </a>
             
           </div>
@@ -536,7 +555,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -547,7 +566,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -558,7 +577,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -607,7 +626,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tensor形状相关操作"><span class="nav-number">1.</span> <span class="nav-text">tensor形状相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-shape-input"><span class="nav-number">1.1.</span> <span class="nav-text">tf.shape(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-size-input"><span class="nav-number">1.2.</span> <span class="nav-text">tf.size(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-rank-input"><span class="nav-number">1.3.</span> <span class="nav-text">tf.rank(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-reshape-input-shape"><span class="nav-number">1.4.</span> <span class="nav-text">tf.reshape(input, shape)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-expand-dims-input-axis-None"><span class="nav-number">1.5.</span> <span class="nav-text">tf.expand_dims(input, axis=None)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-squeeze"><span class="nav-number">1.6.</span> <span class="nav-text">tf.squeeze()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-split-value-name-or-size-split-axis-0"><span class="nav-number">1.7.</span> <span class="nav-text">tf.split(value, name_or_size_split, axis=0)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-unstack-value-num-axis"><span class="nav-number">1.8.</span> <span class="nav-text">tf.unstack(value, num, axis)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积操作"><span class="nav-number">2.</span> <span class="nav-text">卷积操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-conv1d"><span class="nav-number">2.1.</span> <span class="nav-text">tf.conv1d()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-conv2d"><span class="nav-number">2.2.</span> <span class="nav-text">tf.conv2d()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-conv3d"><span class="nav-number">2.3.</span> <span class="nav-text">tf.conv3d()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程控制"><span class="nav-number">3.</span> <span class="nav-text">流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-control-dependencies-和tf-identity"><span class="nav-number">3.1.</span> <span class="nav-text">tf.control_dependencies()和tf.identity()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-assign-x-new-number"><span class="nav-number">3.2.</span> <span class="nav-text">tf.assign(x, new_number)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tensor形状相关操作"><span class="nav-number">1.</span> <span class="nav-text">tensor形状相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-shape-input"><span class="nav-number">1.1.</span> <span class="nav-text">tf.shape(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-size-input"><span class="nav-number">1.2.</span> <span class="nav-text">tf.size(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-rank-input"><span class="nav-number">1.3.</span> <span class="nav-text">tf.rank(input)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-reshape-input-shape"><span class="nav-number">1.4.</span> <span class="nav-text">tf.reshape(input, shape)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-expand-dims-input-axis-None"><span class="nav-number">1.5.</span> <span class="nav-text">tf.expand_dims(input, axis=None)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-squeeze"><span class="nav-number">1.6.</span> <span class="nav-text">tf.squeeze()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-split-value-name-or-size-split-axis-0"><span class="nav-number">1.7.</span> <span class="nav-text">tf.split(value, name_or_size_split, axis=0)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-unstack-value-num-axis"><span class="nav-number">1.8.</span> <span class="nav-text">tf.unstack(value, num, axis)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积操作"><span class="nav-number">2.</span> <span class="nav-text">卷积操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-conv1d"><span class="nav-number">2.1.</span> <span class="nav-text">tf.conv1d()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-conv2d"><span class="nav-number">2.2.</span> <span class="nav-text">tf.conv2d()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-conv3d"><span class="nav-number">2.3.</span> <span class="nav-text">tf.conv3d()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程控制"><span class="nav-number">3.</span> <span class="nav-text">流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-control-dependencies-和tf-identity"><span class="nav-number">3.1.</span> <span class="nav-text">tf.control_dependencies()和tf.identity()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-assign-x-new-number"><span class="nav-number">3.2.</span> <span class="nav-text">tf.assign(x, new_number)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow优化器方法和梯度裁剪"><span class="nav-number">4.</span> <span class="nav-text">TensorFlow优化器方法和梯度裁剪</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-train-AdamOptimizer"><span class="nav-number">4.1.</span> <span class="nav-text">tf.train.AdamOptimizer()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内置函数"><span class="nav-number">4.1.1.</span> <span class="nav-text">内置函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度裁剪"><span class="nav-number">4.2.</span> <span class="nav-text">梯度裁剪</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf中的Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">tf中的Batch Normalization</span></a></li></ol></div>
             
 
           </div>
