@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep Learning,Computer Version," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="总结图像分割识别算法从RCNN到 Faster RCNN的原理和演化过程。">
+<meta name="keywords" content="Deep Learning,Computer Version">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从RCNN到Faster-RCNN">
+<meta property="og:url" content="http://yoursite.com/2018/10/14/Deep Learning/从RCNN到Faster-RCNN/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="总结图像分割识别算法从RCNN到 Faster RCNN的原理和演化过程。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/fast_rcnn.jpg">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/faster_rcnn.jpg">
+<meta property="og:image" content="http://yoursite.com/images/deep_learning/RPN1.jpg">
+<meta property="og:updated_time" content="2018-10-14T08:25:36.051Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从RCNN到Faster-RCNN">
+<meta name="twitter:description" content="总结图像分割识别算法从RCNN到 Faster RCNN的原理和演化过程。">
+<meta name="twitter:image" content="http://yoursite.com/images/deep_learning/fast_rcnn.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/14/Deep Learning/从RCNN到Faster-RCNN/"/>
+
+
+
+
+
+  <title>从RCNN到Faster-RCNN | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/14/Deep Learning/从RCNN到Faster-RCNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从RCNN到Faster-RCNN</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-14T00:00:00+09:00">
+                2018-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/14/Deep Learning/从RCNN到Faster-RCNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/14/Deep Learning/从RCNN到Faster-RCNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>总结图像分割识别算法从RCNN到 Faster RCNN的原理和演化过程。</p>
+<a id="more"></a>
+<p>图像分割识别的主要问题有两个：1.找到候选框；2.识别候选框中的物体。可以说所有图像分割识别的算法都是为了解决这两个问题。经典的图像分割识别算法即定义大小不同的窗口，在图片上进行滑动并对窗口内的物体进行判断，但这种遍历所有可能窗口的方法由于窗口冗余，识别起来非常慢。而目前的研究改为仅对可能是物体的候选区域进行识别，减少了候选框的数量，加快了模型的运行速度。以YOLO，SSD算法为代表的one-stage算法是将两个问题捏合成一个问题，用回归思想一步到位。而RCNN系列算法则是two-stage算法，即使用不同模型对两个问题分开处理。</p>
+<p>整个RCNN系列算法的框架是一样的，主要都是一下四个步骤：</p>
+<ol>
+<li>找到候选框</li>
+<li>提取图片特征</li>
+<li>对候选框中的物体进行分类</li>
+<li>对候选框位置进行精修<br>可以说三个RCNN算法都是以上的步骤流程，不同的是各个步骤使用的模型不相同，本文从RCNN出发，介绍RCNN，Fast-RCNN，Faster-RCNN的算法原理。</li>
+</ol>
+<h2 id="R-CNN算法"><a href="#R-CNN算法" class="headerlink" title="R-CNN算法"></a>R-CNN算法</h2><p>RCNN算法使用Selective Search算法对原始图片提取可能的候选框，然后使用CNN提取每个候选框的特征，最后使用SVM对候选框特征进行分类，同时使用一个回归器对候选框的位置进行精修。</p>
+<h3 id="两个数据集"><a href="#两个数据集" class="headerlink" title="两个数据集"></a>两个数据集</h3><ol>
+<li>一个较大的图片识别分类库，标定每张图片中物体的类别</li>
+<li>一个较小的图片分割检测库，标定每张图片中物体的类别和位置<h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3>RCNN算法有四个步骤</li>
+<li>使用Selective Search算法对一张图片生成1k~2k个候选区域框</li>
+<li>对于每个候选区域，使用CNN提取特征</li>
+<li>特征送入每一类的SVM分类器，判断是否属于该类</li>
+<li>使用回归器精细修正候选框的位置<h3 id="候选框生成"><a href="#候选框生成" class="headerlink" title="候选框生成"></a>候选框生成</h3>使用了Selective Search方法从一张图像生成约2000-3000个候选区域。基本思路如下：</li>
+</ol>
+<ul>
+<li>使用一种过分割手段，将图像分割成小区域</li>
+<li>查看现有小区域，合并可能性最高的两个区域。重复直到整张图像合并成一个区域位置</li>
+<li>输出所有曾经存在过的区域，所谓候选区域<br>候选区域生成和后续步骤相对独立，实际可以使用任意算法进行。<br>上述合并规则只涉及区域的颜色直方图、纹理直方图、面积和位置。合并后的区域特征可以直接由子区域特征计算而来，速度较快。<h3 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h3><h4 id="模型预训练"><a href="#模型预训练" class="headerlink" title="模型预训练"></a>模型预训练</h4>首先使用大的图片分类数据集，对一个CNN分类模型进行训练：输入一张照片，输出1000维的类别标号。也可以下载训练好的CNN模型。<h4 id="调优训练"><a href="#调优训练" class="headerlink" title="调优训练"></a>调优训练</h4>首先把候选框归一化成统一尺寸227×227。<br>然后对预训练的CNN模型进行修改，将全连接的输出层由1000维改为21维（表示20类+背景）。<br>然后使用候选框对预训练的CNN模型进行调优训练。<br>在模型调优训练结束后，输入一个候选框，就可以得到该候选框的特征向量表示。<h3 id="类别判断"><a href="#类别判断" class="headerlink" title="类别判断"></a>类别判断</h3><h4 id="分类器"><a href="#分类器" class="headerlink" title="分类器"></a>分类器</h4>然后对每种target，使用一个线性SVM二类分类器进行判别。输入为CNN输出的特征表示，输出是否属于此类。<h4 id="位置精修"><a href="#位置精修" class="headerlink" title="位置精修"></a>位置精修</h4>通过Selective Search方法得到的候选框往往不是最完美的候选框。 解决方法是构建一个回归器，找到最优候选框。<br>对每一类目标，使用一个线性脊回归器进行精修。<br>输入为CNN输出的候选框特征表示，输出为（dx, dy, dw, dh），分别表示坐标(x,y)和宽高。<h3 id="RCNN的三个问题"><a href="#RCNN的三个问题" class="headerlink" title="RCNN的三个问题"></a>RCNN的三个问题</h3></li>
+</ul>
+<ol>
+<li>测试速度慢，RCNN中一张图像内候选框大量重叠，提取特征操作冗余</li>
+<li>训练速度慢，理由同上</li>
+<li>训练所需内存大，RCNN中独立的分类器和回归器需要大量特征作为训练样本<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3>成功将深度学习引入检测领域，RCNN的前两个步骤（候选区域提取+特征提取）与待检测类别无关，可以在不同类之间共用。这两步在GPU上约需13秒。<br>同时检测多类时，需要倍增的只有后两步骤（判别+精修），都是简单的线性运算，速度很快。这两步对于100K类别只需10秒。</li>
+</ol>
+<h2 id="Fast-R-CNN算法"><a href="#Fast-R-CNN算法" class="headerlink" title="Fast R-CNN算法"></a>Fast R-CNN算法</h2><p>在RCNN的基础上，训练时间从84小时减少为9.5小时，测试时间从47秒减少为0.32秒。但准确率相差无几。</p>
+<h3 id="Fast-RCNN的改进"><a href="#Fast-RCNN的改进" class="headerlink" title="Fast RCNN的改进"></a>Fast RCNN的改进</h3><p>原始RCNN对于每个图片会先用Selective Search方法生成2k个候选框，然后对每个候选框都进行特征提取，这是整个RCNN最耗时的地方。<br>我们完全可以直接对图片提取一次卷积特征，然后只需要将region proposal在原图的位置映射到卷积层特征图上，这样对于一张图像我们只需要提一次卷积层特征，然后对卷积层的输出feature map上的region proposal进行回归和分类。<br>与R-CNN框架图对比，可以发现主要有两处不同：</p>
+<ol>
+<li>卷积操作后引入ROI池化层，使得网络的输入图像可以是任意尺寸，输出则不变，是一个固定的维度。</li>
+<li>损失函数使用了多任务损失函数(multi-task loss)，将边框回归Bounding Box Regression直接加入到CNN网络中训练。<h3 id="算法流程-1"><a href="#算法流程-1" class="headerlink" title="算法流程"></a>算法流程</h3></li>
+<li>直接将原始图像归一化，然后输入到CNN中，提取整个图片的特征。</li>
+<li>将创建候选框的方法直接应用到卷积操作输出的特征图上。</li>
+<li>将特征图上的每个region proposal进行ROI池化，得到统一大小的输出特征。</li>
+<li>将固定大小的region proposal特征输入到全连接层，进行分类和回归定位<br>整个流程可以用如下伪代码表示：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">feature_map = cnn(image)</span><br><span class="line">region_feature_maps = region_proposal(feature_map)</span><br><span class="line">for rf_map in region_feature_maps:</span><br><span class="line">    patch = roi_pooling(rf_map)</span><br><span class="line">    class_pred, local_pred = full_connect(patch)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="分类和回归"><a href="#分类和回归" class="headerlink" title="分类和回归"></a>分类和回归</h3><p>通过ROI池化，可以得到每个region proposa固定大小的特征表示，然后将其输入到全连接层，最后连接两个并列的的输出层，大小分别为21和84，前者是分类的输出，代表每个region proposal属于每个类别（20 + 1类）的得分，后者是回归的输出，代表每个region proposal的四个坐标。<br>整个算法流程如图所示：<br><img src="/images/deep_learning/fast_rcnn.jpg" alt="fast rcnn"></p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>Fast RCNN通过减少卷积特征提取的冗余操作，大大减少了模型的训练和测试时间，尤其是将测试一张照片的时间控制在3秒内，使得Fast RCNN有了被实时应用的可能。</p>
+<h2 id="Faster-R-CNN算法"><a href="#Faster-R-CNN算法" class="headerlink" title="Faster R-CNN算法"></a>Faster R-CNN算法</h2><p>RCNN算法和Fast R-CNN都依赖于外部候选区域方法，如selective search。但这些算法在 CPU 上运行且速度很慢。在测试中，Fast R-CNN 需要 2.3 秒来进行预测，其中 2 秒用于生成 2000 个 ROI。<br>Faster RCNN可以简单地看做“区域生成网络+fast RCNN“的系统，用区域生成网络RPN代替fast RCNN中的Selective Search方法。所有计算没有重复，完全在GPU中完成，大大提高了运行速度。<br>整个网络结构如下图所示：<br><img src="/images/deep_learning/faster_rcnn.jpg" alt="faster_rcnn"><br>可以发现，Fast-RCNN和Faster-RCNN的主要差别就是region proposal的生成方法。</p>
+<h3 id="候选区域生成网络"><a href="#候选区域生成网络" class="headerlink" title="候选区域生成网络"></a>候选区域生成网络</h3><p>基本设想是：RPN的核心思想是使用CNN卷积神经网络直接产生Region Proposal。<br>候选区域网络（RPN）将上一步卷积层提取的原始图片的feature map作为输入。在输入特征图上滑动一个 3×3 的卷积核，对于特征图中的每一个位置，RPN 会做 k 次预测。下图展示了一个 8×8 的特征图，且有一个 3×3 的卷积核执行运算，它最后输出 8×8×3 个 region proposal（其中 k=3）。<br><img src="/images/deep_learning/RPN1.jpg" alt="PRN1"><br>对于RPN提取出的anchor box，经过ROI层得到固定大小的特征表示，然后输出到全连接层中，在全连接之后构建两个输出层：物体分类和框位置回归。滑动窗口的位置提供了物体的大体位置信息，框的回归提供了框更精准的位置。</p>
+<h3 id="分类和回归-1"><a href="#分类和回归-1" class="headerlink" title="分类和回归"></a>分类和回归</h3><p>通过RPN网络，可以得到多个region proposal，然后在将各个region proposal对应的feature map输入到POI池化层，得到大小相同的feature map，最后将其输入到全连接神经网络，和Fast-RCNN相同，全连接包含两个输出层，一个用于物品分类，一个用于region proposal回归。</p>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p>Faster-RCNN是整个RCNN系列中的集大成者，它将图片分割识别的各个步骤统一到了一起，使得模型的运行速度和准确率都得到了提高。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
+          
+            <a href="/tags/Computer-Version/" rel="tag"><i class="fa fa-tag"></i> Computer Version</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/21/Deep Learning/TensorFlow之tfdbg/" rel="next" title="TensorFlow之tfdbg">
+                <i class="fa fa-chevron-left"></i> TensorFlow之tfdbg
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#R-CNN算法"><span class="nav-number">1.</span> <span class="nav-text">R-CNN算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两个数据集"><span class="nav-number">1.1.</span> <span class="nav-text">两个数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法流程"><span class="nav-number">1.2.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#候选框生成"><span class="nav-number">1.3.</span> <span class="nav-text">候选框生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征提取"><span class="nav-number">1.4.</span> <span class="nav-text">特征提取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型预训练"><span class="nav-number">1.4.1.</span> <span class="nav-text">模型预训练</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调优训练"><span class="nav-number">1.4.2.</span> <span class="nav-text">调优训练</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类别判断"><span class="nav-number">1.5.</span> <span class="nav-text">类别判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分类器"><span class="nav-number">1.5.1.</span> <span class="nav-text">分类器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#位置精修"><span class="nav-number">1.5.2.</span> <span class="nav-text">位置精修</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCNN的三个问题"><span class="nav-number">1.6.</span> <span class="nav-text">RCNN的三个问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fast-R-CNN算法"><span class="nav-number">2.</span> <span class="nav-text">Fast R-CNN算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fast-RCNN的改进"><span class="nav-number">2.1.</span> <span class="nav-text">Fast RCNN的改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法流程-1"><span class="nav-number">2.2.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类和回归"><span class="nav-number">2.3.</span> <span class="nav-text">分类和回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Faster-R-CNN算法"><span class="nav-number">3.</span> <span class="nav-text">Faster R-CNN算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#候选区域生成网络"><span class="nav-number">3.1.</span> <span class="nav-text">候选区域生成网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类和回归-1"><span class="nav-number">3.2.</span> <span class="nav-text">分类和回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-2"><span class="nav-number">3.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/10/14/Deep Learning/从RCNN到Faster-RCNN/';
+          this.page.identifier = '2018/10/14/Deep Learning/从RCNN到Faster-RCNN/';
+          this.page.title = '从RCNN到Faster-RCNN';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
