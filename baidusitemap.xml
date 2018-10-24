@@ -4,12 +4,72 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/10/23/Programming%20Language/Python%E5%A5%BD%E7%94%A8%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</loc>
+    <lastmod>2018-10-23T01:11:31.294Z</lastmod>
+    <data>
+        <display>
+        <title>Python好用的第三方库</title>
+        <pubTime>2018-10-22T15:00:00.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/15/Deep%20Learning/Word2Vec%E4%B9%8Bgensim%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-10-16T09:45:03.118Z</lastmod>
+    <data>
+        <display>
+        <title>Word2Vec之gensim使用</title>
+        <pubTime>2018-09-14T15:00:00.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/08/27/Machine%20Learning/%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E4%B9%8BlightGBM/</loc>
-    <lastmod>2018-10-14T08:29:06.284Z</lastmod>
+    <lastmod>2018-10-14T08:29:46.811Z</lastmod>
     <data>
         <display>
         <title>树学习算法总结之lightGBM</title>
         <pubTime>2018-08-26T15:00:00.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/21/Machine%20Learning/%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E4%B9%8Bxgboost/</loc>
+    <lastmod>2018-10-14T08:28:14.047Z</lastmod>
+    <data>
+        <display>
+        <title>树学习算法总结之xgboost</title>
+        <pubTime>2018-04-20T15:00:00.000Z</pubTime>
         
         <tag>Machine Learning</tag>
          
@@ -79,6 +139,26 @@
            
              
               <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/07/11/Programming%20Language/Python%E4%B9%8BNumpy/</loc>
+    <lastmod>2018-10-10T09:21:23.922Z</lastmod>
+    <data>
+        <display>
+        <title>Python之Numpy</title>
+        <pubTime>2018-07-10T15:00:00.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
           
         </display>
     </data>
@@ -419,26 +499,6 @@
            
              
               <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/04/21/Machine%20Learning/%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E4%B9%8Bxgboost/</loc>
-    <lastmod>2018-09-17T23:54:54.897Z</lastmod>
-    <data>
-        <display>
-        <title>树学习算法总结之xgboost</title>
-        <pubTime>2018-04-20T15:00:00.000Z</pubTime>
-        
-        <tag>Machine Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -1298,11 +1358,11 @@
         <title>自制编程语言</title>
         <pubTime>2018-07-26T15:00:00.000Z</pubTime>
         
+        <tag>Project</tag>
+         
         <tag>Java</tag>
          
         <tag>Programming Language</tag>
-         
-        <tag>Project</tag>
          
         <tag>Reading</tag>
          
