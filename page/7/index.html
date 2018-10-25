@@ -253,6 +253,486 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/18/Reading/推荐系统实战笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/18/Reading/推荐系统实战笔记/" itemprop="url">推荐系统实战笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-18T00:00:00+09:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading/" itemprop="url" rel="index">
+                    <span itemprop="name">Reading</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/18/Reading/推荐系统实战笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/18/Reading/推荐系统实战笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Chapter-One好的推荐系统"><a href="#Chapter-One好的推荐系统" class="headerlink" title="Chapter One好的推荐系统"></a>Chapter One好的推荐系统</h1><h2 id="1-1-什么是推荐系统"><a href="#1-1-什么是推荐系统" class="headerlink" title="1.1 什么是推荐系统"></a>1.1 什么是推荐系统</h2><p>在用户并没有一个明确的需求时，就需要一个自动化工具，它可以分析你的历史兴趣，从庞大的物品中找到可能符合你口味的商品，这个工具就是个性化推荐系统。<br>推荐系统和搜索引擎对于用户来说是两个互补的工具，搜索引擎满足了用户有明确目的时的主动查找需求，而推荐系统能够在用户没有明确目的的时候帮助他们发现感兴趣的新内容。</p>
+<h2 id="1-2-个性化推荐系统的应用"><a href="#1-2-个性化推荐系统的应用" class="headerlink" title="1.2 个性化推荐系统的应用"></a>1.2 个性化推荐系统的应用</h2><p>几乎所有推荐系统应用都是由以下三部分组成：</p>
+<ol>
+<li>前台的展示页面</li>
+<li>后台的日志系统</li>
+<li>推荐算法系统</li>
+</ol>
+<h2 id="1-3-推荐系统评测"><a href="#1-3-推荐系统评测" class="headerlink" title="1.3 推荐系统评测"></a>1.3 推荐系统评测</h2><p>一个完整的推荐系统一般存在3个参与方：</p>
+<ol>
+<li>用户</li>
+<li>物品提供者</li>
+<li>提供推荐系统的网站<br>以图书推荐为例，首先需要满足用户的需求，给用户推荐令他们感兴趣的书。其次，需要让各种小众书籍都被推荐给相应的用户，而不是只推荐大出版社的热门书籍。同时，好的推荐系统设计能够让推荐系统不断收集高质量的用户反馈，不断完善推荐质量。因此，一个好的推荐系统是一个三方共赢的产物。</li>
+</ol>
+<h3 id="1-3-1-推荐系统实验方法"><a href="#1-3-1-推荐系统实验方法" class="headerlink" title="1.3.1 推荐系统实验方法"></a>1.3.1 推荐系统实验方法</h3><p>在推荐系统中，主要有3中评测推荐效果的试验方法：</p>
+<ol>
+<li>离线实验</li>
+<li>用户调查</li>
+<li>在线实验</li>
+</ol>
+<h5 id="1-离线实验"><a href="#1-离线实验" class="headerlink" title="1. 离线实验"></a>1. 离线实验</h5><p>离线实验的方法由一下几个步骤构成：</p>
+<ol>
+<li>通过日志系统获得用户行为数据，并按照一定格式生成标准数据集</li>
+<li>将数据集按照一定的规则分成训练集和测试集</li>
+<li>在训练集上训练用户兴趣模型，并在测试集上进行测试</li>
+<li>通过事先定义的离线指标评测算法在测试集上的效果<br>离线实验可以说是一个静态的试验方法，不需要用户参与，只需要静态数据即可，有 <strong>不需要用户参与；方便快捷；可以测试大量算法的优点</strong> ，缺点是 <strong>无法获得很多商业上关注的指标，如点击率转化率等</strong></li>
+</ol>
+<h5 id="2-用户调查"><a href="#2-用户调查" class="headerlink" title="2. 用户调查"></a>2. 用户调查</h5><p>在离线实验中，高预测准确率并不等于高用户满意度，因此用户调查就成了推荐系统测评的一个重要工具。<br>用户调查的优缺点也很明显，优点是：<strong>可以获得用户主观指标</strong>， 缺点是： <strong>募集测试用户代价较大，成本高，而测试用户如果过少也会失去意义</strong></p>
+<h5 id="3-在线实验"><a href="#3-在线实验" class="headerlink" title="3. 在线实验"></a>3. 在线实验</h5><p>AB测试是一种常见在线实验方法，通过将用户随机分为几组，并对每组采用不同算法，然后通过计算每组不同的指标来评价算法性能。 <strong>优点是准确，缺点是实验复杂，周期长</strong>，所以只会对在1，2步骤表现优秀的算法进行AB实验。</p>
+<h3 id="1-3-2-评测指标"><a href="#1-3-2-评测指标" class="headerlink" title="1.3.2 评测指标"></a>1.3.2 评测指标</h3><h5 id="1-用户满意度"><a href="#1-用户满意度" class="headerlink" title="1 用户满意度"></a>1 用户满意度</h5><p>用户满意度只可以通过用户调查和在线实验获得。需要注意的是，设计调查问卷时需要一些技巧，而不仅仅是简单的询问用户对结果是否满意。在线实验中，可以对一些用户行为进行计算的到满意度。如点击率，停留时间，转化率等指标。</p>
+<h5 id="2-预测准确度"><a href="#2-预测准确度" class="headerlink" title="2 预测准确度"></a>2 预测准确度</h5><p>该指标度量的是算法预测用户行为的能力。是非常重要的离线评测指标。预测准确度的计算方法同传统机器学习方法一样（训练模型，测试模型）。在预测准确度中，也有不同的度量指标：</p>
+<ol>
+<li>评分预测：<ol>
+<li>预测用户对物品的评分，</li>
+<li>预测评分的误差计算可以使用平方根误差RMSE和绝对值误差MAE。</li>
+<li>RMSE被认为加大了对预测不准的用户物品评分的惩罚，因而对系统的评测更加苛刻。</li>
+</ol>
+</li>
+<li>TopN推荐<ol>
+<li>对于一个用户，系统会给该用户生成一个推荐列表，即TopN推荐</li>
+<li>TopN推荐一般通过准确率和召回率来度量</li>
+</ol>
+</li>
+<li>覆盖率<ol>
+<li>简单的定义为系统能够推荐出来的物品占总物品集合的比例。</li>
+<li>覆盖率是一个内容提供商会关心的指标</li>
+<li>覆盖率为100%的系统可以将每个物品都推荐给至少一个用户</li>
+<li>好的系统不仅仅需要较高的用户满意度，还要较高的覆盖率</li>
+<li>可以用每个商品被推荐的数量用来计算覆盖率</li>
+<li>可以用 <strong>覆盖率</strong> 和 <strong>基尼系数</strong> 衡量</li>
+</ol>
+</li>
+<li>多样性<ol>
+<li>推荐列表需要比较多样，覆盖用户绝大多数的兴趣点</li>
+<li>可以用相似度算法计算推荐列表items之间的相似度</li>
+<li>相似度最好的情况是满足用户的喜爱程度。</li>
+</ol>
+</li>
+<li>新颖性</li>
+<li>惊喜度<ol>
+<li>如果推荐结果和用户的历史兴趣不相似，但却让用户觉得满意，那么就可以说推荐结果惊喜度很高。而推荐的新颖性仅仅取决于用户是否听说过这个推荐结果</li>
+</ol>
+</li>
+<li>信任度<ol>
+<li>让用户对推荐结果产生信任是非常重要的</li>
+<li>同样结果以信任方式推荐给用户会让用户满意，而如果以广告的形式用户会些许不满。</li>
+<li>首先可以增加推荐系统透明度，主要方法是提供推荐解释。也可以利用好友信息给用户做推荐，并用好友进行推荐解释。</li>
+</ol>
+</li>
+<li>实时性<ol>
+<li>在有些网站中，推荐的实时性会非常重要。</li>
+<li>首先是对用户的实时性，需要对推荐列表的item更新更加准确</li>
+<li>然后是对商品的实时性，对于新加入的商品，如何正确推荐给用户，这涉及到考验系统 <strong>冷启动</strong> 的能力</li>
+</ol>
+</li>
+<li>健壮性<ol>
+<li>大型网站的推荐系统会面临攻击，健壮性指标衡量了一个推荐系统抗击作弊的能力。</li>
+<li>可以通过模拟攻击来计算算法的健壮性</li>
+<li>设计推荐系统时尽量使用代价比较高的用户行为</li>
+<li>在使用数据前，进行攻击检测，从而对攻击数据进行清理</li>
+</ol>
+</li>
+<li>商业指标<ol>
+<li>不同的网站具有不同的商业指标，和盈利能力息息相关。</li>
+</ol>
+</li>
+</ol>
+<h3 id="1-3-3-评价维度"><a href="#1-3-3-评价维度" class="headerlink" title="1.3.3 评价维度"></a>1.3.3 评价维度</h3><p>一个推荐算法，可能整体性能不是很好，但在某种情况下性能比较好，一般来说，评测维度主要是以下三种：</p>
+<pre><code>1. 用户维度
+2. 物品维度
+3. 时间维度
+</code></pre><h1 id="Chapter-Two-利用用户行为数据"><a href="#Chapter-Two-利用用户行为数据" class="headerlink" title="Chapter Two 利用用户行为数据"></a>Chapter Two 利用用户行为数据</h1><p>基于用户行为分析的推荐算法被称为协同过滤算法。</p>
+<h2 id="用户行为数据"><a href="#用户行为数据" class="headerlink" title="用户行为数据"></a>用户行为数据</h2><ol>
+<li>用户行为被保存在服务器上的种种日志文件中</li>
+<li>用户行为在个性推荐系统中一般分为两种：显性反馈行为和隐性反馈行为<ul>
+<li>显性反馈行为包括用户明确表示对物品喜好的行为</li>
+<li>隐性反馈虽然不能明确反应用户喜好，但数量庞大，获取容易<h2 id="基于邻域的算法"><a href="#基于邻域的算法" class="headerlink" title="基于邻域的算法"></a>基于邻域的算法</h2>基于邻域的算法是推荐系统中最基本的算法。基于邻域的算法分为两大类，一类是基于用户的协同过滤算法，另一类是 基于物品的协同过滤算法。<h3 id="基于用户的协同过滤算法"><a href="#基于用户的协同过滤算法" class="headerlink" title="基于用户的协同过滤算法"></a>基于用户的协同过滤算法</h3>基于用户的协同过滤算法本质上是 <strong>找到与需要推荐的用户A有相似兴趣的其他用户，然后把那些用户喜欢的、而用户A没有听说过的物品推荐给A。这种方法称为基于用户的协同过滤算法。</strong><br>从上面的描述中可以看到，基于用户的协同过滤算法主要包括两个步骤。</li>
+</ul>
+</li>
+<li>找到和目标用户兴趣相似的用户集合。</li>
+<li>找到这个集合中的用户喜欢的，且目标用户没有听说过的物品推荐给目标用户。<br>步骤1的关键在于计算两个用户的相似度。这里协同过滤算法主要利用 <strong>行为的相似度计算兴趣的相似度</strong>。<br>我们可以通过Jaccard公式简单计算u，v两个用户的相似度。<strong>Jaccard公式计算方法为：找到两个用户分别有过正反馈的物品集合，计算两个集合的交集和集合并集的比值即为相似度。</strong> Jaccard相似度的取值为[0, 1]，越大两个用户越相似。<br>还有一种方法是计算余弦相似度。<br>常规UserCF对两两用户都利用余弦相似度计算相似度。这种方法的时间复杂度是O(|U|*|U|)，这在用户数很大时非常耗时。事实上，很多用户相互之间并没有对同样的物品产生过行为。所以对于最基本的UserCF的一个优化就是：<strong>首先找到所有兴趣集合并集不为空的用户对，然后只计算这些用户之间的余弦相似度。</strong><br>为此，可以首先建立 <strong>物品到用户的倒排表</strong>，对于每个物品都保存对该物品产生过行为的用户列表。然后建立稀疏矩阵C[u][v]表示用户u和用户v兴趣集合的并集。最后扫描倒排列表中每个物品对应的用户列表，将用户列表中的两两用户对应的C[u][v]加一。最后可以得到所有有共同兴趣的用户以及共同行为的个数。<br><img src="/images/recommender_practice/daopaibiao.png" alt="用户行为倒排表"><br><img src="/images/recommender_practice/UserCF.png" alt="UserCF算法"><h5 id="用户相似度计算的改进"><a href="#用户相似度计算的改进" class="headerlink" title="用户相似度计算的改进"></a>用户相似度计算的改进</h5>两个用户对冷门物品采取过同样的行为更能说明他们兴趣的相似度。在普通的UserCF基础上提出了User-IIF算法：<br><img src="/images/recommender_practice/UserIIF.png" alt="User-IIF算法"><h5 id="UserCF实际应用"><a href="#UserCF实际应用" class="headerlink" title="UserCF实际应用"></a>UserCF实际应用</h5>相比基于物品的协同过滤算法(ItemCF)， UserCF在目前的实际应用中使用并不多。主要原因是：首先，随着网站的用户数目越来越大，计算用户兴趣相似度矩阵将越来越困难，其运算时间复杂度和空间复杂度的增长和用户数的增长近似于平方关系。其次，基于用户的协同过滤很难对推荐结果作出解释。</li>
+</ol>
+<h3 id="基于物品的协同过滤算法"><a href="#基于物品的协同过滤算法" class="headerlink" title="基于物品的协同过滤算法"></a>基于物品的协同过滤算法</h3><p>基于物品的协同过滤算法是目前业界应用最多的算法。 无论是亚马逊网，还是Netflix、Hulu、YouTube，其推荐算法的基础都是该算法。 <strong>基于物品的协同过滤算法(简称ItemCF)给用户推荐那些和他们之前喜欢的物品相似的物品。</strong> 不过，ItemCF算法并不利用物品的内容属性计算物品之间的相似度，它主要通过分析用户的行为记录计算物品之间的相似度。<strong>该算法认为，物品A和物品B具有很大的相似度是因为喜欢物品A的用户大都也喜欢物品 B。</strong></p>
+<h4 id="ItemCF算法步骤"><a href="#ItemCF算法步骤" class="headerlink" title="ItemCF算法步骤"></a>ItemCF算法步骤</h4><p>基于物品的协同过滤算法主要分为两步。</p>
+<ol>
+<li>计算物品之间的相似度。</li>
+<li>根据物品的相似度和用户的历史行为给用户生成推荐列表。<br>两个物品的相似度Wij可以用如下公式计算：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Wij = (N(i)交N(j)) / sqrt(N(i)*N(j))</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Wij可以解释为：<strong>同时喜欢商品i和商品j的人的交集的人数 / 喜欢商品i的人数*喜欢商品j的人数</strong></p>
+<p>ItemCF通过如下公式计算用户u对一个物品j的兴趣<br><img src="images/recommender_practice/ItemCF.png" alt="ItemCF"><br>这里N(u)是用户喜欢的物品的集合，S(j,K)是和物品j最相似的K个物品的集合，wji是物品j和i 的相似度，rui是用户u对物品i的兴趣。<br>该公式的核心思想是：<strong>找出和商品j最相近的k个商品中被用户喜欢的商品is，计算所有is和j的相似度的和</strong><br>该公式的含义是，<strong>和用户历史上感兴趣的物品越相似的物品，越有可能在用户的推荐列表中获得比较高的排名。</strong></p>
+<h6 id="参数K"><a href="#参数K" class="headerlink" title="参数K"></a>参数K</h6><p>参数K是ItemCF算法的重要参数，它对推荐算法的各种指标都会产生一些列的影响：</p>
+<ul>
+<li>精度（准确率和召回率）：准确率和召回率与参数k并不呈正相关或者负相关，但是选择合适的K对于获得推荐系统高的精度比较重要。</li>
+<li>流行度：随着K的增大，推荐结果的流行度会逐渐提高，但是当K增加到一定的程度，流行度就不会再有明显变化。</li>
+<li>覆盖率：K越大，覆盖率会相应地降低</li>
+</ul>
+<h4 id="用户活跃度对物品相似度的影响"><a href="#用户活跃度对物品相似度的影响" class="headerlink" title="用户活跃度对物品相似度的影响"></a>用户活跃度对物品相似度的影响</h4><p>假设有这么一个用户，他是开书店的，假设当当网有100万本书，他买了80万本准备开店卖。从前面ItemCF算法可知，这意味着因为存在这么一个用户，有80万本书两两之间就产生了相似度，也就是说，内存里即将诞生一个80万乘80万的稠密矩阵。但这个人的存在对于ItemCF是没有意义的。</p>
+<h5 id="ItemCF-IUF-Inverse-User-Frequence"><a href="#ItemCF-IUF-Inverse-User-Frequence" class="headerlink" title="ItemCF-IUF(Inverse User Frequence)"></a>ItemCF-IUF(Inverse User Frequence)</h5><p>IUF即用户活跃度对数的倒数的参数，IUF认为活跃用户对物品相似度的贡献应该小于不活跃的用户，他提出应该增加IUF 参数来修正物品相似度的计算公式:<br><img src="images/recommender_practice/IUF.png" alt="IUF"></p>
+<p>在实际应用中，对于上面这种过于活跃的用户，一般直接将其删除。</p>
+<h4 id="物品相似度的归一化"><a href="#物品相似度的归一化" class="headerlink" title="物品相似度的归一化"></a>物品相似度的归一化</h4><p>如果将ItemCF的相似度矩阵按最大值归一化，可以提高推荐的准确率。1 其研究表明，如果已经得到了物品相似度矩阵w，那么可以用如下公式得到归一化之后的相似度 矩阵w’:<br><img src="images/recommender_practice/itemcf_guiyihua.png" alt="guiyihua"><br>归一化的好处不仅仅在于增加推荐的准确度，它还可以提高推荐的覆盖率和多样性。 一般来说，物品总是属于很多不同的类，每一类中的物品联系比较紧密。</p>
+<h5 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h5><p>举一个例子，假设物品分为两类——A和B，A类物品之间的相似 度为0.5，B类物品之间的相似度为0.6，而A类物品和B类物品之间的相似度是0.2。在这种情况下， 如果一个用户喜欢了5个A类物品和5个B类物品，用ItemCF给他进行推荐，推荐的就都是B类物品， 因为B类物品之间的相似度大。但如果归一化之后，A类物品之间的相似度变成了1，B类物品之 间的相似度也是1，那么这种情况下，用户如果喜欢5个A类物品和5个B类物品，那么他的推荐列 表中A类物品和B类物品的数目也应该是大致相等的。从这个例子可以看出，相似度的归一化可 以提高推荐的多样性。</p>
+<h4 id="物品过于热门问题"><a href="#物品过于热门问题" class="headerlink" title="物品过于热门问题"></a>物品过于热门问题</h4><p>如果一个物品过于热门，仅仅在分母上乘该喜欢该物品的人数仍然过于热门，可以在分母的上加上α的幂加大惩罚。通过这种方法可以在适当牺牲准确率和召回率的情况下显著提升结果的覆盖率和新颖性(降低流行度即提高了新颖性)。</p>
+<h3 id="ItemCF和UserCF的对比"><a href="#ItemCF和UserCF的对比" class="headerlink" title="ItemCF和UserCF的对比"></a>ItemCF和UserCF的对比</h3><p>UserCF给用户推荐那些和他有共同兴 趣爱好的用户喜欢的物品，而ItemCF给用户推荐那些和他之前喜欢的物品类似的物品。从这个算 法的原理可以看到，UserCF的推荐结果着重于反映和用户兴趣相似的小群体的热点，而ItemCF 的推荐结果着重于维系用户的历史兴趣。换句话说，UserCF的推荐更社会化，反映了用户所在的 6 小型兴趣群体中物品的热门程度，而ItemCF的推荐更加个性化，反映了用户自己的兴趣传承。</p>
+<p><img src="images/recommender_practice/UserCompareItem.png" alt="UserCompareItem"></p>
+<h3 id="隐语义模型"><a href="#隐语义模型" class="headerlink" title="隐语义模型"></a>隐语义模型</h3><p>LFM（latent factor model）隐语义模型在推荐系统中表现了强大的威力，LFM主要用于找到文本的隐含语义，可以应用在TopK推荐中。</p>
+<h4 id="基础算法"><a href="#基础算法" class="headerlink" title="基础算法"></a>基础算法</h4><p>LFM的核心思想是：<strong>通过隐含特征联系用户兴趣和物品</strong>，LFM采用基于用户行为统计的自动聚类，LFM有很多衍生的手段，包括pLSA，LDA，隐含类别模型，隐含主题模型，矩阵分解等。<br>LFM通过如下公式计算用户u对物品i的兴趣：<br><img src="images/recommender_practice/lfm_format.png" alt="lfm_format"></p>
+<p>所以，想使用LFM模型，需要一个训练集，对于每个用户u，训练集里都包含了用户u喜欢的物品和不感兴趣的物品，通过学习这个数据集，就可以获得上面的模型参数。而对于隐性反馈数据集来说，只有正样本没有负样本，所以LFM的第一个问题就是如何给每个用户生成负样本。负样本的生成可以遵循以下原则：</p>
+<ol>
+<li>对每个用户，正负样本保持平衡</li>
+<li>对每个用户采样负样本时，要选取那些很热门，而用户却没有行为的物品。<br>一般认为，很热门而用户却没有行为更加代表用户对这个物品不感兴趣。因为对于冷门的物 品，用户可能是压根没在网站中发现这个物品，所以谈不上是否感兴趣。</li>
+</ol>
+<p>经过采样，可 以得到一个用户—物品集 K = {(u, i)} ，其中如果(u, i)是正样本，则有 rui = 1 ，否则有 rui = 0 。然后，需要优化如下的损失函数来找到最合适的参数p和q:</p>
+<p><img src="images/recommender_practice/lfm_format2.png" alt="lfm_format2"><br>这里面的K即是隐类，LFM通过隐类将User和Item关联起来。</p>
+<h4 id="重要参数"><a href="#重要参数" class="headerlink" title="重要参数"></a>重要参数</h4><ol>
+<li>隐特征的个数K</li>
+<li>梯度下降的学习速率alpha</li>
+<li>正则化参数lambda</li>
+<li>每个用户的正负样本比例ratio<br>通过实验发现，ratio参数对LFM的性能影响最大。随着负样本数目的增加，覆盖率不 断降低，而推荐结果的流行度不断增加，说明ratio参数控制了推荐算法发掘长尾的能力。<h4 id="LFM缺点"><a href="#LFM缺点" class="headerlink" title="LFM缺点"></a>LFM缺点</h4></li>
+</ol>
+<ul>
+<li>当数据集非常稀疏时，LFM的性能会明显下降，甚至不如UserCF和ItemCF的性能。</li>
+<li>LFM很难实现实时的推荐。经典的LFM模型每次训练时都需要扫描所有的用户行为记录，这样才能计算出用户隐类向量(pu)和物品隐类向量(qi)。而且LFM的训练需要在用户行为记录上反复迭代才能获得比较好的性能。因此，LFM的每次训练都很耗时，一般在实际应用中只能每天训练一次，并且计算出所有用户的推荐结果。</li>
+<li>在新闻推荐中，冷启动问题非常明显。每天都会有大量新的新闻。这些新闻会在很短的时间内获得很多人的关注，但也会在很短的时间内失去用户的关注。因此，它们的生命周期很短，而推荐算法需要在它们短暂的生命周期内就将其推荐给对它们感兴趣的用户。</li>
+</ul>
+<h3 id="LFM和基于邻域方法的比较"><a href="#LFM和基于邻域方法的比较" class="headerlink" title="LFM和基于邻域方法的比较"></a>LFM和基于邻域方法的比较</h3><p>LFM是一种基于机器学习的方法，具有比较好的理论基础。这个方法和基于邻域的方法(比 如UserCF、ItemCF)相比，各有优缺点。下面将从不同的方面对比LFM和基于邻域的方法。</p>
+<ol>
+<li>理论基础： LFM具有较好的理论基础，他是一种学习方法，而基于邻域的方法是一种基于统计的方法。</li>
+<li>离线计算的空间复杂度：基于邻域的方法需要维护一张离线的相关表。假设有M个用户和N个物品， 在计算相关表的过程中，我们可能会获得一张比较稠密的临时相关表， 那么假设是用户相关表，则需要O(M<em>M)的空间，而对于物品相关表，则需要O(N</em>N)的空间。而LFM在建模过程中，如果是F个隐类，那么它需要的存储空间是O(F*(M+N))，这在 M和N很大时可以很好地节省离线计算的内存。</li>
+<li>离线计算的时间复杂度：假设有M个用户、N个物品、K条用户对物品的行为记录。那么， UserCF计算用户相关表的时间复杂度是O(N <em> (K/N)^2)，而ItemCF计算物品相关表的时间 复杂度是O(M</em>(K/M)^2)。而对于LFM，如果用F个隐类，迭代S次，那么它的计算复杂度 是O(K <em> F </em> S)。在一般情况下，LFM的时间复杂度要 稍微高于UserCF和ItemCF，这主要是因为该算法需要多次迭代。但总体上，这两种算法 在时间复杂度上没有质的差别。</li>
+<li>在线实时推荐：UserCF和ItemCF在线服务算法需要将相关表缓存在内存中，然后可以在线进行实时的预测。以ItemCF算法为例，一旦用户喜欢了新的物品，就可以通过查询内存中的相关表将和该物品相似的其他物品推荐给用户。因此，一旦用户有了新的行为， 而且该行为被实时地记录到后台的数据库系统中，他的推荐列表就会发生变化。而从LFM在给用户生成推荐列表时，需要计算用户对所有物品的兴趣 权重，然后排名，返回权重最大的N个物品。因此，LFM不太适合用于物品数非常庞大的系统。另一方面，LFM在生成一个用户推荐列表时速度太慢，因此不能在线实 时计算，而需要离线将所有用户的推荐结果事先计算好存储在数据库中。因此，LFM不 能进行在线实时推荐，也就是说，当用户有了新的行为后，他的推荐列表不会发生变化。</li>
+<li>推荐解释 ItemCF算法支持很好的推荐解释，它可以利用用户的历史行为解释推荐结果。 但LFM无法提供这样的解释，它计算出的隐类虽然在语义上确实代表了一类兴趣和物品， 却很难用自然语言描述并生成解释展现给用户。<h3 id="基于图模型"><a href="#基于图模型" class="headerlink" title="基于图模型"></a>基于图模型</h3>用户行为很容易用二分图表示，因此很多图的算法都可以用到推荐系统中。<h4 id="用户行为数据的二分图表示"><a href="#用户行为数据的二分图表示" class="headerlink" title="用户行为数据的二分图表示"></a>用户行为数据的二分图表示</h4>设用户行为 数据是由一系列二元组组成的，其中每个二元组(u, i)表示用户u对物品i产生过行为。这种数据集 很容易用一个二分图表示。<br><img src="images/recommender_practice/erfentu.png" alt="erfentu"></li>
+</ol>
+<p>将用户行为表示为二分图模型后，下面的任务就是在二分图上给用户进行个性化推荐。如果将个性化推荐算法放到二分图模型上，那么给用户u推荐物品的任务就可以转化为 <strong>度量用户顶点 vu和与vu没有边直接相连的物品节点在图上的相关性</strong>，相关性越高的物品在推荐列表中的权重就越高。</p>
+<h4 id="基于随机游走的PersonalRank算法"><a href="#基于随机游走的PersonalRank算法" class="headerlink" title="基于随机游走的PersonalRank算法"></a>基于随机游走的PersonalRank算法</h4><p>假设要给用户u进行个性化推荐，可以从用户u对应的节点vu开始在用户物品二分图上进行随 机游走。游走到任何一个节点时，首先按照概率α决定是继续游走，还是停止这次游走并从vu节点开始重新游走。如果决定继续游走，那么就从当前节点指向的节点中按照均匀分布随机选择一个节点作为游走下次经过的节点。这样，经过很多次随机游走后，每个物品节点被访问到的概率会收敛到一个数。最终的推荐列表中物品的权重就是物品节点的访问概率。<br><img src="images/recommender_practice/PersonalRank.png" alt="PersonalRank"></p>
+<h5 id="PersonalRank缺点"><a href="#PersonalRank缺点" class="headerlink" title="PersonalRank缺点"></a>PersonalRank缺点</h5><p>该算法在时间复杂度上 有明显的缺点。因为在为每个用户进行推荐时，都需要在整个用户物品二分图上进行迭代，直到 整个图上的每个顶点的PR值收敛。这一过程的时间复杂度非常高，不仅无法在线提供实时推荐， 甚至离线生成推荐结果也很耗时。<br>为了解决PersonalRank每次都需要在全图迭代并因此造成时间复杂度很高的问题，这里给出 两种解决方案。第一种很容易想到，就是减少迭代次数，在收敛之前就停止。这样会影响最终的 精度，但一般来说影响不会特别大。另一种方法就是从矩阵论出发，重新设计算法。我们可以将PersonalRank转化为矩阵的形式。令M为用户物品二 分图的转移概率矩阵</p>
+<h1 id="推荐系统冷启动问题"><a href="#推荐系统冷启动问题" class="headerlink" title="推荐系统冷启动问题"></a>推荐系统冷启动问题</h1><p>冷启动问题主要分3类。</p>
+<ul>
+<li>用户冷启动：对于新用户，我们没有该用户的行为，无法做个性化推荐的问题。</li>
+<li>物品冷启动：对于新物品，我们没有用户对该物品的行为，无法做个性化推荐的问题。</li>
+<li>系统冷启动：系统冷启动主要解决如何在一个新开发的网站上(无用户，只有一些物品的信息)设计个性化推荐系统。</li>
+</ul>
+<p>针对上述冷启动问题，普遍有如下解决方法</p>
+<ul>
+<li>提供非个性化的推荐：直接推荐热门项目，收集User信息</li>
+<li>利用用户注册时的信息做粗粒度个性化</li>
+<li>利用用户社交网络账号登录导入社交网站的好友信息。</li>
+<li>用户注册时要求用户对一些分类或者物品做出反馈</li>
+<li>对于新加入的物品，可以利用内容信息，将它们推荐给喜欢过和它们相似的物品的用户。</li>
+<li>在系统冷启动时，可以引入专家的知识，通过一定的高效方式迅速建立起物品的相关度表。</li>
+</ul>
+<h1 id="利用用户标签数据"><a href="#利用用户标签数据" class="headerlink" title="利用用户标签数据"></a>利用用户标签数据</h1><p>让普通用户给物品打标签（UGC），这种方法是一种表示用户兴趣和物品语义的重要方式。当一个用户对一个物品打上标签，这个标签一方面描述了用户的兴趣，另一方面则表示了物品的语义，从而将用户和物品联系起来。</p>
+<h4 id="To-Be-Continue"><a href="#To-Be-Continue" class="headerlink" title="To Be Continue"></a>To Be Continue</h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/11/Knowledge/atom运行python并修改为python3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/11/Knowledge/atom运行python并修改为python3/" itemprop="url">Atom运行Python3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-11T00:00:00+09:00">
+                2018-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Skills/" itemprop="url" rel="index">
+                    <span itemprop="name">Skills</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/11/Knowledge/atom运行python并修改为python3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/11/Knowledge/atom运行python并修改为python3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>atom是一个由GitHub开发的开源编辑器，以往我是sublime的忠实粉丝，但sublime在Linux下不支持中文输入，没办法愉快的写注释了，只好投奔atom。该文介绍的是如何在atom下运行python。同时应为Mac的默认python版本为2.7，该文也会介绍如何修改atom的运行版本为python3</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/11/Knowledge/atom运行python并修改为python3/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/23/Project/Kaggle项目之Titanic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -702,7 +1182,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/CUDA/CUDA笔记（三）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/Machine Learning/TF-IDF原理及应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -721,7 +1201,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/12/CUDA/CUDA笔记（三）/" itemprop="url">CUDA 学习笔记（三）</a></h1>
+                <a class="post-title-link" href="/2017/11/12/Machine Learning/TF-IDF原理及应用/" itemprop="url">Sklearn之TF-IDF</a></h1>
         
 
         <div class="post-meta">
@@ -744,6 +1224,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -752,9 +1254,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/11/12/CUDA/CUDA笔记（三）/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/12/Machine Learning/TF-IDF原理及应用/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/12/CUDA/CUDA笔记（三）/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/12/Machine Learning/TF-IDF原理及应用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -783,145 +1285,10 @@
 
       
         
-          <p>这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》。本节主要介绍了常量内存和纹理内存。<br>
+          <p>TF-IDF是一种统计方法， 广泛应用于信息检索领域。用于评估一个词对一个文件集或者一个文件的重要程度。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/12/CUDA/CUDA笔记（三）/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/CUDA/CUDA学习笔记(一)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dongfang Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Black Feather">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/12/CUDA/CUDA学习笔记(一)/" itemprop="url">CUDA学习笔记(一)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-12T00:00:00+09:00">
-                2017-11-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/12/CUDA/CUDA学习笔记(一)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/12/CUDA/CUDA学习笔记(一)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/12/CUDA/CUDA学习笔记(一)/#more" rel="contents">
+            <a class="btn" href="/2017/11/12/Machine Learning/TF-IDF原理及应用/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1107,141 +1474,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/CUDA/CUDA笔记（四）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dongfang Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Black Feather">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/12/CUDA/CUDA笔记（四）/" itemprop="url">CUDA 学习笔记（四）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-12T00:00:00+09:00">
-                2017-11-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/12/CUDA/CUDA笔记（四）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/12/CUDA/CUDA笔记（四）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》。本节主要介绍CUDA流。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/12/CUDA/CUDA笔记（四）/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/CUDA/CUDA笔记（五）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1377,7 +1609,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/Machine Learning/TF-IDF原理及应用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/CUDA/CUDA笔记（四）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -1396,7 +1628,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/12/Machine Learning/TF-IDF原理及应用/" itemprop="url">Sklearn之TF-IDF</a></h1>
+                <a class="post-title-link" href="/2017/11/12/CUDA/CUDA笔记（四）/" itemprop="url">CUDA 学习笔记（四）</a></h1>
         
 
         <div class="post-meta">
@@ -1419,28 +1651,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -1449,9 +1659,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/11/12/Machine Learning/TF-IDF原理及应用/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/12/CUDA/CUDA笔记（四）/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/12/Machine Learning/TF-IDF原理及应用/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/12/CUDA/CUDA笔记（四）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1480,10 +1690,10 @@
 
       
         
-          <p>TF-IDF是一种统计方法， 广泛应用于信息检索领域。用于评估一个词对一个文件集或者一个文件的重要程度。<br>
+          <p>这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》。本节主要介绍CUDA流。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/12/Machine Learning/TF-IDF原理及应用/#more" rel="contents">
+            <a class="btn" href="/2017/11/12/CUDA/CUDA笔记（四）/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1534,7 +1744,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/12/Machine Learning/生成模型和判别模型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/CUDA/CUDA学习笔记(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -1553,7 +1763,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/12/Machine Learning/生成模型和判别模型/" itemprop="url">生成模型和判别模型</a></h1>
+                <a class="post-title-link" href="/2017/11/12/CUDA/CUDA学习笔记(一)/" itemprop="url">CUDA学习笔记(一)</a></h1>
         
 
         <div class="post-meta">
@@ -1565,8 +1775,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T00:00:00+09:00">
-                2017-10-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-12T00:00:00+09:00">
+                2017-11-12
               </time>
             
 
@@ -1576,28 +1786,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -1606,9 +1794,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/12/Machine Learning/生成模型和判别模型/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/12/CUDA/CUDA学习笔记(一)/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/12/Machine Learning/生成模型和判别模型/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/12/CUDA/CUDA学习笔记(一)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1637,10 +1825,10 @@
 
       
         
-          <p>监督学习的任务就是从数据中学习一个模型，应用这一模型，对给定的输入X预测相应的输出Y。这个模型的一般形式为决策函数Y=f(X)或者条件概率分布P(Y|X)。而生成模型和判别模型的区别就是如何求得P(Y|X).<br>
+          <p>这是我学习CUDA整理的笔记，从入门的第一个程序开始，主要参考教材是《CUDA by Example》。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/12/Machine Learning/生成模型和判别模型/#more" rel="contents">
+            <a class="btn" href="/2017/11/12/CUDA/CUDA学习笔记(一)/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1728,7 +1916,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

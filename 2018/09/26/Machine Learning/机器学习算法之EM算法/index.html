@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Machine Learning," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="总结EM算法的原理，以及用python实现的EM算法求解双硬币问题。">
+<meta name="keywords" content="Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法之EM算法">
+<meta property="og:url" content="http://yoursite.com/2018/09/26/Machine Learning/机器学习算法之EM算法/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="总结EM算法的原理，以及用python实现的EM算法求解双硬币问题。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/machine_learning/EM1.png">
+<meta property="og:image" content="http://yoursite.com/images/machine_learning/EM2.png">
+<meta property="og:updated_time" content="2018-10-25T01:28:13.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法之EM算法">
+<meta name="twitter:description" content="总结EM算法的原理，以及用python实现的EM算法求解双硬币问题。">
+<meta name="twitter:image" content="http://yoursite.com/images/machine_learning/EM1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/26/Machine Learning/机器学习算法之EM算法/"/>
+
+
+
+
+
+  <title>机器学习算法之EM算法 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/Machine Learning/机器学习算法之EM算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习算法之EM算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T00:00:00+09:00">
+                2018-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/26/Machine Learning/机器学习算法之EM算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/26/Machine Learning/机器学习算法之EM算法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>总结EM算法的原理，以及用python实现的EM算法求解双硬币问题。</p>
+<a id="more"></a>
+<h2 id="EM算法概述"><a href="#EM算法概述" class="headerlink" title="EM算法概述"></a>EM算法概述</h2><p>EM算法被列为十大数据挖掘算法之一，必然有它的过人特性，但相比于其他的算法，EM算法更加抽象难懂。在这里，我尝试用最简单的语言解释EM算法到底是什么，干什么用的，他的运行过程和原理是什么，最后，结合一个EM算法求解双硬币问题的代码，彻底理解它，本文不涉及到具体的公式推导。</p>
+<h3 id="基本抛硬币问题"><a href="#基本抛硬币问题" class="headerlink" title="基本抛硬币问题"></a>基本抛硬币问题</h3><p>想象如下问题：有一枚不均匀的硬币，现在拿该硬币进行十次的抛币实验，得到的结果序列为：正，正，反，正，反，正，正，正… 现要求该硬币正面向上的概率是多少？<br>这是一道非常给定观测序列估计参数的题，只需要假设正面向上的概率为p，反面向上的概率为(1-p)，然后利用极大似然估计，求解p即可。在此不进行详述。</p>
+<h3 id="双硬币问题"><a href="#双硬币问题" class="headerlink" title="双硬币问题"></a>双硬币问题</h3><p>在上一题的基础上进一步加深，现在有两枚不均匀硬币A和B，每次随机从中拿出一枚进行连续十次的抛币实验。然后再将该硬币放回，继续随机从中拿去一枚进行10次抛币实验。往复5次，得到一个5 * 10的抛币实验观察，问两枚硬币A和B的正面向上的概率分别是多少。</p>
+<p>该问题和第一个问题不同的地方就是第二个问题引入了隐变量：‘每次随机拿去的硬币’。因为我们不知道每次随机拿去的是哪枚硬币，就无法用极大似然估计来求这枚硬币的概率分布。所以预测每个硬币的概率分布（正面朝上的概率）就变成了两个问题：1.该数据来自哪个分布（随机选的哪个硬币）；2.该分布是什么样的（正面朝上的概率）</p>
+<h3 id="迭代求解"><a href="#迭代求解" class="headerlink" title="迭代求解"></a>迭代求解</h3><p>直观上来看，这个问题是不可解的，是一个鸡生蛋，蛋生鸡的问题。<br>就双硬币实验来说，只有当我们知道了本次抛币属于同一个硬币的概率分布的时候，我们才能够对这个分布的参数作出靠谱的预测（极大似然）。但现在两枚硬币的概率分布混在了一起，而我们又没办法分开它们（隐变量，每次选取的硬币未知），所以就没法估计这两个分布的参数（正面朝上的概率）。反过来，只有当我们对这两个分布的参数作出了准确的估计的时候，才能知道到底哪些抛币实验结果属于第一个分布，哪些属于第二个分布。<br>为了解决这个循环问题，提出了EM算法：<strong>先随便选出一个随机值来，根据这个值来不断调整，如此循环迭代相互推导最后EM算法收敛到一个解。</strong></p>
+<p>假设我们想估计知道A和B两个参数，在开始状态下二者都是未知的，但如果知道了A的信息就可以得到B的信息，反过来知道了B也就得到了A。可以考虑首先赋予A某种初值，以此得到B的估计值，然后从B的当前值出发，重新估计A的取值，这个过程一直持续到收敛为止。这就是EM算法的核心思想。</p>
+<h3 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h3><p>EM的意思是“Expectation Maximization”，在我们上面的双硬币问题里面，我们是先随便猜一下两枚硬币A和B正面朝上的概率，然后计算每次抛币实验更可能属于第一个硬币还是第二个硬币的分布，这个是属于Expectation一步。<br>有了这个估计，我们就可以根据最大似然估计，来重新估计第一枚硬币A分布的参数，和第二枚硬币B的参数。这个是Maximization。<br>然后根据新得到的更新的两个硬币的参数，在重复E步和M步，不断基于之前的参数更新结果进行计算和进一步的更新，直到参数收敛。</p>
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><ol>
+<li>随机初始化概率分布参数</li>
+<li>E步：选取一个概率分布参数，求在该参数下的属于该分布的期望</li>
+<li>M步：根据E步求解的期望，计算极大似然估计，并最大化该值</li>
+<li>重复2，3步指导参数收敛。</li>
+</ol>
+<h3 id="EM求解双硬币问题"><a href="#EM求解双硬币问题" class="headerlink" title="EM求解双硬币问题"></a>EM求解双硬币问题</h3><p><img src="/images/machine_learning/EM1.png" alt="EM1"></p>
+<p>下图表示双硬币问题两种条件下的解法，1为知道每次选取的是哪枚硬币（无隐变量），用极大似然估计求解；2为不知道每次选取的是哪枚硬币（包含隐变量），用EM算法求解。</p>
+<p><img src="/images/machine_learning/EM2.png" alt="EM2"></p>
+<p>对于EM算法，稍微解释一下上图的计算过程。首先初始值θA=0.6,θB=0.5。<br>由于两个硬币的初始值0.6和0.5，容易得出投掷出5正5反的概率是pA=C(10,5)(0.6^5)(0.4^5)，pB=C(10,5)(0.5^5)(0.5^5), pA/(pA+pB)=0.449, 0.449近似为0.45，表示第一组实验选择的硬币是A的概率为0.45。同理计算第一组实验选择的硬币是B的概率为0.55.<br>图中的2.2H，2.2T是怎么得来的呢？ 0.449 <em> 5H = 2.2H ，0.449 </em> 5T = 2.2T ，表示第一组实验选择A硬币且正面朝上次数的期望值是2.2。其他的值依次类推。</p>
+<h3 id="实现源码"><a href="#实现源码" class="headerlink" title="实现源码"></a>实现源码</h3><p>在我的GitHub上有对上述双硬币问题的求解python实现源码，地址如下：<a href="https://github.com/YHfeather/ML_Note/blob/master/ML_Algorithm/EM_Algorithm.py" target="_blank" rel="noopener">python求解双硬币问题</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/21/Deep Learning/TensorFlow之tfdbg/" rel="next" title="TensorFlow之tfdbg">
+                <i class="fa fa-chevron-left"></i> TensorFlow之tfdbg
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/14/Deep Learning/从RCNN到Faster-RCNN/" rel="prev" title="从RCNN到Faster-RCNN">
+                从RCNN到Faster-RCNN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#EM算法概述"><span class="nav-number">1.</span> <span class="nav-text">EM算法概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本抛硬币问题"><span class="nav-number">1.1.</span> <span class="nav-text">基本抛硬币问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双硬币问题"><span class="nav-number">1.2.</span> <span class="nav-text">双硬币问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代求解"><span class="nav-number">1.3.</span> <span class="nav-text">迭代求解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EM算法"><span class="nav-number">1.4.</span> <span class="nav-text">EM算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程"><span class="nav-number">1.4.1.</span> <span class="nav-text">算法流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EM求解双硬币问题"><span class="nav-number">1.5.</span> <span class="nav-text">EM求解双硬币问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现源码"><span class="nav-number">1.6.</span> <span class="nav-text">实现源码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/09/26/Machine Learning/机器学习算法之EM算法/';
+          this.page.identifier = '2018/09/26/Machine Learning/机器学习算法之EM算法/';
+          this.page.title = '机器学习算法之EM算法';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
