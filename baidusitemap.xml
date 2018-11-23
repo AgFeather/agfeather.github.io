@@ -4,6 +4,86 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/11/02/Programming%20Language/CPP/Cmake%E5%92%8Cmakefile/</loc>
+    <lastmod>2018-11-04T07:29:23.700Z</lastmod>
+    <data>
+        <display>
+        <title>Cmake和makefile</title>
+        <pubTime>2018-11-01T15:00:00.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/11/Machine%20Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2018-11-01T02:25:33.442Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习常见问题和知识点整理</title>
+        <pubTime>2018-04-10T15:00:00.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/10/11/Paper/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E4%B9%8B%E3%80%8ANeural%20Code%20Completion%E3%80%8B/</loc>
+    <lastmod>2018-10-31T08:43:18.764Z</lastmod>
+    <data>
+        <display>
+        <title>论文阅读之《Neural Code Completion》</title>
+        <pubTime>2018-10-10T15:00:00.000Z</pubTime>
+        
+        <tag>Paper</tag>
+         
+         
+           
+             
+              <breadCrumb title="Paper" url="http://yoursite.com/categories/Paper/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/01/17/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B07/</loc>
+    <lastmod>2018-10-29T12:26:35.489Z</lastmod>
+    <data>
+        <display>
+        <title>C++复习笔记（七）</title>
+        <pubTime>2018-01-16T15:00:00.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/01/17/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B06/</loc>
     <lastmod>2018-10-29T09:26:55.358Z</lastmod>
     <data>
@@ -57,6 +137,26 @@
            
              
               <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/10/10/Paper/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E4%B9%8B%E3%80%8AAutomatic%20Code%20Completion%E3%80%8B/</loc>
+    <lastmod>2018-10-28T04:25:34.407Z</lastmod>
+    <data>
+        <display>
+        <title>论文阅读之《Automatic Code Completion》</title>
+        <pubTime>2018-10-09T15:00:00.000Z</pubTime>
+        
+        <tag>Paper</tag>
+         
+         
+           
+             
+              <breadCrumb title="Paper" url="http://yoursite.com/categories/Paper/"/>
           
         </display>
     </data>
@@ -181,26 +281,6 @@
            
              
               <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/04/11/Machine%20Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</loc>
-    <lastmod>2018-10-25T01:36:05.856Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习常见问题和知识点整理</title>
-        <pubTime>2018-04-10T15:00:00.000Z</pubTime>
-        
-        <tag>Machine Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -1088,9 +1168,9 @@
         <title>基于深度学习的电影推荐系统</title>
         <pubTime>2018-03-10T15:00:00.000Z</pubTime>
         
-        <tag>Recommender System</tag>
-         
         <tag>Deep Learning</tag>
+         
+        <tag>Recommender System</tag>
          
         <tag>Project</tag>
          
@@ -1561,9 +1641,9 @@
         <title>自制编程语言</title>
         <pubTime>2018-07-26T15:00:00.000Z</pubTime>
         
-        <tag>Project</tag>
-         
         <tag>Programming Language</tag>
+         
+        <tag>Project</tag>
          
         <tag>Reading</tag>
          

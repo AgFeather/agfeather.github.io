@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="论文《Neural Code Completion》的阅读笔记。">
+<meta name="keywords" content="Paper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读之《Neural Code Completion》">
+<meta property="og:url" content="http://yoursite.com/2018/10/11/Paper/论文阅读之《Neural Code Completion》/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="论文《Neural Code Completion》的阅读笔记。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/paper/nt2n.png">
+<meta property="og:image" content="http://yoursite.com/images/paper/ntn2t.png">
+<meta property="og:updated_time" content="2018-10-31T08:43:18.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="论文阅读之《Neural Code Completion》">
+<meta name="twitter:description" content="论文《Neural Code Completion》的阅读笔记。">
+<meta name="twitter:image" content="http://yoursite.com/images/paper/nt2n.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/11/Paper/论文阅读之《Neural Code Completion》/"/>
+
+
+
+
+
+  <title>论文阅读之《Neural Code Completion》 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/11/Paper/论文阅读之《Neural Code Completion》/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">论文阅读之《Neural Code Completion》</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-11T00:00:00+09:00">
+                2018-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/11/Paper/论文阅读之《Neural Code Completion》/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/11/Paper/论文阅读之《Neural Code Completion》/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>论文《Neural Code Completion》的阅读笔记。<br><a id="more"></a></p>
+<h2 id="Problem-Setup"><a href="#Problem-Setup" class="headerlink" title="Problem Setup"></a>Problem Setup</h2><p>该论文构建一个DL模型，输入是一个partial AST，输出是预测针对输入AST的下一个node。</p>
+<h3 id="input-a-partial-AST"><a href="#input-a-partial-AST" class="headerlink" title="input: a partial AST"></a>input: a partial AST</h3><p>论文中，定义一个AST T的partial AST T’是T中的一个左子树。<br>对于给定节点n，该节点的左子树构成了一个partial tree，而这个partial tree的所有节点也恰好是对整个AST进行中序遍历时，早于节点n的节点子集。</p>
+<h3 id="Next-node-prediction"><a href="#Next-node-prediction" class="headerlink" title="Next node prediction"></a>Next node prediction</h3><p>给定一个partial AST，预测该AST的下一个token。根据需要预测的token是non-terminal token还是terminal token可以将问题分成分别对两种token的预测。</p>
+<h3 id="predicting-next-token-versus-predicting-next-node"><a href="#predicting-next-token-versus-predicting-next-node" class="headerlink" title="predicting next token versus predicting next node"></a>predicting next token versus predicting next node</h3><p>使用AST进行预测两种terminal token和non-terminal token相对于仅仅使用token sequence预测下一个token，前者可以利用更多的结构信息，更有利于预测。</p>
+<h3 id="Joint-prediction"><a href="#Joint-prediction" class="headerlink" title="Joint prediction"></a>Joint prediction</h3><p>predict the next non-terminal and terminal together.被叫做joint prediction。</p>
+<h3 id="Denying-prediction"><a href="#Denying-prediction" class="headerlink" title="Denying prediction"></a>Denying prediction</h3><p>因为有无穷多中的terminal token，所以对它们进行准确的预测时不现实的，论文提出了一个alternative scenario：如果programmer输入一个非常少见的terminal token，模型可以预测出该token的出现并拒绝给出准确的预测。<br>所以论文使用最常见的terminal token构建vocabulary，对于不常见的token设为UNK。</p>
+<h2 id="models"><a href="#models" class="headerlink" title="models"></a>models</h2><h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><ul>
+<li>对于一个给定的partial AST作为输入，首先将其转换为LCRS二叉树，然后中序遍历，得到一个node sequence。</li>
+<li>对于一个长度为k的node sequence，结构为：[(N1, T1), (N2, T2), ..(Nk, Tk)]。其中Ni表示一个non-terminal token，Ti表示该token Ni的一个terminal 子token。</li>
+<li>对于每个non-terminal token，我们不仅仅encode该token的种类，还有该token是否包含最少一个non-terminal child, and/or one right-sibling.</li>
+<li>对于没有terminal child的non-terminal token，标注该token有一个EMPTY child。</li>
+<li>该输入序列：(N1,T1),(N2,T2),…,(Nk,Tk) 只被用作除了预测next terminal token 之外的所有任务。对于next terminal token：Tk+1的预测，除了使用之前的输入序列，还包括Tk+1的non-terminal parent token，也就是Nk+1。</li>
+<li>对于Ni和Ti都使用one-hot-encoding表示。non-terminal的vocabulary和terminal的vocabulary是分开的。<h3 id="Next-non-terminal-prediction"><a href="#Next-non-terminal-prediction" class="headerlink" title="Next non-terminal prediction"></a>Next non-terminal prediction</h3>给定一个输入序列，模型首先预测next non-terminal。该模型被命名为NT2N(using the sequence of Non-terminal and terminal pairs To predict the next Non-terminal)<br>该NT2N的结构如下：<br><img src="/images/paper/nt2n.png" alt="nt2n"><br>从图中可以看到，在LSTM的最后一个输出后连接一个softmax层，进行下一个non-terminal的预测。<h3 id="Using-only-non-terminal-inputs"><a href="#Using-only-non-terminal-inputs" class="headerlink" title="Using only non-terminal inputs"></a>Using only non-terminal inputs</h3>NT2N的一个变种是，在输入层省略掉所有terminal，只是用non-terminal进行训练，在预测时也只预测non-terminal。该变种被称为N2N。<h3 id="Next-terminal-and-non-terminal-prediction"><a href="#Next-terminal-and-non-terminal-prediction" class="headerlink" title="Next terminal and non-terminal prediction"></a>Next terminal and non-terminal prediction</h3>使用NT2N模型，不仅可以预测next non-terminal，也可以预测next terminal。结合LSTM的最后输出，经过一个线性层和softmax层：softmax(WHt+b)得到最后对Tk+1的预测。该模型被称为NT2NT。<h3 id="Next-terminal-prediction"><a href="#Next-terminal-prediction" class="headerlink" title="Next terminal prediction"></a>Next terminal prediction</h3>对下个terminal Tk+1的预测结合了上一个时刻LSTM的输出Ht以及当前时刻k+1的non-terminal Nk+1。对Tk+1的预测如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tk+1 = softmax(W1Hk + W2Nk+1 + b)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该模型被称为NTN2T。模型的结构如下：<br><img src="/images/paper/ntn2t.png" alt="ntn2t"></p>
+<h3 id="Joint-Prediction"><a href="#Joint-Prediction" class="headerlink" title="Joint Prediction"></a>Joint Prediction</h3><p>使用两种方法一起预测next non-terminal和next terminal。</p>
+<ol>
+<li>使用NT2NT模型一起预测</li>
+<li>用一个方法X去预测next non-terminal，然后将预测的non-terminal和input sequence输入进NTN2T中预测next terminal。这种方法被称为X+NTN2T。<h3 id="Denying-Prediction"><a href="#Denying-Prediction" class="headerlink" title="Denying Prediction"></a>Denying Prediction</h3>对于一些不经常使用的terminal token，将其转化为UNK。但为了防止模型过多的预测UNK，从新构建了loss function。当label=UNK时，该loss等于0.</li>
+</ol>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><ol>
+<li>一共包含44种non-terminal，在每个non-terminal后加上两个bit表示是否有child和是否有right-sibling，最后一共有176个non-terminal。</li>
+<li>选择出现最频繁的50,000个terminal。</li>
+<li>加入三种特殊的terminal：UNK表示out-of-vocab；EOF表示end-of-program；Empty表示non-terminal which does not have a terminal.</li>
+<li>值得一提的是，45% terminal 是 Empty terminal<h3 id="training-details"><a href="#training-details" class="headerlink" title="training details"></a>training details</h3></li>
+<li>single layer LSTM， size of hidden layer:1500</li>
+<li>Adam Algorithms</li>
+<li>learning rate:0.001,并且每0.2个epoch会乘0.9</li>
+<li>梯度裁剪阈值为5</li>
+<li>batch size：80</li>
+<li>use truncated backpropagation through time, by unrolling the LSTM model s = 50 times to take an input sequence of length 50 in each batch (and therefore each batch contains b × s = 4000 tokens).<h3 id="tricks"><a href="#tricks" class="headerlink" title="tricks"></a>tricks</h3></li>
+<li>使用随机初始化初始LSTM的h0和c0。并且将前一个segment的final_state作为下一个segment的初始如果这两个segment属于一个program。如果不属于一个则仍然用h0和c0进行初始化。 <strong>We observe that resetting the hidden states for every new program improves the performance a lot.</strong></li>
+<li>对于LSTM模型，一次训练五种不同超参的模型，然后集成到一起进行投票。<strong>we find that the ensemble improves the accuracy by 1 to 3 points in general.</strong><h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2>Raychev et al.(2016a)</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"><i class="fa fa-tag"></i> Paper</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/10/Paper/论文阅读之《Automatic Code Completion》/" rel="next" title="论文阅读之《Automatic Code Completion》">
+                <i class="fa fa-chevron-left"></i> 论文阅读之《Automatic Code Completion》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/14/Deep Learning/目标检测算法之SSD/" rel="prev" title="图片分割识别之SSD">
+                图片分割识别之SSD <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setup"><span class="nav-number">1.</span> <span class="nav-text">Problem Setup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#input-a-partial-AST"><span class="nav-number">1.1.</span> <span class="nav-text">input: a partial AST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-node-prediction"><span class="nav-number">1.2.</span> <span class="nav-text">Next node prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#predicting-next-token-versus-predicting-next-node"><span class="nav-number">1.3.</span> <span class="nav-text">predicting next token versus predicting next node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Joint-prediction"><span class="nav-number">1.4.</span> <span class="nav-text">Joint prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Denying-prediction"><span class="nav-number">1.5.</span> <span class="nav-text">Denying prediction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#models"><span class="nav-number">2.</span> <span class="nav-text">models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入和输出"><span class="nav-number">2.1.</span> <span class="nav-text">输入和输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-non-terminal-prediction"><span class="nav-number">2.2.</span> <span class="nav-text">Next non-terminal prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-only-non-terminal-inputs"><span class="nav-number">2.3.</span> <span class="nav-text">Using only non-terminal inputs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-terminal-and-non-terminal-prediction"><span class="nav-number">2.4.</span> <span class="nav-text">Next terminal and non-terminal prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-terminal-prediction"><span class="nav-number">2.5.</span> <span class="nav-text">Next terminal prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Joint-Prediction"><span class="nav-number">2.6.</span> <span class="nav-text">Joint Prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Denying-Prediction"><span class="nav-number">2.7.</span> <span class="nav-text">Denying Prediction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-number">3.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#training-details"><span class="nav-number">3.2.</span> <span class="nav-text">training details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tricks"><span class="nav-number">3.3.</span> <span class="nav-text">tricks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/10/11/Paper/论文阅读之《Neural Code Completion》/';
+          this.page.identifier = '2018/10/11/Paper/论文阅读之《Neural Code Completion》/';
+          this.page.title = '论文阅读之《Neural Code Completion》';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

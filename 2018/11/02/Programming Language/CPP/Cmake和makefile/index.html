@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Project,Programming Language,Reading,Java," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本文是通过对《2週間でできる! スクリプト言語の作り方》这本书的学习，完成一个简单的编译器。">
-<meta name="keywords" content="Project,Programming Language,Reading,Java">
+<meta name="description" content="什么是Cmake以及makefile。">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自制编程语言">
-<meta property="og:url" content="http://yoursite.com/2018/07/27/Reading/自制编程语言/index.html">
+<meta property="og:title" content="Cmake和makefile">
+<meta property="og:url" content="http://yoursite.com/2018/11/02/Programming Language/CPP/Cmake和makefile/index.html">
 <meta property="og:site_name" content="Black Feather">
-<meta property="og:description" content="本文是通过对《2週間でできる! スクリプト言語の作り方》这本书的学习，完成一个简单的编译器。">
+<meta property="og:description" content="什么是Cmake以及makefile。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-01T06:25:51.437Z">
+<meta property="og:updated_time" content="2018-11-04T07:29:23.700Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自制编程语言">
-<meta name="twitter:description" content="本文是通过对《2週間でできる! スクリプト言語の作り方》这本书的学习，完成一个简单的编译器。">
+<meta name="twitter:title" content="Cmake和makefile">
+<meta name="twitter:description" content="什么是Cmake以及makefile。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/27/Reading/自制编程语言/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/02/Programming Language/CPP/Cmake和makefile/"/>
 
 
 
 
 
-  <title>自制编程语言 | Black Feather</title>
+  <title>Cmake和makefile | Black Feather</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/Reading/自制编程语言/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/Programming Language/CPP/Cmake和makefile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongfang Li">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">自制编程语言</h1>
+          <h1 class="post-title" itemprop="name headline">Cmake和makefile</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-27T00:00:00+09:00">
-                2018-07-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T00:00:00+09:00">
+                2018-11-02
               </time>
             
 
@@ -293,6 +293,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -301,9 +323,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/27/Reading/自制编程语言/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/02/Programming Language/CPP/Cmake和makefile/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/07/27/Reading/自制编程语言/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/02/Programming Language/CPP/Cmake和makefile/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -331,51 +353,11 @@
       
 
       
-        <p>本文是通过对《2週間でできる! スクリプト言語の作り方》这本书的学习，完成一个简单的编译器。</p>
+        <p>什么是Cmake以及makefile。</p>
 <a id="more"></a>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>身在Programming Language Research Lab，虽然自身的研究是深度学习&amp;programming environment，但也有义务对PL有一定了解，虽然看了《SICP》，自己也试着写了一个特别小的Scheme解释器，对编程语言设计整体有了个大概的认识，但因为大三学的《编译原理》早早的就都还给了老师，所以对PL还是缺少一个清晰的认识。正好看到东工大编程语言研究室前任教授：千葉滋教授的编译器入门书籍：《2週間でできる! スクリプト言語の作り方》，而且书评不错，花时间把书中代码实现了一遍。</p>
-<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><p>本章是关于编程设计语言和语言处理器的一些基本概念。</p>
-<h2 id="机器语言和汇编语言的区别"><a href="#机器语言和汇编语言的区别" class="headerlink" title="机器语言和汇编语言的区别"></a>机器语言和汇编语言的区别</h2><p>两者经常混淆，其实机器语言只由一串很长的01二进制组成，而汇编语言就是用来表示这串01数字的，便于理解。所以要想执行汇编语言程序仍然需要将其转换为机器语言。</p>
-<h2 id="编译器和解释器的区别"><a href="#编译器和解释器的区别" class="headerlink" title="编译器和解释器的区别"></a>编译器和解释器的区别</h2><ul>
-<li>解释器就是根据程序中的算法执行运算并返回结果。简单来说，计算器就是一个解释器，我们输入一串数字和运算符到计算器中，计算器返回计算结果，这就是个简单的解释器。</li>
-<li>编译器能将某种语言的程序转换为另一种语言的程序，通常会转换为机器语言程序。</li>
-<li>现代编程语言经常会混用二者，比如Java语言会首先通过编译器将源码转换为java二进制码，并将这种虚拟的语言保存在文件中。之后，Java虚拟机的解释器会执行这段代码。</li>
-<li>大多数Java虚拟机为了提高性能，会在执行过程中通过编译器将一部分Java二进制代码直接转换为机器语言，在执行过程中进行的机器语言转换称为冬天编译或者JIT编译，转换后得到的机器语言程序将被载入内存，由硬件执行，不需要使用解释器。</li>
-</ul>
-<h2 id="语言处理器的架构"><a href="#语言处理器的架构" class="headerlink" title="语言处理器的架构"></a>语言处理器的架构</h2><p>无论是解释器还是编译器，语言处理器的前半部分大同小异，首先源码会进行词法分析，被分割成多个小字符串单元称为单词，之后处理器会执行语法分析，把单词排列转换为AST。之后编译器会将AST转换为其他语言，而解释器会一边分析AST，一边执行运算。</p>
-<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><p>本章是关于一种名叫Stone语言的语法设计。</p>
-<h2 id="Stone语言语法"><a href="#Stone语言语法" class="headerlink" title="Stone语言语法"></a>Stone语言语法</h2><ol>
-<li>包含数的四则运算</li>
-<li>提供变量支持</li>
-<li>基本的循环判断控制语句</li>
-<li>动态语言（不需要显式声明变量类型）</li>
-</ol>
-<h1 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h1><p>本章是关于如何将源码分割成token，也是语言处理器的第一个组成部分：词法分析器（Lexer）</p>
-<p>分为如下几步：</p>
-<ol>
-<li>定义token类</li>
-<li>借助regex构建词法分析器</li>
-<li>搭建UI</li>
-</ol>
-<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1><p>本章是语法分析，关于如何从sequence of token构建AST。</p>
-<p>语法分析的主要任务是分析token之间的关系，如判断哪些token属于同一个表达式或语句，以及处理左右括号配对问题等。同时也会检查程序中是否含有语法错误。</p>
-<h2 id="构建ASTree类"><a href="#构建ASTree类" class="headerlink" title="构建ASTree类"></a>构建ASTree类</h2><ol>
-<li>构建抽象类ASTree，</li>
-<li>并声明两个实现ASTLeaf和ASTList，前者表示AST的叶节点，后者表示AST的中间节点。</li>
-<li>Name类继承自ASTLeaf，表示变量token</li>
-<li>NameLiteral类继承自ASTLeaf，表示整数token</li>
-<li>BinaryExpr类继承自ASTList，表示二元操作符</li>
-</ol>
-<ul>
-<li>要构造AST，处理器首先需要知道会接收到那些token sequence，并确定希望构造出怎样的AST。语法规定了token的组合规则。本章讨论的语法较为浅显，进通过判断语句从哪个token开始，中途能够出现哪些token，又以什么token结束。</li>
-<li>使用BNF巴科斯范式，与上下文无关文法等价。</li>
-</ul>
-<h2 id="BNF"><a href="#BNF" class="headerlink" title="BNF"></a>BNF</h2><p>BNF(Backus-Naur Form)是描述编程语言的文法。巴科斯范式是一种用于表示上下文无关文法的语言，上下文无关文法描述了一类形式语言。</p>
-<p>自然语言存在不同程度的二义性。这种模糊、不确定的方式无法精确定义一门程序设计语言。必须设计一种准确无误地描述程序设计语言的语法结构，这种严谨、简洁、易读的形式规则描述的语言结构模型称为文法。</p>
-<h4 id="BNF语法"><a href="#BNF语法" class="headerlink" title="BNF语法"></a>BNF语法</h4><p>&lt; &gt;     : 内包含的为必选项。<br>[ ]     : 内包含的为可选项。<br>{ }     : 内包含的为可重复0至无数次的项。<br>|       : 表示在其左右两边任选一项，相当于”OR”的意思。<br>::=     : 是“被定义为”的意思<br>“…”   : 术语符号<br>[…]   : 选项，最多出现一次<br>{…}   : 重复项，任意次数，包括 0 次<br>(…)   : 分组<br>|       : 并列选项，只能选一个</p>
-<h4 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h4><p>Java语言总的for语句的BNF范式定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FOR_STATEMENT ::=</span><br><span class="line">    &quot;for&quot; &quot;(&quot; ( variable_declaration |</span><br><span class="line">    ( expression &quot;;&quot; ) | &quot;;&quot; )</span><br><span class="line">    [ expression ] &quot;;&quot;</span><br><span class="line">    [ expression ]</span><br><span class="line">    &quot;)&quot; statement</span><br></pre></td></tr></table></figure></p>
-<h1 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h1><p>本章是关于如何设计语法分析器，即将token sequence与语法规则定义的模式进行匹配，并构造AST。</p>
-<h4 id="Stone语言语法规则"><a href="#Stone语言语法规则" class="headerlink" title="Stone语言语法规则"></a>Stone语言语法规则</h4><p>利用BNF定义Stone语言的语法规则。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h3 id="makefile文件"><a href="#makefile文件" class="headerlink" title="makefile文件"></a>makefile文件</h3><p>makefile关系到了整个工程的编译规则。一个工程中的源文件不计数，其按类型、功能、模块分别放在若干个目录中，makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为makefile就像一个Shell 脚本一样，其中也可以执行操作系统的命令。<br>makefile带来的好处就是——“自动化编译”，一旦写好，只需要一个make命令，整个工程完全自动编译，极大的提高了软件开发的效率。make是一个命令工具，是一个解释makefile中指令的命令工具，一般来说，大多数的IDE都有这个命令，比如：Delphi的make，Visual C++的nmake，Linux下GNU的make。可见，makefile都成为了一种在工程方面的编译方法。</p>
+<h3 id="Cmake"><a href="#Cmake" class="headerlink" title="Cmake"></a>Cmake</h3><p>开发过程中当修改了少量几个文件后，往往只需要重新编译、生成少数几个文件。有效地描述这些文件之间的依赖关系以及处理命令，当个别文件改动后仅执行必要的处理，而不必重复整个编译过程，可以大大提高软件开发的效率。<br><strong>Cmake是用来makefile的一个工具：读入所有源文件之后，自动生成makefile。</strong></p>
+<h3 id="cmake与gcc"><a href="#cmake与gcc" class="headerlink" title="cmake与gcc"></a>cmake与gcc</h3><p>.gcc是编译器，它可以编译很多种编程语言（括C、C++、Objective-C、Fortran、Java等等）。<br>当你的程序只有一个源文件时，直接就可以用gcc命令编译它。但是当你的程序包含很多个源文件时，用gcc命令逐个去编译时，你就很容易混乱而且工作量大，所以出现了make工具。<br>make工具可以看成是一个智能的批处理工具，<strong>它本身并没有编译和链接的功能</strong>，而是用类似于批处理的方式—通过调用makefile文件中用户指定的命令来进行编译和链接的。<br>makefile文件中就包含了调用gcc（也可以是别的编译器）去编译某个源文件的命令。<br>makefile在一些简单的工程完全可以人工手下，但是当工程非常大的时候，手写makefile也是非常麻烦的，如果换了个平台makefile又要重新修改。<br>这时候就出现了Cmake这个工具，cmake就可以更加简单的生成makefile文件给上面那个make用。<br>可是cmake根据什么生成makefile呢？它又要根据一个叫CMakeLists.txt文件（学名：组态档）去生成makefile。到最后CMakeLists.txt文件由程序员手动编写。<br>当然如果使用IDE，类似VS这些一般它都能帮你弄好了，你只需要按一下那个三角形</p>
 
       
     </div>
@@ -422,13 +404,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Project/" rel="tag"><i class="fa fa-tag"></i> Project</a>
-          
-            <a href="/tags/Programming-Language/" rel="tag"><i class="fa fa-tag"></i> Programming Language</a>
-          
-            <a href="/tags/Reading/" rel="tag"><i class="fa fa-tag"></i> Reading</a>
-          
-            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
           
         </div>
       
@@ -441,8 +417,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/25/Reinforce Learning/强化学习之Policy Gradients/" rel="next" title="强化学习之Policy gradient">
-                <i class="fa fa-chevron-left"></i> 强化学习之Policy gradient
+              <a href="/2018/10/23/Programming Language/Python/Python好用的第三方库/" rel="next" title="Python好用的第三方库">
+                <i class="fa fa-chevron-left"></i> Python好用的第三方库
               </a>
             
           </div>
@@ -450,10 +426,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/28/Algorithms/从背包问题理解动态规划/" rel="prev" title="从背包问题理解动态规划">
-                从背包问题理解动态规划 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -540,7 +512,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -551,7 +523,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -562,7 +534,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -611,7 +583,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章"><span class="nav-number">2.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器语言和汇编语言的区别"><span class="nav-number">2.1.</span> <span class="nav-text">机器语言和汇编语言的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器和解释器的区别"><span class="nav-number">2.2.</span> <span class="nav-text">编译器和解释器的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语言处理器的架构"><span class="nav-number">2.3.</span> <span class="nav-text">语言处理器的架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章"><span class="nav-number">3.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stone语言语法"><span class="nav-number">3.1.</span> <span class="nav-text">Stone语言语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章"><span class="nav-number">4.</span> <span class="nav-text">第三章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章"><span class="nav-number">5.</span> <span class="nav-text">第四章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#构建ASTree类"><span class="nav-number">5.1.</span> <span class="nav-text">构建ASTree类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BNF"><span class="nav-number">5.2.</span> <span class="nav-text">BNF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BNF语法"><span class="nav-number">5.2.0.1.</span> <span class="nav-text">BNF语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举例"><span class="nav-number">5.2.0.2.</span> <span class="nav-text">举例</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五章"><span class="nav-number">6.</span> <span class="nav-text">第五章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Stone语言语法规则"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">Stone语言语法规则</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#makefile文件"><span class="nav-number">1.</span> <span class="nav-text">makefile文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cmake"><span class="nav-number">2.</span> <span class="nav-text">Cmake</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cmake与gcc"><span class="nav-number">3.</span> <span class="nav-text">cmake与gcc</span></a></li></ol></div>
             
 
           </div>
@@ -781,9 +753,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/07/27/Reading/自制编程语言/';
-          this.page.identifier = '2018/07/27/Reading/自制编程语言/';
-          this.page.title = '自制编程语言';
+          this.page.url = 'http://yoursite.com/2018/11/02/Programming Language/CPP/Cmake和makefile/';
+          this.page.identifier = '2018/11/02/Programming Language/CPP/Cmake和makefile/';
+          this.page.title = 'Cmake和makefile';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://blackfeather.disqus.com/embed.js';
