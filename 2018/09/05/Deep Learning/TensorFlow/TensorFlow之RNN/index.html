@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="总结TensorFlow中RNN常见的API使用方法和技巧。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-10T09:17:33.865Z">
+<meta property="og:updated_time" content="2019-01-18T07:51:54.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TensorFlow之RNN">
 <meta name="twitter:description" content="总结TensorFlow中RNN常见的API使用方法和技巧。">
@@ -355,6 +355,7 @@
       
         <p>总结TensorFlow中RNN常见的API使用方法和技巧。</p>
 <a id="more"></a>
+<h2 id="单步RNN：RNNCell"><a href="#单步RNN：RNNCell" class="headerlink" title="单步RNN：RNNCell"></a>单步RNN：RNNCell</h2><p>TensorFlow中的所有RNN都继承自tf.contrib.rnn.RNNCell这个抽象类，每个RNNCell都有一个cell方法，(output, next_state) = call(input, state)。<br>假设我们有一个初始状态h0，还有输入x1，调用call(x1, h0)后就可以得到(output1, h1)。再调用一次call(x2, h1)就可以得到(output2, h2)。也就是说，<strong>每调用一次RNNCell的call方法，就相当于在时间上“推进了一步”，这就是RNNCell的基本功能。</strong></p>
 <h2 id="tf-contrib-rnn-BasicLSTMCell"><a href="#tf-contrib-rnn-BasicLSTMCell" class="headerlink" title="tf.contrib.rnn.BasicLSTMCell()"></a>tf.contrib.rnn.BasicLSTMCell()</h2><p>BasicLSTMCell是比较基本的创建LSTM cell的一个类.</p>
 <h3 id="构造函数参数"><a href="#构造函数参数" class="headerlink" title="构造函数参数"></a>构造函数参数</h3><ol>
 <li>num_units: LSTM内部节点数目</li>
@@ -367,6 +368,17 @@
 <h3 id="zero-state-batch-size-dtype"><a href="#zero-state-batch-size-dtype" class="headerlink" title="zero_state(batch_size, dtype)"></a>zero_state(batch_size, dtype)</h3><p>返回一个填充零的状态state，通常用其作为initial state。<br>该state是一个BasicLSTMCellZeroState类，大小为[batch_size, n_units]，表示cell的初始state。</p>
 <h3 id="call-inputs-state-scope"><a href="#call-inputs-state-scope" class="headerlink" title="__call__(inputs, state, scope)"></a>__call__(inputs, state, scope)</h3><p>在给定state和input上运行一次LSTM。返回本次运行的output和一个新的state。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">n_hidden = 128</span><br><span class="line">batch_size = 64</span><br><span class="line"></span><br><span class="line">cell = tf.contrib.rnn.BasicLSTMCell(n_hidden)</span><br><span class="line">init_state = cell.zero_state(batch_size,dtype=tf.float32)</span><br><span class="line"></span><br><span class="line">print(cell.state_size)</span><br><span class="line">print(cell.output_size)</span><br><span class="line">print(init_state)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LSTMStateTuple(c=128, h=128)</span><br><span class="line">128</span><br><span class="line">LSTMStateTuple(c=&lt;tf.Tensor &apos;BasicLSTMCellZeroState/zeros:0&apos; shape=(64, 128) dtype=float32&gt;, h=&lt;tf.Tensor &apos;BasicLSTMCellZeroState/zeros_1:0&apos; shape=(64, 128) dtype=float32&gt;)</span><br></pre></td></tr></table></figure>
+<p>###LSTMCell和BasicLSTMCell的区别</p>
+<ol>
+<li><p>增加了use_peepholes, bool值，为True时增加窥视孔。</p>
+</li>
+<li><p>增加了cell_clip, 浮点值，把cell的值限制在 ±cell_clip内</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c = clip_ops.clip_by_value(c, -self._cell_clip, self._cell_clip)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加了num_proj（int）和proj_clip(float), 相对于BasicLSTMCell，在输出m计算完之后增加了一层线性变换，并限制了输出的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">m = _linear(m, self._num_proj, bias=False, scope=scope)</span><br><span class="line">m = clip_ops.clip_by_value(m, -self._proj_clip, self._proj_clip)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <h2 id="tf-contrib-rnn-MultiRNNCell-cells"><a href="#tf-contrib-rnn-MultiRNNCell-cells" class="headerlink" title="tf.contrib.rnn.MultiRNNCell(cells)"></a>tf.contrib.rnn.MultiRNNCell(cells)</h2><p>定义多层RNN，初始参数cells是一个list，元素为想要叠加在一起的cells。</p>
 <h3 id="内置参数"><a href="#内置参数" class="headerlink" title="内置参数"></a>内置参数</h3><ul>
 <li>state_size 输出一个list，list的长度等于LSTM隐藏层的大小，每个元素都是一个LSTMStateTuple，其中有cell和ht的size。</li>
@@ -553,7 +565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -564,7 +576,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -575,7 +587,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -624,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-contrib-rnn-BasicLSTMCell"><span class="nav-number">1.</span> <span class="nav-text">tf.contrib.rnn.BasicLSTMCell()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数参数"><span class="nav-number">1.1.</span> <span class="nav-text">构造函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部参数"><span class="nav-number">1.2.</span> <span class="nav-text">内部参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zero-state-batch-size-dtype"><span class="nav-number">1.3.</span> <span class="nav-text">zero_state(batch_size, dtype)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#call-inputs-state-scope"><span class="nav-number">1.4.</span> <span class="nav-text">__call__(inputs, state, scope)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-contrib-rnn-MultiRNNCell-cells"><span class="nav-number">2.</span> <span class="nav-text">tf.contrib.rnn.MultiRNNCell(cells)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内置参数"><span class="nav-number">2.1.</span> <span class="nav-text">内置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zero-state-batch-size"><span class="nav-number">2.2.</span> <span class="nav-text">zero_state(batch_size)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-nn-dynamic-rnn"><span class="nav-number">3.</span> <span class="nav-text">tf.nn.dynamic_rnn()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">3.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">3.2.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN中的Dropout"><span class="nav-number">4.</span> <span class="nav-text">RNN中的Dropout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-contrib-rnn-DropoutWrapper"><span class="nav-number">4.1.</span> <span class="nav-text">tf.contrib.rnn.DropoutWrapper()</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单步RNN：RNNCell"><span class="nav-number">1.</span> <span class="nav-text">单步RNN：RNNCell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-contrib-rnn-BasicLSTMCell"><span class="nav-number">2.</span> <span class="nav-text">tf.contrib.rnn.BasicLSTMCell()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数参数"><span class="nav-number">2.1.</span> <span class="nav-text">构造函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部参数"><span class="nav-number">2.2.</span> <span class="nav-text">内部参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zero-state-batch-size-dtype"><span class="nav-number">2.3.</span> <span class="nav-text">zero_state(batch_size, dtype)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#call-inputs-state-scope"><span class="nav-number">2.4.</span> <span class="nav-text">__call__(inputs, state, scope)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-contrib-rnn-MultiRNNCell-cells"><span class="nav-number">3.</span> <span class="nav-text">tf.contrib.rnn.MultiRNNCell(cells)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内置参数"><span class="nav-number">3.1.</span> <span class="nav-text">内置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zero-state-batch-size"><span class="nav-number">3.2.</span> <span class="nav-text">zero_state(batch_size)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-nn-dynamic-rnn"><span class="nav-number">4.</span> <span class="nav-text">tf.nn.dynamic_rnn()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">4.2.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN中的Dropout"><span class="nav-number">5.</span> <span class="nav-text">RNN中的Dropout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-contrib-rnn-DropoutWrapper"><span class="nav-number">5.1.</span> <span class="nav-text">tf.contrib.rnn.DropoutWrapper()</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -644,7 +656,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

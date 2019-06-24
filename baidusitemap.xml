@@ -4,11 +4,51 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/05/26/Programming%20Language/Python/Python%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%B9%8B%E5%9F%BA%E7%A1%80%E7%AF%87/</loc>
-    <lastmod>2018-11-23T01:33:51.749Z</lastmod>
+    <loc>http://yoursite.com/2019/06/26/Reading/%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2019-06-24T12:37:15.533Z</lastmod>
     <data>
         <display>
-        <title>Python使用技巧之基础篇</title>
+        <title>《程序员的自我修养》</title>
+        <pubTime>2019-06-25T15:00:00.000Z</pubTime>
+        
+        <tag>Reading</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reading" url="http://yoursite.com/categories/Reading/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/11/Machine%20Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2019-06-22T05:39:53.528Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习常见问题和知识点整理</title>
+        <pubTime>2018-04-10T15:00:00.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/26/Programming%20Language/Python/Python%E8%A1%A5%E5%85%85%E7%9A%84%E7%82%B9/</loc>
+    <lastmod>2019-06-19T14:39:21.018Z</lastmod>
+    <data>
+        <display>
+        <title>Python补充知识点</title>
         <pubTime>2018-05-25T15:00:00.000Z</pubTime>
         
         <tag>Python</tag>
@@ -24,12 +64,132 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/11/23/Programming%20Language/Python/Python%E4%B9%8BPandas/</loc>
-    <lastmod>2018-11-23T01:28:27.284Z</lastmod>
+    <loc>http://yoursite.com/2018/01/15/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B04%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E7%B1%BB/</loc>
+    <lastmod>2019-06-18T07:38:45.335Z</lastmod>
     <data>
         <display>
-        <title>Python之Pandas</title>
-        <pubTime>2018-11-22T15:00:00.000Z</pubTime>
+        <title>C++复习笔记:结构体和类</title>
+        <pubTime>2018-01-14T15:00:00.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/22/Machine%20Learning/%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E4%B9%8BGBDT/</loc>
+    <lastmod>2019-06-17T08:25:21.727Z</lastmod>
+    <data>
+        <display>
+        <title>树学习算法总结之GBDT</title>
+        <pubTime>2018-04-21T15:00:00.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/01/13/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B02%E5%87%BD%E6%95%B0%20%E6%95%B0%E7%BB%84%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
+    <lastmod>2019-06-17T01:37:45.196Z</lastmod>
+    <data>
+        <display>
+        <title>C++复习笔记:函数 数组和字符串</title>
+        <pubTime>2018-01-12T15:00:00.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/01/12/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B01%E5%8F%98%E9%87%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
+    <lastmod>2019-06-17T01:32:28.167Z</lastmod>
+    <data>
+        <display>
+        <title>C++复习笔记:变量和数据类型</title>
+        <pubTime>2018-01-11T15:00:00.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/21/Machine%20Learning/%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91/</loc>
+    <lastmod>2019-06-13T05:23:16.638Z</lastmod>
+    <data>
+        <display>
+        <title>树学习算法总结之决策树</title>
+        <pubTime>2018-04-20T15:00:00.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/11/12/Programming%20Language/CPP/C++%20vector%E5%AE%B9%E5%99%A8/</loc>
+    <lastmod>2019-06-08T14:21:19.196Z</lastmod>
+    <data>
+        <display>
+        <title>C++ vector容器</title>
+        <pubTime>2018-11-11T15:00:00.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/26/Programming%20Language/Python/Python%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B/</loc>
+    <lastmod>2019-06-08T10:39:29.122Z</lastmod>
+    <data>
+        <display>
+        <title>Python线程和进程</title>
+        <pubTime>2018-05-25T15:00:00.000Z</pubTime>
         
         <tag>Python</tag>
          
@@ -37,6 +197,246 @@
            
              
               <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/05/26/Programming%20Language/Python/Python%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2019-06-08T10:38:46.323Z</lastmod>
+    <data>
+        <display>
+        <title>Python内存管理</title>
+        <pubTime>2019-05-25T15:00:00.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/12/Programming%20Language/Python/Python%E8%A3%85%E9%A5%B0%E5%99%A8/</loc>
+    <lastmod>2019-06-08T10:20:50.223Z</lastmod>
+    <data>
+        <display>
+        <title>python装饰器</title>
+        <pubTime>2018-04-11T15:00:00.000Z</pubTime>
+        
+        <tag>Programming Language</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/04/10/Linux%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2019-04-10T08:21:51.015Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2019-04-10T08:21:48.979Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/28/Deep%20Learning/TensorFlow/TensorFlow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2019-04-10T08:20:29.813Z</lastmod>
+    <data>
+        <display>
+        <title>TensorFlow常用函数整理</title>
+        <pubTime>2017-11-27T15:00:00.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>TensorFlow</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/01/20/OpenCV%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2019-01-20T08:49:36.519Z</lastmod>
+    <data>
+        <display>
+        <title>OpenCV学习笔记</title>
+        <pubTime>2019-01-19T15:00:00.000Z</pubTime>
+        
+        <tag>openCV</tag>
+         
+         
+           
+             
+              <breadCrumb title="openCV" url="http://yoursite.com/categories/openCV/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/01/01/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2019-01-20T05:32:02.868Z</lastmod>
+    <data>
+        <display>
+        <title>自动驾驶入门</title>
+        <pubTime>2018-12-31T15:00:00.000Z</pubTime>
+        
+        <tag>self-driving</tag>
+         
+         
+           
+             
+              <breadCrumb title="self-driving" url="http://yoursite.com/categories/self-driving/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/05/Deep%20Learning/TensorFlow/TensorFlow%E4%B9%8BRNN/</loc>
+    <lastmod>2019-01-18T07:51:54.327Z</lastmod>
+    <data>
+        <display>
+        <title>TensorFlow之RNN</title>
+        <pubTime>2018-09-04T15:00:00.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>TensorFlow</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/01/16/Knowledge/Xcode%E8%BF%90%E8%A1%8COpenCV%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2019-01-16T09:40:50.581Z</lastmod>
+    <data>
+        <display>
+        <title>Xcode运行OpenCV项目</title>
+        <pubTime>2019-01-15T15:00:00.000Z</pubTime>
+        
+        <tag>Computer Vision</tag>
+         
+         
+           
+             
+              <breadCrumb title="Computer Vision" url="http://yoursite.com/categories/Computer-Vision/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/11/01/Unix%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2018-12-28T11:05:27.475Z</lastmod>
+    <data>
+        <display>
+        <title>Unix编程实践教程</title>
+        <pubTime>2018-10-31T15:00:00.000Z</pubTime>
+        
+        <tag>Unix</tag>
+         
+        <tag>C</tag>
+         
+         
+           
+             
+              <breadCrumb title="Unix" url="http://yoursite.com/categories/Unix/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/27/Programming%20Language/Python/Python%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/</loc>
+    <lastmod>2018-11-24T14:40:42.583Z</lastmod>
+    <data>
+        <display>
+        <title>Python编码规范</title>
+        <pubTime>2018-04-26T15:00:00.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/01/17/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B06%E6%96%87%E4%BB%B6%E5%92%8C%E5%BC%82%E5%B8%B8/</loc>
+    <lastmod>2018-11-23T01:36:22.894Z</lastmod>
+    <data>
+        <display>
+        <title>C++复习笔记:文件和异常</title>
+        <pubTime>2018-01-16T15:00:00.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/01/17/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B07STL/</loc>
+    <lastmod>2018-11-23T01:36:01.601Z</lastmod>
+    <data>
+        <display>
+        <title>C++复习笔记:STL</title>
+        <pubTime>2018-01-16T15:00:00.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
           
         </display>
     </data>
@@ -163,26 +563,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/01/15/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B04%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E7%B1%BB/</loc>
-    <lastmod>2018-11-23T01:10:00.290Z</lastmod>
-    <data>
-        <display>
-        <title>C++复习笔记:结构体和类</title>
-        <pubTime>2018-01-14T15:00:00.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-         
-           
-             
-              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2018/01/14/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B03%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8/</loc>
     <lastmod>2018-11-23T01:08:57.936Z</lastmod>
     <data>
@@ -197,65 +577,6 @@
              
               <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/01/12/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B01%E5%8F%98%E9%87%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
-    <lastmod>2018-11-23T01:07:04.021Z</lastmod>
-    <data>
-        <display>
-        <title>C++复习笔记:变量和数据类型</title>
-        <pubTime>2018-01-11T15:00:00.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-         
-           
-             
-              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/01/13/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B02%E5%87%BD%E6%95%B0%20%E6%95%B0%E7%BB%84%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
-    <lastmod>2018-11-23T01:03:28.727Z</lastmod>
-    <data>
-        <display>
-        <title>C++复习笔记:函数 数组和字符串</title>
-        <pubTime>2018-01-12T15:00:00.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-         
-           
-             
-              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/11/28/Deep%20Learning/TensorFlow/TensorFlow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%95%B4%E7%90%86/</loc>
-    <lastmod>2018-11-23T01:01:33.529Z</lastmod>
-    <data>
-        <display>
-        <title>TensorFlow常用函数整理</title>
-        <pubTime>2017-11-27T15:00:00.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>TensorFlow</tag>
-         
-         
-           
         </display>
     </data>
     </url>
@@ -302,20 +623,15 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/11/12/Programming%20Language/CPP/C++%20vector%E5%AE%B9%E5%99%A8/</loc>
-    <lastmod>2018-11-21T01:24:45.259Z</lastmod>
+    <loc>http://yoursite.com/2018/08/14/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2018-11-05T11:27:17.086Z</lastmod>
     <data>
         <display>
-        <title>C++ vector容器</title>
-        <pubTime>2018-11-11T15:00:00.000Z</pubTime>
+        <title></title>
+        <pubTime>2018-08-14T11:20:04.808Z</pubTime>
         
-        <tag>C++</tag>
-         
          
            
-             
-              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
-          
         </display>
     </data>
     </url>
@@ -342,26 +658,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/04/11/Machine%20Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</loc>
-    <lastmod>2018-11-01T02:25:33.442Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习常见问题和知识点整理</title>
-        <pubTime>2018-04-10T15:00:00.000Z</pubTime>
-        
-        <tag>Machine Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2018/10/11/Paper/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E4%B9%8B%E3%80%8ANeural%20Code%20Completion%E3%80%8B/</loc>
     <lastmod>2018-10-31T08:43:18.764Z</lastmod>
     <data>
@@ -375,26 +671,6 @@
            
              
               <breadCrumb title="Paper" url="http://yoursite.com/categories/Paper/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/01/17/Programming%20Language/CPP/C++%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B07/</loc>
-    <lastmod>2018-10-29T12:26:35.489Z</lastmod>
-    <data>
-        <display>
-        <title>C++复习笔记（七）</title>
-        <pubTime>2018-01-16T15:00:00.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-         
-           
-             
-              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
           
         </display>
     </data>
@@ -499,26 +775,6 @@
            
              
               <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/10/23/Programming%20Language/Python/Python%E5%A5%BD%E7%94%A8%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</loc>
-    <lastmod>2018-10-23T01:11:31.294Z</lastmod>
-    <data>
-        <display>
-        <title>Python好用的第三方库</title>
-        <pubTime>2018-10-22T15:00:00.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
           
         </display>
     </data>
@@ -648,148 +904,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/07/11/Programming%20Language/Python/Python%E4%B9%8BNumpy/</loc>
-    <lastmod>2018-10-10T09:21:23.922Z</lastmod>
-    <data>
-        <display>
-        <title>Python之Numpy</title>
-        <pubTime>2018-07-10T15:00:00.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/09/05/Deep%20Learning/TensorFlow/TensorFlow%E4%B9%8BRNN/</loc>
-    <lastmod>2018-10-10T09:17:33.865Z</lastmod>
-    <data>
-        <display>
-        <title>TensorFlow之RNN</title>
-        <pubTime>2018-09-04T15:00:00.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>TensorFlow</tag>
-         
-         
-           
-             
-              <breadCrumb title="Deep Learning" url="http://yoursite.com/categories/Deep-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/06/16/Programming%20Language/Python/Python%E4%B9%8B%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/</loc>
-    <lastmod>2018-10-10T07:55:55.577Z</lastmod>
-    <data>
-        <display>
-        <title>Python之常用模块</title>
-        <pubTime>2018-06-15T15:00:00.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/04/22/Machine%20Learning/%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E4%B9%8BGBDT/</loc>
-    <lastmod>2018-10-10T00:44:46.863Z</lastmod>
-    <data>
-        <display>
-        <title>树学习算法总结之GBDT</title>
-        <pubTime>2018-04-21T15:00:00.000Z</pubTime>
-        
-        <tag>Machine Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/04/21/Machine%20Learning/%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91/</loc>
-    <lastmod>2018-10-09T14:49:08.444Z</lastmod>
-    <data>
-        <display>
-        <title>树学习算法总结之决策树</title>
-        <pubTime>2018-04-20T15:00:00.000Z</pubTime>
-        
-        <tag>Machine Learning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://yoursite.com/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/06/27/Programming%20Language/Python/Python%E4%B9%8B%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2018-10-09T05:40:19.157Z</lastmod>
-    <data>
-        <display>
-        <title>Python之内置函数</title>
-        <pubTime>2018-06-26T15:00:00.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/04/27/Programming%20Language/Python/Python%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/</loc>
-    <lastmod>2018-10-09T05:06:29.938Z</lastmod>
-    <data>
-        <display>
-        <title>Python编码规范</title>
-        <pubTime>2018-04-26T15:00:00.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2018/09/02/Deep%20Learning/TensorFlow/TensorFlow%E4%B9%8B%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98%E5%92%8C%E5%9B%9E%E5%A4%8D/</loc>
     <lastmod>2018-10-08T07:44:33.948Z</lastmod>
     <data>
@@ -803,26 +917,6 @@
            
              
               <breadCrumb title="TensorFlow" url="http://yoursite.com/categories/TensorFlow/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/08/28/Programming%20Language/Python/Python%E4%B9%8BCollections/</loc>
-    <lastmod>2018-10-06T09:28:27.065Z</lastmod>
-    <data>
-        <display>
-        <title>Python之Collections</title>
-        <pubTime>2018-08-27T15:00:00.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
           
         </display>
     </data>
@@ -1059,28 +1153,6 @@
            
              
               <breadCrumb title="Algorithm" url="http://yoursite.com/categories/Algorithm/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/08/16/Programming%20Language/Python/Python%E4%B8%AD%E7%9A%84Magic%20Method/</loc>
-    <lastmod>2018-09-05T11:54:26.205Z</lastmod>
-    <data>
-        <display>
-        <title>Python中的Magic Method</title>
-        <pubTime>2018-08-15T15:00:00.000Z</pubTime>
-        
-        <tag>Programming Language</tag>
-         
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
           
         </display>
     </data>
@@ -1396,28 +1468,6 @@
         <display>
         <title>Python变量作用域</title>
         <pubTime>2018-08-20T15:00:00.000Z</pubTime>
-        
-        <tag>Programming Language</tag>
-         
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/04/12/Programming%20Language/Python/Python%E8%A3%85%E9%A5%B0%E5%99%A8/</loc>
-    <lastmod>2018-09-01T06:32:36.888Z</lastmod>
-    <data>
-        <display>
-        <title>python装饰器</title>
-        <pubTime>2018-04-11T15:00:00.000Z</pubTime>
         
         <tag>Programming Language</tag>
          

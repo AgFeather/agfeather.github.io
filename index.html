@@ -253,6 +253,1242 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/26/Reading/《程序员的自我修养》读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/26/Reading/《程序员的自我修养》读书笔记/" itemprop="url">《程序员的自我修养》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-26T00:00:00+09:00">
+                2019-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading/" itemprop="url" rel="index">
+                    <span itemprop="name">Reading</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/26/Reading/《程序员的自我修养》读书笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/06/26/Reading/《程序员的自我修养》读书笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="第一章：计算机基础概念"><a href="#第一章：计算机基础概念" class="headerlink" title="第一章：计算机基础概念"></a>第一章：计算机基础概念</h1><h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2><ol>
+<li>北桥：为了协调CPU，内存和GPU的高速，大量数据交换的通道。</li>
+<li>南桥：专门用来处理低速IO设备，如磁盘，USB，键盘，鼠标等。由南桥将其汇总后再连接到北桥上</li>
+<li>多道程序：早年用来提高CPU利用率。当一个程序等待IO导致CPU空闲时监控程序会把另外的正在等待CPU资源的程序启动。</li>
+<li>分时系统：每个程序占用CPU一段时间后，主动让出CPU给其他程序，使得一段时间内每个程序都有机会运行一小段时间。这时候监控程序已经比多到程序复杂很多。</li>
+<li>多任务系统：操作系统接管所有硬件资源，并且本身运行在一个受硬件保护的级别。所有的程序都以进程的方式运行在比操作系统权限更低的级别，每个进程都有自己独立的地址空间。CPU由操作系统统一进行分配，每个进程根据优先级的高低都有机会得到CPU，但是，如果运行时间超过了一定的范围，操作系统会停止该进程，将CPU分配给其他等待进程，这种分配方式即为所谓的抢占式，操作系统可以强制剥夺CPU资源并分配给它认为目前最需要运行的进程。</li>
+<li>硬件驱动：针对一个特定的硬件所开发的，可以完成一系列繁琐硬件细节操作并对外提供调用接口的程序。驱动程序可以看做是操作系统的一部分，往往跟操作系统内核一起运行在特权级。通常又硬件厂商完成。操作系统为硬件厂商提供一系列的接口和框架。</li>
+<li>扇区：硬盘基本存储单位，一般为512字节。一个硬盘有多个盘片，每个盘片分两面，每个面按照同心圆划分若干个磁道，每个磁道划分为若干个扇区。</li>
+<li>IO硬件端口：在x86平台，共有65536个硬件端口寄存器。CPU提供两条专门指令in和out来实现对端口的读写。<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2></li>
+<li>虚拟地址：在程序地址和物理地址之间增加一个中间层，这样秩序要处理两个地址之间的映射关系，就可以达到地址空间隔离的效果。</li>
+<li>分段：处理虚拟地址和物理地址映射的一种方法。思路是把一段与程序所需要的内存空间大小的虚拟空间映射到某个地址空间。这样做的好处是，程序员不需要关注具体的物理地址，而是连续的，从0开始的虚拟地址。虚拟地址到物理地址的映射交给OS搞定。</li>
+<li>分页：分段方法没有办法解决由内存不足导致的整个程序不断调入调出内存的问题。分页的思想是把物理/虚拟地址空间和磁盘人为的分成固定大小的页，目前几乎所有OS都使用4KB大小的页。分别叫做物理页，虚拟页，磁盘页。分页的好处是，当有限的内存资源不足时，只需要将内存中没目前没被用到的页写回到磁盘中，将磁盘中即将被用到的页读入到内存中。这样不再需要整个程序从内存到磁盘的读写。同时，虚拟内存的页数也可以大于物理内存页数，只需要物理内存不断调页即可（此时程序不可以同时使用所有虚拟内存页）。<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2></li>
+<li>线程：一个标准线程由线程ID，当前指令指针（pc），寄存器集合和堆栈组成。一个进程由多个线程组成，各个线程之间共享程序的内存空间（代码段，数据段，堆等）以及一些进程级资源（打开文件，信号）。</li>
+<li>线程调度：处理器切换不同线程进行执行。在线程调度中，线程通常拥有至少三个状态：运行（正在执行），就绪（可以立刻执行，但CPU被占用），等待（线程正在等待某一事件IO等，无法执行）</li>
+<li>时间片：处于运行中的线程拥有一段可以执行的时间，称为时间片。当时间片用尽时，该进程进入就绪状态。如果在时间片用尽之前进程就开始等待某一事件，它将进入等待状态。</li>
+<li>调度算法：主流线程调度算法都带有优先级调度和轮转法。前者可以决定每个线程的优先级，改变线程执行顺序，后者表示每个线程在一段时间内都可以被执行。通常情况下，IO密集型线程比CPU密集型线程由更高的优先级。</li>
+<li>线程饿死：一个线程被饿死，说明它的优先级较低，在它执行前，总有高优先级的线程插队。为避免饿死，调度系统通常会逐步提升那些等待很长时间线程的优先级。</li>
+<li>信号量：对于允许多个线程并发访问的资源，定义信号量。一个初始值为N的信号量允许N个线程同时并发访问。</li>
+<li>volatile关键字：用来阻止编译器为了提高速度将一个变量缓存到寄存器内而不写回。阻止编译器调整操作volatile变量的指令顺序</li>
+<li>用户线程到内核线程的映射：一对一模型，多对一模型，多对多模型</li>
+</ol>
+<h1 id="第二章：静态链接"><a href="#第二章：静态链接" class="headerlink" title="第二章：静态链接"></a>第二章：静态链接</h1><h2 id="编译和链接"><a href="#编译和链接" class="headerlink" title="编译和链接"></a>编译和链接</h2><p>代码执行过程可以分解为四个步骤：预处理，编译，汇编，链接</p>
+<h4 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h4><p>源码中的头文件，如stdio.h等被预编译器预编译成一个.i文件。gcc中可以用如下命令执行预编译：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -E hello.c -o hello.i</span><br></pre></td></tr></table></figure></p>
+<p>预编译过程主要处理源码中以#开头的预编译指令。处理规则如下：</p>
+<ol>
+<li>将所有#define删除并展开所有宏定义</li>
+<li>处理所有条件预编译指令，如#if，#ifdef，#elif，#else</li>
+<li>处理#include指令，将被包含的文件插入到该预编译指令的位置。这个过程是递归进行的，也就是说被包含的文件可能还包含其他文件。</li>
+<li>删除所有注释</li>
+<li>添加行号和文件名标识，以便编译器可以产生调试用的行号信息以及错误位置信息。</li>
+<li>保存所有#pragma编译器指令，因为编译器要用到他们。<br>经过预编译后的.i文件不包含任何宏定义，并且被包含的文件都已经被插入。所以当我们无法判断宏定义是否正确或者头文件包含是否正确时，可以查看预编译后的文件来锁定问题。<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4>编译过程是将.i文件进行一系列的词法分析，语法分析，语义分析以及优化后生产相应的汇编代码文件。gcc编译命令如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -S hello.i -o hello.s</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h4><p>汇编器是将编译器产生的汇编代码转变成机器指令。每一个汇编语句几乎都对应一条机器指令，所以汇编过程相对于编译过程要简单，没有复杂语法语义，也不需要指令优化。只需要根据汇编指令和机器指令的对照表一一翻译即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -c hello.s -o hello.o</span><br></pre></td></tr></table></figure></p>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p>经过汇编器产生的.o文件最后需要进行链接才可以生成最后的a.out可执行文件。</p>
+<h2 id="编译器"><a href="#编译器" class="headerlink" title="编译器"></a>编译器</h2><p>编译过程一般可以分为六步：词法分析，语法分析，语义分析，源代码优化，代码生成和目标代码优化。</p>
+<h4 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h4><p>源码被输入到扫描器进行简单词法分析，用一种有限状态机将源码的字符序列分割成一系列的记号（token）。</p>
+<h4 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h4><p>语法分析器将对token序列进行语法分析，从而生成一个AST。蒸锅分析过程采用上下文无关语法。</p>
+<h4 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h4><p>语法分析仅仅是完成对表达式的语法成眠的分析，但它不懂这个语句是否真的有意义。如C语言中两个指针做乘法是没有意义的，但在语法上是合法的。在这个基础上，编译器能分析的语义是 <strong>静态语义</strong>，即编译期可以确定的语义。与之对应的 <strong>动态语义</strong> 是只有在运行期才能确定的语义。<br>静态语义通常包括声明和类型匹配，类型转换。这个期间可以找到所有类型不匹配的错误。动态语义如将0作为一个除数是非法的只能在运行期报错。<br>经过语义分析后，整个AST的表达式都会被标识上类型。</p>
+<h4 id="中间代码生成"><a href="#中间代码生成" class="headerlink" title="中间代码生成"></a>中间代码生成</h4><p>现代编译器有着很多层次的优化，源代码优化器会在源代码级别进行优化。由于在AST上直接优化比较困难，所以优化器会将AST转换成中间代码，他是语法树的顺序表示，已经非常接近目标代码。<br>中间代码使得编译器可以被分为前端和后端，前端负责生产机器无关的中间代码。后端负责将中间代码转换为目标机器码。这样针对跨平台编译器而言，可以共用同一个前端而设计不同个后端。</p>
+<h4 id="目标代码生成和优化"><a href="#目标代码生成和优化" class="headerlink" title="目标代码生成和优化"></a>目标代码生成和优化</h4><p>编译器后端主要包括代码生成器和目标代码优化器。代码生成器将中间代码转化成目标机器代码，这个过程依赖于目标机器。 然后目标代码优化器将目标代码进行优化，比如选择合适的寻址方式，用位移代替乘法运算，删除多余指令等。</p>
+<h4 id="编译器的输出"><a href="#编译器的输出" class="headerlink" title="编译器的输出"></a>编译器的输出</h4><p>编译器生成的目标代码有一个问题是：变量的地址没有确定。如果有些变量的地址在其他模块就需要链接器最终将这些目标文件链接起来形成可执行文件。</p>
+<h2 id="链接-1"><a href="#链接-1" class="headerlink" title="链接"></a>链接</h2><p>在一个程序被分割成多个模块（文件）后，这些模块如何最后组成一个单一程序是一个问题。常见的组合问题有两种，一个是模块之间的函数调用，而是模块间的变量访问。函数、变量访问须知道目标函数、变量的地址。模块之间的调用和访问过程就是链接。<br>链接器将多个有互相关联的模块拼接到一起，最后产生一个可执行程序。   </p>
+<h4 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h4><p>一个复杂系统由多个模块组成，人们把每个源代码模块独立的编译，然后按照需要将他们组装起来，组装的过程就是链接。链接的主要内容就是把模块之间的互相引用处理好。从原理上讲，链接就是把一些指令对其他符号地址的引用加以修正。<br>链接过程主要包括地址和空间分配，符号决议和重定位。</p>
+<h1 id="第三章：目标文件"><a href="#第三章：目标文件" class="headerlink" title="第三章：目标文件"></a>第三章：目标文件</h1><p>目标文件是编译器编译源码后产生的文件，从结构上讲，它是已经编译后的可执行文件，只是还没有经过链接过程。一些符号和地址可能没有被调整。</p>
+<h2 id="目标文件的格式"><a href="#目标文件的格式" class="headerlink" title="目标文件的格式"></a>目标文件的格式</h2><p>从广义上看，目标文件和可执行文件的格式几乎一样。该格式在Windows下主要PE-COFF格式，在Linux下是ELF格式。<br>不光是可执行文件（.exe和ELF），动态链接库DLL（windows下的ddl和linux下的.so）以及静态链接库SLL（Windows下的.lib和linux下的.a）文件都是按照可执行文件格式进行存储。<br>ELF文件标准把系统中采用ELF格式存储的文件归为四类：</p>
+<ol>
+<li>可重定位文件：.o .obj</li>
+<li>可执行文件：.exe</li>
+<li>共享目标文件：.so .dll</li>
+<li><p>核心转储文件：linux下的core dump</p>
+<h2 id="目标文件内容"><a href="#目标文件内容" class="headerlink" title="目标文件内容"></a>目标文件内容</h2><p>目标文件中包含：编译后的机器指令代码，数据。链接需要的一些信息：符号表，调试信息，字符串等。一般目标文件将这些信息按照不同属性，以段或者节的形式存储。</p>
+</li>
+<li><p>程序源码编译后的机器指令经常被放在代码段里，<strong>代码段</strong> 常见的后缀有.core和.text。</p>
+</li>
+<li>全局变量和局部静态变量数据经常放在 <strong>数据段</strong>，数据段一般以.data结尾。</li>
+<li>常量只读数据放在 <strong>只读段.rodata</strong> 中。</li>
+<li>未初始化的全局变量和局部静态变量一般放在一个叫.bss的段里。</li>
+</ol>
+<h2 id="ELF格式细节"><a href="#ELF格式细节" class="headerlink" title="ELF格式细节"></a>ELF格式细节</h2><p>通过一个c语言例子详细讲解ELF格式文件的细节<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">int printf(const char* format, ...);</span><br><span class="line"></span><br><span class="line">int global_init_var = 84;</span><br><span class="line">int global_uninit_var;</span><br><span class="line"></span><br><span class="line">void func1(int i)&#123;</span><br><span class="line">    printf(&quot;%d\n&quot;, i);</span><br><span class="line">&#125;</span><br><span class="line">int main(void)&#123;</span><br><span class="line">    static int static_var = 85;</span><br><span class="line">    static int static_var2;</span><br><span class="line">    int a = 1;</span><br><span class="line">    int b;</span><br><span class="line">    func1(static_var + static_var2 + a + b);</span><br><span class="line">    return a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过指定-c，告诉gcc只编译不链接。之后可以得到一个1104字节的.o目标文件。</p>
+<h3 id="objdump分析工具"><a href="#objdump分析工具" class="headerlink" title="objdump分析工具"></a>objdump分析工具</h3><p>使用objdump工具对以ELF格式的目标.o文件的内容进行分析。</p>
+<h3 id="自定义段"><a href="#自定义段" class="headerlink" title="自定义段"></a>自定义段</h3><p>有时候为了满足特殊的需求，如Linux内核初始化或者某些硬件的内存等，需要制定某些部分代码能被放到所期望的段去。GCC提供一个扩展机制，直需要在代码中定义即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((section(&quot;FOO&quot;))) int global = 42;</span><br><span class="line">__attribute__((section(&quot;BAR&quot;))) void foo()&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在全局变量或函数之前加上 “<strong>attribute</strong>((section(“name”)))”属性就可以把相应的变量或函数放到以“name”作为段名的段中。</p>
+<h3 id="ELF文件结构"><a href="#ELF文件结构" class="headerlink" title="ELF文件结构"></a>ELF文件结构</h3><p>ELF文件中，最常见的格式如下：</p>
+<ol>
+<li>header 文件头</li>
+<li>.text 代码段</li>
+<li>.data 数据段</li>
+<li>.bss 未初始化的常量，全局变量段</li>
+<li>.rel.text 重定位表，链接器在处理目标文件时，需要对每个目标文件中的某些部位进行重定位</li>
+<li>字符串表 ELF文件中很多字符串如段名，变量名等。字符串表将所有字符串连在一起存放在一个表中，然后使用字符串在表中的偏移来引用字符串。<h4 id="ELF-Header"><a href="#ELF-Header" class="headerlink" title="ELF Header"></a>ELF Header</h4>文件头描述了整个文件的基本属性，版本，目标机器型号，程序入口地址等。<br>可以使用readelf命令来详细查看ELF文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -h SimpleSection.o</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>ELF文件头中定义了ELF魔数，文件机器字节长度，数据存储方式，版本，运行平台，硬件平台，硬件平台版本，入口地址，段表位置等。<br><strong>魔数</strong> 用来确认文件的类型，操作系统在加载可执行文件的时候回确认魔数是否正确， 如果不正确会拒绝加载。<br><strong>机器类型</strong> ELF文件被设计成可以在多个平台使用，但并不代表一个ELF文件可以在不同平台下运行。e_machine表示该ELF文件平台的属性。<br><strong>段表位置</strong> 保存ELF文件中各种各样段的基本属性以及结构，比如每个段的段名，段的长度，在文件中的偏移，读写权等。段表是ELF中最重要的结构之一。编译器，链接器和装载器都是依靠段表来定位和访问各个段的属性的。段表在ELF文件中的位置由文件头中的 “e_shoff”决定，表示段表的偏移位置。</p>
+<h2 id="链接的接口–符号"><a href="#链接的接口–符号" class="headerlink" title="链接的接口–符号"></a>链接的接口–符号</h2><p>链接的本质就是把多个不同的目标文件之间相互粘到一起。目标文件之间的相互拼合实际上是目标文件之间对地址的引用，即对函数和变量的地址的引用。在连接过程中，将函数和变量统称为 <strong>符号</strong>， 函数名或变量名就是 <strong>符号名</strong>。链接过程中很关键的部分就是符号的管理，每个目标文件都会有一个相应的符号表，用来记录目标文件中所用到的所有符号。每个符号有一个对应的值，叫做 <strong>符号值</strong>，对于变量和函数来说，符号值就是他们的地址。</p>
+<h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>在ELF文件中，符号表往往是其中的一个段，命名为.symtab。</p>
+<p>符号表中所有可能的符号有：</p>
+<ol>
+<li>定义在本目标文件中的全局符号（变量或函数）。</li>
+<li>在目标文件中引用的全局符号，却没有定义在本目标文件叫外部符号。如函数声明等。</li>
+<li>段名，往往由编译器产生，值为该段的起始地址。如.text 或.data等。</li>
+<li>局部符号，只在编译单元内部可见</li>
+<li>行号信息<br>这里面最重要的就是第一个和第二个，因为链接器正是使用1和2进行文件粘合。</li>
+</ol>
+<p>可以使用readelf工具查看可执行文件的符号表.symtab：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -s file.o</span><br></pre></td></tr></table></figure></p>
+<h3 id="符号冲突"><a href="#符号冲突" class="headerlink" title="符号冲突"></a>符号冲突</h3><p>对于C++而言，因为有函数重载机制，或者变量名相同但作用域不同等情况，会有两个函数名字相同，但参数列表不相同的情况。针对这种情况，使用符号修饰或符号改编的机制。</p>
+<p><strong>函数签名</strong> 包含了一个函数的信息，包括函数名，参数类型，所在的类和名称空间等信息。函数签名用不来识别不同的函数。在编译器和链接器处理符号时，使用某种 <strong>名称修饰</strong> 的方法，是每个函数签名都对应一个修饰后的名称。也就是说会将函数和变量的名字进行修饰形成符号名。 编译器产生的目标文件中的所用的符号名其实是 <strong>相应函数和变量修饰之后的名称</strong>。</p>
+<h3 id="弱符号和强符号"><a href="#弱符号和强符号" class="headerlink" title="弱符号和强符号"></a>弱符号和强符号</h3><p>在多个目标文件中包含有相同名字全局符号的定义，那么这两个目标文件在链接的时候回出现符号重复定义的错误。比如在两个文件A和B中都定义一个全局整型变量global并都进行了初始化，那么链接器在将A和B进行链接时会报错。</p>
+<p>这种会报错的符号被定义为 <strong>强符号</strong>。 对于C++而言，编译器默认 <strong>函数和初始化了的全局变量</strong> 为强符号。未初始化的全局变量为弱符号。</p>
+<p>针对强弱符号，编译器有如下处理规则：</p>
+<ol>
+<li>不允许强符号被多次定义（多个目标文件不允许出现同名强符号）</li>
+<li>如果一个符号在某个目标文件中是强符号，其他文件中是弱符号，那么选择强符号。</li>
+</ol>
+<p>在CGG中，可以通过“<strong>attribute</strong>((weak))”来定义任何一个强符号为弱符号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((weak)) weak = 2;</span><br></pre></td></tr></table></figure></p>
+<h3 id="强引用弱引用"><a href="#强引用弱引用" class="headerlink" title="强引用弱引用"></a>强引用弱引用</h3><p>如果在链接过程中，链接器没有找到该符号的定义，链接器就会报符号未定义的错误，这种被称为 <strong>强引用</strong> 。 <strong>弱引用</strong> 则是如果该符号未被定义，链接器对该引用不报错。对于一般未定义的弱引用，链接器某人其为0.</p>
+<p>在GCC中，可以使用 “<strong>attribute</strong>((weakref))”来声明一个外部函数的引用为弱引用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((weakref)) void foo();</span><br><span class="line">int main()&#123;</span><br><span class="line">    foo();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们可以将上述代码编译成一个可执行文件，GCC并不会报链接错误。但当我们运行这个可执行文件时，会发生运行错误，因为当main函数试图调用foo函数时，foo的函数地址为0.</p>
+<p>弱符号和弱引用机制对于库来说十分有用。比如说库中定义的弱符号可以被用户定义的强符号所覆盖，从而使程序可以使用自定义的库函数。</p>
+<h1 id="第四章：静态链接"><a href="#第四章：静态链接" class="headerlink" title="第四章：静态链接"></a>第四章：静态链接</h1><p>静态链接的核心目标是：有两个目标文件时，如何将它们链接起来形成一个可执行文件？<br>本章使用如下两个c代码a.c和b.c进行解释说明。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// a.c</span><br><span class="line">extern int shared;</span><br><span class="line">int main()&#123;</span><br><span class="line">    int a = 100;</span><br><span class="line">    swap(&amp;a, &amp;shared);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//b.c</span><br><span class="line">int shared = 1;</span><br><span class="line">void swap(int* a, int* b)&#123;</span><br><span class="line">    *a ^= *b ^= *a ^= *b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>首先使用GCC将两个文件编译成目标文件a.o和b.o</p>
+<h2 id="空间和地址分配"><a href="#空间和地址分配" class="headerlink" title="空间和地址分配"></a>空间和地址分配</h2><p>对于链接器来说，在这个例子中输入的目标文件是a.o和b.o输出是一个可执行文件ab。从ELF文件格式可知，ab的代码段和数据段都是输入文件合并过来的。问题是如何将两者进行合并？</p>
+<h3 id="按序叠加"><a href="#按序叠加" class="headerlink" title="按序叠加"></a>按序叠加</h3><p>最简单的方法就是将输入的目标文件按照次序叠加起来。这么做有一个问题就是对于大型项目有很多输入目标文件的情况下，输出可执行文件会有很多零散的段，这种做法非常浪费空间。</p>
+<h3 id="相似段合并"><a href="#相似段合并" class="headerlink" title="相似段合并"></a>相似段合并</h3><p>将相同性质的段合并到一起，比如说将所有.text代码段合并，接着是.data段，.bas段等。</p>
+<h2 id="两步链接"><a href="#两步链接" class="headerlink" title="两步链接"></a>两步链接</h2><p>整个链接过程分为两步。</p>
+<ol>
+<li>第一步：空间与地址分配。扫描所有输入目标文件，获取各个段的长度，属性和位置并将各个表合并。同时统计符号表信息，符号定义和符号引用统一成一个全局符号表。</li>
+<li>第二步：符号解析与重定位。使用上一步收集到的信息，进行符号解析与重定位，调整代码中的地址。</li>
+</ol>
+<p>链接结束后程序中所有使用的地址已经是在进程中的虚拟地址VMA (Virtual Memory Address)和大小。在链接前所有目标文件中的VMA都为0因为虚拟空间还没有被分配。</p>
+<h3 id="符号地址确定"><a href="#符号地址确定" class="headerlink" title="符号地址确定"></a>符号地址确定</h3><p>在第一步扫描的过程汇总，链接器会将虚拟地址分配给各个符号。由于是多个文件组合在一起，所以需要给各个符号添加一个偏移量使其被调整到正确的虚拟地址。一般情况下偏移量都是之前目标文件代码段的整段大小。（顺序链接）</p>
+<h2 id="符号解析和重定位"><a href="#符号解析和重定位" class="headerlink" title="符号解析和重定位"></a>符号解析和重定位</h2><h3 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a>重定位</h3><p>分配完空间和地址后，链接器进入符号解析和重定位步骤。</p>
+<p>当在一个文件A中调用另一个文件B中的成员或者函数foo()时，在A的目标文件中并不知道foo的具体地址，所以此时的目标文件中关于foo的调用时所指向的地址是0.而当链接器经过第一步扫描后，其实它已经知道了所有符号的位置， <strong>所以需要对所有符号调用进行重定向，使其指向正确的符号的地址</strong>。</p>
+<p>当链接是如果没有导入需要的库（遗漏了某些需要被链接的库）会报错：链接时符号未定义。</p>
+<h3 id="重定位表"><a href="#重定位表" class="headerlink" title="重定位表"></a>重定位表</h3><p>在ELF文件中，有一个叫重定位表的专门结构来保存于重定位相关的信息。一般情况下重定位表示ELF文件中的一个或多个段。对代码段进行重定位的表名称为：.rel.text。对数据段进行重定位的表名称为：.rel.data</p>
+<h2 id="COMMON块"><a href="#COMMON块" class="headerlink" title="COMMON块"></a>COMMON块</h2><p>对于多符号定义类型冲突的情况，尤其是弱符号来说，使用COMMON机制处理该问题。</p>
+<p>举例来说，编译器将未初始化的全局变量定义作为弱符号处理，如果在不同文件中定义了两个名称相同的全局未初始化变量，按照COMMON链接规则，该符号的大小以所有该弱符号中占据字节最大的为准。</p>
+<h2 id="静态库链接"><a href="#静态库链接" class="headerlink" title="静态库链接"></a>静态库链接</h2><p>一般情况下，一个语言的开发环境往往附带有 <strong>语言库</strong>，这些库是对操作系统的API的封装。包括C中常见的printf函数等。一个静态库可以简单的看做是一组目标文件的组合。</p>
+<p>例如C语言的标准库glibc本身是用C开发的，包含很多C语言源码文件，编译完成后有同样数量的目标文件。人们把这些目标文件压缩到一起并对其进行行编号和索引。进而就形成了libc.a静态库文件。</p>
+<p>当我们写个最简单的C代码，打印hello world时，就会调用libc.a库中的printf.o目标文件。但当我们尝试只用目标文件helloworld.o和printf.o进行链接时，会报错，因为printf.o还依赖于libc.a中其它的目标文件。</p>
+<h2 id="链接控制"><a href="#链接控制" class="headerlink" title="链接控制"></a>链接控制</h2><p>通常情况下直接使用链接器默认的配置就可以完成链接过程，但对于一些特殊情况，可能需要制定链接器的一些配置进行链接以便达到目的。通常情况下有一下三种方式控制链接器：</p>
+<ol>
+<li>命令行参数，如-o，-e等</li>
+<li>链接指令存放在目标文件里，编译器通常使用这种方法向链接器传递指令。</li>
+<li>使用链接控制脚本<br>通常情况下，可以自己写一个脚本，并指定该脚本作为链接控制脚本，对于ld链接器来说，使用-T参数指定脚本：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ld -T link.script</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>链接控制脚本程序使用一种特殊的链接脚本语言编写而成。一般使用.lds后缀作为扩展名。</p>
+<h2 id="BFD库"><a href="#BFD库" class="headerlink" title="BFD库"></a>BFD库</h2><p>由于不同硬件平台都有自己独特的目标文件格式，对于像GCC这种跨平台编译器来说需要定义一个统一接口来处理不同的目标文件格式。 <strong>BFD库可以把目标文件抽象成一个统一的模型</strong>。 GCC都通过操作BFD库来处理目标文件，通过这种方式可以将编译器和目标文件隔离。一旦需要支持新的目标文件格式，只需要在BFD库添加一种新格式而不需要对编译器做出修改。</p>
+<h1 id="第五章：Window-PE-COFF"><a href="#第五章：Window-PE-COFF" class="headerlink" title="第五章：Window PE/COFF"></a>第五章：Window PE/COFF</h1><p>在Windows平台下，使用一种叫PE的格式作为标准可执行文件。PE文件格式和ELF同根同源，都是COFF格式的发展。在windows下，习惯将目标文件默认为COFF格式，可执行文件为PE格式。统称为PE/COFF文件。</p>
+<p>和ELF一样，PE也允许程序员将变量或者函数放在自定义段中，VC++使用“pragma”编译器指示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#pragma data_seg(&quot;FOO&quot;)</span><br><span class="line">int global = 1;</span><br><span class="line">#pragma data_seg(&quot;.data&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>上述代码表示将global放到FOO段中，然后指导编译器将段恢复到.data段。</p>
+<p>PE/COFF 文件格式和ELF文件非常相似，也是在window下最广泛应用的可执行文件格式，微软的编译器产生的目标文件都是COFF格式。COFF文件中有个很特别的段叫 <strong>.drectve段</strong>，这个段保存了编译器传递给链接器的命令行参数，可以通过这个段实现指定运行库等功能。</p>
+<p>PE格式是windows下的可执行文件和动态链接库的格式。PE格式是COFF格式的改进版本，增加了PE文件头，数据目录等。</p>
+<h1 id="第六章：可执行文件的装载与进程"><a href="#第六章：可执行文件的装载与进程" class="headerlink" title="第六章：可执行文件的装载与进程"></a>第六章：可执行文件的装载与进程</h1><p>可执行文件只有被装载到内存中，才会被CPU执行。</p>
+<h2 id="进程虚拟地址空间"><a href="#进程虚拟地址空间" class="headerlink" title="进程虚拟地址空间"></a>进程虚拟地址空间</h2><p>程序被运行起来后，它将拥有独立的虚拟地址空间。虚拟地址空间由CPU的位数决定大小，32位的硬件平台决定了虚拟空间的最大值时2的32次方。64位则是2的64次方。一般情况下，可以通过C语言中的指针大小来判断硬件平台的位数：32位平台下指针大小为4字节，64位平台下大小为8字节。</p>
+<h2 id="装载方式"><a href="#装载方式" class="headerlink" title="装载方式"></a>装载方式</h2><p>一次性将程序执行需要的所有数据和指令都装载到内存的方法称为 <strong>静态装载</strong>，而通过将常用的部分驻留在内存中，不常用的部分存放在磁盘上，这种方法称为 <strong>动态装载</strong>。  </p>
+<p><strong>覆盖载入</strong> 和 <strong>页映射</strong> 是两种最典型的动态装载方法。</p>
+<h3 id="覆盖载入"><a href="#覆盖载入" class="headerlink" title="覆盖载入"></a>覆盖载入</h3><p>现在几乎已经被淘汰。覆盖载入将整个管理过程交给程序员，程序员先将程序分割成若干块。然后在编写一个 <strong>覆盖管理器</strong> ，该管理器负责管理哪个模块需要读入内存，哪个模块目前可以被覆盖。覆盖管理器一般都常驻内存。在有多个模块的情况下，程序员需要手工将模块按照他们之间的调用依赖关系组织成树状结构。</p>
+<h3 id="页映射"><a href="#页映射" class="headerlink" title="页映射"></a>页映射</h3><p>页映射是虚拟存储机制的一部分。页映射将内存和所有磁盘中的数据和指令按照 “页” 为单位划分若干页，这也是装载的操作单位。</p>
+<p>页映射算法先将程序入口装载到内存中运行，之后需要用到哪个页，就将哪个页装载到内存中，当发现内存中所有也都被占用时，根据算法决定内存中的哪个页会被覆盖，常见的算法有 <strong>先进先出算法FIFO</strong> 和 <strong>最少使用算法LUR</strong>。</p>
+<p>整个过程负责页调度的管理器就是现代操作系统中的存储管理器。</p>
+<h2 id="从操作系统看文件装载"><a href="#从操作系统看文件装载" class="headerlink" title="从操作系统看文件装载"></a>从操作系统看文件装载</h2><h3 id="进程的建立"><a href="#进程的建立" class="headerlink" title="进程的建立"></a>进程的建立</h3><p>进程建立主要分为三个步骤</p>
+<ol>
+<li>创建一个独立的虚拟地址空间<ol>
+<li>虚拟空间由一组页映射函数将虚拟空间的各个页映射到物理空间</li>
+</ol>
+</li>
+<li>读取可执行文件头，并建立虚拟空间与可执行文件的映射<ol>
+<li>由于可执行文件装载时实际上是被映射到虚拟空间，所以可执行文件很多时候又被叫做映射文件</li>
+<li>Linux将进程虚拟空间中的一个段叫做虚拟内存区域（VMA），用来记录这个映射关系。</li>
+</ol>
+</li>
+<li>将CPU的指令寄存器设置成可执行文件的入口地址，启动运行<h3 id="页错误"><a href="#页错误" class="headerlink" title="页错误"></a>页错误</h3>上述过程执行结束后，可执行文件的指令和数据并没有真正的被装载到物理内存中，仅仅是建立了可执行文件–虚拟内存–物理内存 三者之间的映射关系。  </li>
+</ol>
+<p>当CPU开始执行时，会发现程序入口的物理地址为空，进而引发一个页错误。CPU将权限交给操作系统，操作系统通过之前建立的映射，将可执行文件的一个运行页装载到内存中，然后CPU进行运行。整个页错误处理过程不断循环，直到程序结束。</p>
+<h3 id="段合并"><a href="#段合并" class="headerlink" title="段合并"></a>段合并</h3><p>由于一个可执行文件往往包含十多个小段，而内存空间的空间分配是以页为单位的，如果可执行文件中包含大量的小段，会造成大量的内存浪费。所以ELF格式可执行文件引入segment概念，可以将多个 <strong>较小的，读写运行权限相同的 section合并成几个segment</strong> 进而减少内存浪费。</p>
+<p>所以说，对于ELF文件，可以说是从不同的角度被分割，不同的角度称为 <strong>视图</strong>，从section的角度来看，ELF文件就是链接视图。从segment角度来看，就是执行视图。</p>
+<h3 id="VMA"><a href="#VMA" class="headerlink" title="VMA"></a>VMA</h3><p>一个进程基本上可以分为如下几个VMA区域：</p>
+<ol>
+<li>代码VMA，权限只读，可执行，有映像文件</li>
+<li>数据VMA，权限读写，可执行，有映像文件</li>
+<li>堆VMA，权限读写，可执行，无映像文件，匿名，可向上扩展</li>
+<li>栈VMA，权限读写，不可执行，无映像文件，匿名，可向下扩展。</li>
+</ol>
+<h3 id="堆和栈"><a href="#堆和栈" class="headerlink" title="堆和栈"></a>堆和栈</h3><p>VMA也会被用来对进程的地址空间堆栈进行管理。</p>
+<h3 id="段的地址对齐"><a href="#段的地址对齐" class="headerlink" title="段的地址对齐"></a>段的地址对齐</h3><p>即便是将可执行文件中的多个section按照读写权限合并成几个segment，仍然会出现物理内存页浪费的情况（每个segment大小都不是页的整数倍，会有一部分小数据单独占一整页）。UNIX系统通过 <strong>各个segment接壤部分共享一个物理页，然后将该物理页分别映射两次到两个虚拟页中</strong> 的方法，实现了物理页覆盖，减少页浪费的方法。使用这种方法，一个物理页可能同时包含两个segment的数据，有时甚至多余两个segment。</p>
+<h3 id="进程栈初始化"><a href="#进程栈初始化" class="headerlink" title="进程栈初始化"></a>进程栈初始化</h3><p>操作系统在进程启动前将一些进程运行所需要的环境提前保存到虚拟空间的栈中。</p>
+<h1 id="第七章：动态链接"><a href="#第七章：动态链接" class="headerlink" title="第七章：动态链接"></a>第七章：动态链接</h1><p>静态链接存在浪费内存和磁盘空间，模块更新困难等问题。因为每个程序除了保留着printf(),scanf()等公用库函数，还有相当数量的其他库静态函数。在Linux中，一个普通的程序会使用到C语言静态库至少1M以上。  </p>
+<p>例如，两个程序program1.o 和program2.o都用到了lib.o这个静态链接库。那么当内核运行这两个程序时，lib.o在磁盘和内存中都有两份副本。当系统中存在大量类似于lib.o的被多个程序共享的目标文件时，浪费的空间无法想象。</p>
+<p>另一个问题是静态链接对程序的更新，部署和发布都会造成更多麻烦。如果program.o包含一个lib.o是由第三方提供，当该第三方更新lib.o后，program的发布者必须马上拿到最新版的lib.o并与program.o链接后重新发布给用户。也就是说，任何一个模块的更新，程序都需要重新进行链接，发布给用户。</p>
+<p>解决这个两个问题的方法就是动态链接：<strong>不对那些组成程序的目标文件进行链接，等到程序要运行时才进行链接。</strong> 也就是说，把链接这个过程推迟到运行时再进行，这就是动态链接的基本思想。</p>
+<p>上述program1.o的例子中，如果运用动态链接，就是保留program1.o, program2.o 和 lib.o三个目标文件。当运行program1.o是，系统首先加载program1.o，当系统发现program1.o中用到了lib.o，系统接着加载lib.o，然后系统再进行动态链接工作，这个链接工作和静态连接很像，完成这些步骤后，系统把控制权交给program1.o的程序入口，程序开始运行。 而如果这个时候需要运行program2.o，那么系统只需要加载program2.o而不需要再一次加载lib.o因为内存中已经有一份lib.o存在，系统只需要将program2.o和lib.o链接起来即可。整个链接过程是由专门的 <strong>动态链接器</strong> 完成的。</p>
+<p><strong>程序可扩展性和兼容性</strong> 动态链接还有一个特点就是程序在运行时可以动态选择加载各种程序模块，这个有点后来被制作程序的 <strong>插件</strong>。</p>
+<p>比如公司开发完一个产品，可以规定一个程序的接口，其他开发者只需要按照这个接口来编写符合要求的动态链接文件，这个产品就可以动态的载入各种第三方模块。在程序运行时动态链接，实现程序的扩展功能。</p>
+<h3 id="动态链接基本实现"><a href="#动态链接基本实现" class="headerlink" title="动态链接基本实现"></a>动态链接基本实现</h3><p>动态链接基本思想是将程序按照模块拆分成各个相对独立的部分，在程序运行时才将他们链接在一起形成一个完整的程序。而不像静态链接那样，先把所有程序模块都链接成一个单独的可执行文件然后再执行。在linux中，ELF动态链接文件被称为 <strong>动态共享对象</strong>， 简称 <strong>共享对象，一般是以.so为扩展名的一些文件</strong> 。在window中，动态链接文件被称为 <strong>动态链接库，常常以.dll为扩展名。</strong></p>
+<p>在linux中，常用的c语言运行库为glibc，它的动态链接形式保存在‘/lib’目录下，文件名叫做‘libc.so’。</p>
+<p>可以使用gcc将一个c文件编译成共享文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -fPIC -shared -o lib.so lib.c</span><br></pre></td></tr></table></figure></p>
+<p>-shared表示产生共享文件。</p>
+<p>主函数program1.c和program2.c在编译过程也需要制定动态链接文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -o program1 program1.c ./lib.so</span><br><span class="line">gcc -o program2 program1.c ./lib.so</span><br></pre></td></tr></table></figure></p>
+<h2 id="延迟绑定"><a href="#延迟绑定" class="headerlink" title="延迟绑定"></a>延迟绑定</h2><p>动态链接往往比静态链接慢5%左右，因为动态链接需要进行复杂的GOT定位，然后间接寻址。</p>
+<p>动态链接下模块之间包含大量的函数引用，所以在开始执行前，动态链接会耗费不少时间用于解决模块之间的函数引用的符号查找以及重定位。但程序中多少会存在一些即是程序执行完也没有被用到的函数（比如一些错误处理函数等），所以提前将所有模块都进行动态链接是一种浪费。所以ELF采用一种延迟绑定的做法。 <strong>基本思想是当函数第一次被用到时才进行绑定（符号查找，重定位等），如果没用到则不用绑定</strong>。 这样做可以大大加快程序的启动速度。</p>
+<h2 id="总结动态链接过程"><a href="#总结动态链接过程" class="headerlink" title="总结动态链接过程"></a>总结动态链接过程</h2><p>动态链接的情况下，可执行文件的装载与静态链接基本一样，首先OS读取可执行文件的文件头，并将各个segment映射到进程的虚拟空间中。在静态链接下，OS接着就将控制权交给可执行文件的入口地址，程序开始执行。  </p>
+<p>但对于动态链接而言，OS还不能在装载完之后就把控制权交给可执行文件，因为由于动态链接的缘故，此时可执行文件中很多外部符号的引用还处于无效地址状态，即还没有跟相应的共享对象中的实际位置链接起来。所以在装载完可执行文件后，OS会先启动一个动态链接器。</p>
+<p>动态链接器得到控制权后，首先初始化自身，然后根据当前环境参数，开始对可执行文件进行动态链接工作。</p>
+<p>链接工作分为3步，先是启动动态链接器本身，然后装载所有需要共享的对象，最后是重定位和初始化。</p>
+<p>动态链接器启动后，会将可执行文件和链接器本身的符号表合并到一个符号表中，称为 <strong>全局符号表</strong>，然后链接器开始寻找可执行文件所依赖的共享对象。ELF文件中的 “.dynamic”中指出了可执行文件所依赖的共享对象。然后一个个的遍历依赖的共享对象，将它对应的代码段和数据段映射到进程空间中。当一个共享对象被装载，它的符号表会被合并到全局符号表中。所有共享对象都被装载后，全局符号表中包含进程运行所需要的所有动态链接符号。</p>
+<p>完成上述步骤后，链接器开始遍历可执行文件和每个共享对象的重定位表，将每个需要重定位的位置进行修正。</p>
+<p>所有链接工作结束后，动态链接器将控制权交还给可执行文件，程序开始正式执行。</p>
+<h2 id="动态符号表"><a href="#动态符号表" class="headerlink" title="动态符号表"></a>动态符号表</h2><p>为了表示动态链接模块之间的符号导入导出关系，ELF用动态符号表段来保存这些信息，段名为 “.dynsym”。动态符号表只保存和动态链接相关的符号信息。</p>
+<h2 id="显式运行时链接"><a href="#显式运行时链接" class="headerlink" title="显式运行时链接"></a>显式运行时链接</h2><p>也叫运行时加载，是让程序自己在运行时加载指定的模块，并可以在不需要改模块时将其卸载。运行时加载使得程序的模块组织更加灵活，可以用来实现一些诸如插件，驱动等功能。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>动态链接的两个优点：大大降低了对内存和磁盘空间的浪费；更加方便的维护升级程序。</li>
+<li>动态链接装在地址不缺的的解决方法：装载时重定位和地址无关代码。<ol>
+<li>装载时从定位无法共享代码段，但速度快</li>
+<li>地址无关代码缺点是速度慢，但可以实现代码段在各个进程之间的共享，节省内存空间</li>
+</ol>
+</li>
+</ol>
+<h1 id="第八章：Linux共享库的组织"><a href="#第八章：Linux共享库的组织" class="headerlink" title="第八章：Linux共享库的组织"></a>第八章：Linux共享库的组织</h1><p><strong>共享库</strong> 和共享对象没有区别，Linux下的共享库就是普通的ELF共享对象。  </p>
+<h2 id="共享库版本"><a href="#共享库版本" class="headerlink" title="共享库版本"></a>共享库版本</h2><p>因为程序和共享库可以彼此分离，所以程序对共享库提供的ABI（二进制接口）的兼容就变得非常重要。Linux通过规定明明系统来管理每个共享库，Linux下的每个共享库文件名必须如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libname.so.x.y.z</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>x为主版本号，表示重大升级，不同主版本号之间不兼容。</li>
+<li>y为次版本号，表示增量升级，即增加一些新的接口符号，但保持原来符号不变。不同次版本号之间可以相互兼容</li>
+<li>z为发布版本号，表示丢一些错误的修正，性能改进等，完全不添加新的接口，也不对旧接口进行修改。</li>
+</ul>
+<h2 id="SO-NAME"><a href="#SO-NAME" class="headerlink" title="SO-NAME"></a>SO-NAME</h2><p>OS普遍采用一种叫SO-NAME的命名机制来记录共享库的依赖关系。防止动态链接器调用了错误的共享库版本导致无法正确链接。</p>
+<h2 id="共享库系统路径"><a href="#共享库系统路径" class="headerlink" title="共享库系统路径"></a>共享库系统路径</h2><p>目前大多数Linux都遵守FHS（FILE Hierarchy Standard）标准，该标准规定了一个系统中的系统文件如何存放，包括各个目录的结构组织和作用。有利于促进各个OS的兼容性。</p>
+<p>FHS标准规定，一个系统主要有两个存放共享库的位置：</p>
+<ol>
+<li>/lib 主要存放系统中最关键和基础的共享库，主要是那些/bin和/sbin下程序所需要的库</li>
+<li>/usr/lib 主要保存一些非系统运行时所需要的关键共享库，主要是一些开发时用的共享库。</li>
+<li>/usr/local/lib 用来防止一些跟操作系统本身并不相关的库，主要是第三方的应用程序的库，比如python解释器相关的共享库（它的可执行文件可能被放到/usr/local/bin下）</li>
+</ol>
+<h3 id="共享库的安装"><a href="#共享库的安装" class="headerlink" title="共享库的安装"></a>共享库的安装</h3><p>我们需要将一个共享库安装到OS中，以便各种程序都可以共享使用它。最简单的办法是将新的共享库复制到某个标准的共享库目录中。如/lib等，然后运行ldconfig即可。</p>
+<h1 id="第九章：Windows下的动态链接"><a href="#第九章：Windows下的动态链接" class="headerlink" title="第九章：Windows下的动态链接"></a>第九章：Windows下的动态链接</h1><p>Windows下的动态链接库缩写为DLL，是和EXE文件一个概念，都是PE格式的二进制文件。相当于Linux下的ELF格式的共享对象。</p>
+<h2 id="DLL"><a href="#DLL" class="headerlink" title="DLL"></a>DLL</h2><h3 id="创建DLL"><a href="#创建DLL" class="headerlink" title="创建DLL"></a>创建DLL</h3><p>使用关键字__declspec指定导入导出符号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__declspec(dllexport) double Add(double a, double b)&#123;</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用编译器将其编译成DLL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl /LDd math.c</span><br></pre></td></tr></table></figure></p>
+<p>就会生成math.dll文件和math.lib文件</p>
+<h3 id="使用DLL"><a href="#使用DLL" class="headerlink" title="使用DLL"></a>使用DLL</h3><p>当需要使用DLL中的某个符号时，需要使用__declspec(dllimport)关键字显式声明某个符号为导入符号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#inlcude &lt;stdio.h&gt;</span><br><span class="line">__declspec(dllimport) double Add(double a, double b);</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    double result = Add(3.0, 2.3);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后将程序进行编译并声明需要用到的动态链接库：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cl /c testmath.c</span><br><span class="line">link testmath.obj math.lib</span><br></pre></td></tr></table></figure></p>
+<p>math.lib并不是如同静态链接中的那样，包含着math.c的二进制代码和数据，而是包含了用来描述math.dll的导出符号的文件。</p>
+<h3 id="导出表"><a href="#导出表" class="headerlink" title="导出表"></a>导出表</h3><p>当一个PE需要将一些函数或变量提供给其他PE文件使用是，我们将这些符号导出，最典型的情况是一个DLL文件将符号到处给EXE文件使用。所有导出的符号被集中在一个 <strong>导出表</strong> 中。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>动态链接对Window非常重要，整个window系统本身即基于动态链接机制，window的API也是通过DLL形式提供给开发者， 而不是linux那样以系统调用为OS的入口。</p>
+<h1 id="第十章：内存"><a href="#第十章：内存" class="headerlink" title="第十章：内存"></a>第十章：内存</h1><p>程序的运行：程序的环境由以下三部分组成：内存，运行库，系统调用。  </p>
+<p>在32位系统里，内存空间拥有4GB的寻址能力。这4GB会被分割一部分用于OS的运行被称为 <strong>内核空间</strong> 。用户仅可以使用剩下的2GB或3GB的 <strong>用户空间</strong>。</p>
+<h2 id="程序的内存布局"><a href="#程序的内存布局" class="headerlink" title="程序的内存布局"></a>程序的内存布局</h2><p>在用户空间里，内存也被继续分割：应用程序使用的内存空间有如下默认区域：</p>
+<ol>
+<li>栈：栈用于维护函数调用的上下文。栈通常在用户空间的最高地址出分配，有数兆字节大小。通常情况下栈是向下增长的</li>
+<li>堆：堆用来容纳应用程序动态分配的内存区域，当程序使用malloc或者new分配内存时，得到的内存就来自于堆。堆通常在栈的下方，一般情况下比栈大很多，可以有数百兆的容量。</li>
+<li>可执行文件映像：存储着可执行文件在内存里的映像，由装载器在装载时将可执行文件映射到这个空间中。</li>
+<li>保留区：保留区是对内存中收到保护禁止访问的内存区域总称。例如在大多数OS中，极小地址都是不允许访问的，如NULL。</li>
+<li>动态链接区：这个区域用来映射装载的动态链接库，如果可执行文件依赖动态链接库，那么系统将为它分配相应的空间并将共享库载入到该空间。<h2 id="栈与调用惯例"><a href="#栈与调用惯例" class="headerlink" title="栈与调用惯例"></a>栈与调用惯例</h2>栈在程度运行中具有举足轻重的地位，栈保存了一个函数调用所需要的维护信息，通常被称为 <strong>堆栈帧或者活动记录</strong>。 堆栈帧一般包含如下几方面内容：</li>
+<li>函数的返回地址和参数</li>
+<li>临时变量：包括函数的非静态全局变量以及编译器自动生成的其他临时变量</li>
+<li>保存的上下文：包括在函数调用前后需要保持不变的寄存器。</li>
+</ol>
+<p>一个函数的活动记录用ebp和esp两个寄存器划定范围，esp始终指向栈的顶部，也就是当前活动记录的顶部。ebp指向函数活动记录的一个固定位置，ebp又被称为帧指针。ebp不随当前函数的执行而变化，esp始终指向栈顶，因此随着函数的执行会不断变化。固定不变的ebp可以用来定位函数活动记录中的各个数据。<br>在ebp之前首先是这个函数的返回地址，再往前是压入栈中的参数。ebp所直接指向的数据是调用该函数前ebp的值，这样在函数返回的时候，ebp可以通过读取这个值恢复到调用前的值。</p>
+<h5 id="函数调用的过程如下："><a href="#函数调用的过程如下：" class="headerlink" title="函数调用的过程如下："></a>函数调用的过程如下：</h5><ol>
+<li>把传入的参数压入栈中</li>
+<li>把当前指令的下一条指令的地址压入栈中（即调用函数后的下一条指令的地址，可以理解为返回地址）</li>
+<li>跳到函数体执行</li>
+<li>push ebp：把ebp压入栈中（old ebp）</li>
+<li>mov ebp,esp：ebp=esp （这时ebp指向栈顶）<h5 id="函数返回的过程如下："><a href="#函数返回的过程如下：" class="headerlink" title="函数返回的过程如下："></a>函数返回的过程如下：</h5></li>
+<li>mov esp, ebp：回复esp同时回收全局变量空间</li>
+<li>pop ebp：从栈中回复保存的ebp的值</li>
+<li>ret：从栈中去的返回地址，并跳转到该位置。继续执行原来的函数</li>
+</ol>
+<h3 id="调用惯例"><a href="#调用惯例" class="headerlink" title="调用惯例"></a>调用惯例</h3><p>各个函数对栈的工作过程，函数调用过程，参数读取过程等信息所遵守的共同约定。一般会规定如下几个方面：函数参数的传递顺序和方式，栈的维护方式，名字修饰的策略等。  </p>
+<p>在C语言中，有多个调用惯例，默认调用惯例是cdecl。例如，对函数foo的声明，他的完整形式是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int _cdecl foo(int n, float m)</span><br></pre></td></tr></table></figure></p>
+<p>_cdecl并非标准关键字，在不同编译器有不同写法。</p>
+<h3 id="函数返回值传递"><a href="#函数返回值传递" class="headerlink" title="函数返回值传递"></a>函数返回值传递</h3><p>常见的调用惯例使用eax和edx联合，用以处理返回值。<br>假设main函数中调用了return_test()函数，并得到一个较大字节的返回值，常见返回值处理过程如下：</p>
+<ol>
+<li>在main函数在栈上额外开辟一片空间，并将这个空间的一部分作为传递返回值的临时对象，称为temp</li>
+<li>将temp对象的地址作为隐藏参数传递给return_test函数</li>
+<li>return_test函数将数据拷贝给temp对象，并将temp对象的地址用eax传出</li>
+<li>return_test返回后，main函数将eax指向的temp对象的内容拷贝给n，n即为在main函数中被return_test函数返回值赋值的对象。</li>
+</ol>
+<h3 id="声名狼藉的C-返回对象"><a href="#声名狼藉的C-返回对象" class="headerlink" title="声名狼藉的C++返回对象"></a>声名狼藉的C++返回对象</h3><p>C++在返回一个对象时，对象要经过两次拷贝构造函数的调用，甚至更多。所以返回一个较大的对象会有非常多的额外开销。所以 <strong>C++程序中要尽量避免返回对象</strong></p>
+<h2 id="堆与内存管理"><a href="#堆与内存管理" class="headerlink" title="堆与内存管理"></a>堆与内存管理</h2><p>因为栈的数据在函数返回的时候会被释放掉，所以无法将数据传递至函数外。而全局变量没办法动态的产生，只能在编译的时候定义。</p>
+<p>堆是一块巨大的内存空间，尝尝占据整个虚拟空间的绝大部分。程序可以在堆中申请一块连续内存并自由使用。这块内存在程序主动放弃之前会一直保持有效。程序通过new和malloc申请堆空间。  </p>
+<p>程序创建初始时，向OS申请一块适当大小的堆空间，然后由程序自己管理这块空间，具体来说，往往是程序的运行库负责管理堆空间的分配。运行库管理堆空间的算法就是堆的分配算法。</p>
+<h3 id="堆分配算法"><a href="#堆分配算法" class="headerlink" title="堆分配算法"></a>堆分配算法</h3><p>如何管理一大块连续的内存空间，能够按需求分配，释放其中的空间，这就是堆分配算法。</p>
+<ol>
+<li>空闲链表：该方法是把堆中各个空闲的块按照链表的方式连接起来，当用户请求一块空间时，可以遍历整个链表直到找到合适大小的块并将其拆分。当用户释放空间时将它合并到空闲链表中。</li>
+<li>位图(Bitmap)：核心思想是将整个堆划分为大量的块，每个块的大小相同，当用户请求内存的时候，总是分配整数个块的空间给用户，第一个块称为已分配区域的头，其余的称为已分配区域的主体。<strong>可以使用一个整数数组来记录块的使用情况，由于每个块只有头、主体、空闲三个状态，因此仅仅需要两bit即可表示一个块</strong>。使用位图有如下几个优缺点：<ol>
+<li>速度快，整个堆的空闲信息存储在一个数组内</li>
+<li>稳定性好，为避免越界写数据，只需要将位图简单备份一下即可</li>
+<li>块不需要额外信息，易于管理</li>
+<li>缺点：分配时容易产生碎片，导致浪费。</li>
+</ol>
+</li>
+<li>对象池：在一些场合下，被分配对象的大小是较为固定的几个值，如果每次分配的空间大小都一样，那么就可以按照这个每次请求分配的大小作为一个单位，吧整个堆空间划分为大量的小块，每次请求的时候只需要找到一个小块就可以。对象池的管理方法可以使用空闲链表或者位图。<br>实际应用中，对的分配算法往往采用多种算法复合而成。</li>
+</ol>
+<h1 id="第十一章：运行库"><a href="#第十一章：运行库" class="headerlink" title="第十一章：运行库"></a>第十一章：运行库</h1><p>本章介绍从程序创始开始，在程序背后保证程序正常运行的运行库。</p>
+<h2 id="入口函数和程序初始化"><a href="#入口函数和程序初始化" class="headerlink" title="入口函数和程序初始化"></a>入口函数和程序初始化</h2><p>OS装载程序后，首先运行的并不是main的第一行，而是一些负责准备好main函数执行所需要的环境，并负责调用main函数的代码。<br>一个典型的程序运行步骤如下：</p>
+<ol>
+<li>OS创建进程后，把控制权交给程序的入口，这个入口往往是运行库中的某个入口函数</li>
+<li>入口函数对运行库和运行环境进行初始化，包括堆，IO，线程，全局变量构造等等。</li>
+<li>入口函数在完成初始化后，调用main函数，正式开始执行程序的主体部分。</li>
+<li>main函数执行完毕后，返回到入口函数，入口函数进行清理工作，包括全局变量析构，堆销毁，关闭IO等，然后进行系统调用结束进程。</li>
+</ol>
+<p>大部分情况下程序员都不会和入口函数打交道，常见的有 <strong>glibc和MSVC的入口函数</strong>，并且各个入口函数的启动过程在不同情况下差别很大，比如静态的glibc和动态的glibc，glibc用于可执行文件和用于共享库文件的差别。</p>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p>环境变量是存在于系统中的一些公用数据，任何程序都可以访问。通常情况下环境变量存储的都是一些系统的公共信息，例如系统搜索路径，当前OS版本。环境变量格式为key=value字符串。在Linux下，直接在命令行里输入export即可。</p>
+<h2 id="C语言运行库"><a href="#C语言运行库" class="headerlink" title="C语言运行库"></a>C语言运行库</h2><p>C语言背后有一套庞大的代码支持，这套代码至少包括入口函数，以及所依赖的函数所构成的函数集合，各种标准库函数的实现等。这个代码集合被称为 <strong>运行时库Runtime Library</strong> C语言的运行库被称为 <strong>C运行库（CRT）</strong></p>
+<p>一个C语言运行库大致包括了如下功能：</p>
+<ul>
+<li>启动和退出：包括入口函数以及入口函数所依赖的其他函数等</li>
+<li>标准函数：由C语言标准规定的C语言标准库所拥有的函数实现</li>
+<li>IO：IO功能的封装和实现</li>
+<li>堆：堆的封装和实现</li>
+<li>语言实现：语言中一些特殊功能的实现</li>
+<li>调试：实现调试功能的代码</li>
+</ul>
+<h3 id="C语言标准库"><a href="#C语言标准库" class="headerlink" title="C语言标准库"></a>C语言标准库</h3><p>C语言标准库占据CRT的大部分，ANSIC标准库由24个C头文件组成，非常轻量，仅包含了数学函数，字符串处理，IO等基本方法。常见头文件如下：</p>
+<ol>
+<li>标准输入输出：stdio.h</li>
+<li>文件操作：stdio.h</li>
+<li>字符操作：ctype.h</li>
+<li>字符串操作：string.h</li>
+<li>数学函数：math.h</li>
+<li>资源管理：stdlib.h</li>
+</ol>
+<p>运行库是平台相关的，因为它和操作系统结合的非常紧密，C语言的运行库从某种程度上来讲是C语言的程序和不同操作系统平台之间的抽象层，将不同的操作系统API抽象成相应的库函数。Linux和Windows两个主要C语言运行库分别是glibc（GNU C Library）和MSVCRT。</p>
+<p>事实上，glibc和MSVCRT是C标准库的超集，例如线程操作并不包含在标准库中，但两者都提供线程操作库。</p>
+<h1 id="第十二章：系统调用与API"><a href="#第十二章：系统调用与API" class="headerlink" title="第十二章：系统调用与API"></a>第十二章：系统调用与API</h1><p>系统调用是应用程序与操作系统内核之间的接口，决定了应用程序如何与啮合打交道，无论程序是直接及逆行系统调用还是通过运行库，最后都会到达系统调用这个层面上。</p>
+<p>其中Windows系统完全基于DLL机制，所以它通过DLL对系统调用进行了包装，形成了所谓的Windows API。应用程序所能看到Windows系统最底层的接口就是Windows API。所以Windows程序相当于在运行库和系统调用之间又多了一层API。</p>
+<p>现代OS通常提供两种特权级别给程序分别为 <strong>用户模式</strong> 和 <strong>内核模式</strong>，系统调用是运行在内核模式的，而应用程序基本上都运行在用户模式。而应用程序通常通过<strong>中断</strong> 来从用户态切换到内核态。</p>
+<p>Windows API是以DLL导出函数的形式暴露给应用程序开发者的，微软把这些DLL导出函数的头文件，导出库，相关文件和工具一起提供给开发者，包装成了Software Development Kit（SDK）。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/Programming Language/Python/Python内存管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/26/Programming Language/Python/Python内存管理/" itemprop="url">Python内存管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T00:00:00+09:00">
+                2019-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/26/Programming Language/Python/Python内存管理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/05/26/Programming Language/Python/Python内存管理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>介绍python内存管理模型。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/26/Programming Language/Python/Python内存管理/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/10/Linux笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/10/Linux笔记/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-10T17:21:48+09:00">
+                2019-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/10/Linux笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/04/10/Linux笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><h4 id="预编译指令"><a href="#预编译指令" class="headerlink" title="预编译指令"></a>预编译指令</h4><p>在源文件中，以“#”开始的内容就是预编译指令。它的作用是告诉编译器，让它在真正进行编译之前对源文件进行一些插入文件、替换字符串等预处理，以得到最终参与编译的源文件。</p>
+<p>“#include”指令用于将指定的文件插入该指令所在的位置，作为整个源文件的一部分。因为这样的文件总是在一个源文件的头部被插入，所 以我们通常将这样的文件称为头文件（header file）。</p>
+<p>“#include”指令后的文件名有两种表示方式：如果使用双引号””来包围一个文件名，则预 处理器在处理这个指令的时候，将首先在当前目录（也就是这个源文件所在的目录）下搜索这个文件，如果不存在，则继续在项目的包含目录（包括项目的默认头文 件目录，也就是Visual Studio安装目录下的“\VC\include”文件夹,以及在项目属性中设置的项目附加头文件目录）下搜索这个文件；而如果使用尖括 号&lt;&gt;来包围一个文件名，预处理器则会直接在项目的包含目录下搜索这个文件。所以，通常我们使用””来插入当前项目目录下的头文件（比如我们 自己创建的头文件），而使用&lt;&gt;来插入各种项目包含目录下的库头文件（比如这里的iostream）。</p>
+<h4 id="C-执行过程"><a href="#C-执行过程" class="headerlink" title="C++执行过程"></a>C++执行过程</h4><ol>
+<li>由编译器将.cpp文件编译成.obj文件</li>
+<li>由链接器将.obj文件和Visual C++所提供的标准库目标文件整合成最终的可执行文件</li>
+<li>在操作系统执行文件前，会进行准备工作，如创建进程空间，将文件的数据段和代码段映射到进程的虚拟内存空间，初始化全局变量等。</li>
+<li>操作系统执行可执行文件</li>
+</ol>
+<h4 id="size-t"><a href="#size-t" class="headerlink" title="size_t"></a>size_t</h4><p>size_t是一些C/C++标准在stddef.h中定义的。这个类型足以用来表示对象的大小。</p>
+<p>size_t的真实类型与操作系统有关，在32位架构中被普遍定义为：</p>
+<p>typedef   unsigned int size_t;</p>
+<p>而在64位架构中被定义为：</p>
+<p>typedef  unsigned long size_t;<br>size_t在32位架构上是4字节，在64位架构上是8字节，在不同架构上进行编译时需要注意这个问题。<br>而int在不同架构下都是4字节，与size_t不同；且int为带符号数，size_t为无符号数。</p>
+<p>size_t是无符号的，并且是平台无关的，表示0-MAXINT的范围；</p>
+<p>int是有符号的；</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/20/OpenCV学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/20/OpenCV学习笔记/" itemprop="url">OpenCV学习笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-20T00:00:00+09:00">
+                2019-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/openCV/" itemprop="url" rel="index">
+                    <span itemprop="name">openCV</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/20/OpenCV学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/20/OpenCV学习笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>openCV学习笔记。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/20/OpenCV学习笔记/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/16/Knowledge/Xcode运行OpenCV项目/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/16/Knowledge/Xcode运行OpenCV项目/" itemprop="url">Xcode运行OpenCV项目</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-16T00:00:00+09:00">
+                2019-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Vision/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/16/Knowledge/Xcode运行OpenCV项目/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/16/Knowledge/Xcode运行OpenCV项目/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>介绍如何在Mac上安装OpenCV并用XCode运行OpenCV项目。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/16/Knowledge/Xcode运行OpenCV项目/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/自动驾驶入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/01/自动驾驶入门/" itemprop="url">自动驾驶入门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+09:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/self-driving/" itemprop="url" rel="index">
+                    <span itemprop="name">self-driving</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/01/自动驾驶入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/01/自动驾驶入门/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>自动驾驶入门笔记整理。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/01/自动驾驶入门/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/Programming Language/Python/Python单元测试/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -360,163 +1596,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/11/23/Programming Language/Python/Python单元测试/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/Programming Language/Python/Python之Pandas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dongfang Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Black Feather">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/23/Programming Language/Python/Python之Pandas/" itemprop="url">Python之Pandas</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-23T00:00:00+09:00">
-                2018-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/23/Programming Language/Python/Python之Pandas/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/23/Programming Language/Python/Python之Pandas/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>总结Pandas的常见用法。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/23/Programming Language/Python/Python之Pandas/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1025,791 +2104,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Programming Language/Python/Python好用的第三方库/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dongfang Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Black Feather">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/23/Programming Language/Python/Python好用的第三方库/" itemprop="url">Python好用的第三方库</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-23T00:00:00+09:00">
-                2018-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/23/Programming Language/Python/Python好用的第三方库/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/23/Programming Language/Python/Python好用的第三方库/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>整理一些好用的python第三方库。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/23/Programming Language/Python/Python好用的第三方库/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/14/Deep Learning/CV/目标检测算法之SSD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dongfang Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Black Feather">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/14/Deep Learning/CV/目标检测算法之SSD/" itemprop="url">图片分割识别之SSD</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-14T00:00:00+09:00">
-                2018-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/14/Deep Learning/CV/目标检测算法之SSD/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/14/Deep Learning/CV/目标检测算法之SSD/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>介绍one-stage图像分割识别算法：SSD算法。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/14/Deep Learning/CV/目标检测算法之SSD/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/14/Deep Learning/CV/从RCNN到Faster-RCNN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dongfang Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Black Feather">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/14/Deep Learning/CV/从RCNN到Faster-RCNN/" itemprop="url">从RCNN到Faster-RCNN</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-14T00:00:00+09:00">
-                2018-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/14/Deep Learning/CV/从RCNN到Faster-RCNN/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/14/Deep Learning/CV/从RCNN到Faster-RCNN/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>总结图像分割识别算法从RCNN到 Faster RCNN的原理和演化过程。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/14/Deep Learning/CV/从RCNN到Faster-RCNN/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/14/Deep Learning/CV/目标检测算法之YOLO/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dongfang Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Black Feather">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/14/Deep Learning/CV/目标检测算法之YOLO/" itemprop="url">图片分割识别之YOLO</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-14T00:00:00+09:00">
-                2018-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/14/Deep Learning/CV/目标检测算法之YOLO/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/14/Deep Learning/CV/目标检测算法之YOLO/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>介绍one-stage图像分割识别算法：YOLO算法。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/14/Deep Learning/CV/目标检测算法之YOLO/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/11/Paper/论文阅读之《Neural Code Completion》/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dongfang Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Black Feather">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/11/Paper/论文阅读之《Neural Code Completion》/" itemprop="url">论文阅读之《Neural Code Completion》</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-11T00:00:00+09:00">
-                2018-10-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Paper/" itemprop="url" rel="index">
-                    <span itemprop="name">Paper</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/11/Paper/论文阅读之《Neural Code Completion》/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/11/Paper/论文阅读之《Neural Code Completion》/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>论文《Neural Code Completion》的阅读笔记。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/11/Paper/论文阅读之《Neural Code Completion》/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1860,7 +2154,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1871,7 +2165,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1882,7 +2176,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1935,7 +2229,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

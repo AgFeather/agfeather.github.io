@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="python装饰器类似于java中的面向切面编程，是python的高级语法， 可以将各个函数中重复的操作（插入日志，性能测试，事务处理，缓存等）抽离出来，将这些于函数原本功能无关的雷同代码定义在装饰器中，概括的讲： 装饰器的作用就是为已经存在的对象添加额外的功能">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-01T06:32:36.888Z">
+<meta property="og:updated_time" content="2019-06-08T10:20:50.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python装饰器">
 <meta name="twitter:description" content="python装饰器类似于java中的面向切面编程，是python的高级语法， 可以将各个函数中重复的操作（插入日志，性能测试，事务处理，缓存等）抽离出来，将这些于函数原本功能无关的雷同代码定义在装饰器中，概括的讲： 装饰器的作用就是为已经存在的对象添加额外的功能">
@@ -354,7 +354,7 @@
 
       
         <p>python装饰器类似于java中的面向切面编程，是python的高级语法， 可以将各个函数中重复的操作（插入日志，性能测试，事务处理，缓存等）抽离出来，将这些于函数原本功能无关的雷同代码定义在装饰器中，概括的讲： <strong>装饰器的作用就是为已经存在的对象添加额外的功能</strong><br><a id="more"></a></p>
-<h2 id="装饰器简单应用"><a href="#装饰器简单应用" class="headerlink" title="装饰器简单应用"></a>装饰器简单应用</h2><p>看如下代码：decorator函数即定义一个装饰器，foo为一个常规的函数。该代码即为用decorator对f函数进行装饰。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def decorator(func):</span><br><span class="line">	def wrapper():</span><br><span class="line">		print(&apos;this is a decorator&apos;)</span><br><span class="line">		return func()</span><br><span class="line">	return wrapper</span><br><span class="line"></span><br><span class="line">def func():</span><br><span class="line">	print(&apos;i am a normal function&apos;)</span><br><span class="line"></span><br><span class="line">foo = decorator(foo)</span><br><span class="line">foo()</span><br><span class="line"># 调用装饰过得foo函数会首先运行wrapper()中的内容，然后返回foo函数</span><br></pre></td></tr></table></figure></p>
+<h2 id="装饰器简单应用"><a href="#装饰器简单应用" class="headerlink" title="装饰器简单应用"></a>装饰器简单应用</h2><p>看如下代码：decorator函数即定义一个装饰器，foo为一个常规的函数。该代码即为用decorator对f函数进行装饰。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def decorator(func):</span><br><span class="line">	def wrapper():</span><br><span class="line">		print(&apos;this is a decorator&apos;)</span><br><span class="line">		return func()</span><br><span class="line">	return wrapper</span><br><span class="line"></span><br><span class="line">def func():</span><br><span class="line">	print(&apos;i am a normal function&apos;)</span><br><span class="line"></span><br><span class="line">foo = decorator(func)</span><br><span class="line">foo()</span><br><span class="line"># 调用装饰过得foo函数会首先运行wrapper()中的内容，然后返回foo函数</span><br></pre></td></tr></table></figure></p>
 <h2 id="装饰器的语法糖"><a href="#装饰器的语法糖" class="headerlink" title="装饰器的语法糖"></a>装饰器的语法糖</h2><p>在上面对装饰器的简单实用中，我们发现每次想要对函数进行装饰时，都需要进行一步赋值操作 ‘foo = decorator(foo)’，这种操作让程序变得更为复杂难以调试，所以我们可以使用语法糖完成对函数进行装饰的过程。</p>
 <p>将装饰器的语法糖‘@’放到函数定义的地方，这样就可以省略最后一步的赋值操作。可以将上面的例子改写为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def decorator(func):</span><br><span class="line">	def wrapper():</span><br><span class="line">		print(&apos;this is a decorator&apos;)</span><br><span class="line">		return func()</span><br><span class="line">	return wrapper</span><br><span class="line"></span><br><span class="line">@decorator</span><br><span class="line">def foo():</span><br><span class="line">	print(&apos;i am a normal func&apos;)</span><br><span class="line"></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure></p>
 <p>如上所示，使用语法糖，我们就可以省略最后一步的赋值操作。foo函数不需要作任何修改，只需要在定义函数的地方加上装饰器的语法糖，调用的时候还是和以前一样。</p>
@@ -525,7 +525,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -536,7 +536,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -547,7 +547,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -616,7 +616,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

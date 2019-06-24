@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="整理Python编码规范PEP8的内容以及一些其他约定俗成的编码规范。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-09T05:06:29.938Z">
+<meta property="og:updated_time" content="2018-11-24T14:40:42.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python编码规范">
 <meta name="twitter:description" content="整理Python编码规范PEP8的内容以及一些其他约定俗成的编码规范。">
@@ -355,7 +355,9 @@
       
         <p>整理Python编码规范PEP8的内容以及一些其他约定俗成的编码规范。</p>
 <a id="more"></a>
-<h2 id="python编码风格"><a href="#python编码风格" class="headerlink" title="python编码风格"></a>python编码风格</h2><h3 id="PEP8"><a href="#PEP8" class="headerlink" title="PEP8"></a>PEP8</h3><p>PEP8 是python代码风格指南。现在有多个python包来检查python代码风格是否符合PEP8.<br>‘pip3 install pycodestyple’<br>然后，对一个python文件运行，会返回任何违反PEP8的报告：<br>‘pycodestyple python_test.py’<br>程序autopep8能将代码自动格式化成pep8风格：<br>‘pip3 install autopep8’<br>用一下指令格式化一个文件：<br>‘autopep8 –in-place python_file.py’<br>不包含 –in-place 标志将会使得程序直接将更改的代码输出到控制台，以供审查。 –aggressive 标志则会执行更多实质性的变化，而且可以多次使用以达到更佳的效果。</p>
+<h2 id="python编码风格"><a href="#python编码风格" class="headerlink" title="python编码风格"></a>python编码风格</h2><p>PEP8 是python代码风格指南。</p>
+<h3 id="pep8包"><a href="#pep8包" class="headerlink" title="pep8包"></a>pep8包</h3><h4 id="pycodestyple"><a href="#pycodestyple" class="headerlink" title="pycodestyple"></a>pycodestyple</h4><p>现在有多个python包来检查python代码风格是否符合PEP8.<br>‘pip3 install pycodestyple’<br>然后，对一个python文件运行，会返回任何违反PEP8的报告：<br>‘pycodestyple python_test.py’</p>
+<h4 id="autopep8"><a href="#autopep8" class="headerlink" title="autopep8"></a>autopep8</h4><p>程序autopep8能将代码自动格式化成pep8风格：<br>‘pip3 install autopep8’<br>用一下指令格式化一个文件：<br>‘autopep8 –in-place python_file.py’<br>不包含 –in-place 标志将会使得程序直接将更改的代码输出到控制台，以供审查。 –aggressive 标志则会执行更多实质性的变化，而且可以多次使用以达到更佳的效果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">autopep8 --in-place --aggressive python_code.py</span><br></pre></td></tr></table></figure></p>
 <h4 id="代码编排"><a href="#代码编排" class="headerlink" title="代码编排"></a>代码编排</h4><ol>
 <li>类和top-level函数之间空两行，类中的方法定义之间空一行，函数内部逻辑无关段落之间空一行，其他地方尽量不要空行。</li>
 <li>模块内容的顺序：模块说明—&gt;import—&gt;globals&amp;constants—&gt;其他定义。其中import部分，又按标准、三方和自己编写顺序依次排放，之间空一行。</li>
@@ -443,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/26/Reinforce Learning/强化学习之OpenAI Gym/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2018/04/27/Deep Learning/CNN模型演化过程/" rel="next" title="CNN模型演化过程">
+                <i class="fa fa-chevron-left"></i> CNN模型演化过程
               </a>
             
           </div>
@@ -453,8 +455,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/27/Deep Learning/CNN模型演化过程/" rel="prev" title="CNN模型演化过程">
-                CNN模型演化过程 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/27/Reading/SICP第二章笔记/" rel="prev" title="SICP第二章:构造数据抽象">
+                SICP第二章:构造数据抽象 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -542,7 +544,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -553,7 +555,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -564,7 +566,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -613,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python编码风格"><span class="nav-number">1.</span> <span class="nav-text">python编码风格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PEP8"><span class="nav-number">1.1.</span> <span class="nav-text">PEP8</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码编排"><span class="nav-number">1.1.1.</span> <span class="nav-text">代码编排</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空格使用"><span class="nav-number">1.1.2.</span> <span class="nav-text">空格使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名规范"><span class="nav-number">1.1.3.</span> <span class="nav-text">命名规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编码建议"><span class="nav-number">1.1.4.</span> <span class="nav-text">编码建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免在列表中修改"><span class="nav-number">1.2.</span> <span class="nav-text">避免在列表中修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用enumerate-获得当前列表计数"><span class="nav-number">1.3.</span> <span class="nav-text">使用enumerate()获得当前列表计数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python编码风格"><span class="nav-number">1.</span> <span class="nav-text">python编码风格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pep8包"><span class="nav-number">1.1.</span> <span class="nav-text">pep8包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pycodestyple"><span class="nav-number">1.1.1.</span> <span class="nav-text">pycodestyple</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#autopep8"><span class="nav-number">1.1.2.</span> <span class="nav-text">autopep8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码编排"><span class="nav-number">1.1.3.</span> <span class="nav-text">代码编排</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空格使用"><span class="nav-number">1.1.4.</span> <span class="nav-text">空格使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名规范"><span class="nav-number">1.1.5.</span> <span class="nav-text">命名规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编码建议"><span class="nav-number">1.1.6.</span> <span class="nav-text">编码建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免在列表中修改"><span class="nav-number">1.2.</span> <span class="nav-text">避免在列表中修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用enumerate-获得当前列表计数"><span class="nav-number">1.3.</span> <span class="nav-text">使用enumerate()获得当前列表计数</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -633,7 +635,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

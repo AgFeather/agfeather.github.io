@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="C++复习笔记的第四部分。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-23T01:10:00.290Z">
+<meta property="og:updated_time" content="2019-06-18T07:38:45.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++复习笔记:结构体和类">
 <meta name="twitter:description" content="C++复习笔记的第四部分。">
@@ -362,7 +362,7 @@
 <p> 通过 ‘-&gt;’ 运算符,使用指向该结构的指针访问结构的成员：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char *title = pbook-&gt;title;</span><br></pre></td></tr></table></figure></p>
 <h3 id="typeof-关键字"><a href="#typeof-关键字" class="headerlink" title="typeof 关键字"></a>typeof 关键字</h3><p>在定义结构体时，使用typeof关键字可以在接下来定义结构体变量时省略struct关键字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef struct Books</span><br><span class="line">&#123;</span><br><span class="line">   char  title[50];</span><br><span class="line">   char  author[50];</span><br><span class="line">   char  subject[100];</span><br><span class="line">   int   book_id;</span><br><span class="line">&#125;Books;</span><br><span class="line"></span><br><span class="line">Books book1, book2;</span><br></pre></td></tr></table></figure></p>
 <h3 id="Note：两种访问符的区别"><a href="#Note：两种访问符的区别" class="headerlink" title="Note：两种访问符的区别"></a>Note：两种访问符的区别</h3><p>对于变量，可以使用访问符’.’来访问结构体/类得成员，如果是指向变量的指针，则需要使用访问符’-&gt;’来访问成员：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">struct AAA&#123;</span><br><span class="line">    int number;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">AAA s;</span><br><span class="line">AAA *ps;</span><br><span class="line"></span><br><span class="line">// 一下三者是等价的</span><br><span class="line">s.number = 1;</span><br><span class="line">(*ps).number = 1;</span><br><span class="line">ps-&gt;number = 1;</span><br></pre></td></tr></table></figure></p>
-<p>箭头（-&gt;）：左边必须为指针；<br>点号（.）：左边必须为实体。</p>
+<p><strong>箭头（-&gt;）：左边必须为指针；</strong><br><strong>点号（.）：左边必须为实体。</strong></p>
 <h2 id="C-类"><a href="#C-类" class="headerlink" title="C++类"></a>C++类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Box&#123;</span><br><span class="line">public:</span><br><span class="line">    double length;</span><br><span class="line">    double breadth;</span><br><span class="line">    double height;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Box box1;</span><br><span class="line">box1.height = 1.0; //使用成员访问符访问类成员</span><br></pre></td></tr></table></figure>
 <h3 id="类外部定义函数"><a href="#类外部定义函数" class="headerlink" title="类外部定义函数"></a>类外部定义函数</h3><p>我们不仅可以将函数定义写在类的内部作为类的成员函数，也可以将函数写在类的外部，然后使用范围解析运算符’::’ 来定义。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Box&#123;</span><br><span class="line">public:</span><br><span class="line">    double getVolume(void);</span><br><span class="line">&#125;;</span><br><span class="line">double Box::getVolume(void)&#123;...&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="类访问修饰符"><a href="#类访问修饰符" class="headerlink" title="类访问修饰符"></a>类访问修饰符</h3><p>访问修饰符可以限制函数直接访问类的内部成员。C++有：public，private，protected三种修饰符。</p>
@@ -560,7 +560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -571,7 +571,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -582,7 +582,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -651,7 +651,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

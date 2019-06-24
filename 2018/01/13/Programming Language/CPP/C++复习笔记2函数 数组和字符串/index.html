@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="C++复习笔记的第二部分。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-23T01:03:28.727Z">
+<meta property="og:updated_time" content="2019-06-17T01:37:45.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++复习笔记:函数 数组和字符串">
 <meta name="twitter:description" content="C++复习笔记的第二部分。">
@@ -357,12 +357,11 @@
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>和Java不同的是，C++需要函数声明：当在一个源文件中定义函数且在另一个文件中调用函数时，函数声明是必需的。在这种情况下，应该在调用函数的文件顶部声明函数。</p>
 <h3 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h3><p>在函数调用时，存在如下调用传参方法：</p>
 <ol>
-<li>传值调用：该方法把参数的实际值复制给函数的形式参数。在这种情况下，修改函数内的形式参数对实际参数没有影响。</li>
-<li>指针调用：该方法把参数的地址复制给形式参数。在函数内，该地址用于访问调用中要用到的实际参数。这意味着，修改形式参数会影响实际参数。</li>
-<li>引用调用：该方法把参数的引用复制给形式参数。在函数内，该引用用于访问调用中要用到的实际参数。这意味着，修改形式参数会影响实际参数。<br>默认情况下，C++ 使用传值调用来传递参数。一般来说，这意味着函数内的代码不能改变用于调用函数的参数。<h3 id="参数默认值"><a href="#参数默认值" class="headerlink" title="参数默认值"></a>参数默认值</h3>当您定义一个函数，您可以为参数列表中后边的每一个参数指定默认值。当调用函数时，如果实际参数的值留空，则使用这个默认值。</li>
+<li>传值调用：该方法把实参的实际值复制给函数的形参，修改函数内的形参对实参没有影响。默认情况下，C++ 使用 <strong>传值调用来传递参数。</strong></li>
+<li>指针调用：该方法把实参的地址复制给形参，用于访问调用中要用到的实参。修改形参会影响实际参数。</li>
+<li>引用调用：该方法把实参的引用复制给形参，用于访问调用中要用到的实参，修改形参会影响实际参数。<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3>C++中lambda表达式的声明方式如下：<br><a href="parameters">capture</a>-&gt;return-type{body}<br>例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[](int x, int y)&#123;return x&lt;y;&#125;</span><br><span class="line">[](int x, int y) -&gt; int &#123;int z = x + y; return z+x;&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<p>这是通过在函数定义中使用赋值运算符来为参数赋值的。调用函数时，如果未传递参数的值，则会使用默认值，如果指定了值，则会忽略默认值。</p>
-<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>C++中lambda表达式的声明方式如下：<br><a href="parameters">capture</a>-&gt;return-type{body}<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[](int x, int y)&#123;return x&lt;y;&#125;</span><br><span class="line">[](int x, int y) -&gt; int &#123;int z = x + y; return z+x;&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>C++的数组声明：’type arrayName[size]’<br>包括如下初始化方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int array[2] = &#123;1, 2&#125;;</span><br><span class="line">int array[] = &#123;1, 2&#125;;</span><br></pre></td></tr></table></figure></p>
 <h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3><p>多维数组声明如下：’type arrayName[size1][size2][size3]…’<br>以二维数组为例，本质上仍然是一位数组，一维数组中每个元素仍然为一个一维数组。<br>多维数组可以用嵌套大括号来初始化，也可以省略掉嵌套大括号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int a[3][4] = &#123;  </span><br><span class="line"> &#123;0, 1, 2, 3&#125; ,   /*  初始化索引号为 0 的行 */</span><br><span class="line"> &#123;4, 5, 6, 7&#125; ,   /*  初始化索引号为 1 的行 */</span><br><span class="line"> &#123;8, 9, 10, 11&#125;   /*  初始化索引号为 2 的行 */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int a[3][4] = &#123;0,1,2,3,4,5,6,7,8,9,10,11&#125;;</span><br></pre></td></tr></table></figure></p>
 <h3 id="数组作为参数"><a href="#数组作为参数" class="headerlink" title="数组作为参数"></a>数组作为参数</h3><p>C++ 传数组给一个函数，数组类型自动转换为指针类型，因而传的实际是地址。<br>函数声明可以用一下三种方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void func(int *params)&#123;&#125;</span><br><span class="line">void func(int params[10])&#123;&#125;</span><br><span class="line">void func(int params[])&#123;&#125;</span><br></pre></td></tr></table></figure></p>
@@ -384,6 +383,9 @@
 <li>strstr(s1, s2); 返回一个指针，指向字符串 s1 中字符串 s2 的第一次出现的位置。<h3 id="C-的String类"><a href="#C-的String类" class="headerlink" title="C++的String类"></a>C++的String类</h3>C++字符串类不仅支持以上所有函数，同时还有更多其他功能。使用时需要：’#include <string>‘。这时可以创建字符串类。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;string&gt;</span><br><span class="line">string str1 = &quot;hello&quot;;</span><br><span class="line">string str2 = &quot;world&quot;;</span><br><span class="line">string str3;</span><br><span class="line"></span><br><span class="line">str3 = str1 + str2;</span><br><span class="line">int len  = str3.size();</span><br></pre></td></tr></table></figure>
 </string></li>
 </ol>
+<h3 id="原生字符串"><a href="#原生字符串" class="headerlink" title="原生字符串"></a>原生字符串</h3><p>在C++11中引入原生字符串机制，即对字符串内部的文本不进行转义，达到所见即所得的效果。使用方法是在字符串前面加R。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string s = R&quot;(\zeng\\mei)&quot;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="中文字符"><a href="#中文字符" class="headerlink" title="中文字符"></a>中文字符</h3><p>用wchar_t表示中文字符，它占用2个字节的内存空间。因为我们的代码中有扩展的中文字符，所以要求我们的代码文件使用UTF-8的编码格式进行保存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wchar_t cChs = L&apos;哈&apos;;</span><br><span class="line">wcout.imbue(locale(&quot;chs&quot;));</span><br><span class="line">wcout&lt;&lt;cChs&lt;&lt;endl;</span><br></pre></td></tr></table></figure></p>
+<p>字符常量或字符串常量前面的L前缀，表示对这里的字符或字符串采用wide-character字符集（宽字符集，通常是 UNICODE字符集）对其进行编码。而如果不使用L前缀，则表示使用multibyte-character字符集（多字节字符集）对其进行编码。所 以，如果我们要用某个字符或字符串常量对一个宽字符（wchar_t）或宽字符串（wstring）变量进行初始化或赋值时，我们应该在这个字符或字符串 常量前加上L前缀。反之，如果是对char和string类型的变量进行初始化或赋值时，则不需要添加L前缀。</p>
 
       
     </div>
@@ -542,7 +544,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -553,7 +555,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -564,7 +566,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -613,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数参数"><span class="nav-number">1.1.</span> <span class="nav-text">函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数默认值"><span class="nav-number">1.2.</span> <span class="nav-text">参数默认值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lambda表达式"><span class="nav-number">1.3.</span> <span class="nav-text">lambda表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">2.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多维数组"><span class="nav-number">2.1.</span> <span class="nav-text">多维数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组作为参数"><span class="nav-number">2.2.</span> <span class="nav-text">数组作为参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从函数返回数组"><span class="nav-number">2.3.</span> <span class="nav-text">从函数返回数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">3.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C风格字符串"><span class="nav-number">3.1.</span> <span class="nav-text">C风格字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串函数"><span class="nav-number">3.1.1.</span> <span class="nav-text">字符串函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-的String类"><span class="nav-number">3.2.</span> <span class="nav-text">C++的String类</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数参数"><span class="nav-number">1.1.</span> <span class="nav-text">函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lambda表达式"><span class="nav-number">1.2.</span> <span class="nav-text">lambda表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">2.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多维数组"><span class="nav-number">2.1.</span> <span class="nav-text">多维数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组作为参数"><span class="nav-number">2.2.</span> <span class="nav-text">数组作为参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从函数返回数组"><span class="nav-number">2.3.</span> <span class="nav-text">从函数返回数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">3.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C风格字符串"><span class="nav-number">3.1.</span> <span class="nav-text">C风格字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串函数"><span class="nav-number">3.1.1.</span> <span class="nav-text">字符串函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-的String类"><span class="nav-number">3.2.</span> <span class="nav-text">C++的String类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原生字符串"><span class="nav-number">3.3.</span> <span class="nav-text">原生字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中文字符"><span class="nav-number">3.4.</span> <span class="nav-text">中文字符</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -633,7 +635,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="自我介绍我叫李东方，目前在日本东京工业大学计算机学院攻读硕士学位，研究方向为深度学习和编程环境，本科是大连理工大学软件工程专业。我拥有扎实的数据机构和算法基础，熟练使用TensorFlow等深度学习框架，熟悉机器学习、深度学习算法的原理和应用。熟悉Java、Python编程语言。有MapReduce和CUDA使用经验。了解强化学习。目前的研究项目为：基于深度学习的代码补全系统。已完成的个人项目有基">
+<meta name="keywords" content="Machine Learning, Deep Learning, TensorFlow, Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Black Feather">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/个人项目介绍/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="自我介绍我叫李东方，目前在日本东京工业大学计算机学院攻读硕士学位，研究方向为深度学习和编程环境，本科是大连理工大学软件工程专业。我拥有扎实的数据机构和算法基础，熟练使用TensorFlow等深度学习框架，熟悉机器学习、深度学习算法的原理和应用。熟悉Java、Python编程语言。有MapReduce和CUDA使用经验。了解强化学习。目前的研究项目为：基于深度学习的代码补全系统。已完成的个人项目有基">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-05T11:27:17.086Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Black Feather">
+<meta name="twitter:description" content="自我介绍我叫李东方，目前在日本东京工业大学计算机学院攻读硕士学位，研究方向为深度学习和编程环境，本科是大连理工大学软件工程专业。我拥有扎实的数据机构和算法基础，熟练使用TensorFlow等深度学习框架，熟悉机器学习、深度学习算法的原理和应用。熟悉Java、Python编程语言。有MapReduce和CUDA使用经验。了解强化学习。目前的研究项目为：基于深度学习的代码补全系统。已完成的个人项目有基">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/14/个人项目介绍/"/>
+
+
+
+
+
+  <title> | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/个人项目介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-14T20:20:04+09:00">
+                2018-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/14/个人项目介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/08/14/个人项目介绍/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>我叫李东方，目前在日本东京工业大学计算机学院攻读硕士学位，研究方向为深度学习和编程环境，本科是大连理工大学软件工程专业。<br>我拥有扎实的数据机构和算法基础，熟练使用TensorFlow等深度学习框架，熟悉机器学习、深度学习算法的原理和应用。熟悉Java、Python编程语言。有MapReduce和CUDA使用经验。了解强化学习。<br>目前的研究项目为：基于深度学习的代码补全系统。已完成的个人项目有基于深度学习的电影推荐系统和基于OpenAI环境的强化学习应用。<br>外语能力方面：可以熟练使用英语和日语。</p>
+<h2 id="代码补全系统介绍"><a href="#代码补全系统介绍" class="headerlink" title="代码补全系统介绍"></a>代码补全系统介绍</h2><p>该项目的核心原理是：使用深度学习方法，对代码进行预测。数据集是从GitHub上爬去的JavaScript源码。然后将这些源码处理成token字符流。并在此基础上进行模型学习和预测。为便于理解，可以将这个任务想象成一个NLP任务，token看做一个个单词，基于给定的单词序列，预测接下来的单词是什么。</p>
+<h4 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h4><p>模型方面，使用的是CNN+MultiRNN的结构。CNN with sliding window的作用是提取特征，RNN的作用是接收CNN提取的特征，并在时序上进行预测。<br>其中对于源码中的每个字符，构建embedding vector表示（dim=32），然后设定15个token为一个上下文（可以理解为一个定长的句子），然后分别用4个不同大小的卷积核对这个上下文进行扫描，在不从层次上提取特征图，然后将这个特征图拼接到一起，作为该上下文的特征表示。然后将其输入到RNN中，RNN使用的是双层LSTM的核，输入为CNN得到的一个上下文的特征表示，输出为一个token的one-hot encoding表示，作为整个模型的预测输出。</p>
+<h4 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h4><p>对于原始的JavaScript源码，首先使用一个lexer处理成token 字节流，每个token有两个属性，一个是type，表示的是token的类别，如：变量名，关键字，字符串等等，另一个属性是value，表示该token 的取值。<br>考虑到有一些token如同数值变量，字符串等，有无数种取值，在一些情况下直接预测的难度非常大所以在目前阶段，将一些特定种类token的value进行统一处理，比如说数字的值直接领其为1.等。<br>然后将统一化token的type和value拼接到一起得到一种token。然后定义一个embedding matrix表示每种token的embedding 向量。</p>
+<h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>目前的准确率是70%左右，同时建立一个bi-gram模型作为对照，该bi-gram的准确率接近40%。</p>
+<h4 id="future-work"><a href="#future-work" class="headerlink" title="future work"></a>future work</h4><p>考虑到该研究本质上是一个类NLP项目，所以目前的想法是将seq2seq应用到项目中，对比准确率。</p>
+<h2 id="推荐系统项目介绍"><a href="#推荐系统项目介绍" class="headerlink" title="推荐系统项目介绍"></a>推荐系统项目介绍</h2><p>整个系统的核心是使用MovieLen的电影数据集，通过对电影数据，用户数据和评分数据进行处理。得到每个电影和用户的特征。然后分别对每个特征构建embeding matrix以及神经网络，实现对各个特征进行提取。针对电影的标题使用有包含滑动窗口的CNN，对电影的种类，用户年龄，用户职业，用户性别，分别构建多个双层神经网络。这样就可以通过神经网络将每个用户的每个特征提取成一个向量。训练完成后模型的绝对值误差可以降到0.8左右</p>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p>这样讲就可以得到可以用来表示所有用户和电影的特征矩阵。<br>整个神经网络训练完成后，通过给定用户和电影，对模型进行正向传播就可以预测出用户给该电影的评分。而如果给定一个电影，通过计算该电影与其他电影的余弦相似度，可以统计该电影topk个相似电影。同理给定用户可以找到topk个相似用户。同时，给定一个用户，我们可以通过用该用户的特征向量和电影特征矩阵相乘，计算出该用户对每个电影的估计评分，进而找出该用户可能喜欢的电影。<br>最后可以利用协同过滤思想，给定电影，找到可能喜欢该电影的n个用户，在找到这n个用户可能喜欢的电影，进而找到给定电影的相似电影。</p>
+<h4 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h4><ol>
+<li>如何下载数据？ 使用urllib.request根据url下载数据并使用zipfile解压。</li>
+<li>如何处理用户数据？ 用户数据一共包含5个字段，使用userID，jobID，GenderID，Age作为用户特征，舍弃zip-code。</li>
+<li>如何对用户数据进行处理？ userId和JobID不做处理，gender字段转换为0，1值。将age离散化，分割成7个区间，分别用0~6表示</li>
+<li>如何处理movie数据？电影数据一共包含3个字段，movieid保留不作处理，genres字段表示电影的类别。构建一个映射字典将其数字化，同时每个电影有多个genres组合，所以genres属性是一个list。title字段中，首先去除掉电影时间，构建word2int映射字典，将title中的每个单词转换为int值。同时统一genres和title字段的长度，空白部分用定义的特殊符号表示</li>
+<li>如何处理rating数据？ rating数据包括userID，movieId，ratings值和timestamps，这里仅将timestamps删除。然后将userid和movieid作为外键连接movie和user两个表组成整个feature表。<br>然后将整个大表切割成feature表和target表。</li>
+<li>整个神经网络是什么样的？神经网络的整体被分成两个部分：user神经网络和movie神经网络。</li>
+<li>moive神经网络是什么样的？分别对movieid，movie的genres和movie的title构建embedding matrix。对于输入的movie的各个特征分别做lookup得到embedding vector。然后将genres和id的vector分别输入到两个不同的MLP中。对于title的embedding matrix，构建CNN with sliding windows神经网络，分别定义filter 宽度为2，3，4，5在title embedding matrix上滑动提取多个feature map。使用最大池化，和dropout层减小过拟合。然后将多个feature map连接到一起组成title representation vector。最后分别将title vector，id vector, genres vector连接到一起组成movie feature representation。</li>
+<li>user神经网络是什么样的？和movie神经网络类似，分别对userid，age，occupation，gender构建embedding matrix和多个MLP，每个MLP的输出可以做是对各个属性的特征提取。然后将多个MLP的输出拼接到一起组成user feature representation。</li>
+<li>训练过程是怎样的？ 从user nn和movie nn可以得到user feature vector和movie feature vector。这里我通过通过将向量乘法，将这两个向量相乘得到一个值，这个值就是NN对给定user和给定movie的评分预测。通过和真实的ratings做平方损失函数，计算损失使用Adam优化算法对模型参数进行更新。</li>
+<li>说说都有什么推荐功能，如何实现的？<ol>
+<li>首先是给定user对给定movie的评分预测，只需要对NN进行正向传播即可</li>
+<li>对所有user和movie进行正向传播，可以得到user feature matrix和movie feature matrix。</li>
+<li>找topk相似电影：根据两个特征矩阵，对于给定movie，计算所有movie中和其余弦相似度最大的topk个movie作为最相似电影推荐。</li>
+<li>同理可以找topk最相似用户。</li>
+<li>给定用户推荐其喜欢的电影：用该user的特征向量和每个movie的向量相乘，找出topk个预测评分最高的电影。</li>
+<li>看过这个电影的人还可能喜欢哪些？首先预测出对该电影评分最高的topk个人，然后预测这几个人对所有电影的评分，找到评分最高的n个电影返回。</li>
+</ol>
+</li>
+<li>和协同过滤对比？ 在原始的协同过滤算法，当数据量过大时容易产生稀疏矩阵，这样的矩阵无论是存储还是推荐都会产生较大问题。而通过多个神经网络，可以将每个movie和user的表示压缩到一个小矩阵中。</li>
+<li>数据缺失问题？</li>
+</ol>
+<h2 id="基于OpenAI-Gym的DQN应用介绍"><a href="#基于OpenAI-Gym的DQN应用介绍" class="headerlink" title="基于OpenAI Gym的DQN应用介绍"></a>基于OpenAI Gym的DQN应用介绍</h2><p>本项目主要使用OpenAI Gym作为环境。RL模型方面，构建了deep q network模型，在模型中使用了Double DQN的思想减小overestimate。使用priority Policy思想，构建了SumTree结构作为Replay Memory实现了基于数据优先级的模型训练，大大加快了模型的训练过程。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/13/Machine Learning/机器学习问题总结/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/16/Machine Learning/常见特征工程/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自我介绍"><span class="nav-number">1.</span> <span class="nav-text">自我介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码补全系统介绍"><span class="nav-number">2.</span> <span class="nav-text">代码补全系统介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型结构"><span class="nav-number">2.0.1.</span> <span class="nav-text">模型结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据处理"><span class="nav-number">2.0.2.</span> <span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表现"><span class="nav-number">2.0.3.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#future-work"><span class="nav-number">2.0.4.</span> <span class="nav-text">future work</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐系统项目介绍"><span class="nav-number">3.</span> <span class="nav-text">推荐系统项目介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">3.0.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提问"><span class="nav-number">3.0.2.</span> <span class="nav-text">提问</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于OpenAI-Gym的DQN应用介绍"><span class="nav-number">4.</span> <span class="nav-text">基于OpenAI Gym的DQN应用介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/08/14/个人项目介绍/';
+          this.page.identifier = '2018/08/14/个人项目介绍/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

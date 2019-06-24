@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Unix,C," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="《Unix/Linux编程实践教程》的读书笔记。">
+<meta name="keywords" content="Unix,C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unix编程实践教程">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/Unix编程实践教程/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="《Unix/Linux编程实践教程》的读书笔记。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-28T11:05:27.475Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unix编程实践教程">
+<meta name="twitter:description" content="《Unix/Linux编程实践教程》的读书笔记。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/01/Unix编程实践教程/"/>
+
+
+
+
+
+  <title>Unix编程实践教程 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/Unix编程实践教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Unix编程实践教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T00:00:00+09:00">
+                2018-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unix/" itemprop="url" rel="index">
+                    <span itemprop="name">Unix</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/01/Unix编程实践教程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/01/Unix编程实践教程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>《Unix/Linux编程实践教程》的读书笔记。</p>
+<a id="more"></a>
+<h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><h3 id="为什么要有操作系统"><a href="#为什么要有操作系统" class="headerlink" title="为什么要有操作系统"></a>为什么要有操作系统</h3><p>在现代计算机中，会有多个程序同时在内存中运行，而有些程序需要访问资源，有些需要占用设备，如果任由各个程序随便访问计算机中的各种资源很显然会引起计算机的崩溃。而操作系统就是用户程序和计算机内部设备之间的桥梁。</p>
+<p>操作系统也是一种程序，所有的程序都必须在内存中才可以运行，用来容纳操作系统的内存空间叫做系统空间，容纳用户程序的内存叫做用户空间。操作系统也被称为内核。</p>
+<p>由于内核是用户程序和计算机设备之间的桥梁，任何程序想要访问设备都需要通过内核进行。</p>
+<h3 id="系统编程"><a href="#系统编程" class="headerlink" title="系统编程"></a>系统编程</h3><p>在编写普通程序时可以认为，程序时直接连接到各个设备的（因为操作系统自动完成了这个过程），但在进行系统编程时，必须对系统的结构和工作方式有更深的了解，知道内核提供哪些服务（系统调用），如何使用这些API，系统都有哪些资源和设备，以及不同设备之间如何操作。</p>
+<h4 id="系统资源"><a href="#系统资源" class="headerlink" title="系统资源"></a>系统资源</h4><ol>
+<li>处理器</li>
+<li>输入输出(I/O)</li>
+<li>进程管理</li>
+<li>内存</li>
+<li>设备</li>
+<li>计时器</li>
+<li>进程间通信</li>
+<li>网络</li>
+</ol>
+<h3 id="从用户角度理解Unix"><a href="#从用户角度理解Unix" class="headerlink" title="从用户角度理解Unix"></a>从用户角度理解Unix</h3><p>整个Unix的使用过程一般如下：用户登录–运行程序–用户退出。下面分别看这几个步骤Unix系统做了什么。</p>
+<p>Unix允许多个用户同时登录到系统，当用户名和密码验证通过后，Unix会启动一个叫shell的进程并将用户交给这个进程，用这个进程处理用户的请求，每个用户都有属于自己的shell进程。<br>shell会在屏幕上显示提示符，一般为$，用户可以在提示符后输入要运行的程序，内核负责把用户的输入传给shell。当用户注销时，内核会结束所有分配给这个用户的进程。</p>
+<h3 id="more指令"><a href="#more指令" class="headerlink" title="more指令"></a>more指令</h3><p>这里，编写了一个简单版本的 ‘more’指令，来看整个Unix的具体运行过程，more.c的代码在如下URL。<br><a href="https://github.com/YHfeather" target="_blank" rel="noopener">simple_more.c</a></p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>在使用Unix时，需要经常确认那些用户正在使用系统，通过who命令可以显示系统中活动用户的情况。<br>本章通过分析Unix中的who命令学习Unix的文件系统。</p>
+<h3 id="命令即程序"><a href="#命令即程序" class="headerlink" title="命令即程序"></a>命令即程序</h3><p>一个补充知识是：在Unix中，几乎所有命令都是人为用C语言编写的程序，当在命令行输入命令时，shell就知道你想要运行的命令对应的程序，如果你认为对某个命令提供的功能不满意（比如ls， cd等），完全可以自己编写自己的ls，cd命令。<br>在 Unix 系统中增 加新的命令是一件很容易的事 。 把 程序的可执行文件放到以下任意 一个目录就可以了: /bin、/usr/bin、/usr/local/bin，这些目录里面存放着很多系统命令 。 Unix 系统中一开始并没有这么多的命令， 一 些人编写程序用来解决某个特定的问题 ，而其 他 人也觉得这个程序很有用，随着越来越多的使用，这个程序就逐渐成了 Unix 的标准命令 。</p>
+<h3 id="who命令如何工作"><a href="#who命令如何工作" class="headerlink" title="who命令如何工作"></a>who命令如何工作</h3><p>你可能会认为，像 who 这样的系统程序一定会用到一些特殊的系统调用，需要高级管理 员的权限，要编写这样的程序得要花很多钱来购买系统开发工具，包括光盘、参考书等。<br>实际上，所需的资料都在系统中，你要知道的仅仅是如何找到这些资料。<br>通过’man who’阅读联机帮助，就可以得到很多有用的信息。</p>
+<blockquote>
+<p>已登录用户的信息是放在文件/var/ adm/utmp 中的，who 通过读该文件 获得信息。</p>
+</blockquote>
+<p>继续查找utmp文件的帮助：’man -k utmp’可以得到如下信息：</p>
+<blockquote>
+<p> utmp 这个文件里面保存的是结构数组，数组元素是 utmp 类型的结构，可 以在 utmp. h 中找到 utmp 类型的定义</p>
+</blockquote>
+<p>接下来的问题是: utmp. h 这个文件在哪里?</p>
+<blockquote>
+<p>可以在 FILES 部分找到 utmp. h 这个文件的位置，在/usr/include/utmp.h 目 录里。</p>
+</blockquote>
+<h4 id="阅读-h文件"><a href="#阅读-h文件" class="headerlink" title="阅读.h文件"></a>阅读.h文件</h4><p>从 utmp 的联机帮助中可以知道， utmp 中的数据结构定义在 /usr/include/utmp. h 中。 在 Unix 系统中，大多数的头文件都存放在 /usr/include 这个目录里，当 C 语言编译器在源程 序中发现如下的定义:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># include &lt;stdio. h&gt;</span><br></pre></td></tr></table></figure></p>
+<p>它会到/usr/include 中寻找相应的头文件。</p>
+<h4 id="使用open，read和close"><a href="#使用open，read和close" class="headerlink" title="使用open，read和close"></a>使用open，read和close</h4><p>使用上述 3 个系统调用可以从 utmp 文件中取得用户登录信息。</p>
+<h5 id="使用open打开一个文件。"><a href="#使用open打开一个文件。" class="headerlink" title="使用open打开一个文件。"></a>使用open打开一个文件。</h5><p>这个系统调用在进程和文件之间建立 一 条连接，这个连接被称为文件描述符，它就像 一 条由进程通向内核的管道。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;fcntl.h&gt;</span><br><span class="line">int fd = open(char *name, int how)</span><br><span class="line">// name 表示文件名，how表示打开方式，返回值叫做文件描述符，为-1时表示遇到错误。</span><br><span class="line">// how=O_RDONLY; O_WRONLY; O_RDWR. 分别表示只读，只写，读写</span><br></pre></td></tr></table></figure></p>
+<p>打开文件是内核提供的服务，如果在打开过程中内核检测到任何错误，这个系统调用就 会返回 -1。<br>当→个文件已经被打开，是否允许再次打开呢?这种情况发生在有多个进程要同时访 问一个文件的时候。 Unix 并不禁止一个文件同时被多个进程访问，如果禁止的话，那两个用 户就无法同时使用 who命令了。</p>
+<h5 id="从文件读取数据：read"><a href="#从文件读取数据：read" class="headerlink" title="从文件读取数据：read"></a>从文件读取数据：read</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;unistd.h&gt;</span><br><span class="line">ssize_t numread = read(int fd, void *buf, size_t qty)</span><br><span class="line">fd 为open返回的文件描述符</span><br><span class="line">buf表示用来存放数据的缓冲区</span><br><span class="line">qty表示要读取的字节数</span><br><span class="line">返回-1时表示读取错误</span><br></pre></td></tr></table></figure>
+<p>read 这个系统调用请求内核从 fd 所指定的文件中读取 qty 字节的数据，存放到 buf 所指定的内存空间中，内核如果成功地读取了数据，就返回所读取的字节数目，否则返回-1.</p>
+<h5 id="关闭一个文件：close"><a href="#关闭一个文件：close" class="headerlink" title="关闭一个文件：close"></a>关闭一个文件：close</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#inlcude&lt;unistd.h&gt;</span><br><span class="line">int result = close(int fd)</span><br><span class="line">fd 为文件描述符</span><br><span class="line">返回-1表示遇到错误，返回0表示成功关闭</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unix/" rel="tag"><i class="fa fa-tag"></i> Unix</a>
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/14/Deep Learning/CV/从RCNN到Faster-RCNN/" rel="next" title="从RCNN到Faster-RCNN">
+                <i class="fa fa-chevron-left"></i> 从RCNN到Faster-RCNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/02/Programming Language/CPP/Cmake和makefile/" rel="prev" title="Cmake和makefile">
+                Cmake和makefile <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要有操作系统"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要有操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统编程"><span class="nav-number">1.2.</span> <span class="nav-text">系统编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统资源"><span class="nav-number">1.2.1.</span> <span class="nav-text">系统资源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从用户角度理解Unix"><span class="nav-number">1.3.</span> <span class="nav-text">从用户角度理解Unix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#more指令"><span class="nav-number">1.4.</span> <span class="nav-text">more指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令即程序"><span class="nav-number">2.1.</span> <span class="nav-text">命令即程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#who命令如何工作"><span class="nav-number">2.2.</span> <span class="nav-text">who命令如何工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读-h文件"><span class="nav-number">2.2.1.</span> <span class="nav-text">阅读.h文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用open，read和close"><span class="nav-number">2.2.2.</span> <span class="nav-text">使用open，read和close</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用open打开一个文件。"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">使用open打开一个文件。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从文件读取数据：read"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">从文件读取数据：read</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关闭一个文件：close"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">关闭一个文件：close</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/11/01/Unix编程实践教程/';
+          this.page.identifier = '2018/11/01/Unix编程实践教程/';
+          this.page.title = 'Unix编程实践教程';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

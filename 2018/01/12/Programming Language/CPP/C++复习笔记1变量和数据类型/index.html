@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="C++的复习笔记，在n年使用Java而没碰过C++的情况下，复习一下早年的C++知识。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-23T01:07:04.021Z">
+<meta property="og:updated_time" content="2019-06-17T01:32:28.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++复习笔记:变量和数据类型">
 <meta name="twitter:description" content="C++的复习笔记，在n年使用Java而没碰过C++的情况下，复习一下早年的C++知识。">
@@ -365,18 +365,13 @@
 <li>int类型：四字节</li>
 <li>long int类型：八字节</li>
 <li>float类型：四字节</li>
-<li>double类型：八字节<h4 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h4>使用关键字enum创建枚举类型：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">enum color&#123;</span><br><span class="line">    red,</span><br><span class="line">    green=5,</span><br><span class="line">    blue</span><br><span class="line">&#125; obj1, obj2, obj3;</span><br><span class="line">obj1 = red; // == 0</span><br><span class="line">obj2 = green; // == 5</span><br><span class="line">obj3 = blue; // == 6</span><br></pre></td></tr></table></figure>
+<li>double类型：八字节<h4 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h4>使用关键字enum创建枚举类型：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">enum color&#123;</span><br><span class="line">    red,</span><br><span class="line">    green=5,</span><br><span class="line">    blue</span><br><span class="line">&#125; obj1, obj2, obj3; // 这三个变量的取值只可能是enum中声明的几个</span><br><span class="line">obj1 = red; // == 0</span><br><span class="line">obj2 = green; // == 5</span><br><span class="line">obj3 = blue; // == 6</span><br><span class="line">enum color obj4 = red;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>默认情况下，第一个名称的值为 0，第二个名称的值为 1，第三个名称的值为 2，以此类推。</p>
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="变量声明定义初始化"><a href="#变量声明定义初始化" class="headerlink" title="变量声明定义初始化"></a>变量声明定义初始化</h4><p>使用extern关键字可以在任何地方声明一个变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 变量声明</span><br><span class="line">extern int a, b;</span><br><span class="line">extern float f;</span><br><span class="line"></span><br><span class="line">int main ()&#123;</span><br><span class="line">  // 变量定义</span><br><span class="line">  int a, b;</span><br><span class="line">  float f;</span><br><span class="line"></span><br><span class="line">  // 实际初始化</span><br><span class="line">  a = 10;</span><br><span class="line">  b = 20;</span><br><span class="line"></span><br><span class="line">  f = 70.0/3.0;</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>两种方法定义常量：</p>
-<ol>
-<li>#define 预处理器</li>
-<li>const 关键字<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define LENGHT 10</span><br><span class="line">const int WIDTH = 5;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="变量修饰符"><a href="#变量修饰符" class="headerlink" title="变量修饰符"></a>变量修饰符</h3><p>C++允许对char，int，double进行修饰：</p>
+<p>枚举常量代表该枚举类型的变量可能取的值，编译系统为每个枚举常量指定一个整数值，缺省状态下，这个整数就是所列举元素的序号，序号从0开始。 可以在定义枚举类型时为部分或全部枚举常量指定整数值，在指定值之前的枚举常量仍按缺省方式取值，而指定值之后的枚举常量按依次加1的原则取值。</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="变量声明定义初始化"><a href="#变量声明定义初始化" class="headerlink" title="变量声明定义初始化"></a>变量声明定义初始化</h4><p>使用extern关键字可以在任何地方声明一个变量。<strong>该变量定义在其它模块中，这里仅仅是声明，如同函数声明一样</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 变量声明</span><br><span class="line">extern int a, b;</span><br><span class="line">extern float f;</span><br><span class="line"></span><br><span class="line">int main ()&#123;</span><br><span class="line">  // 变量定义</span><br><span class="line">  int a, b;</span><br><span class="line">  float f;</span><br><span class="line"></span><br><span class="line">  // 实际初始化</span><br><span class="line">  a = 10;</span><br><span class="line">  b = 20;</span><br><span class="line"></span><br><span class="line">  f = 70.0/3.0;</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当局部变量被定义时，系统不会对其初始化，您必须自行对其初始化。定义全局变量时，系统会自动初始化.</p>
+<h4 id="变量修饰符"><a href="#变量修饰符" class="headerlink" title="变量修饰符"></a>变量修饰符</h4><p>C++允许对char，int，double进行修饰：</p>
 <ul>
 <li>signed 有符号</li>
 <li>unsigned 无符号</li>
@@ -384,15 +379,17 @@
 <li>short 短整数<br>C++允许对变量进行修饰：</li>
 <li>const 常量</li>
 <li>volatile 声明程序直接从内存读取变量，而不是寄存器</li>
-<li>restrict<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4></li>
 </ul>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>两种方法定义常量：</p>
 <ol>
-<li>当局部变量被定义时，系统不会对其初始化，您必须自行对其初始化。定义全局变量时，系统会自动初始化.</li>
+<li>#define 预处理器</li>
+<li>const 关键字<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define LENGHT 10</span><br><span class="line">const int WIDTH = 5;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 <h2 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h2><p>类型别名是给已经存在的类型起一个别名，这样可以让复杂的类型名字变得简单明了。使用typedef或者using定义类型别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef double wages; // wages是double的同义词</span><br><span class="line">using SI = SaleItem; // SI是SaleItem的同义词</span><br><span class="line"></span><br><span class="line">wages hourly;</span><br><span class="line">SI item;</span><br></pre></td></tr></table></figure></p>
 <p>指针，常量和类型别名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typedef char* pstring; //pstring是char*的别名</span><br><span class="line">pstring cstr = 0; //cstr是指向char的指针</span><br></pre></td></tr></table></figure></p>
-<h3 id="auto类型说明符"><a href="#auto类型说明符" class="headerlink" title="auto类型说明符"></a>auto类型说明符</h3><p>编程时经常需要用表达式的结果给变量进行赋值，而往往在声明变量时不知道表达式结果的类型，C++11引入auto类型说明符，可以让编译器自动分析表达式所属的类型。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auto item = val1 + val2; //由val1和val2相加的结果推断出item的类型。</span><br></pre></td></tr></table></figure></p>
-<h3 id="decltype类型说明符"><a href="#decltype类型说明符" class="headerlink" title="decltype类型说明符"></a>decltype类型说明符</h3><p>有时候我们需要用表达式结果的类型推断出定义的类型，但不想用该表达式的值初始化变量，decltype说明符可以解决这个问题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decltype(f()) sum = x; //sum的类型是函数f的返回类型</span><br></pre></td></tr></table></figure></p>
+<h2 id="auto类型说明符"><a href="#auto类型说明符" class="headerlink" title="auto类型说明符"></a>auto类型说明符</h2><p>编程时经常需要用表达式的结果给变量进行赋值，而往往在声明变量时不知道表达式结果的类型，C++11引入auto类型说明符，可以让编译器自动分析表达式所属的类型。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auto item = val1 + val2; //由val1和val2相加的结果推断出item的类型。</span><br></pre></td></tr></table></figure></p>
+<h2 id="decltype类型说明符"><a href="#decltype类型说明符" class="headerlink" title="decltype类型说明符"></a>decltype类型说明符</h2><p>有时候我们需要用表达式结果的类型推断出定义的类型，但不想用该表达式的值初始化变量，decltype说明符可以解决这个问题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decltype(f()) sum = x; //sum的类型是函数f的返回类型</span><br></pre></td></tr></table></figure></p>
 <p>编译器并不实际调用函数f，而是使用f的返回值类型作为sum的类型。</p>
 
       
@@ -552,7 +549,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -563,7 +560,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -574,7 +571,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -623,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-简介"><span class="nav-number">1.</span> <span class="nav-text">C++ 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标准库"><span class="nav-number">1.1.</span> <span class="nav-text">标准库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-变量和数据类型"><span class="nav-number">2.</span> <span class="nav-text">C++ 变量和数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本类型的大小"><span class="nav-number">2.1.1.</span> <span class="nav-text">基本类型的大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#枚举类型"><span class="nav-number">2.1.2.</span> <span class="nav-text">枚举类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">2.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量声明定义初始化"><span class="nav-number">2.2.1.</span> <span class="nav-text">变量声明定义初始化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量"><span class="nav-number">2.3.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量修饰符"><span class="nav-number">2.4.</span> <span class="nav-text">变量修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tips"><span class="nav-number">2.4.1.</span> <span class="nav-text">tips</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型别名"><span class="nav-number">3.</span> <span class="nav-text">类型别名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#auto类型说明符"><span class="nav-number">3.1.</span> <span class="nav-text">auto类型说明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decltype类型说明符"><span class="nav-number">3.2.</span> <span class="nav-text">decltype类型说明符</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-简介"><span class="nav-number">1.</span> <span class="nav-text">C++ 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标准库"><span class="nav-number">1.1.</span> <span class="nav-text">标准库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-变量和数据类型"><span class="nav-number">2.</span> <span class="nav-text">C++ 变量和数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本类型的大小"><span class="nav-number">2.1.1.</span> <span class="nav-text">基本类型的大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#枚举类型"><span class="nav-number">2.1.2.</span> <span class="nav-text">枚举类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">2.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量声明定义初始化"><span class="nav-number">2.2.1.</span> <span class="nav-text">变量声明定义初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量修饰符"><span class="nav-number">2.2.2.</span> <span class="nav-text">变量修饰符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量"><span class="nav-number">2.3.</span> <span class="nav-text">常量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型别名"><span class="nav-number">3.</span> <span class="nav-text">类型别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#auto类型说明符"><span class="nav-number">4.</span> <span class="nav-text">auto类型说明符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decltype类型说明符"><span class="nav-number">5.</span> <span class="nav-text">decltype类型说明符</span></a></li></ol></div>
             
 
           </div>
@@ -643,7 +640,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

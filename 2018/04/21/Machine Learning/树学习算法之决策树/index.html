@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Black Feather">
 <meta property="og:description" content="在机器学习中，决策树扮演了很重要的决策，不仅仅是传统的决策树，bagging集成方法的代表随机森林以及Boosting集成方法Adaboot，GBDT，xgboost都是基于决策树。决策树广泛的应用于机器学习的各个领域并且取得了良好的效果。本文就是对整个决策树体系的整理：从决策树到xgboost">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-09T14:49:08.444Z">
+<meta property="og:updated_time" content="2019-06-13T05:23:16.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树学习算法总结之决策树">
 <meta name="twitter:description" content="在机器学习中，决策树扮演了很重要的决策，不仅仅是传统的决策树，bagging集成方法的代表随机森林以及Boosting集成方法Adaboot，GBDT，xgboost都是基于决策树。决策树广泛的应用于机器学习的各个领域并且取得了良好的效果。本文就是对整个决策树体系的整理：从决策树到xgboost">
@@ -380,12 +380,13 @@
 <li>预剪枝是指在决策树生成过程中，首先从数据集中分割出验证集，然后对每个节点在划分前先进行估计，若当前节点的划分不能带来决策树泛化性能的提升，则停止划分并将当前节点标记为叶节点；<strong>比较划分前后在验证集的精度是否提高</strong></li>
 <li>预剪枝有欠拟合风险<h3 id="后剪枝"><a href="#后剪枝" class="headerlink" title="后剪枝"></a>后剪枝</h3></li>
 <li>后剪枝则是先训练一颗完整的决策树，然后自底向上的对非叶节点进行考察，若将该节点对应的子节点替换为叶节点能带来决策树泛化性能的提升（在验证集上准确率提高），则将该子树替换为叶节点。 <strong>比较划分前后在验证集的精度是否提高</strong></li>
-<li>后剪枝也可以通过构建决策树loss function，最小化loss实现。</li>
+<li>后剪枝也可以通过构建决策树loss function，最小化loss实现。基于损失函数的后剪枝算法见《统计学习方法》</li>
 <li>后剪枝欠拟合风险小，泛化性能优于预剪枝，但需要先生成再剪枝，开销大。</li>
 </ol>
 <h2 id="连续值和缺失值"><a href="#连续值和缺失值" class="headerlink" title="连续值和缺失值"></a>连续值和缺失值</h2><h3 id="连续值"><a href="#连续值" class="headerlink" title="连续值"></a>连续值</h3><ul>
 <li>对于取值为连续值的属性，考察该属性的所有取值，并从小到大排列。分别以任意相邻的取值的中值作为分割点，计算信息增益，并选取信息增益最大的点作为分割点。（其中可以将原节点的信息熵改为期望，因为每个取值的概率都为1/n） （具体公式见书84页）</li>
-<li>对于回归树的连续型属性，考察该属性的所有取值，分别以任意相邻节点取值的中值作为分割点，<strong>计算平方损失</strong>，找到平方损失最小的连续型属性和该属性的分割节点。</li>
+<li>对于分类树，直接按照该连续属性取值的切割点，将该点的数据分为两部分，然后计算各个切割方案的信息增益。</li>
+<li>对于回归树的连续型属性，考察该属性的所有取值，分别以任意相邻节点取值的中值作为分割点，<strong>计算该节点输出c和标签y的平方损失</strong>，找到平方损失最小的连续型属性和该属性的分割节点。</li>
 <li>与离散属性不同，若当前节点划分属性为连续属性，该属性还可作为其后代节点的划分属性。<h3 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h3>三种情况：</li>
 </ul>
 <ol>
@@ -475,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/21/Machine Learning/树学习算法之xgboost/" rel="next" title="树学习算法总结之xgboost">
-                <i class="fa fa-chevron-left"></i> 树学习算法总结之xgboost
+              <a href="/2018/04/18/Hadoop/Hadoop入门/" rel="next" title="Hadoop入门">
+                <i class="fa fa-chevron-left"></i> Hadoop入门
               </a>
             
           </div>
@@ -485,8 +486,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/22/Machine Learning/树学习算法之GBDT/" rel="prev" title="树学习算法总结之GBDT">
-                树学习算法总结之GBDT <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/21/Machine Learning/树学习算法之xgboost/" rel="prev" title="树学习算法总结之xgboost">
+                树学习算法总结之xgboost <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -574,7 +575,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -585,7 +586,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -596,7 +597,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -665,7 +666,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

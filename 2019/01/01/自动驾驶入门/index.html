@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="self-driving," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="自动驾驶入门笔记整理。">
+<meta name="keywords" content="self-driving">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动驾驶入门">
+<meta property="og:url" content="http://yoursite.com/2019/01/01/自动驾驶入门/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="自动驾驶入门笔记整理。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-20T05:32:02.868Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自动驾驶入门">
+<meta name="twitter:description" content="自动驾驶入门笔记整理。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/01/自动驾驶入门/"/>
+
+
+
+
+
+  <title>自动驾驶入门 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/自动驾驶入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">自动驾驶入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+09:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/self-driving/" itemprop="url" rel="index">
+                    <span itemprop="name">self-driving</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/01/自动驾驶入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/01/自动驾驶入门/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>自动驾驶入门笔记整理。</p>
+<a id="more"></a>
+<h1 id="自动驾驶"><a href="#自动驾驶" class="headerlink" title="自动驾驶"></a>自动驾驶</h1><h2 id="高精度地图"><a href="#高精度地图" class="headerlink" title="高精度地图"></a>高精度地图</h2><p>高精度地图是整个无人驾驶软件模块的核心，因为其他模块都是基于HD地图进行的。高精地图包含大量驾驶辅助信息，帮助汽车更好的理解路面情况，位置信息等。</p>
+<h3 id="高精地图构建"><a href="#高精地图构建" class="headerlink" title="高精地图构建"></a>高精地图构建</h3><h4 id="数据采集"><a href="#数据采集" class="headerlink" title="数据采集"></a>数据采集</h4><ol>
+<li>道路信息和建筑信息是不断变化的，这就需要数据采集团队不断更新数据集</li>
+<li>通常采用GPS，雷达，照相机，摄像机等传感器采集数据<h4 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h4></li>
+<li>对收集到的数据进行整理、分类、清洗，进而得到没有任何语义信息或者注释的初始地图模板<h4 id="对象检测"><a href="#对象检测" class="headerlink" title="对象检测"></a>对象检测</h4></li>
+<li>根据处理后生成的原始数据，使用AI技术检测静态对象并对其进行分类，如车道线，交通标志等。<h4 id="手动验证"><a href="#手动验证" class="headerlink" title="手动验证"></a>手动验证</h4><ol>
+<li>对于AI标注的数据，需要进行手动验证，保证准确性并及时发现问题。<h4 id="地图发布"><a href="#地图发布" class="headerlink" title="地图发布"></a>地图发布</h4><h3 id="高精地图用处"><a href="#高精地图用处" class="headerlink" title="高精地图用处"></a>高精地图用处</h3><h4 id="高精地图用于导航"><a href="#高精地图用于导航" class="headerlink" title="高精地图用于导航"></a>高精地图用于导航</h4>高精地图可以根据用户的目标，智能规划出几条路线，甚至可以考虑到路线的拥挤程度，交通管制（信号灯，限速等）等种种因素。<br>不同于一般导航地图，高精地图的精确度往往需要厘米级别，而一般导航地图往往只有米级别的精确度。<h4 id="高精地图用于定位"><a href="#高精地图用于定位" class="headerlink" title="高精地图用于定位"></a>高精地图用于定位</h4>高精地图用于定位类似于拼图游戏，找到一块小拼图在整个地图上的位置，通常情况下有一下几步：</li>
+</ol>
+</li>
+<li>车辆会首先根据摄像头和雷达找到当前位置的地标（比如周围建筑等），得到地标的图片数据和三维点云数据等</li>
+<li>车辆将地标数据和高精地图上已知的地标进行比较该步骤往往需要如下处理过程：<ol>
+<li>数据预处理，消除不准确或质量差的数据</li>
+<li>坐标转换，将来自不同视角的数据转换到统一坐标系</li>
+<li>数据融合，将来自各种车辆和传感器的数据合并<h4 id="高精地图用于感知"><a href="#高精地图用于感知" class="headerlink" title="高精地图用于感知"></a>高精地图用于感知</h4>车辆上的传感器受限于物理或环境等因素，无法感知到极远处的信息（如同人不能看到和听到很远处的情况一样），而高精地图可以直接告诉车辆远处的交通信息。<h4 id="高精地图用于行驶规划"><a href="#高精地图用于行驶规划" class="headerlink" title="高精地图用于行驶规划"></a>高精地图用于行驶规划</h4></li>
+</ol>
+</li>
+<li>高精地图可以明确的告诉车辆中心线的位置，进而车辆可以尽可能的靠中间行驶，也可以提前告诉限速标志的路段进而车辆可以更早的做准备。</li>
+</ol>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><p>车辆将传感器识别的地标，与高精度地图上存在的地标进行对比。为了进行对比，必须能够在它自身坐标系和地图坐标系之间转换数据，然后系统必须在地图上以十厘米的精度确定车辆的精确位置。通常通过以下几种方式进行定位。</p>
+<h3 id="GNSS-RTK"><a href="#GNSS-RTK" class="headerlink" title="GNSS RTK"></a>GNSS RTK</h3><p>使用GPS进行定位</p>
+<h3 id="惯性导航定位"><a href="#惯性导航定位" class="headerlink" title="惯性导航定位"></a>惯性导航定位</h3><p>通过对汽车初始位置，初始速度，加速度等信息进行计算，得到任意时刻汽车的位置，即为惯性导航。</p>
+<h3 id="激光雷达定位"><a href="#激光雷达定位" class="headerlink" title="激光雷达定位"></a>激光雷达定位</h3><p>将激光雷达收集到的点云数据和预先存在的HD map进行匹配，进而从HD地图得到定位信息。</p>
+<h3 id="视觉定位"><a href="#视觉定位" class="headerlink" title="视觉定位"></a>视觉定位</h3><p>根据通过摄像头手机的信息准确定位汽车。常用的算法包括粒子滤波算法。使用视觉定位的优点是视觉数据是最容易收集的数据，缺点是视觉数据缺失了三维信息特征。</p>
+<h2 id="感知"><a href="#感知" class="headerlink" title="感知"></a>感知</h2><p>汽车想要实现自动驾驶功能的第一个需求就是感知，汽车需要能够知道周围的环境。这里会使用很多计算机视觉的技术帮助汽车感知和理解周围环境</p>
+<h3 id="计算机视觉"><a href="#计算机视觉" class="headerlink" title="计算机视觉"></a>计算机视觉</h3><p>在感知环节中，计算机视觉被大量应用，主要有以下几个方面：</p>
+<ol>
+<li>检测：找出物品在环境中的位置</li>
+<li>分类：明确对象是什么</li>
+<li>跟踪：随时间的推移观察移动的物体（如其他汽车，行人等）</li>
+<li>语义分割：将图像中的每个像素与语义类别进行匹配（如道路，汽车，天空等），进而可以尽可能详细的了解环境，并确定车辆可以行驶的区域<h3 id="数据捕捉"><a href="#数据捕捉" class="headerlink" title="数据捕捉"></a>数据捕捉</h3>通常情况下，自动驾驶汽车不仅仅使用摄像机，照相机捕捉周围环境的图片，也会使用雷达，激光雷达等传感器捕捉三维点云图（包含了更多距离信息）</li>
+</ol>
+<h2 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h2><p>在自动驾驶车辆行驶过程中，车辆周围的物体也在不断运动（如其它汽车，行人等），无人车需要预测这些可移动物体接下来的行为，这样才能确保无人车做出最佳决策。<br>自动驾驶中的无人技术的一个特殊性是实时性，也就是说，预测算法的延迟要越短越好</p>
+<h3 id="基于模型的预测"><a href="#基于模型的预测" class="headerlink" title="基于模型的预测"></a>基于模型的预测</h3><p>基于模型的预测算法将首先对被观察的物体所有可能的行为进行建模，并假设物体接下来的行为是等概率的。然后继续观察物体的行为，并不断调整各个预测行为模型的准确率，看物体与哪个模型的预测行为更加匹配。</p>
+<p>基于模型的预测方法的优点是可解释性更强，更加直观。结合了现有的物理知识和交通法规，人类行为等多方面知识。</p>
+<h3 id="基于数据驱动的预测"><a href="#基于数据驱动的预测" class="headerlink" title="基于数据驱动的预测"></a>基于数据驱动的预测</h3><p>数据驱动算法使用机器学习算法，通过观察结果来训练模型，数据驱动方法的优点是训练数据越多，模型的准确率越高。</p>
+<h3 id="车道序列模型"><a href="#车道序列模型" class="headerlink" title="车道序列模型"></a>车道序列模型</h3><p>通常情况下，我们不会直接对一个物体每时每刻的行为或移动位置进行预测，这样会使得模型过于复杂。常见的做法是构建车道序列模型：将车道分割成多个片段，然后预测物体在各个车道片段的移动规律，这也就是更粗粒度上的目标行为预测。这样讲就将问题转换成了时间序列预测模型。<br>在实践中，通常使用RNN神经网络对目标的行为序列进行预测。</p>
+<h3 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h3><p>在得到车辆在每个指定时间点的预测位置后，需要结合物理运动规律，生成两个相邻时间点车辆的运行轨迹。</p>
+<h2 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h2><p>在规划模块，我们会结合HD地图，定位和预测来构建车辆轨迹，规划模块的目标是生成避免碰撞和舒适的可执行轨迹，一般用一系列带关联速度的点序列来表示，每个点也包含一个指示何时应帝大那个点的时间戳。<br>规划模块一共分为如下几步：</p>
+<ol>
+<li>路线导航，侧重于如何从地图的A点到B点</li>
+<li>轨迹规划，得到导航路线后，通过微妙的决策来驾驶车辆以避免障碍物</li>
+</ol>
+<p>路线规划一共有三个输入：</p>
+<ol>
+<li>地图，包括公路网和实时交通信息</li>
+<li>在地图上的当前位置</li>
+<li>目的地</li>
+</ol>
+<p>通常情况下，使用图搜索方法来寻找到达目的地的最优路径。在开始搜索前，通常将地图数据重新格式化成图（只包含点和边）的数据结构，然后可以使用已经存在的大量图搜索算法来搜索最优路径（A star等算法）</p>
+<h3 id="轨迹生成-1"><a href="#轨迹生成-1" class="headerlink" title="轨迹生成"></a>轨迹生成</h3><p>在得到从起始点到终点的路径后，需要生成更细粒度的轨迹，更细粒度意味着在每条街道，每个拐口的具体轨迹。<br>轨迹生成的目的是生成由一系列路径点所定义的轨迹，每个路径点都有一个时间戳，速度和方向。然后拟合各个路径点最后生成轨迹的几何表征。而在无人驾驶车辆运行时，生成的路径点序列可能会被其他的可移动障碍物（其它车辆，行人等）暂时阻挡。</p>
+<h4 id="轨迹约束"><a href="#轨迹约束" class="headerlink" title="轨迹约束"></a>轨迹约束</h4><p>在现实中，生成的轨迹会有很多约束：</p>
+<ol>
+<li>轨迹应能免于相撞，也就是说保证无障碍物。</li>
+<li>让乘客感到舒适，所以需要轨迹和速度的变化尽可能平滑。</li>
+<li>轨迹应该对车辆实际可行，避免如立即180度转弯等问题。</li>
+<li>合法，轨迹应该符合所在道路的交通规则。<h4 id="Frenet坐标系"><a href="#Frenet坐标系" class="headerlink" title="Frenet坐标系"></a>Frenet坐标系</h4>如何表示车辆在路上的位置？最直接的方法是建立笛卡尔坐标系，也就是说给车辆一个(x,y)坐标，但这个方法的缺点是我们不知道路的坐标，所以也无法简单的计算车在公路上的具体位置。<br>笛卡尔坐标系的替代方法是Frenet坐标系，Frenet坐标系描述了汽车相对于道路的位置，在Frenet框架中，s表示沿道路的距离，被称为纵坐标，d表示与道路方向垂直的位移，被称为横坐标。</li>
+</ol>
+<h4 id="路径规划和速度规划"><a href="#路径规划和速度规划" class="headerlink" title="路径规划和速度规划"></a>路径规划和速度规划</h4><p>将轨迹规划分割成两个子问题分别讨论：路径规划和速度规划。<br>路径规划首先生成多个候选路径，然后使用成本函数对每条路径进行评估，该函数包含平滑度，安全性，道路中心偏离等因素。然后选择成本函数最低的路径作为最优路径规划。<br>然后需要做的是确定沿着这条路径行进的速度。我们将这个路径上的速度称为“速度曲线”</p>
+<h5 id="ST图"><a href="#ST图" class="headerlink" title="ST图"></a>ST图</h5><p>我们使用ST图帮助设计和选择速度曲线</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/self-driving/" rel="tag"><i class="fa fa-tag"></i> self-driving</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/23/Programming Language/Python/Python单元测试/" rel="next" title="Python单元测试">
+                <i class="fa fa-chevron-left"></i> Python单元测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/16/Knowledge/Xcode运行OpenCV项目/" rel="prev" title="Xcode运行OpenCV项目">
+                Xcode运行OpenCV项目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自动驾驶"><span class="nav-number">1.</span> <span class="nav-text">自动驾驶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高精度地图"><span class="nav-number">1.1.</span> <span class="nav-text">高精度地图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#高精地图构建"><span class="nav-number">1.1.1.</span> <span class="nav-text">高精地图构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据采集"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">数据采集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据处理"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象检测"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">对象检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手动验证"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">手动验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#地图发布"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">地图发布</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高精地图用处"><span class="nav-number">1.1.2.</span> <span class="nav-text">高精地图用处</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#高精地图用于导航"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">高精地图用于导航</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高精地图用于定位"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">高精地图用于定位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高精地图用于感知"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">高精地图用于感知</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高精地图用于行驶规划"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">高精地图用于行驶规划</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定位"><span class="nav-number">1.2.</span> <span class="nav-text">定位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GNSS-RTK"><span class="nav-number">1.2.1.</span> <span class="nav-text">GNSS RTK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#惯性导航定位"><span class="nav-number">1.2.2.</span> <span class="nav-text">惯性导航定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激光雷达定位"><span class="nav-number">1.2.3.</span> <span class="nav-text">激光雷达定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视觉定位"><span class="nav-number">1.2.4.</span> <span class="nav-text">视觉定位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知"><span class="nav-number">1.3.</span> <span class="nav-text">感知</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机视觉"><span class="nav-number">1.3.1.</span> <span class="nav-text">计算机视觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据捕捉"><span class="nav-number">1.3.2.</span> <span class="nav-text">数据捕捉</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预测"><span class="nav-number">1.4.</span> <span class="nav-text">预测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于模型的预测"><span class="nav-number">1.4.1.</span> <span class="nav-text">基于模型的预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于数据驱动的预测"><span class="nav-number">1.4.2.</span> <span class="nav-text">基于数据驱动的预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#车道序列模型"><span class="nav-number">1.4.3.</span> <span class="nav-text">车道序列模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轨迹生成"><span class="nav-number">1.4.4.</span> <span class="nav-text">轨迹生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规划"><span class="nav-number">1.5.</span> <span class="nav-text">规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#轨迹生成-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">轨迹生成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#轨迹约束"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">轨迹约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Frenet坐标系"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">Frenet坐标系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径规划和速度规划"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">路径规划和速度规划</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ST图"><span class="nav-number">1.5.1.3.1.</span> <span class="nav-text">ST图</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/01/自动驾驶入门/';
+          this.page.identifier = '2019/01/01/自动驾驶入门/';
+          this.page.title = '自动驾驶入门';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
