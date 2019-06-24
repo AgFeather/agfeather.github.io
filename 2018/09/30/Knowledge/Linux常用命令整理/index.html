@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="整理常用的Linux命令。">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令整理">
+<meta property="og:url" content="http://yoursite.com/2018/09/30/Knowledge/Linux常用命令整理/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="整理常用的Linux命令。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-23T00:52:07.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux常用命令整理">
+<meta name="twitter:description" content="整理常用的Linux命令。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/30/Knowledge/Linux常用命令整理/"/>
+
+
+
+
+
+  <title>Linux常用命令整理 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/30/Knowledge/Linux常用命令整理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux常用命令整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-30T00:00:00+09:00">
+                2018-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/30/Knowledge/Linux常用命令整理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/30/Knowledge/Linux常用命令整理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>整理常用的Linux命令。</p>
+<a id="more"></a>
+<h2 id="Linux指令"><a href="#Linux指令" class="headerlink" title="Linux指令"></a>Linux指令</h2><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><h4 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h4><p>移动到指定目录</p>
+<h4 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h4><p>列出当前文件中所有内容</p>
+<pre><code>1. &apos;-l&apos; (long的缩写) 输出详细信息
+2. &apos;-a&apos; (all的缩写) 输出包括隐藏文件的所有文件
+3. &apos;-lh&apos; (human), 直接 -l 不方便人看, 这个指令是方便给人观看的. 注意这里的文件大小使用了 K, MB, GB 之类概括
+</code></pre><h5 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h5><p>像 ‘-rw-rw-r–’ 这种, 就是权限的说明. 这串字符得拆成4个部分</p>
+<ul>
+<li>Type: 很多种 (最常见的是 - 为文件, d 为文件夹, 其他的还有l, n … 这种东西, 真正自己遇到了, 网上再搜就好, 一次性说太多记不住的).</li>
+<li>User: 后面跟着的三个空是使用 User 的身份能对这个做什么处理 (r 能读; w 能写; x 能执行; - 不能完成某个操作).</li>
+<li>Group: 一个 Group 里可能有一个或多个 user, 这些权限的样式和 User 一样.</li>
+<li>Others: 除了 User 和 Group 以外人的权限.</li>
+</ul>
+<h3 id="文件、文件夹的创建和移动"><a href="#文件、文件夹的创建和移动" class="headerlink" title="文件、文件夹的创建和移动"></a>文件、文件夹的创建和移动</h3><h4 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h4><p>后接文件名，新建一个文件<br>如果想同时建立多个文件, 输入多个文件的名字, 以空格分开.</p>
+<h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><p>是复制文件或者文件夹的指令, 常用的方式是’copy oldFile newFile’</p>
+<pre><code>1. -i (interactive) 如果 newFile 已经存在, 会直接覆盖已存在的newFile, 如果要避免直接覆盖, 我们在 cp 后面加一个选项 -i.表示如果newFile已经存在警告是否覆盖
+2. -R (Recursive) 复制 **文件夹** 到一个位置
+3. 复制多个文件. 复制名字部分相同的多个文件, \* 是说”你就找文件前面是 file 的文件, 后面是什么名字无所谓” &apos;cp file_pre_name* folder2/&apos;
+4. 或者你可以单独选定几个文件, cp 会默认最后一个选项是要复制去的文件夹. 比如下面把 file1 和 file2 复制去 folder1/ &apos;cp file1 file2 folder/&apos;
+</code></pre><h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h4><p>剪切：移动到另一个文件夹</p>
+<pre><code>1. 因为移动文件到原始的地点, 但是以不同的文件名 &apos;mv file1 NewName&apos;
+</code></pre><h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h4><p>创建一个文件夹</p>
+<h4 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h4><p>移除文件夹，前提条件是文件夹必须为空</p>
+<h5 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h5><p>移除文件。</p>
+<pre><code>1. -i 或 -I 有提示地移除文件 (为了避免误删)
+2. -r 或 -R (recursively)递归删除文件夹中的内容和文件夹，和 rmdir 不同, rm -r 可以在文件夹中有文件的情况下删除这个文件夹.
+</code></pre><h3 id="文件的编辑和显示"><a href="#文件的编辑和显示" class="headerlink" title="文件的编辑和显示"></a>文件的编辑和显示</h3><h4 id="vi"><a href="#vi" class="headerlink" title="vi"></a>vi</h4><p>使用vim打开文件进行编辑</p>
+<h4 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h4><p>(catenate) 可以用来显示文件内容, 或者是将某个文件里的内容写入到其他文件里.</p>
+<pre><code>1. &apos;&gt;&apos; 将文件的内容放到另一个文件中 &apos;cat file1 &gt; file2&apos;
+2. &gt; 将多个文件的内容打包一起放入另一个文件 &apos;cat file1 file2 &gt; file3&apos;
+3. &gt;&gt; 将内容添加在一个文件末尾
+</code></pre><h4 id="tac"><a href="#tac" class="headerlink" title="tac"></a>tac</h4><p>是cat的反向操作，从最后一行开始打印</p>
+<h4 id="more"><a href="#more" class="headerlink" title="more"></a>more</h4><p>和cat不同的是more可以一页一页查看文件内容，比较适合大文件的查看，more会首先显示文件的一页内容，然后按Enter再显示一行，按空格在显示一页。</p>
+<h4 id="head"><a href="#head" class="headerlink" title="head"></a>head</h4><p>[-n number] filename   取得文件的前几行，-n后接数字表示显示几行</p>
+<h4 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h4><p>head的反向操作，显示文件的后几行</p>
+<h3 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h3><h4 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h4><p>locate命令用于查找符合条件的文档，他会去保存文档和目录名称的数据库内，查找合乎范本样式条件的文档或目录。<br>一般情况我们只需要输入 locate your_file_name 即可查找指定文件。</p>
+<h4 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h4><p>在特定目录中查找原始代码、二进制文件，或是帮助文件等特殊文件。<br>所以该指令只能用于查找二进制文件、源代码文件和man手册页，一般文件的定位需使用locate命令。</p>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><p>find命令用来在指定目录下查找文件。可以用正则表达式进行文件匹配。</p>
+<h5 id="find指令例子"><a href="#find指令例子" class="headerlink" title="find指令例子"></a>find指令例子</h5><ul>
+<li>将目前目录及其子目录下所有延伸档名是 c 的文件列出来。<br>‘find . -name “*.c”‘</li>
+<li>将目前目录其其下子目录中所有一般文件列出<br>‘find . -type f’</li>
+<li>将目前目录及其子目录下所有最近 20 天内更新过的文件列出<br>‘find . -ctime 20’</li>
+</ul>
+<h3 id="系统相关"><a href="#系统相关" class="headerlink" title="系统相关"></a>系统相关</h3><h4 id="lsblk"><a href="#lsblk" class="headerlink" title="lsblk"></a>lsblk</h4><p>以树状图输出所有块设备，可以用来便捷的查找插入USB的名字</p>
+<h4 id="uname-a"><a href="#uname-a" class="headerlink" title="uname -a"></a>uname -a</h4><p>是Unix Name的缩写，显示机器名，操作系统和内核详细信息</p>
+<h4 id="history"><a href="#history" class="headerlink" title="history"></a>history</h4><p>显示在终端执行过的所有命令的历史，按ctrl+R可以搜索已经执行过的命令</p>
+<h4 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h4><p>显示网络配置详细信息</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/26/Machine Learning/机器学习算法之EM算法/" rel="next" title="机器学习算法之EM算法">
+                <i class="fa fa-chevron-left"></i> 机器学习算法之EM算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/10/Paper/论文阅读之《Automatic Code Completion》/" rel="prev" title="论文阅读之《Automatic Code Completion》">
+                论文阅读之《Automatic Code Completion》 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux指令"><span class="nav-number">1.</span> <span class="nav-text">Linux指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本指令"><span class="nav-number">1.1.</span> <span class="nav-text">基本指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cd"><span class="nav-number">1.1.1.</span> <span class="nav-text">cd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ls"><span class="nav-number">1.1.2.</span> <span class="nav-text">ls</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#文件权限"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">文件权限</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件、文件夹的创建和移动"><span class="nav-number">1.2.</span> <span class="nav-text">文件、文件夹的创建和移动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#touch"><span class="nav-number">1.2.1.</span> <span class="nav-text">touch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cp"><span class="nav-number">1.2.2.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mv"><span class="nav-number">1.2.3.</span> <span class="nav-text">mv</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mkdir"><span class="nav-number">1.2.4.</span> <span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rmdir"><span class="nav-number">1.2.5.</span> <span class="nav-text">rmdir</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rm"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">rm</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的编辑和显示"><span class="nav-number">1.3.</span> <span class="nav-text">文件的编辑和显示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vi"><span class="nav-number">1.3.1.</span> <span class="nav-text">vi</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cat"><span class="nav-number">1.3.2.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tac"><span class="nav-number">1.3.3.</span> <span class="nav-text">tac</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more"><span class="nav-number">1.3.4.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#head"><span class="nav-number">1.3.5.</span> <span class="nav-text">head</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tail"><span class="nav-number">1.3.6.</span> <span class="nav-text">tail</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件搜索"><span class="nav-number">1.4.</span> <span class="nav-text">文件搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#locate"><span class="nav-number">1.4.1.</span> <span class="nav-text">locate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#whereis"><span class="nav-number">1.4.2.</span> <span class="nav-text">whereis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#find"><span class="nav-number">1.4.3.</span> <span class="nav-text">find</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#find指令例子"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">find指令例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统相关"><span class="nav-number">1.5.</span> <span class="nav-text">系统相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lsblk"><span class="nav-number">1.5.1.</span> <span class="nav-text">lsblk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#uname-a"><span class="nav-number">1.5.2.</span> <span class="nav-text">uname -a</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#history"><span class="nav-number">1.5.3.</span> <span class="nav-text">history</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ifconfig"><span class="nav-number">1.5.4.</span> <span class="nav-text">ifconfig</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/09/30/Knowledge/Linux常用命令整理/';
+          this.page.identifier = '2018/09/30/Knowledge/Linux常用命令整理/';
+          this.page.title = 'Linux常用命令整理';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

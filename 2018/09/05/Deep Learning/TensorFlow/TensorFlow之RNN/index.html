@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep Learning,TensorFlow," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="总结TensorFlow中RNN常见的API使用方法和技巧。">
+<meta name="keywords" content="Deep Learning,TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow之RNN">
+<meta property="og:url" content="http://yoursite.com/2018/09/05/Deep Learning/TensorFlow/TensorFlow之RNN/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="总结TensorFlow中RNN常见的API使用方法和技巧。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-10T09:17:33.865Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow之RNN">
+<meta name="twitter:description" content="总结TensorFlow中RNN常见的API使用方法和技巧。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/05/Deep Learning/TensorFlow/TensorFlow之RNN/"/>
+
+
+
+
+
+  <title>TensorFlow之RNN | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/05/Deep Learning/TensorFlow/TensorFlow之RNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TensorFlow之RNN</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-05T00:00:00+09:00">
+                2018-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/05/Deep Learning/TensorFlow/TensorFlow之RNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/05/Deep Learning/TensorFlow/TensorFlow之RNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>总结TensorFlow中RNN常见的API使用方法和技巧。</p>
+<a id="more"></a>
+<h2 id="tf-contrib-rnn-BasicLSTMCell"><a href="#tf-contrib-rnn-BasicLSTMCell" class="headerlink" title="tf.contrib.rnn.BasicLSTMCell()"></a>tf.contrib.rnn.BasicLSTMCell()</h2><p>BasicLSTMCell是比较基本的创建LSTM cell的一个类.</p>
+<h3 id="构造函数参数"><a href="#构造函数参数" class="headerlink" title="构造函数参数"></a>构造函数参数</h3><ol>
+<li>num_units: LSTM内部节点数目</li>
+<li>forget_bias float类型, 遗忘门加上一个bias. 为了减少在训练早期的遗忘尺度，如果等于1，就是不会忘记任何信息。如果等于0，就都忘记。</li>
+<li>state_is_tuple 为True 的话, 接受和返回的states都是一个tuples,其中成员是和返回的状态都是一个2元元组,成员分别为 c_state and m_state.</li>
+<li>activation 内部激活函数<h3 id="内部参数"><a href="#内部参数" class="headerlink" title="内部参数"></a>内部参数</h3></li>
+<li>state_size  当state_is_tuple 为 true时，返回一个LSTMStateTuple(c=128, h=128)，c和h分别表示cell state的size和每个时刻输出的大小。</li>
+<li>output_size 输出层的大小</li>
+</ol>
+<h3 id="zero-state-batch-size-dtype"><a href="#zero-state-batch-size-dtype" class="headerlink" title="zero_state(batch_size, dtype)"></a>zero_state(batch_size, dtype)</h3><p>返回一个填充零的状态state，通常用其作为initial state。<br>该state是一个BasicLSTMCellZeroState类，大小为[batch_size, n_units]，表示cell的初始state。</p>
+<h3 id="call-inputs-state-scope"><a href="#call-inputs-state-scope" class="headerlink" title="__call__(inputs, state, scope)"></a>__call__(inputs, state, scope)</h3><p>在给定state和input上运行一次LSTM。返回本次运行的output和一个新的state。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">n_hidden = 128</span><br><span class="line">batch_size = 64</span><br><span class="line"></span><br><span class="line">cell = tf.contrib.rnn.BasicLSTMCell(n_hidden)</span><br><span class="line">init_state = cell.zero_state(batch_size,dtype=tf.float32)</span><br><span class="line"></span><br><span class="line">print(cell.state_size)</span><br><span class="line">print(cell.output_size)</span><br><span class="line">print(init_state)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LSTMStateTuple(c=128, h=128)</span><br><span class="line">128</span><br><span class="line">LSTMStateTuple(c=&lt;tf.Tensor &apos;BasicLSTMCellZeroState/zeros:0&apos; shape=(64, 128) dtype=float32&gt;, h=&lt;tf.Tensor &apos;BasicLSTMCellZeroState/zeros_1:0&apos; shape=(64, 128) dtype=float32&gt;)</span><br></pre></td></tr></table></figure>
+<h2 id="tf-contrib-rnn-MultiRNNCell-cells"><a href="#tf-contrib-rnn-MultiRNNCell-cells" class="headerlink" title="tf.contrib.rnn.MultiRNNCell(cells)"></a>tf.contrib.rnn.MultiRNNCell(cells)</h2><p>定义多层RNN，初始参数cells是一个list，元素为想要叠加在一起的cells。</p>
+<h3 id="内置参数"><a href="#内置参数" class="headerlink" title="内置参数"></a>内置参数</h3><ul>
+<li>state_size 输出一个list，list的长度等于LSTM隐藏层的大小，每个元素都是一个LSTMStateTuple，其中有cell和ht的size。</li>
+<li>output_size 输出层size，大小等于最后一个LSTM层的n_units<h3 id="zero-state-batch-size"><a href="#zero-state-batch-size" class="headerlink" title="zero_state(batch_size)"></a>zero_state(batch_size)</h3>对MultiRNN中每个LSTM隐藏层返回一个初始state。是一个list，list大小等于MultiRNN中隐藏层的个数，list中每个元素为一个BasicLSTMZeroState，大小为[batch_size, n_units]，表示该LSTM隐藏层cell的初始state。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">n_hidden = 128</span><br><span class="line">batch_size = 64</span><br><span class="line"></span><br><span class="line">cell_list = []</span><br><span class="line">for i in range(3):</span><br><span class="line">    n_hidden += 64</span><br><span class="line">    c = tf.contrib.rnn.BasicLSTMCell(n_hidden)</span><br><span class="line">    cell_list.append(c)</span><br><span class="line"></span><br><span class="line">multiCell = tf.contrib.rnn.MultiRNNCell(cell_list)</span><br><span class="line">init_states = multiCell.zero_state(batch_size, dtype=tf.float32)</span><br><span class="line"></span><br><span class="line">print(multiCell.state_size)</span><br><span class="line">print(multiCell.output_size)</span><br><span class="line">print(init_states)</span><br><span class="line"></span><br><span class="line">(LSTMStateTuple(c=192, h=192), LSTMStateTuple(c=256, h=256), LSTMStateTuple(c=320, h=320))</span><br><span class="line">320</span><br><span class="line">(LSTMStateTuple(c=&lt;tf.Tensor &apos;MultiRNNCellZeroState/BasicLSTMCellZeroState/zeros:0&apos; shape=(64, 192) dtype=float32&gt;, h=&lt;tf.Tensor &apos;MultiRNNCellZeroState/BasicLSTMCellZeroState/zeros_1:0&apos; shape=(64, 192) dtype=float32&gt;), LSTMStateTuple(c=&lt;tf.Tensor &apos;MultiRNNCellZeroState/BasicLSTMCellZeroState_1/zeros:0&apos; shape=(64, 256) dtype=float32&gt;, h=&lt;tf.Tensor &apos;MultiRNNCellZeroState/BasicLSTMCellZeroState_1/zeros_1:0&apos; shape=(64, 256) dtype=float32&gt;), LSTMStateTuple(c=&lt;tf.Tensor &apos;MultiRNNCellZeroState/BasicLSTMCellZeroState_2/zeros:0&apos; shape=(64, 320) dtype=float32&gt;, h=&lt;tf.Tensor &apos;MultiRNNCellZeroState/BasicLSTMCellZeroState_2/zeros_1:0&apos; shape=(64, 320) dtype=float32&gt;))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="tf-nn-dynamic-rnn"><a href="#tf-nn-dynamic-rnn" class="headerlink" title="tf.nn.dynamic_rnn()"></a>tf.nn.dynamic_rnn()</h2><p>这个函数的作用就是通过指定的RNN Cell来展开计算神经网络.</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>dynamic_rnn(cell,inputs,sequence_length=None,initial_state=None,dtype=None,parallel_iterations=None,swap_memory=False,time_major=False,scope=None)<br>其中常用的参数如下所示：</p>
+<ul>
+<li>cell: RNNCell的对象.</li>
+<li>inputs: RNN的输入,当time_major == False (default) 的时候,必须是形状为 [batch_size, max_time, …] 的tensor, 要是 time_major == True 的话, 必须是形状为 [max_time, batch_size, …] 的tensor.</li>
+<li>initial_state: RNN的初始状态. 一般用cell.zero_state()的返回结果作为输入。</li>
+<li>time_major: 规定了输入和输出tensor的格式,如果 true, tensor为[max_time, batch_size, depth]. 若是false, 那么tensor的形状为[batch_size, max_time, depth].<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3></li>
+<li>outputs: 表示RNN的输出tensor,要是time_major == False (default),那么这个tensor的形状为[batch_size, max_time, cell.output_size].</li>
+<li>state: 最终state,输出该RNN中每个隐藏层的final state。对于只有一层的RNN，返回一个LSTMStateTuple，对于多层RNN，返回一个LSTMStateTuple的list，表示每个隐藏层的final state。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cell = tf.contrib.rnn.BasicLSTMCell(hidden_size)</span><br><span class="line">init_state = cell.zero_state(batch_size)</span><br><span class="line">outputs, state = tf.nn.dynamic_rnn(rnn_cell, input_data,</span><br><span class="line">    initial_state=init_state, dtype=tf.float32)</span><br><span class="line"># output is a tensor of shape [batch_size, time_steps, hidden_size]</span><br><span class="line"># state is a tensor of shape [batch_size, hidden_size]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="RNN中的Dropout"><a href="#RNN中的Dropout" class="headerlink" title="RNN中的Dropout"></a>RNN中的Dropout</h2><p>RNN对时序序列上的连接不进行Dropout，因为RNN中的循环会放大噪声，扰乱它自己的学习。而仅仅在同一时刻不同隐藏层之间进行Dropout。</p>
+<h3 id="tf-contrib-rnn-DropoutWrapper"><a href="#tf-contrib-rnn-DropoutWrapper" class="headerlink" title="tf.contrib.rnn.DropoutWrapper()"></a>tf.contrib.rnn.DropoutWrapper()</h3><p>对rnn进行Dropout，核心参数如下：</p>
+<ul>
+<li>cell</li>
+<li>input_keep_prob 输入层的Dropout概率</li>
+<li>output_keep_prob 输出层的Dropout概率</li>
+<li>variational_recurrent=False 该参数用来控制Dropout方式，当为False时，仅在rnn层与层之间进行Dropout，在时序上不进行Dropout；当为True时，也在每个time step上进行Dropout。If this parameter is set, input_size must be provided.</li>
+<li>input_size TensorShape objects containing the depth(s) of the input tensors expected to be passed in to the DropoutWrapper.</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
+          
+            <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/02/Deep Learning/TensorFlow/TensorFlow之模型保存和回复/" rel="next" title="TensorFlow之模型保存和回复">
+                <i class="fa fa-chevron-left"></i> TensorFlow之模型保存和回复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/11/Deep Learning/深度学习调参经验/" rel="prev" title="深度学习调参经验">
+                深度学习调参经验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-contrib-rnn-BasicLSTMCell"><span class="nav-number">1.</span> <span class="nav-text">tf.contrib.rnn.BasicLSTMCell()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数参数"><span class="nav-number">1.1.</span> <span class="nav-text">构造函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部参数"><span class="nav-number">1.2.</span> <span class="nav-text">内部参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zero-state-batch-size-dtype"><span class="nav-number">1.3.</span> <span class="nav-text">zero_state(batch_size, dtype)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#call-inputs-state-scope"><span class="nav-number">1.4.</span> <span class="nav-text">__call__(inputs, state, scope)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-contrib-rnn-MultiRNNCell-cells"><span class="nav-number">2.</span> <span class="nav-text">tf.contrib.rnn.MultiRNNCell(cells)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内置参数"><span class="nav-number">2.1.</span> <span class="nav-text">内置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zero-state-batch-size"><span class="nav-number">2.2.</span> <span class="nav-text">zero_state(batch_size)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-nn-dynamic-rnn"><span class="nav-number">3.</span> <span class="nav-text">tf.nn.dynamic_rnn()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">3.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">3.2.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN中的Dropout"><span class="nav-number">4.</span> <span class="nav-text">RNN中的Dropout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-contrib-rnn-DropoutWrapper"><span class="nav-number">4.1.</span> <span class="nav-text">tf.contrib.rnn.DropoutWrapper()</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/09/05/Deep Learning/TensorFlow/TensorFlow之RNN/';
+          this.page.identifier = '2018/09/05/Deep Learning/TensorFlow/TensorFlow之RNN/';
+          this.page.title = 'TensorFlow之RNN';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

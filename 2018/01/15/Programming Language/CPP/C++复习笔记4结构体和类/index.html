@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C++复习笔记的第四部分。">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++复习笔记:结构体和类">
+<meta property="og:url" content="http://yoursite.com/2018/01/15/Programming Language/CPP/C++复习笔记4结构体和类/index.html">
+<meta property="og:site_name" content="Black Feather">
+<meta property="og:description" content="C++复习笔记的第四部分。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-23T01:10:00.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++复习笔记:结构体和类">
+<meta name="twitter:description" content="C++复习笔记的第四部分。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/15/Programming Language/CPP/C++复习笔记4结构体和类/"/>
+
+
+
+
+
+  <title>C++复习笔记:结构体和类 | Black Feather</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Black Feather</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/Programming Language/CPP/C++复习笔记4结构体和类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongfang Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Black Feather">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++复习笔记:结构体和类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-15T00:00:00+09:00">
+                2018-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/15/Programming Language/CPP/C++复习笔记4结构体和类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/01/15/Programming Language/CPP/C++复习笔记4结构体和类/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>C++复习笔记的第四部分。<br><a id="more"></a></p>
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><p>C++可以自定义结构体，便于自定义数据类型。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct type_name&#123;</span><br><span class="line">    member_type1 member_name1;</span><br><span class="line">    member_type2 member_name2;</span><br><span class="line">    ...</span><br><span class="line">&#125; object_name;</span><br></pre></td></tr></table></figure></p>
+<p>比如定义一个book数据类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct Book&#123;</span><br><span class="line">    char title[50];</span><br><span class="line">    char author[20];</span><br><span class="line">    double price;</span><br><span class="line">    int bood_id;</span><br><span class="line">&#125; book1;</span><br></pre></td></tr></table></figure></p>
+<h3 id="访问结构体成员"><a href="#访问结构体成员" class="headerlink" title="访问结构体成员"></a>访问结构体成员</h3><p>使用成员访问运算符’.’，来访问结构体中的成员,继续刚才的例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Book book1;</span><br><span class="line">strcpy(book1.title, &quot;C++ primer&quot;);</span><br><span class="line">book1.price = 20.8;</span><br></pre></td></tr></table></figure></p>
+<h3 id="结构体作为函数参数"><a href="#结构体作为函数参数" class="headerlink" title="结构体作为函数参数"></a>结构体作为函数参数</h3><p>结构体也可以作为参数传递到函数中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void printBook(struct Book book)&#123;</span><br><span class="line">    cout&lt;&lt;book.title&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;book.author&lt;&lt;endl;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="结构体指针"><a href="#结构体指针" class="headerlink" title="结构体指针"></a>结构体指针</h3><p>可以定义指向结构体的指针：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Book book1;</span><br><span class="line">struct Book *pbook;</span><br><span class="line">pbook = &amp;book1;</span><br></pre></td></tr></table></figure></p>
+<p> 通过 ‘-&gt;’ 运算符,使用指向该结构的指针访问结构的成员：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char *title = pbook-&gt;title;</span><br></pre></td></tr></table></figure></p>
+<h3 id="typeof-关键字"><a href="#typeof-关键字" class="headerlink" title="typeof 关键字"></a>typeof 关键字</h3><p>在定义结构体时，使用typeof关键字可以在接下来定义结构体变量时省略struct关键字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef struct Books</span><br><span class="line">&#123;</span><br><span class="line">   char  title[50];</span><br><span class="line">   char  author[50];</span><br><span class="line">   char  subject[100];</span><br><span class="line">   int   book_id;</span><br><span class="line">&#125;Books;</span><br><span class="line"></span><br><span class="line">Books book1, book2;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Note：两种访问符的区别"><a href="#Note：两种访问符的区别" class="headerlink" title="Note：两种访问符的区别"></a>Note：两种访问符的区别</h3><p>对于变量，可以使用访问符’.’来访问结构体/类得成员，如果是指向变量的指针，则需要使用访问符’-&gt;’来访问成员：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">struct AAA&#123;</span><br><span class="line">    int number;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">AAA s;</span><br><span class="line">AAA *ps;</span><br><span class="line"></span><br><span class="line">// 一下三者是等价的</span><br><span class="line">s.number = 1;</span><br><span class="line">(*ps).number = 1;</span><br><span class="line">ps-&gt;number = 1;</span><br></pre></td></tr></table></figure></p>
+<p>箭头（-&gt;）：左边必须为指针；<br>点号（.）：左边必须为实体。</p>
+<h2 id="C-类"><a href="#C-类" class="headerlink" title="C++类"></a>C++类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Box&#123;</span><br><span class="line">public:</span><br><span class="line">    double length;</span><br><span class="line">    double breadth;</span><br><span class="line">    double height;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Box box1;</span><br><span class="line">box1.height = 1.0; //使用成员访问符访问类成员</span><br></pre></td></tr></table></figure>
+<h3 id="类外部定义函数"><a href="#类外部定义函数" class="headerlink" title="类外部定义函数"></a>类外部定义函数</h3><p>我们不仅可以将函数定义写在类的内部作为类的成员函数，也可以将函数写在类的外部，然后使用范围解析运算符’::’ 来定义。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Box&#123;</span><br><span class="line">public:</span><br><span class="line">    double getVolume(void);</span><br><span class="line">&#125;;</span><br><span class="line">double Box::getVolume(void)&#123;...&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="类访问修饰符"><a href="#类访问修饰符" class="headerlink" title="类访问修饰符"></a>类访问修饰符</h3><p>访问修饰符可以限制函数直接访问类的内部成员。C++有：public，private，protected三种修饰符。</p>
+<ul>
+<li>public为公有成员，在程序中类的外部可以直接访问。</li>
+<li>private私有成员，私有成员变量或函数在类的外部是不可访问的。只有类内部函数和友元函数可以访问。</li>
+<li>protected保护成员，于私有成员类似，不同的是：<strong>保护成员在派生类（子类）中是可以访问的</strong></li>
+</ul>
+<h3 id="构造函数和初始化列表"><a href="#构造函数和初始化列表" class="headerlink" title="构造函数和初始化列表"></a>构造函数和初始化列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Line&#123;</span><br><span class="line">public:</span><br><span class="line">    Line(double len, int tempx);</span><br><span class="line">private:</span><br><span class="line">    double length;</span><br><span class="line">    int x;</span><br><span class="line">&#125;;</span><br><span class="line">Line::Line(double len, int tempx): length(len), x(tempx)&#123;</span><br><span class="line">    cout&lt;&lt;&quot;object is created&quot;&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line">等价于：</span><br><span class="line">Line::Line(double len, int tempx)&#123;</span><br><span class="line">    length = len;</span><br><span class="line">    x = tempx;</span><br><span class="line">    cout&lt;&lt;&quot;object is created&quot;&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h3><p>拷贝构造函数是一种特殊的构造函数，它在创建对象时，是使用同一类中之前创建的对象来初始化新创建的对象。拷贝构造函数通常用于：</p>
+<ul>
+<li>通过使用另一个同类型的对象来初始化新创建的对象。</li>
+<li>复制对象把它作为参数传递给函数。</li>
+<li>复制对象，并从函数返回这个对象。<br>如果在类中没有定义拷贝构造函数，编译器会自行定义一个。如果类带有指针变量，并有动态内存分配，则它必须有一个拷贝构造函数。拷贝构造函数的最常见形式如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">className (const className &amp;obj)&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="类的析构函数"><a href="#类的析构函数" class="headerlink" title="类的析构函数"></a>类的析构函数</h3><p>类的析构函数是类的一种特殊的成员函数，它会在每次删除所创建的对象时执行。</p>
+<p>析构函数的名称与类的名称是完全相同的，只是在前面加了个波浪号（~）作为前缀，它不会返回任何值，也不能带有任何参数。析构函数有助于在跳出程序（比如关闭文件、释放内存等）前释放资源。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Line::~Line(void)&#123;</span><br><span class="line">    cout&lt;&lt;&quot;obj is deleted&quot;&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Note：构建和析构顺序"><a href="#Note：构建和析构顺序" class="headerlink" title="Note：构建和析构顺序"></a>Note：构建和析构顺序</h3><ol>
+<li>对于包含内部成员类的构造，首先初始化内部成员类，然后初始化该类。析构过程中，首先析构内部成员类，然后析构本类。</li>
+<li>对于继承类的构造来说，首先初始化父类，然后初始化继承类。析构过程中，首先析构继承类，然后析构父类。</li>
+</ol>
+<h3 id="友元函数"><a href="#友元函数" class="headerlink" title="友元函数"></a>友元函数</h3><p>类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员。尽管友元函数的原型有在类的定义中出现过，但是友元函数并不是成员函数。</p>
+<p>友元可以是一个函数，该函数被称为友元函数；友元也可以是一个类，该类被称为友元类，在这种情况下，整个类及其所有成员都是友元。</p>
+<p>如果要声明函数为一个类的友元，需要在类定义中该函数原型前使用关键字 friend。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Box&#123;</span><br><span class="line">public:</span><br><span class="line">    double width;</span><br><span class="line">    friend void printWidth(Box box);</span><br><span class="line">&#125;</span><br><span class="line">void printWidth(Box box)&#123;cout&lt;&lt;box.width&lt;&lt;endl;&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h3><p>引入内联函数的目的是为了解决程序中函数调用的效率问题。C++ 使用关键字inline定义内联函数。如果一个函数是内联的，那么在编译时，编译器会把该函数的代码副本放置在每个调用该函数的地方， 而不是按通常的函数调用机制进行调用。如果已定义的函数多于10行，编译器会忽略 inline 限定符。</p>
+<p>程序在编译器编译的时候，编译器将程序中出现的内联函数的调用表达式用内联函数的函数体进行替换，而对于其他的函数，都是在运行时候才被替代。这其实就是个空间代价换时间的i节省。所以内联函数一般都是1-5行的小函数。在使用内联函数时要留神：</p>
+<p>1.在内联函数内不允许使用循环语句和开关语句；<br>2.内联函数的定义必须出现在内联函数第一次调用之前；<br>3.类结构中所在的类说明内部定义的函数是内联函数。</p>
+<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><p>优点: 当函数体比较小的时候, 内联该函数可以令目标代码更加高效. 对于存取函数以及其它函数体比较短, 性能关键的函数, 鼓励使用内联.</p>
+<p>缺点: 滥用内联将导致程序变慢. 内联可能使目标代码量或增或减, 这取决于内联函数的大小. 内联非常短小的存取函数通常会减少代码大小, 但内联一个相当大的函数将戏剧性的增加代码大小</p>
+<h3 id="类的静态成员"><a href="#类的静态成员" class="headerlink" title="类的静态成员"></a>类的静态成员</h3><h4 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h4><p>可以使用 static 关键字来把类成员定义为静态的。当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本。</p>
+<p>静态成员在类的所有对象中是共享的。如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零。我们不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化</p>
+<h4 id="静态成员函数"><a href="#静态成员函数" class="headerlink" title="静态成员函数"></a>静态成员函数</h4><p>如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问。</p>
+<p>静态成员函数只能访问静态成员数据、其他静态成员函数和类外部的其他函数。</p>
+<p>静态成员函数有一个类范围，他们不能访问类的 this 指针。可以使用静态成员函数来判断类的某些对象是否已被创建。</p>
+<h5 id="静态成员函数与普通成员函数的区别："><a href="#静态成员函数与普通成员函数的区别：" class="headerlink" title="静态成员函数与普通成员函数的区别："></a>静态成员函数与普通成员函数的区别：</h5><ul>
+<li>静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数）。</li>
+<li>普通成员函数有 this 指针，可以访问类中的任意成员；而静态成员函数没有 this 指针。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Dongfang Li WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dongfang Li Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/14/Programming Language/CPP/C++复习笔记3指针和引用/" rel="next" title="C++复习笔记:指针和引用">
+                <i class="fa fa-chevron-left"></i> C++复习笔记:指针和引用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/16/Programming Language/CPP/C++复习笔记5继承和多态/" rel="prev" title="C++复习笔记:继承和多态">
+                C++复习笔记:继承和多态 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongfang Li</p>
+              <p class="site-description motion-element" itemprop="description">My blog about programming and machine learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/YHfeather" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/dongfang.li.790" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体"><span class="nav-number">1.</span> <span class="nav-text">结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#访问结构体成员"><span class="nav-number">1.1.</span> <span class="nav-text">访问结构体成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体作为函数参数"><span class="nav-number">1.2.</span> <span class="nav-text">结构体作为函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体指针"><span class="nav-number">1.3.</span> <span class="nav-text">结构体指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof-关键字"><span class="nav-number">1.4.</span> <span class="nav-text">typeof 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Note：两种访问符的区别"><span class="nav-number">1.5.</span> <span class="nav-text">Note：两种访问符的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-类"><span class="nav-number">2.</span> <span class="nav-text">C++类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类外部定义函数"><span class="nav-number">2.1.</span> <span class="nav-text">类外部定义函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类访问修饰符"><span class="nav-number">2.2.</span> <span class="nav-text">类访问修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数和初始化列表"><span class="nav-number">2.3.</span> <span class="nav-text">构造函数和初始化列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝构造函数"><span class="nav-number">2.4.</span> <span class="nav-text">拷贝构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的析构函数"><span class="nav-number">2.5.</span> <span class="nav-text">类的析构函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Note：构建和析构顺序"><span class="nav-number">2.6.</span> <span class="nav-text">Note：构建和析构顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#友元函数"><span class="nav-number">2.7.</span> <span class="nav-text">友元函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联函数"><span class="nav-number">2.8.</span> <span class="nav-text">内联函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优缺点"><span class="nav-number">2.8.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的静态成员"><span class="nav-number">2.9.</span> <span class="nav-text">类的静态成员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态变量"><span class="nav-number">2.9.1.</span> <span class="nav-text">静态变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#静态成员函数"><span class="nav-number">2.9.2.</span> <span class="nav-text">静态成员函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#静态成员函数与普通成员函数的区别："><span class="nav-number">2.9.2.1.</span> <span class="nav-text">静态成员函数与普通成员函数的区别：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongfang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blackfeather.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/01/15/Programming Language/CPP/C++复习笔记4结构体和类/';
+          this.page.identifier = '2018/01/15/Programming Language/CPP/C++复习笔记4结构体和类/';
+          this.page.title = 'C++复习笔记:结构体和类';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blackfeather.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
